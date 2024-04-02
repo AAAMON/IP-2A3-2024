@@ -1,4 +1,0 @@
-nu stiu daca aici trebuia sa fac pathu, dar banuiesc ca da:)
-
-am pus 2 PureRef-uri, unul unde ma gandeam ca ar merge sa punem toate asseturile pe care urmeaza sa le facem si unul in care mi-am pus cateva idei de cum le-as face
-ig fiecare am putea sa ne facem un PureRef cu stilul pe care l-ar aborda ca sa ne putem decide mai tarziu la unul

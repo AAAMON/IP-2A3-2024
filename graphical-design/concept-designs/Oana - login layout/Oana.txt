@@ -1,1 +1,0 @@
-Mi a placut mult design ul de la loginul pt GreenPunk (imaginea din dreapta jos din .pur), de aceea am structurat layout-ul in acest fel
