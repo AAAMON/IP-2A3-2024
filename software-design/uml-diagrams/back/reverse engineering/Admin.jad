@@ -1,0 +1,43 @@
+// Decompiled by DJ v3.10.10.93 Copyright 2007 Atanas Neshkov  Date: 02.04.2024 08:50:09
+// Home Page: http://members.fortunecity.com/neshkov/dj.html http://www.neshkov.com/dj.html - Check often for new version!
+// Decompiler options: packimports(3) 
+// Source File Name:   Admin.java
+
+
+public class Admin
+    implements User
+{
+
+    public Admin()
+    {
+    }
+
+    public void SendAdminComm(AdminCommand admincommand)
+    {
+    }
+
+    public static void main(String args[])
+    {
+        Admin A = new Admin();
+    }
+
+    public void verifyPassword(String s)
+    {
+    }
+
+    public void sendToServer()
+    {
+    }
+
+    public void receiveFromServer()
+    {
+    }
+
+    public void exitGame()
+    {
+    }
+
+    public String username;
+    public Integer adminID;
+    public Integer clientSocket;
+}

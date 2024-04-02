@@ -1,0 +1,40 @@
+// Decompiled by DJ v3.10.10.93 Copyright 2007 Atanas Neshkov  Date: 02.04.2024 08:50:09
+// Home Page: http://members.fortunecity.com/neshkov/dj.html http://www.neshkov.com/dj.html - Check often for new version!
+// Decompiler options: packimports(3) 
+// Source File Name:   CommandType.java
+
+
+final class CommandType extends Enum
+{
+
+    public static CommandType[] values()
+    {
+        return (CommandType[])$VALUES.clone();
+    }
+
+    public static CommandType valueOf(String name)
+    {
+        return (CommandType)Enum.valueOf(CommandType, name);
+    }
+
+    private CommandType(String s, int i)
+    {
+        super(s, i);
+    }
+
+    private static CommandType[] $values()
+    {
+        return (new CommandType[] {
+            add_user, remove_user_data, create_room, remove_room, manage_game, ban_user
+        });
+    }
+
+    public static final CommandType add_user = new CommandType("add_user", 0);
+    public static final CommandType remove_user_data = new CommandType("remove_user_data", 1);
+    public static final CommandType create_room = new CommandType("create_room", 2);
+    public static final CommandType remove_room = new CommandType("remove_room", 3);
+    public static final CommandType manage_game = new CommandType("manage_game", 4);
+    public static final CommandType ban_user = new CommandType("ban_user", 5);
+    private static final CommandType $VALUES[] = $values();
+
+}

@@ -1,0 +1,30 @@
+// Decompiled by DJ v3.10.10.93 Copyright 2007 Atanas Neshkov  Date: 02.04.2024 08:50:09
+// Home Page: http://members.fortunecity.com/neshkov/dj.html http://www.neshkov.com/dj.html - Check often for new version!
+// Decompiler options: packimports(3) 
+// Source File Name:   UserDB.java
+
+import java.util.List;
+
+public class UserDB
+{
+
+    public UserDB()
+    {
+    }
+
+    public static void main(String args[])
+    {
+        UserDB A = new UserDB();
+    }
+
+    public void AddUser()
+    {
+    }
+
+    public void RemoveUser()
+    {
+    }
+
+    public String userData;
+    public List user;
+}
