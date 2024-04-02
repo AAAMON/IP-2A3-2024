@@ -1,0 +1,10 @@
+
+research
+	- gamed based -> all -> some progress
+	- implemenetation based -> all -> to finish
+
+organisation
+	- all -> to finish
+
+implementation
+	- build prototype in python

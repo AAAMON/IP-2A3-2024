@@ -1,0 +1,35 @@
+
+research
+	- game based
+		- find faction strategy based on stregths
+		- find optimal game state representation (toghether with api and network teams)
+	
+	- implementation based
+		- research decision trees
+		- decide programming language
+		- find best way to create AI API
+
+
+organisation
+	- configure trello or similar
+	- decide on which faction does each person work on
+
+implementation
+	- API interface (toghether with api and network teams)
+	- BotManager (as seen in C4 diagram)
+
+
+bots
+	- easy
+		- moves acording with the rules
+		- nothing more
+
+	- medium 
+		- moves in a way that mimics beginner players
+	
+	- hard
+		- moves with a strategy
+		- has random component -> can not be easily predicted
+	
+	- final (stretch goal)
+		- can beat most players
