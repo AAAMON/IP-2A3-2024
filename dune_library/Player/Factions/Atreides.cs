@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace dune_library.Player.Factions
 {
-    internal class Atreides
+    internal class Atreides : Faction
     {
+        public Atreides(string name) : base(name)
+        {
+        }
     }
 }

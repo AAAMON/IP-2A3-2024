@@ -8,5 +8,8 @@ namespace dune_library.Player
 {
     internal class Graveyard
     {
+        public List<General> Generals { get; set; }
+        public int Troops { get; set; }
+        public bool CanReviveGenerals { get; set; }
     }
 }

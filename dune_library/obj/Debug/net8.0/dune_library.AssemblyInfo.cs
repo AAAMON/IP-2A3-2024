@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("dune_library")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+04a31b681164822ccd2ffebd8ac82ee340677a2a")]
 [assembly: System.Reflection.AssemblyProductAttribute("dune_library")]
 [assembly: System.Reflection.AssemblyTitleAttribute("dune_library")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

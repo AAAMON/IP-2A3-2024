@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace dune_library.Player.Factions
 {
-    internal class Emperor
+    internal class Emperor : Faction
     {
+        public Emperor(string name) : base(name)
+        {
+        }
     }
 }

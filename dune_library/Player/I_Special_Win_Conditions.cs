@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace dune_library.Player
 {
-    internal class I_Special_Win_Conditions
+    internal interface I_Special_Win_Conditions
     {
+        bool CheckWin(int turnCount, Faction faction);
     }
 }

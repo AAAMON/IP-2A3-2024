@@ -8,5 +8,6 @@ namespace dune_library.Player
 {
     internal class General
     {
+        public int PowerLevel { get; set; }
     }
 }

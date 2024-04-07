@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace dune_library.Player.Factions
 {
-    internal class Harkonnen
+    internal class Harkonnen : Faction
     {
+        public Harkonnen(string name) : base(name)
+        {
+        }
     }
 }
