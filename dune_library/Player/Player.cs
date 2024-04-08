@@ -18,6 +18,7 @@ namespace dune_library.Player
         private List<Treachery_Card> TreacheryCards { get; set; }
         private List<Spice_Card> SpiceCards { get; set; }
         public object Hand { get; private set; }
+        private int ReserveTroops { get; set; } // New attribute for reserve troops
 
         public Player(string name, Faction faction, bool isHuman)
         {
@@ -26,6 +27,7 @@ namespace dune_library.Player
             IsHuman = isHuman;
             TreacheryCards = new List<Treachery_Card>();
             SpiceCards = new List<Spice_Card>();
+            ReserveTroops = 0; // later change
         }
 
         public void PlayCard(Treachery_Card card)
@@ -54,19 +56,38 @@ namespace dune_library.Player
             }
         }
 
-        public void MoveTroops(dune_library.Map.Sector fromSector, dune_library.Map.Sector toSector, int troopsCount)
+        public void MoveTroops(dune_library.Map.Section fromSection, dune_library.Map.Section toSection, int troopsCount)
         {
-            if (Faction.TroopPositions.ContainsKey(fromSector) &&
-                Faction.TroopPositions[fromSector] >= troopsCount)
+            if (Faction.TroopPositions.ContainsKey(fromSection) &&
+                Faction.TroopPositions[fromSection] >= troopsCount)
             {
-                Faction.TroopPositions[fromSector] -= troopsCount;
-                Faction.TroopPositions[toSector] += troopsCount;
+                Faction.TroopPositions[fromSection] -= troopsCount;
+                Faction.TroopPositions[toSection] += troopsCount;
             }
             else
             {
-                Console.WriteLine("Insufficient troops or incorrect sector.");
+                Console.WriteLine("Insufficient troops or incorrect section.");
             }
         }
 
+        public void DeployTroops(dune_library.Map.Section toSection, int troopsCount)
+        {
+            if (ReserveTroops > troopsCount)
+            {
+                ReserveTroops -= troopsCount;
+                if (Faction.TroopPositions.ContainsKey(toSection))
+                {
+                    Faction.TroopPositions[toSection] += troopsCount;
+                }
+                else
+                {
+                    Faction.TroopPositions.Add(toSection, troopsCount);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Insufficient reserve troops.");
+            }
+        }
     }
 }
