@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace dune_library.Map {
   internal class Polar_Sink : Region {
+    public override List<Section> Sections { get; }
     public Polar_Sink(string name) : base(name) {
-      sections = [new(18)];
+      Sections = [new(18, this)];
     }
   }
 }

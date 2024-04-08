@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace dune_library.Map {
   internal class Rock : Region {
+    public override List<Section> Sections { get; }
     public Rock(string name, ushort first_sector, ushort sectors_spanned) : base(name) {
-      sections = Enumerable.Range(first_sector, first_sector + sectors_spanned).Select(sector => new Section(Map.To_Sector(sector))).ToList();
+      Sections = Enumerable.Range(first_sector, first_sector + sectors_spanned)
+                           .Select(sector => new Section(Map.To_Sector(sector), this))
+                           .ToList();
     }
   }
 }
