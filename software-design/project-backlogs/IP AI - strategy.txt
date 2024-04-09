@@ -1,0 +1,100 @@
+﻿Atreides
+-leaderi: 1 de 1 strength, 1 de 2 strength, 1 de 4 strength, 2 de 5 strength
+-avantaje: 1) la faza de bidding, vezi pe rand fiecare carte care va fi licitata
+2)incepi jocul cu 10 spices si 10 forte direct pe board in Arrakeen (pozitionare buna, e un oras care iti da income de 2 spices in faza de colectare + collection rate de 3 spices/forta + movement de 3 teritorii daca pleci din Arrakeen +  ai written notes despre cine si ce card are)
+3)se uita la cartea de sus din spice deck cand vrea ->stii unde e spice blowul inainte, te poti muta cu mult inainte acolo + stii cand e sandworm si nexus (teritoriu de evitat si aliante de facut, de ex cu Fremen care stie unde va fi furtuna + deals(vinzi info: ceri spice ca sa arati un card))
+4) pot vedea o parte din battle planul oponentului: weapon, defense, leader sau numarul 
+-advanced advantages: 1)kwisatz haderach: o carte tracker care urmareste cate forte pierzi in batalie. Cand ajungi la 7 dai unlock la un header pe care la o batalie per tura il poti include ca sa iti mareasca puterea liderului cu 2 si ii da imunitate de la a fi numit tradator 
+
+
+Spacing Guild
+5 forte in Tuek's Sietch(destulde bun!e a2a cea mai greu de ajuns avand in vedere strongholdurile) si 15 forte in rezerva(in afara planetei)
+Incep cu 5 spice
+free revival:1 forta
+lideri slabi:Guild Rep(1), Soo-Soo Sook(2), Mater Bewt(3), Esmar Tuek(3), Staban Tuek(5)
+Avantaje: 
+1.primesti bani pt shippingul altora(din off-planet la planet) 
+discalimer:fremen nu plateste
+bene-geseritu o sa aduca mai mult forte spirituale deci nu mi aduce venituri prea multe
+venitul e nesigur dar de ajutor
+incearca sa licitezi pana la 5 la fieccare runda(armele si cartile de defensiva sunt de ajutor pt liderii slabi)
+poti aduce multe forte pe planeta pe orice teritoriu(aduci asa multe astfel incat chiar daca iti moare liderul si nu omori liderul celuilalt poti sa dial suficient de mult a.i. sa castigi)-e costisitor dar uneori merita; ceilalti se tem de asta
+2. am 3 tipuri de shippment
+     1.costul e jumate
+     2.iti poti muta echipele oriunde pe tabla, iar costul e destinatia
+     3.poti sa shipuiesti si de pe planta in rezerve(nu ai arme si esti tinta usoara)
+3.victorie speciala: daca pana la tura 10,nimeni nu ocupa nr de strongholduri, castigi iar bene geserita nu poate prezice asta!(incearca sa ii previi pe altii sa castige, dar in tururile din final in special)
+mituieste l pe artreidis sa iti arate cartile!
+avantaje cand cineva ma are ca aliat:venit,shipping/2
+advanced game:
+ship and move oricand doresti(impiedici sa castige altcineva-stronghold blocking)
+e de ajutor sa mergi ultimul(vezi ce au fct altii-colectezi spice) sau chiar si primul(preventiv) 
+mituirea cu spice pentru a-i face pe altii sa lupte intre ei
+liderii slabi nu ofera mult spice deci nu e pierdere
+
+
+Emperor
+Lideri decenti:2->bashar, 3->caid,3->Burseg,5->Captain aramsham,6->Hasimir Fenring(unul din cei mai puternici)
+Start:20 forte in rezerve,10 spice
+Free revival:1
+Avantaj:Primeste spice uri cu fiecare achizitie de treatory cards
+5 star forces ->2power
+Forces necesita spice pt full power altfel /2.
+Este un aliat foarte bun deci si dorit
+Aliante: pot da revive la aliat pana la 3 soldati+ poate cumpara cards cu spice urile mele
+Tips:
+First turn:Grija la harkonen sa nu cumpere (da-i outbid)
+Deal with atreides la inceput ?
+In bidding incearca sa cumperi desi sunt useless
+Incearca sa cresti pretul
+Incearca sa ataci cu putine trupe pentru a arunca cartile rele
+Tine factiunile sarace atacand locuri cu spice uri
+~Habbanya sietch la inceput
+~Tuek’s sanse mari de castig impotriva guilda 
+Manangement de spice important
+Aliatul e important:
+Grija fremen->mai puternici soldati  au potential de aliat
+
+
+
+
+
+
+Fremen
+
+
+Puncte slabe
+* Saraci (dar nu ai nevoie de spice decat pentru treachery cards)
+        
+Puncte forte
+* Lideri puternici (contracarat de faptul ca nu ai defense cards -> probabil sa moara)
+* Revive gratis (max 3 revive)
+* Spawn gratis (intr-o zona)
+* Daune reduse de la furtuna
+
+
+Strategie
+* Lupta mult (ai revive mai bun ca ceilalti)
+* Risca pentru spice
+* Are mereu sens sa folosesti spice pentru treachery cards (nu ai ce face altceva cu el)
+
+
+
+
+
+
+Harkonnen
+
+
+Punte forte
+* Mai multi tradatori
+* 10 trupe deja puse la inceput -> pozitie centrala
+* Lideri variati
+* Carti gratis la fiecare auction castigat
+
+
+Strategie
+* Destul de straight forward
+* Sansa de castig in tura 1
+* Merita jucat agresiv
+* Probabil cel mai usoara factiune de jucat
