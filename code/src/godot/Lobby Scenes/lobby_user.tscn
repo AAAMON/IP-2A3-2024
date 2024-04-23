@@ -147,8 +147,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.392157, 0, 1)
 theme_override_fonts/font = ExtResource("2_q4g88")
 theme_override_font_sizes/font_size = 15
-text = "NO
-"
+text = "NO"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -302,8 +301,7 @@ columns = 3
 custom_minimum_size = Vector2(120, 30)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_q4g88")
-text = "Atreides
-"
+text = "Atreides"
 
 [node name="BeneGesserit_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer"]
 custom_minimum_size = Vector2(120, 30)
@@ -321,22 +319,19 @@ text = "Emperor"
 custom_minimum_size = Vector2(120, 30)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_q4g88")
-text = "Fremen
-"
+text = "Fremen"
 
 [node name="SpacingGuild_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer"]
 custom_minimum_size = Vector2(120, 30)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_q4g88")
-text = "Spacing Guild
-"
+text = "Spacing Guild"
 
 [node name="Harkonnen_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer"]
 custom_minimum_size = Vector2(120, 30)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_q4g88")
-text = "Harkonnen
-"
+text = "Harkonnen"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -348,22 +343,20 @@ alignment = 2
 custom_minimum_size = Vector2(120, 30)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_q4g88")
-text = "EXIT
-"
+text = "RETURN"
 
 [node name="Ready_Button" type="Button" parent="MarginContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(120, 30)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_q4g88")
 toggle_mode = true
-text = "Ready"
+text = "READY"
 
 [node name="Start_Button" type="Button" parent="MarginContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(120, 30)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_q4g88")
-text = "START
-"
+text = "START"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
