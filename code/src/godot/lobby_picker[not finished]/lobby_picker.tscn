@@ -1,0 +1,234 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4b85bo3g6rfo"]
+
+[ext_resource type="Script" path="res://lobby_picker.gd" id="1_rmmoh"]
+
+[node name="LobbyPicker" type="Node2D"]
+script = ExtResource("1_rmmoh")
+
+[node name="LobbyPickerContainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RefreshListButton" type="Button" parent="LobbyPickerContainer"]
+offset_left = 768.0
+offset_top = 544.0
+offset_right = 880.0
+offset_bottom = 575.0
+text = "REFRESH LIST
+"
+
+[node name="Return" type="Button" parent="LobbyPickerContainer"]
+offset_left = 128.0
+offset_top = 32.0
+offset_right = 199.0
+offset_bottom = 63.0
+text = "RETURN
+"
+
+[node name="table_grid" type="GridContainer" parent="LobbyPickerContainer"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 3
+
+[node name="cap tabel" type="Label" parent="LobbyPickerContainer/table_grid"]
+layout_mode = 2
+text = "LOBBY OWNER
+"
+
+[node name="cap tabel2" type="Label" parent="LobbyPickerContainer/table_grid"]
+layout_mode = 2
+text = "NUMBER OF PLAYERS"
+
+[node name="cap tabel3" type="Label" parent="LobbyPickerContainer/table_grid"]
+layout_mode = 2
+text = "GAME DIFFICULTY"
+
+[node name="TableContainer" type="HBoxContainer" parent="LobbyPickerContainer"]
+offset_top = 27.0
+offset_right = 427.0
+offset_bottom = 455.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="LobbyOwner" type="VBoxContainer" parent="LobbyPickerContainer/TableContainer"]
+layout_mode = 2
+
+[node name="CAP1" type="Label" parent="LobbyPickerContainer/TableContainer/LobbyOwner"]
+layout_mode = 2
+text = "LOBBY OWNER"
+
+[node name="Label" type="Label" parent="LobbyPickerContainer/TableContainer/LobbyOwner"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="LobbyPickerContainer/TableContainer/LobbyOwner"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="LobbyPickerContainer/TableContainer/LobbyOwner"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="LobbyPickerContainer/TableContainer/LobbyOwner"]
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="LobbyPickerContainer/TableContainer/LobbyOwner"]
+layout_mode = 2
+
+[node name="Label6" type="Label" parent="LobbyPickerContainer/TableContainer/LobbyOwner"]
+layout_mode = 2
+
+[node name="Label7" type="Label" parent="LobbyPickerContainer/TableContainer/LobbyOwner"]
+layout_mode = 2
+
+[node name="Label8" type="Label" parent="LobbyPickerContainer/TableContainer/LobbyOwner"]
+layout_mode = 2
+
+[node name="Label9" type="Label" parent="LobbyPickerContainer/TableContainer/LobbyOwner"]
+layout_mode = 2
+
+[node name="Label10" type="Label" parent="LobbyPickerContainer/TableContainer/LobbyOwner"]
+layout_mode = 2
+
+[node name="Label11" type="Label" parent="LobbyPickerContainer/TableContainer/LobbyOwner"]
+layout_mode = 2
+
+[node name="Label12" type="Label" parent="LobbyPickerContainer/TableContainer/LobbyOwner"]
+layout_mode = 2
+
+[node name="Label13" type="Label" parent="LobbyPickerContainer/TableContainer/LobbyOwner"]
+layout_mode = 2
+
+[node name="Label14" type="Label" parent="LobbyPickerContainer/TableContainer/LobbyOwner"]
+layout_mode = 2
+
+[node name="Label15" type="Label" parent="LobbyPickerContainer/TableContainer/LobbyOwner"]
+layout_mode = 2
+
+[node name="NumberOfPlayers" type="VBoxContainer" parent="LobbyPickerContainer/TableContainer"]
+layout_mode = 2
+
+[node name="CAP2" type="Label" parent="LobbyPickerContainer/TableContainer/NumberOfPlayers"]
+layout_mode = 2
+text = "NUMBER OF PLAYERS"
+
+[node name="Label" type="Label" parent="LobbyPickerContainer/TableContainer/NumberOfPlayers"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="LobbyPickerContainer/TableContainer/NumberOfPlayers"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="LobbyPickerContainer/TableContainer/NumberOfPlayers"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="LobbyPickerContainer/TableContainer/NumberOfPlayers"]
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="LobbyPickerContainer/TableContainer/NumberOfPlayers"]
+layout_mode = 2
+
+[node name="Label6" type="Label" parent="LobbyPickerContainer/TableContainer/NumberOfPlayers"]
+layout_mode = 2
+
+[node name="Label7" type="Label" parent="LobbyPickerContainer/TableContainer/NumberOfPlayers"]
+layout_mode = 2
+
+[node name="Label8" type="Label" parent="LobbyPickerContainer/TableContainer/NumberOfPlayers"]
+layout_mode = 2
+
+[node name="Label9" type="Label" parent="LobbyPickerContainer/TableContainer/NumberOfPlayers"]
+layout_mode = 2
+
+[node name="Label10" type="Label" parent="LobbyPickerContainer/TableContainer/NumberOfPlayers"]
+layout_mode = 2
+
+[node name="Label11" type="Label" parent="LobbyPickerContainer/TableContainer/NumberOfPlayers"]
+layout_mode = 2
+
+[node name="Label12" type="Label" parent="LobbyPickerContainer/TableContainer/NumberOfPlayers"]
+layout_mode = 2
+
+[node name="Label13" type="Label" parent="LobbyPickerContainer/TableContainer/NumberOfPlayers"]
+layout_mode = 2
+
+[node name="Label14" type="Label" parent="LobbyPickerContainer/TableContainer/NumberOfPlayers"]
+layout_mode = 2
+
+[node name="Label15" type="Label" parent="LobbyPickerContainer/TableContainer/NumberOfPlayers"]
+layout_mode = 2
+
+[node name="GameDifficulty" type="VBoxContainer" parent="LobbyPickerContainer/TableContainer"]
+layout_mode = 2
+
+[node name="CAP3" type="Label" parent="LobbyPickerContainer/TableContainer/GameDifficulty"]
+layout_mode = 2
+text = "GAME DIFFICULTY"
+
+[node name="Label" type="Label" parent="LobbyPickerContainer/TableContainer/GameDifficulty"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="LobbyPickerContainer/TableContainer/GameDifficulty"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="LobbyPickerContainer/TableContainer/GameDifficulty"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="LobbyPickerContainer/TableContainer/GameDifficulty"]
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="LobbyPickerContainer/TableContainer/GameDifficulty"]
+layout_mode = 2
+
+[node name="Label6" type="Label" parent="LobbyPickerContainer/TableContainer/GameDifficulty"]
+layout_mode = 2
+
+[node name="Label7" type="Label" parent="LobbyPickerContainer/TableContainer/GameDifficulty"]
+layout_mode = 2
+
+[node name="Label8" type="Label" parent="LobbyPickerContainer/TableContainer/GameDifficulty"]
+layout_mode = 2
+
+[node name="Label9" type="Label" parent="LobbyPickerContainer/TableContainer/GameDifficulty"]
+layout_mode = 2
+
+[node name="Label10" type="Label" parent="LobbyPickerContainer/TableContainer/GameDifficulty"]
+layout_mode = 2
+
+[node name="Label11" type="Label" parent="LobbyPickerContainer/TableContainer/GameDifficulty"]
+layout_mode = 2
+
+[node name="Label12" type="Label" parent="LobbyPickerContainer/TableContainer/GameDifficulty"]
+layout_mode = 2
+
+[node name="Label13" type="Label" parent="LobbyPickerContainer/TableContainer/GameDifficulty"]
+layout_mode = 2
+
+[node name="Label14" type="Label" parent="LobbyPickerContainer/TableContainer/GameDifficulty"]
+layout_mode = 2
+
+[node name="Label15" type="Label" parent="LobbyPickerContainer/TableContainer/GameDifficulty"]
+layout_mode = 2
+
+[node name="LobbyPickerInstructionLabel" type="Label" parent="LobbyPickerContainer"]
+offset_left = 488.0
+offset_top = 40.0
+offset_right = 662.0
+offset_bottom = 63.0
+size_flags_horizontal = 4
+text = "CHOOSE YOUR LOBBY:
+"
+
+[node name="JoinLobbyButton" type="Button" parent="LobbyPickerContainer"]
+offset_left = 280.0
+offset_top = 544.0
+offset_right = 379.0
+offset_bottom = 575.0
+text = "JOIN LOBBY
+"
+
+[node name="CreateLobbyButton" type="Button" parent="LobbyPickerContainer"]
+offset_left = 512.0
+offset_top = 544.0
+offset_right = 634.0
+offset_bottom = 575.0
+text = "CREATE LOBBY"
