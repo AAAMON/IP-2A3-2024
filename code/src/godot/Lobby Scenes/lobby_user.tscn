@@ -1,0 +1,398 @@
+[gd_scene load_steps=3 format=3 uid="uid://wf01flrrgrov"]
+
+[ext_resource type="Script" path="res://Lobby Scenes/lobby_user.gd" id="1_r7qbd"]
+[ext_resource type="FontFile" uid="uid://qv4q51uyiccf" path="res://Dune_Rise.ttf" id="2_q4g88"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r7qbd")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Separator" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Game Title" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 62
+text = "DUNE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="The Board Game" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 15
+text = "THE BOARDGAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 27
+alignment = 1
+
+[node name="Separator2" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Lobby Name" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 20
+text = "[Lobby Name]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Difficulty" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 20
+text = "[GAME DIFFICULTY]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(505, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 10
+columns = 3
+
+[node name="Player List" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 20
+text = "PLAYER LIST"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Faction" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 20
+text = "FACTION"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ready" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 20
+text = "READY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Host Username" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.392157, 0, 1)
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 15
+text = "HOST_USERNAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Host Faction" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.392157, 0, 1)
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 15
+text = "UNSELECTED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Host Ready" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.392157, 0, 1)
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 15
+text = "NO
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Username_Player1" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 15
+text = "USERNAME #1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Faction_Player1" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 15
+text = "UNSELECTED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ready_Player1" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 15
+text = "NO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Username_Player2" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 15
+text = "USERNAME #2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Faction_Player2" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 15
+text = "UNSELECTED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ready_Player2" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 15
+text = "NO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Username_Player3" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 15
+text = "USERNAME #3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Faction_Player3" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 15
+text = "UNSELECTED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ready_Player3" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 15
+text = "NO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Username_Player4" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 15
+text = "USERNAME #4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Faction_Player4" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 15
+text = "UNSELECTED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ready_Player4" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 15
+text = "NO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Username_Player5" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 15
+text = "N-AMALIA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Faction_Player5" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 15
+text = "UNSELECTED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ready_Player5" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 15
+text = "NO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Separator2" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Faction_Information" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(490, 300)
+layout_mode = 2
+size_flags_vertical = 3
+stretch_mode = 2
+
+[node name="Factions" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 15
+text = "FACTIONS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+columns = 3
+
+[node name="Atreides_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+text = "Atreides
+"
+
+[node name="BeneGesserit_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+text = "Bene Gesserit"
+
+[node name="Emperor_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+text = "Emperor"
+
+[node name="Fremen_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+text = "Fremen
+"
+
+[node name="SpacingGuild_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+text = "Spacing Guild
+"
+
+[node name="Harkonnen_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+text = "Harkonnen
+"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+alignment = 2
+
+[node name="Return_Button" type="Button" parent="MarginContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+text = "EXIT
+"
+
+[node name="Ready_Button" type="Button" parent="MarginContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+toggle_mode = true
+text = "Ready"
+
+[node name="Start_Button" type="Button" parent="MarginContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+text = "START
+"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="Username" type="Label" parent="MarginContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q4g88")
+theme_override_font_sizes/font_size = 14
+text = "N-AMALIA"
+
+[connection signal="mouse_entered" from="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer/Atreides_Button" to="." method="_on_atreides_button_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer/Atreides_Button" to="." method="_on_atreides_button_mouse_exited"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer/Atreides_Button" to="." method="_on_atreides_button_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer/BeneGesserit_Button" to="." method="_on_bene_gesserit_button_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer/BeneGesserit_Button" to="." method="_on_bene_gesserit_button_mouse_exited"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer/BeneGesserit_Button" to="." method="_on_bene_gesserit_button_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer/Emperor_Button" to="." method="_on_emperor_button_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer/Emperor_Button" to="." method="_on_emperor_button_mouse_exited"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer/Emperor_Button" to="." method="_on_emperor_button_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer/Fremen_Button" to="." method="_on_fremen_button_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer/Fremen_Button" to="." method="_on_fremen_button_mouse_exited"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer/Fremen_Button" to="." method="_on_fremen_button_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer/SpacingGuild_Button" to="." method="_on_spacing_guild_button_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer/SpacingGuild_Button" to="." method="_on_spacing_guild_button_mouse_exited"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer/SpacingGuild_Button" to="." method="_on_spacing_guild_button_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer/Harkonnen_Button" to="." method="_on_harkonnen_button_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer/Harkonnen_Button" to="." method="_on_harkonnen_button_mouse_exited"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/GridContainer/Harkonnen_Button" to="." method="_on_harkonnen_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer2/Return_Button" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer2/Ready_Button" to="." method="_on_ready_button_pressed"]
