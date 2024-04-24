@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace dune_library.Map_Resources {
   internal class Section {
-    public Section(int sector, Region region, int spice_capacity) {
+    public Section(int sector, Territory region, int spice_capacity) {
       Origin_Sector = sector;
       Origin_Region = region;
       Spice_Capacity = spice_capacity;
     }
 
-    public Section(int sector, Region region) {
+    public Section(int sector, Territory region) {
       Origin_Sector = sector;
       Origin_Region = region;
       Spice_Capacity = null;
     }
 
     public int Origin_Sector { get; }
-    public Region Origin_Region { get; }
+    public Territory Origin_Region { get; }
 
     public int? Spice_Capacity { get; }
 

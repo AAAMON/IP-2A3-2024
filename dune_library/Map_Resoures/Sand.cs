@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LanguageExt;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,9 @@ using System.Threading.Tasks;
 using System.Transactions;
 
 namespace dune_library.Map_Resources {
-  internal class Sand : Region {
-    public override List<Section> Sections { get; }
-    public Sand(string name, List<(int sector, int? spice_capacity)> data_list) : base(name) {
+  internal class Sand : Territory {
+    public override IReadOnlyList<Section> Sections { get; }
+    public Sand(string name, List<(int sector, Option<int> spice_capacity)> data_list) : base(name) {
       {
         var first_sector = data_list.First().sector;
         var last_sector = data_list.Last().sector;
@@ -22,18 +23,21 @@ namespace dune_library.Map_Resources {
         }
       }
       Sections = data_list.Select(e =>
-                            e.spice_capacity.HasValue ? new Section(e.sector, this, (int)e.spice_capacity) : new Section(e.sector, this)
+                            e.spice_capacity.Match(
+                              value => new Section(e.sector, this, value),
+                              () => new Section(e.sector, this)
+                            )
                           ).ToList();
     }
 
-    public Sand(string name, int first_sector, List<int?> spice_capacities) : base(name) {
+    public Sand(string name, int first_sector, List<Option<int>> spice_capacities) : base(name) {
       int current_sector = first_sector;
       Sections = spice_capacities.Select(spice_capacity =>
-                                   spice_capacity.HasValue ?
-                                    new Section(Map.To_Sector(current_sector++), this, spice_capacity.Value)
-                                  :
-                                    new Section(Map.To_Sector(current_sector++), this)
-                                 ).ToList();
+                                    spice_capacity.Match(
+                                      value => new Section(Map.To_Sector(current_sector++), this, value),
+                                      () => new Section(Map.To_Sector(current_sector++), this)
+                                    )
+                                  ).ToList();
     }
 
     public Sand(string name, int first_sector, int sectors_spanned) : base(name) {

@@ -6,30 +6,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LanguageExt;
 
-namespace dune_library.Player_Resources
-{
-  internal class Player
-  {
-    private Faction Faction { get; set; }
+namespace dune_library.Player_Resources {
+  internal class Player {
+    public Perspective Perspective { get; set; }
       
-    private string Name { get; set; }
+    private readonly string Name;
       
-    private bool IsHuman { get; set; } //human or AI
-      
-    private bool IsActive { get; set; } //his turn
-      
-    private List<Treachery_Card> TreacheryCards { get; set; }
-      
-    private List<Spice_Card> SpiceCards { get; set; }
-      
-    public object Hand { get; private set; }
-      
-    private int ReserveTroops { get; set; } // New attribute for reserve troops
-      
-    public int Assigned_Sector { get; }
+    private bool IsHuman { get; set; }
 
-    public Player(string name, Faction faction, bool isHuman, ushort assigned_sector)
+    /*public Player(string name, Faction faction, bool isHuman, ushort assigned_sector)
     {
       Name = name;
       Faction = faction;
@@ -79,6 +66,6 @@ namespace dune_library.Player_Resources
       } else {
         Console.WriteLine("Insufficient reserve troops.");
       }
-    }
+    }*/
   }
 }

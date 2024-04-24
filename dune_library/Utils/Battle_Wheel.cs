@@ -1,4 +1,5 @@
 ﻿using dune_library.Player_Resources;
+using LanguageExt;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace dune_library.Utils {
     public Battle_Wheel() { }
 
     public int get_from_range_closed(int min, int max) {
-      int result = max + 1;
+      var result = max + 1;
       // while (result < min || result > max) {
       //   ask player for a number between min and max
       //   get number from player
@@ -19,6 +20,6 @@ namespace dune_library.Utils {
       return result;
     }
 
-    public Player? Last_Player { get; set; }
+    public Option<Player> Last_Player { get; set; }
   }
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace dune_library.Map_Resources {
-  internal class Strongholds : Region {
+  internal class Strongholds : Territory {
     public override List<Section> Sections { get; }
     public Strongholds(string name, ushort sector) : base(name) {
       Sections = [new Section(Map.To_Sector(sector), this)];

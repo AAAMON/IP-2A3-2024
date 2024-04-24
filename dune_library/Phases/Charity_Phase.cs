@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace dune_library.Phases
 {
-    internal class CharityPhase : Phase
+    /*internal class CharityPhase : Phase
     {
         private Game game;
         private string commandFilePath;
@@ -69,5 +69,5 @@ namespace dune_library.Phases
                 }
             }
         }
-    }
+    }*/
 }
