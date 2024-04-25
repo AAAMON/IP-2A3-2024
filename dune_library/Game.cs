@@ -1,4 +1,5 @@
 ﻿using dune_library.Map_Resources;
+using dune_library.Phases;
 using dune_library.Player_Resources;
 using dune_library.Treachery_Cards;
 using dune_library.Utils;
@@ -10,16 +11,16 @@ using System.Threading.Tasks;
 
 namespace dune_library {
   internal class Game {
-    public static void main() {
+    public static void Main() {
       Game game = new();
-      game.play();
+      game.Play();
     }
 
     public Game() {
       // init Players somehow
     }
 
-    private void play() {
+    private void Play() {
       //setup
       for (Round = 1; Round <= 10; Round += 1) {
         //storm
@@ -34,24 +35,30 @@ namespace dune_library {
       }
     }
 
+    public (Battle_Wheel A, Battle_Wheel B) Battle_Wheels { get; }
+
     public IList<Player> Players { get; private set; }
 
-    public int Round { get; private set; }
+    #region Supreme Perspective
 
-    public int Phase { get; private set; }
-
-    public int Moment { get; private set; }
-
-    public Treachery_Deck Treachery_Deck { get; }
-
-    public Map Map { get; }
+    public Map Map { get; } = new();
 
     public int Storm_Sector => Map.Storm_Sector;
 
-    public IDictionary<Faction, int> Assigned_Sector { get; }
+    public int Round { get; private set; }
 
-    public IDictionary<Faction, Own_Player_Info> Player_Infos { get; }
+    public Phase Phase { get; private set; }
 
-    public (Battle_Wheel A, Battle_Wheel B) Battle_Wheels { get; }
+    public IDictionary<Faction, int> Assigned_Sector { get; private set; }
+
+    #endregion
+
+    #region Private Game Data
+
+    public IDictionary<Faction, Own_Player_Info> Player_Infos { get; private set; }
+
+    public Treachery_Deck Treachery_Deck { get; private set; }
+
+    #endregion
   }
 }

@@ -1,6 +1,7 @@
 ﻿using dune_library.Map_Resources;
 using dune_library.Player_Resources;
 using dune_library.Utils;
+using LanguageExt;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,27 +21,27 @@ namespace dune_library.Phases {
       Battle_Wheels = game.Battle_Wheels;
     }
 
-    public Map Map { get; }
+    public Map_Resources.Map Map { get; }
 
     public int Storm_Sector { get; private set; }
 
     public bool Is_First_Turn { get; }
     
-    public Player? Can_Play_Family_Atomics { get; } // supposed to be an optional
+    public Option<Player> Can_Play_Family_Atomics { get; }
 
-    public Player? Can_Play_Weather_Control { get; } // optional
+    public Option<Player> Can_Play_Weather_Control { get; }
 
     public (Battle_Wheel first, Battle_Wheel second) Battle_Wheels { get; }
 
     public int Calculate_Storm(int min, int max) {
-      return Battle_Wheels.first.get_from_range_closed(min, max) + Battle_Wheels.second.get_from_range_closed(min, max);
+      return Battle_Wheels.first.Get_from_range_closed(min, max) + Battle_Wheels.second.Get_from_range_closed(min, max);
     }
 
     public void Move_Storm(int number_of_sectors) {
       // affect troops by storm
       Storm_Sector += 1;
-      Enumerable.Range(Storm_Sector, Storm_Sector + number_of_sectors).ToList().ForEach(pos =>
-                  Map.Storm_Affected_Sections_By_Sector[pos].ForEach(section => section.Affect_By_Storm())
+      Enumerable.Range(Storm_Sector, number_of_sectors).ToList().ForEach(pos =>
+                  Map.Storm_Affectable[pos].ForEach(section => section.Affect_By_Storm())
                 );
     }
     public override void Play_Out() {

@@ -1,4 +1,5 @@
-﻿using dune_library.Utils;
+﻿using dune_library.Player_Resources;
+using dune_library.Utils;
 using LanguageExt;
 using static LanguageExt.Prelude;
 
@@ -19,66 +20,66 @@ namespace dune_library.Map_Resources {
       // territories have been initialised in increasing order by earliest sector crossed
       // if more territories start in the same sector, the one closer to the polar sink gets priority
 
-      var Cielago_North = new Sand("Cielago North", 0, [None, None, 8]);
-      var Cielago_Depression = new Sand("Cielago Depression", 0, 3);
-      var Meridian = new Sand("Meridian", 0, 2);
+      var Cielago_North = new Sand("Cielago North", 0, [None, None, 8], Presences);
+      var Cielago_Depression = new Sand("Cielago Depression", 0, 3, Presences);
+      var Meridian = new Sand("Meridian", 0, 2, Presences);
 
-      var Cielago_South = new Sand("Cielago South", 1, [12, None]);
+      var Cielago_South = new Sand("Cielago South", 1, [12, None], Presences);
 
-      var Cielago_East = new Sand("Cielago East", 2, 2);
+      var Cielago_East = new Sand("Cielago East", 2, 2, Presences);
 
-      var Harg_Pass = new Sand("Harg Pass", 3, 2);
-      var False_Wall_South = new Rock("False Wall South", 3, 2);
-      var South_Mesa = new Sand("South Mesa", 3, [None, 10, None]);
+      var Harg_Pass = new Sand("Harg Pass", 3, 2, Presences);
+      var False_Wall_South = new Rock("False Wall South", 3, 2, Presences);
+      var South_Mesa = new Sand("South Mesa", 3, [None, 10, None], Presences);
 
-      var False_Wall_East = new Rock("False_Wall_East", 4, 5);
-      var The_Minor_Erg = new Sand("The Minor Erg", 4, [None, None, None, 8]);
-      var Pasty_Mesa = new Rock("Pasty_Mesa", 4, 4);
-      var Tuek_s_Sietch = new Strongholds("Tuek's Sietch", 4);
+      var False_Wall_East = new Rock("False_Wall_East", 4, 5, Presences);
+      var The_Minor_Erg = new Sand("The Minor Erg", 4, [None, None, None, 8], Presences);
+      var Pasty_Mesa = new Rock("Pasty_Mesa", 4, 4, Presences);
+      var Tuek_s_Sietch = new Strongholds("Tuek's Sietch", 4, Presences);
 
 
-      var Red_Chasm = new Sand("Red Chasm", 6, [8]);
+      var Red_Chasm = new Sand("Red Chasm", 6, [8], Presences);
 
-      var Shield_Wall = new Rock("Shield_Wall", 7, 2);
-      var Gara_Kulon = new Sand("Gara Kulon", 7, 1);
+      var Shield_Wall = new Rock("Shield_Wall", 7, 2, Presences);
+      var Gara_Kulon = new Sand("Gara Kulon", 7, 1, Presences);
 
-      var Imperial_Basin = new Sand("Imperial Basin", 8, 3);
-      var Hole_In_The_Rock = new Sand("Hole In The Rock", 8, 1);
-      var Rim_Wall_West = new Rock("Rim Wall West", 8, 1);
-      var Basin = new Sand("Basin", 8, 1);
-      var Sihaya_Ridge = new Sand("Sihaya Ridge", 8, [6]);
-      var Old_Gap = new Sand("Old Gap", 8, [None, 6, None]);
+      var Imperial_Basin = new Sand("Imperial Basin", 8, 3, Presences);
+      var Hole_In_The_Rock = new Sand("Hole In The Rock", 8, 1, Presences);
+      var Rim_Wall_West = new Rock("Rim Wall West", 8, 1, Presences);
+      var Basin = new Sand("Basin", 8, 1, Presences);
+      var Sihaya_Ridge = new Sand("Sihaya Ridge", 8, [6], Presences);
+      var Old_Gap = new Sand("Old Gap", 8, [None, 6, None], Presences);
 
-      var Arrakeen = new Strongholds("Arrakeen", 9);
+      var Arrakeen = new Strongholds("Arrakeen", 9, Presences);
 
-      var Arsunt = new Sand("Arsunt", 10, 2);
-      var Carthag = new Strongholds("Carthag", 10);
-      var Tsimpo = new Sand("Tsimpo", 10, 3);
-      var Broken_Land = new Sand("Broken Land", 10, [None, 8]);
+      var Arsunt = new Sand("Arsunt", 10, 2, Presences);
+      var Carthag = new Strongholds("Carthag", 10, Presences);
+      var Tsimpo = new Sand("Tsimpo", 10, 3, Presences);
+      var Broken_Land = new Sand("Broken Land", 10, [None, 8], Presences);
 
-      var Hagga_Basin = new Sand("Hagga_Basin", 11, [None, 6]);
-      var Plastic_Basin = new Rock("Plastic Basin", 11, 3);
+      var Hagga_Basin = new Sand("Hagga_Basin", 11, [None, 6], Presences);
+      var Plastic_Basin = new Rock("Plastic Basin", 11, 3, Presences);
 
-      var Rock_Outcroppings = new Sand("Rock Outcroppings", 12, [None, 6]);
+      var Rock_Outcroppings = new Sand("Rock Outcroppings", 12, [None, 6], Presences);
 
-      var Wind_Pass = new Sand("Wind Pass", 13, 4);
-      var Sietch_Tabr = new Strongholds("Sietch Tabr", 13);
-      var Bight_Of_The_Cliff = new Sand("Bight Of The Cliff", 13, 2);
+      var Wind_Pass = new Sand("Wind Pass", 13, 4, Presences);
+      var Sietch_Tabr = new Strongholds("Sietch Tabr", 13, Presences);
+      var Bight_Of_The_Cliff = new Sand("Bight Of The Cliff", 13, 2, Presences);
 
-      var The_Great_Flat = new Sand("The Great Flat", 14, [10]);
-      var Funeral_Plain = new Sand("Funeral Plain", 14, [6]);
+      var The_Great_Flat = new Sand("The Great Flat", 14, [10], Presences);
+      var Funeral_Plain = new Sand("Funeral Plain", 14, [6], Presences);
 
-      var The_Greater_Flat = new Sand("The Greater Flat", 15, 1);
-      var False_Wall_West = new Rock("False Wall West", 15, 3);
-      var Habbanya_Erg = new Sand("Habbanya Erg", 15, [8, None]);
+      var The_Greater_Flat = new Sand("The Greater Flat", 15, 1, Presences);
+      var False_Wall_West = new Rock("False Wall West", 15, 3, Presences);
+      var Habbanya_Erg = new Sand("Habbanya Erg", 15, [8, None], Presences);
 
-      var Wind_Pass_North = new Sand("Wind Pass North", 16, [6, None]);
-      var Habbanya_Ridge_Flat = new Sand("Habbanya Ridge Flat", 16, [None, 10]);
-      var Habbanya_Sietch = new Strongholds("Habbanya Sietch", 16);
+      var Wind_Pass_North = new Sand("Wind Pass North", 16, [6, None], Presences);
+      var Habbanya_Ridge_Flat = new Sand("Habbanya Ridge Flat", 16, [None, 10], Presences);
+      var Habbanya_Sietch = new Strongholds("Habbanya Sietch", 16, Presences);
 
-      var Cielago_West = new Sand("Cielago West", 17, 2);
+      var Cielago_West = new Sand("Cielago West", 17, 2, Presences);
 
-      var Polar_Sink = new Polar_Sink("Polar Sink");
+      var Polar_Sink = new Polar_Sink("Polar Sink", Presences);
 
       #endregion
 
@@ -691,6 +692,7 @@ namespace dune_library.Map_Resources {
         /*Cielago_North.Sections[0],*/
         /*Cielago_North.Sections[1],*/
       ]);
+
       #endregion
 
       #endregion
@@ -704,7 +706,8 @@ namespace dune_library.Map_Resources {
       //     - family atomics = are not affected by wind before the family atomics card is played
       //                        but are affected by wind after  the family atomics card is played
       // none or all commented sections might get included later
-      Storm_Affected_Sections_By_Sector = [ [
+
+      Storm_Affectable = [ [
           // 0
           Cielago_North.Sections[0],
           Cielago_West.Sections[1],
@@ -756,7 +759,6 @@ namespace dune_library.Map_Resources {
           The_Minor_Erg.Sections[3],
           /*Pasty_Mesa.Sections[3],*/ // rock section
           Gara_Kulon.Sections[0],
-
         ], [
           // 8
           /*Imperial_Basin.Sections[0],*/ // family atomics
@@ -787,7 +789,6 @@ namespace dune_library.Map_Resources {
           Tsimpo.Sections[1],
           /*Plastic_Basin.Sections[0],*/ // rock section
           Broken_Land.Sections[1],
-
         ], [
           // 12
           Hagga_Basin.Sections[1],
@@ -832,61 +833,8 @@ namespace dune_library.Map_Resources {
 
       #endregion
 
-      #region Assigning territories to the dedicated containers
-
-      sand_list = [
-        Cielago_East,
-        Harg_Pass,
-        South_Mesa,
-        The_Minor_Erg,
-        Red_Chasm,
-        Gara_Kulon,
-        Imperial_Basin,
-        Hole_In_The_Rock,
-        Basin,
-        Sihaya_Ridge,
-        Old_Gap,
-        Arsunt,
-        Tsimpo,
-        Broken_Land,
-        Hagga_Basin,
-        Rock_Outcroppings,
-        Wind_Pass,
-        Bight_Of_The_Cliff,
-        The_Great_Flat,
-        Funeral_Plain,
-        The_Greater_Flat,
-        Habbanya_Erg,
-        Wind_Pass_North,
-        Habbanya_Ridge_Flat,
-        Cielago_West,
-        Cielago_North,
-        Cielago_Depression,
-        Meridian,
-        Cielago_South,
-      ];
-      rock_list = [
-        False_Wall_South,
-        False_Wall_East,
-        Pasty_Mesa,
-        Shield_Wall,
-        Rim_Wall_West,
-        Plastic_Basin,
-        False_Wall_West,
-      ];
-      strongholds_list = [
-        Tuek_s_Sietch,
-        Arrakeen,
-        Carthag,
-        Sietch_Tabr,
-        Habbanya_Sietch,
-      ];
-      polar_sink = Polar_Sink;
-
-      #endregion
-
       #region Assigning relevant sections to the influenced_by_family_atomics list
-      influenced_by_family_atomics = [
+      Influenced_By_Family_Atomics = [
         Imperial_Basin.Sections[0],
         Imperial_Basin.Sections[1],
         Arrakeen.Sections[0],
@@ -896,16 +844,13 @@ namespace dune_library.Map_Resources {
       #endregion
     }
 
-    private readonly IReadOnlyCollection<Sand> sand_list;
-    private readonly IReadOnlyCollection<Rock> rock_list;
-    private readonly IReadOnlyCollection<Strongholds> strongholds_list;
-    private readonly Polar_Sink polar_sink;
-
     // make readonly later if possible (during storm phase impl, testing shield wall destruction)
-    public IReadOnlyList<ICollection<Section>> Storm_Affected_Sections_By_Sector;
+    public IReadOnlyList<ICollection<Section>> Storm_Affectable;
 
-    private bool shield_wall_was_destroyed = false;
-    private readonly IReadOnlyCollection<Section> influenced_by_family_atomics;
+    public bool Shield_Wall_Was_Destroyed { get; private set; } = false;
+    private readonly IReadOnlyCollection<Section> Influenced_By_Family_Atomics;
+
+    #region Section Linking Methods
 
     private static void Link(Section a, Section b) {
       a.Add_Neighbor(b);
@@ -921,17 +866,23 @@ namespace dune_library.Map_Resources {
       a.Block_Adding_Neighbors();
     }
 
+    #endregion
+
     public void Destroy_Shield_Wall() {
-      shield_wall_was_destroyed = true;
+      Shield_Wall_Was_Destroyed = true;
       // basically adds the imperial basin, arrakeen and carthag to the sections affected by the storm
-      influenced_by_family_atomics.ForEach(section => {
-        Storm_Affected_Sections_By_Sector[section.Origin_Sector].Add(section);
+      Influenced_By_Family_Atomics.ForEach(section => {
+        Storm_Affectable[section.Origin_Sector].Add(section);
       });
     }
 
     public void Move_Storm(int sectors_to_move) {
-      //destroy everything within these sectors
+      Enumerable.Range(Storm_Sector + 1, sectors_to_move).ToList().ForEach(pos =>
+                  Storm_Affectable[pos].ForEach(section => section.Affect_By_Storm())
+                );
       Storm_Sector = To_Sector(Storm_Sector + sectors_to_move);
     }
+
+    public IDictionary<Faction, ISet<Section>> Presences { get; } = new Dictionary<Faction, ISet<Section>>();
   }
 }
