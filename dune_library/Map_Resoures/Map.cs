@@ -1,6 +1,7 @@
 ﻿using dune_library.Player_Resources;
 using dune_library.Utils;
 using LanguageExt;
+using System.Collections;
 using static LanguageExt.Prelude;
 
 // storm sectors go from 0 to 17, the polar sink is considered to be the 18 th storm sector
@@ -881,6 +882,24 @@ namespace dune_library.Map_Resources {
                   Storm_Affectable[pos].ForEach(section => section.Affect_By_Storm())
                 );
       Storm_Sector = To_Sector(Storm_Sector + sectors_to_move);
+    }
+
+    /*public IEnumerable<Section> Get_Accessible_Sections(Faction faction, Section origin, uint depth) {
+      if (origin.Is_Present(faction)) {
+        throw new ArgumentException("The Faction \"" + faction.ToString() + "\" does not have any troops in this section.");
+      }
+      Queue<Section> q = [];
+      q.Enqueue(origin);
+      while (q.Count > 0) {
+        var current 
+      }
+      ICollection<Section> to_return = [];
+      return to_return;
+    }*/
+
+    public bool Is_Accessible(Faction faction, Section section) {
+      return section.Origin_Sector != Storm_Sector &&
+        !(section.Is_Full_Stronghold && !section.Is_Present(faction));
     }
 
     public IDictionary<Faction, ISet<Section>> Presences { get; } = new Dictionary<Faction, ISet<Section>>();

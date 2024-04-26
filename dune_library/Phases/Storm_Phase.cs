@@ -34,7 +34,7 @@ namespace dune_library.Phases {
     public (Battle_Wheel first, Battle_Wheel second) Battle_Wheels { get; }
 
     public int Calculate_Storm(int min, int max) {
-      return Battle_Wheels.first.Get_from_range_closed(min, max) + Battle_Wheels.second.Get_from_range_closed(min, max);
+      return Battle_Wheel.Get_From_Range_Closed(min, max) + Battle_Wheel.Get_From_Range_Closed(min, max);
     }
 
     public void Move_Storm(int number_of_sectors) {

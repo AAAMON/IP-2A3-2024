@@ -7,11 +7,7 @@ using System.Threading.Tasks;
 
 namespace dune_library.Player_Resources {
   internal abstract class Player_Info {
-    public Player_Info(int spice,int reserves, int dead_forces, IList<General> generals,
-      IList<General> traitors, IList<General> discarded_traitors) {
-      Spice = spice;
-      Reserves = reserves;
-      Dead_Forces = dead_forces;
+    public Player_Info(IList<General> generals, IList<General> traitors, IList<General> discarded_traitors) {
       Generals = generals;
       Traitors = traitors;
       Discarded_Traitors = discarded_traitors;
@@ -26,16 +22,16 @@ namespace dune_library.Player_Resources {
       Discarded_Traitors = other.Discarded_Traitors;
     }
 
-    public int Spice { get; set; }
-    
-    public int Reserves { get; }
+    public int Spice { get; set; } = 0;
+
+    public int Reserves { get; set; } = 20;
 
     public int Dead_Forces { get; set; }
 
-    public IList<General> Generals { get; set; }
+    public IList<General> Generals { get; set; } = [];
 
-    public IList<General> Traitors { get; set; }
+    public IList<General> Traitors { get; set; } = [];
 
-    public IList<General> Discarded_Traitors { get; set; }
+    public IList<General> Discarded_Traitors { get; set; } = [];
   }
 }

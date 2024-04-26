@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace dune_library.Map_Resources {
   internal class Rock : Territory {
     public override IReadOnlyList<Section> Sections { get; }
-    public Rock(string name, int first_sector, int sectors_spanned, IDictionary<Faction, ISet<Section>> presences) : base(name) {
+    public Rock(string name, int first_sector, int sectors_spanned, IDictionary<Faction, ISet<Section>> map_presences) : base(name) {
       Sections = Enumerable.Range(first_sector, sectors_spanned)
-                           .Select(sector => new Section(Map.To_Sector(sector), this, presences))
+                           .Select(sector => new Section(Map.To_Sector(sector), this, map_presences))
                            .ToList();
     }
   }

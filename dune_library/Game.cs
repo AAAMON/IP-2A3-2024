@@ -3,6 +3,8 @@ using dune_library.Phases;
 using dune_library.Player_Resources;
 using dune_library.Treachery_Cards;
 using dune_library.Utils;
+using LanguageExt;
+using static LanguageExt.Prelude;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +19,12 @@ namespace dune_library {
     }
 
     public Game() {
-      // init Players somehow
+      // might need to do something here for Players
     }
 
     private void Play() {
       //setup
+
       for (Round = 1; Round <= 10; Round += 1) {
         //storm
         //spice blow
@@ -35,29 +38,29 @@ namespace dune_library {
       }
     }
 
-    public (Battle_Wheel A, Battle_Wheel B) Battle_Wheels { get; }
+    public (Battle_Wheel A, Battle_Wheel B) Battle_Wheels { get; } = new();
 
-    public IList<Player> Players { get; private set; }
+    public IList<Player> Players { get; private set; } = [];
 
-    #region Supreme Perspective
+    #region Total Perspective
 
-    public Map Map { get; } = new();
+    public Map_Resources.Map Map { get; } = new();
 
     public int Storm_Sector => Map.Storm_Sector;
 
-    public int Round { get; private set; }
+    public int Round { get; private set; } = 0;
 
-    public Phase Phase { get; private set; }
+    public Option<Phase> Phase { get; private set; } = None;
 
-    public IDictionary<Faction, int> Assigned_Sector { get; private set; }
+    public IDictionary<Faction, int> Assigned_Sector { get; private set; } = new Dictionary<Faction, int>();
 
     #endregion
 
     #region Private Game Data
 
-    public IDictionary<Faction, Own_Player_Info> Player_Infos { get; private set; }
+    public IDictionary<Faction, Own_Player_Info> Player_Infos { get; private set; } = new Dictionary<Faction, Own_Player_Info>();
 
-    public Treachery_Deck Treachery_Deck { get; private set; }
+    public Treachery_Deck Treachery_Deck { get; private set; } = new();
 
     #endregion
   }

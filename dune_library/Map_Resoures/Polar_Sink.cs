@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 namespace dune_library.Map_Resources {
   internal class Polar_Sink : Territory {
     public override IReadOnlyList<Section> Sections { get; }
-    public Polar_Sink(string name, IDictionary<Faction, ISet<Section>> presences) : base(name) {
-      Sections = [new(18, this, presences)];
+    public Polar_Sink(string name, IDictionary<Faction, ISet<Section>> map_presences) : base(name) {
+      Sections = [new(18, this, map_presences)];
     }
   }
 }
