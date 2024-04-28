@@ -6,10 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace dune_library.Player_Resources {
-  internal class Perspective(Game game, Faction faction) {
+  public class Perspective(Game game, Faction faction) {
     public Faction Faction { get; } = faction;
 
     public Map_Resources.Map Map => game.Map;
@@ -27,9 +28,39 @@ namespace dune_library.Player_Resources {
         new KeyValuePair<Faction, Player_Info>(e.Key, e.Key == faction ? e.Value : new Other_Player_Info(e.Value))
       ).ToDictionary();
 
-    public Own_Player_Info Own_Player_Info => (Own_Player_Info)Player_Infos[Faction];
+    //public Own_Player_Info Own_Player_Info => (Own_Player_Info)Player_Infos[Faction];
 
     // public Territory_Card Last_Spice_Card { get; set; }
+
+    public void SerializeToJson(string filePath)
+     {
+        try
+        {
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            string json = JsonSerializer.Serialize(this, options);
+            File.WriteAllText(filePath, json);
+            Console.WriteLine("Serialization successful.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error occurred during serialization: {ex.Message}");
+        }
+     }
+
+     /*public static Perspective DeserializeFromJson(string filePath)
+     {
+        try
+        {
+            string jsonData = File.ReadAllText(filePath);
+            Perspective deserializedObject = JsonSerializer.Deserialize<Perspective>(jsonData);
+            return deserializedObject;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error occurred during deserialization: {ex.Message}");
+            return default;
+        }
+     }*/
 
   }
 }

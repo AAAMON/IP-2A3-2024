@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace dune_library.Player_Resources {
-  internal class General(string name, uint strength) {
+  public class General(string name, uint strength) {
     public string Name => name;
 
     public uint Strength => strength;

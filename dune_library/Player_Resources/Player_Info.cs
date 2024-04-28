@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace dune_library.Player_Resources {
-  internal abstract class Player_Info {
+  public abstract class Player_Info {
     public Player_Info(IList<General> generals, IList<General> traitors, IList<General> discarded_traitors) {
       Generals = generals;
       Traitors = traitors;

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace dune_library.Utils {
-  internal class Battle_Wheel() {
+  public class Battle_Wheel() {
 
     public static int Get_From_Range_Closed(int min, int max) {
       var result = max + 1;

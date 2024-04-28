@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using dune_library.Treachery_Cards;
 
 namespace dune_library.Player_Resources {
-  internal enum Faction {
+  public enum Faction {
     Atreides,
     Bene_Gesserit,
     Emperor,

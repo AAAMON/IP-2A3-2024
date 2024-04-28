@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using LanguageExt;
 
 namespace dune_library.Player_Resources {
-  internal class Player {
+  public class Player {
     public Perspective Perspective { get; set; }
       
     private readonly string Name;

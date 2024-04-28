@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace dune_library {
-  internal class Game {
+  public class Game {
     public static void Main() {
       Game game = new();
       game.Play();

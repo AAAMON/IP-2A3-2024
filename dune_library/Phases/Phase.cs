@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace dune_library.Phases {
-  internal abstract class Phase {
+  public abstract class Phase {
     public abstract void Play_Out();
   }
 }

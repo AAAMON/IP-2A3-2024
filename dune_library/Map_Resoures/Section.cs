@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace dune_library.Map_Resources {
-  internal class Section(int sector, Territory territory, IDictionary<Faction, ISet<Section>> map_presences) {
+  public class Section(int sector, Territory territory, IDictionary<Faction, ISet<Section>> map_presences) {
     public int Origin_Sector => sector;
 
     public Territory Origin_Territory => territory;
