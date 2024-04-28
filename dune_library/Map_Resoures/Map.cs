@@ -1,86 +1,96 @@
 ﻿using dune_library.Player_Resources;
 using dune_library.Utils;
 using LanguageExt;
-using System.Collections;
 using static LanguageExt.Prelude;
+using System.Collections;
+using System.ComponentModel.DataAnnotations;
+using dune_library.Map_Resoures;
 
 // storm sectors go from 0 to 17, the polar sink is considered to be the 18 th storm sector
 // 0 is considered to be the starting sector in the rulebook (aka the one with 8 spice capacity in the cielago north region)
-namespace dune_library.Map_Resources {
-  internal class Map {
+namespace dune_library.Map_Resources
+{
+    internal class Map {
     public static int NUMBER_OF_SECTORS => 18;
 
     public static int To_Sector(int raw_sector) {
       return raw_sector % NUMBER_OF_SECTORS;
     }
 
-    public int Storm_Sector { get; private set; }
-
     public Map() {
-      #region Initialisation of every territory
+      #region Initialisation of every territory and their container
       // territories have been initialised in increasing order by earliest sector crossed
       // if more territories start in the same sector, the one closer to the polar sink gets priority
+      Territories = [
+        Cielago_North = new("Cielago North", 0, [None, None, 8]),
+        Cielago_Depression = new("Cielago Depression", 0, 3),
+        Meridian = new("Meridian", 0, 2),
 
-      var Cielago_North = new Sand("Cielago North", 0, [None, None, 8], Presences);
-      var Cielago_Depression = new Sand("Cielago Depression", 0, 3, Presences);
-      var Meridian = new Sand("Meridian", 0, 2, Presences);
+        Cielago_South = new("Cielago South", 1, [12, None]),
 
-      var Cielago_South = new Sand("Cielago South", 1, [12, None], Presences);
+        Cielago_East = new("Cielago East", 2, 2),
 
-      var Cielago_East = new Sand("Cielago East", 2, 2, Presences);
+        Harg_Pass = new("Harg Pass", 3, 2),
+        False_Wall_South = new("False Wall South", 3, 2),
+        South_Mesa = new("South Mesa", 3, [None, 10, None]),
 
-      var Harg_Pass = new Sand("Harg Pass", 3, 2, Presences);
-      var False_Wall_South = new Rock("False Wall South", 3, 2, Presences);
-      var South_Mesa = new Sand("South Mesa", 3, [None, 10, None], Presences);
-
-      var False_Wall_East = new Rock("False_Wall_East", 4, 5, Presences);
-      var The_Minor_Erg = new Sand("The Minor Erg", 4, [None, None, None, 8], Presences);
-      var Pasty_Mesa = new Rock("Pasty_Mesa", 4, 4, Presences);
-      var Tuek_s_Sietch = new Strongholds("Tuek's Sietch", 4, Presences);
+        False_Wall_East = new("False_Wall_East", 4, 5),
+        The_Minor_Erg = new("The Minor Erg", 4, [None, None, None, 8]),
+        Pasty_Mesa = new("Pasty_Mesa", 4, 4),
+        Tuek_s_Sietch = new("Tuek's Sietch", 4),
 
 
-      var Red_Chasm = new Sand("Red Chasm", 6, [8], Presences);
+        Red_Chasm = new("Red Chasm", 6, [8]),
 
-      var Shield_Wall = new Rock("Shield_Wall", 7, 2, Presences);
-      var Gara_Kulon = new Sand("Gara Kulon", 7, 1, Presences);
+        Shield_Wall = new("Shield_Wall", 7, 2),
+        Gara_Kulon = new("Gara Kulon", 7, 1),
 
-      var Imperial_Basin = new Sand("Imperial Basin", 8, 3, Presences);
-      var Hole_In_The_Rock = new Sand("Hole In The Rock", 8, 1, Presences);
-      var Rim_Wall_West = new Rock("Rim Wall West", 8, 1, Presences);
-      var Basin = new Sand("Basin", 8, 1, Presences);
-      var Sihaya_Ridge = new Sand("Sihaya Ridge", 8, [6], Presences);
-      var Old_Gap = new Sand("Old Gap", 8, [None, 6, None], Presences);
+        Imperial_Basin = new("Imperial Basin", 8, 3),
+        Hole_In_The_Rock = new("Hole In The Rock", 8, 1),
+        Rim_Wall_West = new("Rim Wall West", 8, 1),
+        Basin = new("Basin", 8, 1),
+        Sihaya_Ridge = new("Sihaya Ridge", 8, [6]),
+        Old_Gap = new("Old Gap", 8, [None, 6, None]),
 
-      var Arrakeen = new Strongholds("Arrakeen", 9, Presences);
+        Arrakeen = new("Arrakeen", 9),
 
-      var Arsunt = new Sand("Arsunt", 10, 2, Presences);
-      var Carthag = new Strongholds("Carthag", 10, Presences);
-      var Tsimpo = new Sand("Tsimpo", 10, 3, Presences);
-      var Broken_Land = new Sand("Broken Land", 10, [None, 8], Presences);
+        Arsunt = new("Arsunt", 10, 2),
+        Carthag = new("Carthag", 10),
+        Tsimpo = new("Tsimpo", 10, 3),
+        Broken_Land = new("Broken Land", 10, [None, 8]),
 
-      var Hagga_Basin = new Sand("Hagga_Basin", 11, [None, 6], Presences);
-      var Plastic_Basin = new Rock("Plastic Basin", 11, 3, Presences);
+        Hagga_Basin = new("Hagga_Basin", 11, [None, 6]),
+        Plastic_Basin = new("Plastic Basin", 11, 3),
 
-      var Rock_Outcroppings = new Sand("Rock Outcroppings", 12, [None, 6], Presences);
+        Rock_Outcroppings = new("Rock Outcroppings", 12, [None, 6]),
 
-      var Wind_Pass = new Sand("Wind Pass", 13, 4, Presences);
-      var Sietch_Tabr = new Strongholds("Sietch Tabr", 13, Presences);
-      var Bight_Of_The_Cliff = new Sand("Bight Of The Cliff", 13, 2, Presences);
+        Wind_Pass = new("Wind Pass", 13, 4),
+        Sietch_Tabr = new("Sietch Tabr", 13),
+        Bight_Of_The_Cliff = new("Bight Of The Cliff", 13, 2),
 
-      var The_Great_Flat = new Sand("The Great Flat", 14, [10], Presences);
-      var Funeral_Plain = new Sand("Funeral Plain", 14, [6], Presences);
+        The_Great_Flat = new("The Great Flat", 14, [10]),
+        Funeral_Plain = new("Funeral Plain", 14, [6]),
 
-      var The_Greater_Flat = new Sand("The Greater Flat", 15, 1, Presences);
-      var False_Wall_West = new Rock("False Wall West", 15, 3, Presences);
-      var Habbanya_Erg = new Sand("Habbanya Erg", 15, [8, None], Presences);
+        The_Greater_Flat = new("The Greater Flat", 15, 1),
+        False_Wall_West = new("False Wall West", 15, 3),
+        Habbanya_Erg = new("Habbanya Erg", 15, [8, None]),
 
-      var Wind_Pass_North = new Sand("Wind Pass North", 16, [6, None], Presences);
-      var Habbanya_Ridge_Flat = new Sand("Habbanya Ridge Flat", 16, [None, 10], Presences);
-      var Habbanya_Sietch = new Strongholds("Habbanya Sietch", 16, Presences);
+        Wind_Pass_North = new("Wind Pass North", 16, [6, None]),
+        Habbanya_Ridge_Flat = new("Habbanya Ridge Flat", 16, [None, 10]),
+        Habbanya_Sietch = new("Habbanya Sietch", 16),
 
-      var Cielago_West = new Sand("Cielago West", 17, 2, Presences);
+        Cielago_West = new("Cielago West", 17, 2),
 
-      var Polar_Sink = new Polar_Sink("Polar Sink", Presences);
+        Polar_Sink = new("Polar Sink"),
+      ];
+
+      #endregion
+
+      #region Initialising the Section Containers
+
+      Sections = Territories.SelectMany(l => l.Sections).ToList();
+
+      Sections_With_Spice = Sections.OfType<With_Spice>().ToList();
 
       #endregion
 
@@ -845,11 +855,129 @@ namespace dune_library.Map_Resources {
       #endregion
     }
 
+    #region Territories
+
+    public Sand Cielago_North { get; }
+    public Sand Cielago_Depression { get; }
+    public Sand Meridian { get; }
+
+    public Sand Cielago_South { get; }
+
+    public Sand Cielago_East { get; }
+
+    public Sand Harg_Pass { get; }
+    public Rock False_Wall_South { get; }
+    public Sand South_Mesa { get; }
+
+    public Rock False_Wall_East { get; }
+    public Sand The_Minor_Erg { get; }
+    public Rock Pasty_Mesa { get; }
+    public Strongholds Tuek_s_Sietch { get; }
+
+
+    public Sand Red_Chasm { get; }
+
+    public Rock Shield_Wall { get; }
+    public Sand Gara_Kulon { get; }
+
+    public Sand Imperial_Basin { get; }
+    public Sand Hole_In_The_Rock { get; }
+    public Rock Rim_Wall_West { get; }
+    public Sand Basin { get; }
+    public Sand Sihaya_Ridge { get; }
+    public Sand Old_Gap { get; }
+
+    public Strongholds Arrakeen { get; }
+
+    public Sand Arsunt { get; }
+    public Strongholds Carthag { get; }
+    public Sand Tsimpo { get; }
+    public Sand Broken_Land { get; }
+
+    public Sand Hagga_Basin { get; }
+    public Rock Plastic_Basin { get; }
+
+    public Sand Rock_Outcroppings { get; }
+
+    public Sand Wind_Pass { get; }
+    public Strongholds Sietch_Tabr { get; }
+    public Sand Bight_Of_The_Cliff { get; }
+
+    public Sand The_Great_Flat { get; }
+    public Sand Funeral_Plain { get; }
+
+    public Sand The_Greater_Flat { get; }
+    public Rock False_Wall_West { get; }
+    public Sand Habbanya_Erg { get; }
+
+    public Sand Wind_Pass_North { get; }
+    public Sand Habbanya_Ridge_Flat { get; }
+    public Strongholds Habbanya_Sietch { get; }
+
+    public Sand Cielago_West { get; }
+
+    public Polar_Sink Polar_Sink { get; }
+
+    #endregion
+
+    #region Containers for Territories and Sections + Lookup functions by id
+
+    public IList<Territory> Territories { get; }
+
+    public IList<Section> Sections { get; }
+
+    public ICollection<With_Spice> Sections_With_Spice { get; }
+
+    public Territory ToTerritory(int id) {
+      if (id > Territories.Count) {
+        throw new ArgumentException("no territory is mapped to this id (max: " + Territories.Count + ", id: " + id + ")");
+      }
+      return Territories[id];
+    }
+
+    public Section ToSection(int id) {
+      if (id > Sections.Count) {
+        throw new ArgumentException("no territory is mapped to this id (max: " + Sections.Count + ", id: " + id + ")");
+      }
+      return Sections[id];
+    }
+
+    #endregion
+
+    #region Storm
+
     // make readonly later if possible (during storm phase impl, testing shield wall destruction)
     public IReadOnlyList<ICollection<Section>> Storm_Affectable;
 
+    public int Storm_Sector { get; private set; }
+
+    public void Move_Storm(int sectors_to_move) {
+      Enumerable.Range(Storm_Sector + 1, sectors_to_move).ToList().ForEach(pos =>
+                  Storm_Affectable[pos].ForEach(section => {
+                    Presences_Manager.Remove_But_Keep_Half_Of_Fremen(section);
+                    section.Delete_Spice();
+                  })
+                );
+      Storm_Sector = To_Sector(Storm_Sector + sectors_to_move);
+    }
+
+    #endregion
+
+    #region Family Atomics
+
     public bool Shield_Wall_Was_Destroyed { get; private set; } = false;
+
     private readonly IReadOnlyCollection<Section> Influenced_By_Family_Atomics;
+
+    public void Destroy_Shield_Wall() {
+      Shield_Wall_Was_Destroyed = true;
+      // basically adds the imperial basin, arrakeen and carthag to the sections affected by the storm
+      Influenced_By_Family_Atomics.ForEach(section => {
+        Storm_Affectable[section.Origin_Sector].Add(section);
+      });
+    }
+
+    #endregion
 
     #region Section Linking Methods
 
@@ -869,21 +997,6 @@ namespace dune_library.Map_Resources {
 
     #endregion
 
-    public void Destroy_Shield_Wall() {
-      Shield_Wall_Was_Destroyed = true;
-      // basically adds the imperial basin, arrakeen and carthag to the sections affected by the storm
-      Influenced_By_Family_Atomics.ForEach(section => {
-        Storm_Affectable[section.Origin_Sector].Add(section);
-      });
-    }
-
-    public void Move_Storm(int sectors_to_move) {
-      Enumerable.Range(Storm_Sector + 1, sectors_to_move).ToList().ForEach(pos =>
-                  Storm_Affectable[pos].ForEach(section => section.Affect_By_Storm())
-                );
-      Storm_Sector = To_Sector(Storm_Sector + sectors_to_move);
-    }
-
     /*public IEnumerable<Section> Get_Accessible_Sections(Faction faction, Section origin, uint depth) {
       if (origin.Is_Present(faction)) {
         throw new ArgumentException("The Faction \"" + faction.ToString() + "\" does not have any troops in this section.");
@@ -897,11 +1010,11 @@ namespace dune_library.Map_Resources {
       return to_return;
     }*/
 
+    public Global_Faction_Presences Presences_Manager { get; } = new();
+
     public bool Is_Accessible(Faction faction, Section section) {
       return section.Origin_Sector != Storm_Sector &&
-        !(section.Is_Full_Stronghold && !section.Is_Present(faction));
+        !(Presences_Manager.Is_Full_Strongholds(section) && !Presences_Manager.Is_Present(section, faction));
     }
-
-    public IDictionary<Faction, ISet<Section>> Presences { get; } = new Dictionary<Faction, ISet<Section>>();
   }
 }

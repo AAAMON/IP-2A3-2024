@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LanguageExt;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,17 @@ namespace dune_library.Utils {
       foreach (var item in source) {
         action(item);
       }
+    }
+
+    #endregion
+
+    #region Option
+
+    public static T OrElseThrow<T>(this Option<T> option, Func<Exception> to_throw) {
+      return option.Match(
+          Some: value => value,
+          None: () => throw to_throw.Invoke()
+      );
     }
 
     #endregion

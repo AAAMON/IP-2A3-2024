@@ -8,10 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace dune_library.Player_Resources {
-  internal class General(string name, uint strength) {
-    public string Name => name;
+  internal class General(Faction faction, string name, int strength) {
+    private static int counter = 0;
 
-    public uint Strength => strength;
+    public int Id { get; } = counter++;
+
+    public readonly Faction Faction = faction;
+
+    public readonly string Name = name;
+
+    public readonly int Strength = strength;
 
     public Option<Section> Location { get; set; } = None;
 
@@ -23,7 +29,15 @@ namespace dune_library.Player_Resources {
       Revivable,
     }
 
-    public E_Status Status { get; private set; } = E_Status.Alive;
+    private E_Status Status { get; set; } = E_Status.Alive;
+
+    public bool Is_Alive => Status == E_Status.Alive;
+
+    public bool Is_Dead => !Is_Alive;
+
+    public bool Is_Revivable => Status == E_Status.Revivable;
+
+    public bool Is_Not_Revivable => Status == E_Status.Not_Revivable;
 
     public void Kill() {
       if (Status == E_Status.Alive) {

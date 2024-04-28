@@ -7,14 +7,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LanguageExt;
+using static LanguageExt.Prelude;
+using LanguageExt.UnsafeValueAccess;
+using dune_library.Utils;
 
 namespace dune_library.Player_Resources {
   internal class Player {
-    public Perspective Perspective { get; set; }
+
+    public Player(string name) {
+      Name = name;
+      _faction = None;
+    }
       
-    private readonly string Name;
-      
-    private bool IsHuman { get; set; }
+    public string Name { get; }
+
+    private Option<Faction> _faction;
+
+    public Faction Faction {
+      get => _faction.OrElseThrow(() => new ArgumentException("faction has not been assigned yet"));
+      set => _faction = value;
+    }
 
     /*public Player(string name, Faction faction, bool isHuman, ushort assigned_sector)
     {
@@ -23,7 +35,7 @@ namespace dune_library.Player_Resources {
       IsHuman = isHuman;
       TreacheryCards = new List<Treachery_Card>();
       SpiceCards = new List<Spice_Card>();
-      Assigned_Sector = assigned_sector;
+      Player_Markers = assigned_sector;
       ReserveTroops = 0;
     }
 

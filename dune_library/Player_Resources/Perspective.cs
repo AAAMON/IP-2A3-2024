@@ -1,6 +1,7 @@
 ﻿using dune_library.Map_Resources;
 using dune_library.Phases;
 using dune_library.Spice;
+using dune_library.Utils;
 using LanguageExt;
 using System;
 using System.Collections.Generic;
@@ -9,27 +10,37 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace dune_library.Player_Resources {
-  internal class Perspective(Game game, Faction faction) {
-    public Faction Faction { get; } = faction;
+  internal class Perspective {
+    public Faction Faction { get; }
 
-    public Map_Resources.Map Map => game.Map;
+    public (Battle_Wheel A, Battle_Wheel B) Battle_Wheels { get; }
 
-    public int Storm_Sector => Map.Storm_Sector;
+    public Map_Resources.Map Map { get; }
 
-    public int Round => game.Round;
+    public int Round { get; }
 
-    public Option<Phase> Phase => game.Phase;
+    public Option<Phase> Phase { get; }
 
-    public IDictionary<Faction, int> Assigned_Sector => game.Assigned_Sector;
+    public Generals_Manager General_Manager { get; }
 
-    public IDictionary<Faction, Player_Info> Player_Infos { get; } =
-      game.Player_Infos.Select(e =>
-        new KeyValuePair<Faction, Player_Info>(e.Key, e.Key == faction ? e.Value : new Other_Player_Info(e.Value))
-      ).ToDictionary();
+    public Alliances_Manager Alliances_Manager { get; }
 
-    public Own_Player_Info Own_Player_Info => (Own_Player_Info)Player_Infos[Faction];
+    public Territory_Card Last_Spice_Card { get; }
 
-    // public Territory_Card Last_Spice_Card { get; set; }
+    public IDictionary<Faction, Public_Faction_Knowledge> Public_Faction_Knowledge { get; }
 
+    public Special_Faction_Knowledge Special_Faction_Knowledge { get; }
+
+    public Perspective(Faction faction, Game game) {
+      Faction = faction;
+      Battle_Wheels = game.Battle_Wheels;
+      Map = game.Map;
+      Phase = game.Phase;
+      General_Manager = game.General_Manager;
+      Alliances_Manager = game.Alliances_Manager;
+      Last_Spice_Card = game.Last_Spice_Card;
+      Public_Faction_Knowledge = game.Public_Faction_Knowledge;
+      Special_Faction_Knowledge = game.Special_Faction_Knowledge[faction];
+    }
   }
 }

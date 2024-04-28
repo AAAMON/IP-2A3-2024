@@ -12,7 +12,7 @@ namespace dune_library.Phases {
   internal class Storm_Phase : Phase {
     public Storm_Phase(Game game) {
       Map = game.Map;
-      Storm_Sector = game.Storm_Sector;
+      Storm_Sector = game.Map.Storm_Sector;
       Can_Play_Family_Atomics = null;
       // more complicated
       Can_Play_Weather_Control = null;
@@ -37,19 +37,19 @@ namespace dune_library.Phases {
       return Battle_Wheel.Get_From_Range_Closed(min, max) + Battle_Wheel.Get_From_Range_Closed(min, max);
     }
 
-    public void Move_Storm(int number_of_sectors) {
+    /*public void Move_Storm(int number_of_sectors) {
       // affect troops by storm
       Storm_Sector += 1;
       Enumerable.Range(Storm_Sector, number_of_sectors).ToList().ForEach(pos =>
                   Map.Storm_Affectable[pos].ForEach(section => section.Affect_By_Storm())
                 );
-    }
+    }*/
     public override void Play_Out() {
       int sectors_to_move = 0;
       if (Is_First_Turn) {
         // select the players before and after the initial storm marker
         sectors_to_move = Calculate_Storm(0, 20);
-        Move_Storm(sectors_to_move);
+        /*Move_Storm(sectors_to_move);*/
       } else {
         // Thread family_atomics_asking_thread;
         // Thread weather_control_asking_thread;
@@ -64,7 +64,7 @@ namespace dune_library.Phases {
         
         // poll for the two threads, as is the case
 
-        Move_Storm(sectors_to_move);
+        /*Move_Storm(sectors_to_move);*/
       }
     }
   }

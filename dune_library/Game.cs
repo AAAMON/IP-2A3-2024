@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using dune_library.Spice;
 
 namespace dune_library {
   internal class Game {
@@ -23,8 +24,7 @@ namespace dune_library {
     }
 
     private void Play() {
-      //setup
-
+      
       for (Round = 1; Round <= 10; Round += 1) {
         //storm
         //spice blow
@@ -38,30 +38,40 @@ namespace dune_library {
       }
     }
 
-    public (Battle_Wheel A, Battle_Wheel B) Battle_Wheels { get; } = new();
-
     public IList<Player> Players { get; private set; } = [];
 
-    #region Total Perspective
+    #region Information that everyone should know
+
+    public (Battle_Wheel A, Battle_Wheel B) Battle_Wheels { get; } = new();
 
     public Map_Resources.Map Map { get; } = new();
-
-    public int Storm_Sector => Map.Storm_Sector;
 
     public int Round { get; private set; } = 0;
 
     public Option<Phase> Phase { get; private set; } = None;
 
-    public IDictionary<Faction, int> Assigned_Sector { get; private set; } = new Dictionary<Faction, int>();
+    public Generals_Manager General_Manager { get; } = new();
+
+    public Alliances_Manager Alliances_Manager { get; } = new();
+
+    public Territory_Card Last_Spice_Card { get; private set; } = new();
+
+    public IDictionary<Faction, Public_Faction_Knowledge> Public_Faction_Knowledge { get; private set; }
+
+    public IDictionary<Faction, Special_Faction_Knowledge> Special_Faction_Knowledge { get; private set; }
 
     #endregion
 
     #region Private Game Data
 
-    public IDictionary<Faction, Own_Player_Info> Player_Infos { get; private set; } = new Dictionary<Faction, Own_Player_Info>();
-
     public Treachery_Deck Treachery_Deck { get; private set; } = new();
 
+    public Spice_Deck Spice_Deck { get; private set; } = new();
+
     #endregion
+
+    public Perspective Generate_Perspective(Faction faction) {
+      return new Perspective(faction, this);
+    }
   }
 }
