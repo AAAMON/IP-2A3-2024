@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using dune_library.Spice;
 
 namespace dune_library {
-  internal class Game {
+  public class Game {
     public static void Main() {
       Game game = new();
       game.Play();

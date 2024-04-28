@@ -5,6 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace dune_library.Treachery_Cards {
-  internal class Treachery_Card {
+  public class Treachery_Card {
   }
 }

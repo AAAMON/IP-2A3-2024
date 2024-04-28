@@ -8,9 +8,8 @@ using dune_library.Map_Resoures;
 
 // storm sectors go from 0 to 17, the polar sink is considered to be the 18 th storm sector
 // 0 is considered to be the starting sector in the rulebook (aka the one with 8 spice capacity in the cielago north region)
-namespace dune_library.Map_Resources
-{
-    internal class Map {
+namespace dune_library.Map_Resources {
+  internal class Map {
     public static int NUMBER_OF_SECTORS => 18;
 
     public static int To_Sector(int raw_sector) {

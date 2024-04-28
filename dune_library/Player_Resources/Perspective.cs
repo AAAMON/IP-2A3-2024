@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace dune_library.Player_Resources {
@@ -42,5 +43,35 @@ namespace dune_library.Player_Resources {
       Public_Faction_Knowledge = game.Public_Faction_Knowledge;
       Special_Faction_Knowledge = game.Special_Faction_Knowledge[faction];
     }
+    public void SerializeToJson(string filePath)
+     {
+        try
+        {
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            string json = JsonSerializer.Serialize(this, options);
+            File.WriteAllText(filePath, json);
+            Console.WriteLine("Serialization successful.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error occurred during serialization: {ex.Message}");
+        }
+     }
+
+     /*public static Perspective DeserializeFromJson(string filePath)
+     {
+        try
+        {
+            string jsonData = File.ReadAllText(filePath);
+            Perspective deserializedObject = JsonSerializer.Deserialize<Perspective>(jsonData);
+            return deserializedObject;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error occurred during deserialization: {ex.Message}");
+            return default;
+        }
+     }*/
+
   }
 }
