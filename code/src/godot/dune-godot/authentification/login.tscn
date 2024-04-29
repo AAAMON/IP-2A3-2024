@@ -1,0 +1,118 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5hqyyg4h1d2r"]
+
+[ext_resource type="FontFile" uid="uid://duu07hfiwa68t" path="res://fonts/Neuropol.otf" id="1_avtd3"]
+[ext_resource type="Script" path="res://authentification/login.gd" id="1_o8pxm"]
+[ext_resource type="Texture2D" uid="uid://dxgmy13s2g4un" path="res://assets/Asset 53.png" id="2_fd3uj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cq3l3"]
+font = ExtResource("1_avtd3")
+
+[node name="loginMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -797.0
+offset_bottom = -256.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o8pxm")
+
+[node name="background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 398.0
+offset_top = 179.0
+offset_right = 757.0
+offset_bottom = 559.0
+texture = ExtResource("2_fd3uj")
+expand_mode = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(400, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 198.5
+offset_top = -72.0
+offset_right = 598.5
+offset_bottom = 428.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 60.0
+offset_top = 60.0
+offset_right = -60.0
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 34
+text = "LOGIN"
+label_settings = SubResource("LabelSettings_cq3l3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="Username" type="LineEdit" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_avtd3")
+theme_override_font_sizes/font_size = 22
+placeholder_text = "Username"
+
+[node name="MarginContainer2" type="MarginContainer" parent="NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Password1" type="LineEdit" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_avtd3")
+theme_override_font_sizes/font_size = 22
+placeholder_text = "Password"
+
+[node name="MarginContainer3" type="MarginContainer" parent="NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Password2" type="LineEdit" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_avtd3")
+theme_override_font_sizes/font_size = 22
+placeholder_text = "Password"
+
+[node name="MarginContainer4" type="MarginContainer" parent="NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HFlowContainer" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/h_separation = 30
+alignment = 1
+
+[node name="cancel" type="Button" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_avtd3")
+text = "CANCEL"
+
+[node name="login" type="Button" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_avtd3")
+text = "LOGIN"
+
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/HBoxContainer/cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/HBoxContainer/login" to="." method="_on_login_pressed"]

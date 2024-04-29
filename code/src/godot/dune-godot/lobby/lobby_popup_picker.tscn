@@ -1,0 +1,1160 @@
+[gd_scene load_steps=8 format=3 uid="uid://baj0ed3sfq8ng"]
+
+[ext_resource type="Script" path="res://lobby/lobby_popup_picker.gd" id="1_112d2"]
+[ext_resource type="FontFile" uid="uid://duu07hfiwa68t" path="res://fonts/Neuropol.otf" id="1_e2j8q"]
+[ext_resource type="StyleBox" uid="uid://dm7eymt2w4tuq" path="res://lobby/HeaderCell.tres" id="2_1u2nt"]
+[ext_resource type="Texture2D" uid="uid://dxgmy13s2g4un" path="res://assets/Asset 53.png" id="2_22res"]
+[ext_resource type="StyleBox" uid="uid://cgb6b2i4dxhot" path="res://lobby/TableCell.tres" id="4_vsgfo"]
+
+[sub_resource type="Theme" id="Theme_kkh2x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r3eus"]
+
+[node name="Lobby_picker" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_112d2")
+
+[node name="background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_22res")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ReturnButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("1_e2j8q")
+theme_override_font_sizes/font_size = 15
+text = "RETURN
+"
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_e2j8q")
+theme_override_font_sizes/font_size = 18
+text = "CHOOSE YOUR LOBBY
+"
+horizontal_alignment = 1
+
+[node name="Control4" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(1008, 30)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(252, 0)
+layout_mode = 2
+theme = SubResource("Theme_kkh2x")
+theme_override_styles/panel = ExtResource("2_1u2nt")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer/HBoxContainer/Panel"]
+material = SubResource("ShaderMaterial_r3eus")
+custom_minimum_size = Vector2(250, 30)
+layout_mode = 2
+offset_right = 250.0
+offset_bottom = 30.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_e2j8q")
+theme_override_font_sizes/font_size = 15
+text = "LOBBY OWNER
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel2" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(252, 0)
+layout_mode = 2
+theme = SubResource("Theme_kkh2x")
+theme_override_styles/panel = ExtResource("2_1u2nt")
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer/HBoxContainer/Panel2"]
+custom_minimum_size = Vector2(250, 30)
+layout_mode = 2
+offset_right = 250.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("1_e2j8q")
+theme_override_font_sizes/font_size = 15
+text = "NAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel3" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(252, 0)
+layout_mode = 2
+theme = SubResource("Theme_kkh2x")
+theme_override_styles/panel = ExtResource("2_1u2nt")
+
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer/HBoxContainer/Panel3"]
+custom_minimum_size = Vector2(250, 30)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -126.0
+offset_top = -15.0
+offset_right = 126.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_e2j8q")
+theme_override_font_sizes/font_size = 15
+text = "NUMBER OF PLAYERS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel4" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(252, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_1u2nt")
+
+[node name="Label4" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer/HBoxContainer/Panel4"]
+custom_minimum_size = Vector2(250, 30)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -67.0
+offset_right = 67.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_e2j8q")
+theme_override_font_sizes/font_size = 15
+text = "DIFFICULTY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Row" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="Cell" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row/Cell"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell2" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row/Cell2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell3" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row/Cell3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell4" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row/Cell4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Row2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="Cell" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row2"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row2/Cell"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell2" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row2"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row2/Cell2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell3" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row2"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row2/Cell3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell4" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row2"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row2/Cell4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Row3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="Cell" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row3"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row3/Cell"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell2" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row3"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row3/Cell2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell3" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row3"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row3/Cell3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell4" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row3"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row3/Cell4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Row4" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="Cell" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row4"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row4/Cell"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell2" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row4"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row4/Cell2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell3" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row4"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row4/Cell3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell4" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row4"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row4/Cell4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Row5" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="Cell" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row5"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row5/Cell"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell2" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row5"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row5/Cell2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell3" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row5"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row5/Cell3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell4" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row5"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row5/Cell4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Row6" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="Cell" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row6"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row6/Cell"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell2" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row6"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row6/Cell2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell3" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row6"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row6/Cell3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell4" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row6"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row6/Cell4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Row7" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="Cell" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row7"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row7/Cell"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell2" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row7"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row7/Cell2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell3" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row7"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row7/Cell3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell4" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row7"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row7/Cell4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Row8" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="Cell" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row8"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row8/Cell"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell2" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row8"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row8/Cell2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell3" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row8"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row8/Cell3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell4" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row8"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row8/Cell4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Row9" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="Cell" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row9"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row9/Cell"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell2" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row9"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row9/Cell2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell3" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row9"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row9/Cell3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell4" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row9"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row9/Cell4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Row10" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="Cell" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row10"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row10/Cell"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell2" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row10"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row10/Cell2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell3" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row10"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row10/Cell3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell4" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row10"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row10/Cell4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Row11" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="Cell" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row11"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row11/Cell"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell2" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row11"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row11/Cell2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell3" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row11"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row11/Cell3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell4" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row11"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row11/Cell4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Row12" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="Cell" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row12"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row12/Cell"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell2" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row12"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row12/Cell2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell3" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row12"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row12/Cell3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell4" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row12"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row12/Cell4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Row13" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="Cell" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row13"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row13/Cell"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell2" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row13"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row13/Cell2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell3" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row13"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row13/Cell3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell4" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row13"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row13/Cell4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Row14" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="Cell" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row14"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row14/Cell"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell2" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row14"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row14/Cell2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell3" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row14"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row14/Cell3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cell4" type="Panel" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row14"]
+custom_minimum_size = Vector2(252, 25)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_vsgfo")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer2/PanelContainer2/ScrollContainer/VBoxContainer/Row14/Cell4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control3" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HFlowContainer2" type="HFlowContainer" parent="MarginContainer/VBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/h_separation = 140
+alignment = 1
+
+[node name="JoinLobbyButton" type="Button" parent="MarginContainer/VBoxContainer/HFlowContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_e2j8q")
+theme_override_font_sizes/font_size = 15
+text = "JOIN LOBBY
+"
+
+[node name="CreateLobbyButton" type="Button" parent="MarginContainer/VBoxContainer/HFlowContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_e2j8q")
+theme_override_font_sizes/font_size = 15
+text = "CREATE LOBBY
+"
+
+[node name="RefreshListButton" type="Button" parent="MarginContainer/VBoxContainer/HFlowContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_e2j8q")
+theme_override_font_sizes/font_size = 15
+text = "REFRESH LIST
+"
+
+[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HFlowContainer2/JoinLobbyButton" to="." method="_on_join_lobby_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HFlowContainer2/CreateLobbyButton" to="." method="_on_create_lobby_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HFlowContainer2/RefreshListButton" to="." method="_on_refresh_list_button_pressed"]

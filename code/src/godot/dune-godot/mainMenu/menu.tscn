@@ -1,0 +1,158 @@
+[gd_scene load_steps=11 format=3 uid="uid://d384mi86r46x3"]
+
+[ext_resource type="Script" path="res://mainMenu/menu.gd" id="1_1meg3"]
+[ext_resource type="Texture2D" uid="uid://dxgmy13s2g4un" path="res://assets/Asset 53.png" id="2_vp4q5"]
+[ext_resource type="FontFile" uid="uid://bp3x2663204n" path="res://fonts/Dune_Rise.ttf" id="3_07l2q"]
+[ext_resource type="FontFile" uid="uid://duu07hfiwa68t" path="res://fonts/Neuropol.otf" id="4_vof7t"]
+[ext_resource type="Script" path="res://mainMenu/vButtonContainer.gd" id="4_xyx23"]
+[ext_resource type="Script" path="res://mainMenu/joinLobby.gd" id="5_3xgdi"]
+[ext_resource type="Script" path="res://mainMenu/hostLobby.gd" id="6_hlo3b"]
+[ext_resource type="Script" path="res://playerData.gd" id="7_5lkyu"]
+[ext_resource type="Script" path="res://mainMenu/userPanel.gd" id="7_qiwd3"]
+[ext_resource type="Script" path="res://mainMenu/apiConnection.gd" id="9_v6jjx"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1meg3")
+
+[node name="background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_vp4q5")
+
+[node name="margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="titleContainer" type="VBoxContainer" parent="margin"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="space1" type="Control" parent="margin/titleContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="title" type="Label" parent="margin/titleContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_07l2q")
+theme_override_font_sizes/font_size = 62
+text = "D U N E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="space2" type="Control" parent="margin/titleContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="description" type="Label" parent="margin/titleContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_07l2q")
+theme_override_font_sizes/font_size = 15
+text = "THE BOARDGAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="hButtonContainer" type="HBoxContainer" parent="margin"]
+layout_mode = 2
+alignment = 1
+
+[node name="vButtonContainer" type="VBoxContainer" parent="margin/hButtonContainer"]
+layout_mode = 2
+theme_override_constants/separation = 27
+alignment = 1
+script = ExtResource("4_xyx23")
+
+[node name="space" type="Control" parent="margin/hButtonContainer/vButtonContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="login" type="Button" parent="margin/hButtonContainer/vButtonContainer"]
+custom_minimum_size = Vector2(120, 32)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_vof7t")
+text = "LOGIN"
+
+[node name="joinLobby" type="Button" parent="margin/hButtonContainer/vButtonContainer"]
+custom_minimum_size = Vector2(120, 32)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_vof7t")
+text = "JOIN LOBBY"
+script = ExtResource("5_3xgdi")
+
+[node name="hostLobby" type="Button" parent="margin/hButtonContainer/vButtonContainer"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_vof7t")
+text = "HOST LOBBY
+"
+script = ExtResource("6_hlo3b")
+
+[node name="settings" type="Button" parent="margin/hButtonContainer/vButtonContainer"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_vof7t")
+text = "SETTINGS
+"
+
+[node name="guide" type="Button" parent="margin/hButtonContainer/vButtonContainer"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_vof7t")
+text = "GUIDE
+"
+
+[node name="quit" type="Button" parent="margin/hButtonContainer/vButtonContainer"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_vof7t")
+text = "QUIT GAME
+"
+
+[node name="userPanel" type="HBoxContainer" parent="margin"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+script = ExtResource("7_qiwd3")
+
+[node name="username" type="Label" parent="margin/userPanel"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_vof7t")
+theme_override_font_sizes/font_size = 14
+text = "     USERNAME"
+
+[node name="logout" type="Button" parent="margin/userPanel"]
+custom_minimum_size = Vector2(120, 32)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_vof7t")
+text = "LOGOUT"
+
+[node name="apiConnection" type="Node" parent="margin/userPanel"]
+script = ExtResource("9_v6jjx")
+
+[node name="playerData" type="Node" parent="margin/userPanel"]
+script = ExtResource("7_5lkyu")
+
+[connection signal="pressed" from="margin/hButtonContainer/vButtonContainer/login" to="." method="_on_login_pressed"]
+[connection signal="pressed" from="margin/hButtonContainer/vButtonContainer/joinLobby" to="margin/hButtonContainer/vButtonContainer/joinLobby" method="_on_pressed"]
+[connection signal="pressed" from="margin/hButtonContainer/vButtonContainer/hostLobby" to="margin/hButtonContainer/vButtonContainer/hostLobby" method="_on_pressed"]
+[connection signal="pressed" from="margin/hButtonContainer/vButtonContainer/quit" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="margin/userPanel/logout" to="margin/userPanel" method="_on_logout_pressed"]

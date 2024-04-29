@@ -1,0 +1,641 @@
+[gd_scene load_steps=39 format=3 uid="uid://qb45g731sgmk"]
+
+[ext_resource type="Script" path="res://baseGame/base_game_hud.gd" id="1_1jdqd"]
+[ext_resource type="Script" path="res://baseGame/popup.gd" id="1_xtbao"]
+[ext_resource type="Texture2D" uid="uid://b8tlsx6jx1s2m" path="res://assets/Asset 3.png" id="2_1wd2q"]
+[ext_resource type="Texture2D" uid="uid://wijyoxvk6w87" path="res://assets/Asset 19.png" id="3_gw5dj"]
+[ext_resource type="Texture2D" uid="uid://c17lfmus5m7xk" path="res://assets/Asset 16.png" id="4_132t1"]
+[ext_resource type="FontFile" uid="uid://duu07hfiwa68t" path="res://fonts/Neuropol.otf" id="5_3gmgh"]
+[ext_resource type="Texture2D" uid="uid://cguewqfks3yeq" path="res://assets/Asset 15.png" id="6_qrwk6"]
+[ext_resource type="Texture2D" uid="uid://bhbovawkxt8ml" path="res://assets/Asset 20.png" id="7_yp3l7"]
+[ext_resource type="Texture2D" uid="uid://cjbt75i11tf68" path="res://assets/Asset 14.png" id="8_lk417"]
+[ext_resource type="Texture2D" uid="uid://df662v78ds3im" path="res://assets/Asset 17.png" id="9_bvu6k"]
+[ext_resource type="Texture2D" uid="uid://dihi5tbv5a7pi" path="res://assets/Asset 13.png" id="10_epgx7"]
+[ext_resource type="Texture2D" uid="uid://deqid7wq0qaji" path="res://assets/Asset 11.png" id="11_f7s6u"]
+[ext_resource type="Texture2D" uid="uid://b4dkpahto565h" path="res://assets/Asset 12.png" id="12_jasq0"]
+[ext_resource type="Texture2D" uid="uid://cvwwas6geu8l5" path="res://assets/Asset 10.png" id="13_ej40d"]
+[ext_resource type="Texture2D" uid="uid://ude4hoikhhin" path="res://assets/Asset 9.png" id="14_6q7bw"]
+[ext_resource type="Texture2D" uid="uid://20spkeq5ksmq" path="res://assets/Asset 8.png" id="15_xkqle"]
+[ext_resource type="Texture2D" uid="uid://ppan4qh17r08" path="res://assets/Asset 7.png" id="16_ltqj5"]
+[ext_resource type="Texture2D" uid="uid://0di871f8j1wy" path="res://assets/Asset 6.png" id="17_a0wlr"]
+[ext_resource type="Texture2D" uid="uid://dbvw0uv7lpyjp" path="res://assets/Asset 4.png" id="18_uebe1"]
+[ext_resource type="Texture2D" uid="uid://dqwms7177el8d" path="res://assets/Asset 5.png" id="19_djhge"]
+[ext_resource type="Texture2D" uid="uid://bed123e5tbt5l" path="res://assets/Asset 45.png" id="20_aihq0"]
+[ext_resource type="Texture2D" uid="uid://dk2ka1akgtv4u" path="res://assets/Asset 32.png" id="21_1elrt"]
+[ext_resource type="Texture2D" uid="uid://by5u1uq7hgcbv" path="res://assets/Asset 41.png" id="22_jplrn"]
+[ext_resource type="Texture2D" uid="uid://bltg2rotsr8sc" path="res://assets/Asset 29.png" id="23_oeyqg"]
+[ext_resource type="Texture2D" uid="uid://brlv8o5sx68y1" path="res://assets/Asset 31.png" id="24_j2nk6"]
+[ext_resource type="Texture2D" uid="uid://dd4iatof4vrgu" path="res://assets/Asset 21.png" id="25_ru3ul"]
+[ext_resource type="Texture2D" uid="uid://ddy3cvw3byw1e" path="res://assets/Asset 44.png" id="26_6gogh"]
+[ext_resource type="Texture2D" uid="uid://cq7l5s5t0gmgr" path="res://assets/Asset 27.png" id="27_5kowd"]
+[ext_resource type="Texture2D" uid="uid://bt3b2xwmxe8xc" path="res://assets/Asset 25.png" id="28_jbaol"]
+[ext_resource type="Texture2D" uid="uid://ddftscc3g2sgp" path="res://assets/Asset 52.png" id="29_jitfh"]
+[ext_resource type="Texture2D" uid="uid://blabedll75bav" path="res://assets/Asset 33.png" id="30_m248h"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_fic1j"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xepbg"]
+texture = ExtResource("2_1wd2q")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="Theme" id="Theme_lopji"]
+
+[sub_resource type="Theme" id="Theme_skht1"]
+default_font = ExtResource("5_3gmgh")
+
+[sub_resource type="LabelSettings" id="LabelSettings_goyfp"]
+font_size = 12
+font_color = Color(0.858824, 0.8, 0.65098, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_60mt3"]
+font = ExtResource("5_3gmgh")
+font_size = 12
+font_color = Color(0.858824, 0.8, 0.65098, 1)
+
+[sub_resource type="GDScript" id="GDScript_kk0r1"]
+script/source = "extends TextureButton
+
+
+
+"
+
+[node name="HUD" type="CanvasLayer"]
+scale = Vector2(0.84, 0.84)
+transform = Transform2D(0.84, 0, 0, 0.84, 0, 0)
+script = ExtResource("1_1jdqd")
+
+[node name="popup" type="TextureRect" parent="."]
+offset_top = 610.0
+offset_right = 307.0
+offset_bottom = 915.0
+texture = SubResource("PlaceholderTexture2D_fic1j")
+script = ExtResource("1_xtbao")
+metadata/_edit_group_ = true
+
+[node name="playerHUD" type="Panel" parent="."]
+offset_left = -7.14286
+offset_top = 557.143
+offset_right = 1374.86
+offset_bottom = 777.143
+theme_override_styles/panel = SubResource("StyleBoxTexture_xepbg")
+
+[node name="buttonHelp" type="TextureButton" parent="playerHUD"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 12.0
+offset_right = 146.0
+offset_bottom = 106.0
+theme = SubResource("Theme_lopji")
+texture_normal = ExtResource("3_gw5dj")
+metadata/_edit_group_ = true
+
+[node name="buttonExit" type="TextureButton" parent="playerHUD"]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 139.0
+offset_right = 342.0
+offset_bottom = 204.0
+theme = SubResource("Theme_lopji")
+texture_normal = ExtResource("4_132t1")
+
+[node name="Label3" type="Label" parent="playerHUD/buttonExit"]
+layout_mode = 0
+offset_left = 100.048
+offset_top = 13.3809
+offset_right = 216.048
+offset_bottom = 36.3809
+theme = SubResource("Theme_skht1")
+text = "LEADERS"
+label_settings = SubResource("LabelSettings_goyfp")
+
+[node name="buttonExit2" type="TextureButton" parent="playerHUD"]
+layout_mode = 0
+offset_left = 239.0
+offset_top = 96.0
+offset_right = 342.0
+offset_bottom = 140.0
+theme = SubResource("Theme_lopji")
+texture_normal = ExtResource("6_qrwk6")
+
+[node name="Label2" type="Label" parent="playerHUD/buttonExit2"]
+layout_mode = 0
+offset_left = 15.7619
+offset_top = 11.1429
+offset_right = 84.7619
+offset_bottom = 32.1429
+text = "FORCES"
+label_settings = SubResource("LabelSettings_60mt3")
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 162
+
+[node name="buttonExit3" type="TextureButton" parent="playerHUD"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 111.0
+offset_right = 147.0
+offset_bottom = 205.0
+theme = SubResource("Theme_lopji")
+texture_normal = ExtResource("7_yp3l7")
+metadata/_edit_group_ = true
+
+[node name="buttonExit4" type="TextureButton" parent="playerHUD"]
+layout_mode = 0
+offset_left = 142.857
+offset_top = 11.9047
+offset_right = 381.857
+offset_bottom = 94.9047
+theme = SubResource("Theme_lopji")
+texture_normal = ExtResource("8_lk417")
+
+[node name="username" type="Label" parent="playerHUD/buttonExit4"]
+layout_mode = 0
+offset_left = 82.1429
+offset_top = 54.7619
+offset_right = 243.143
+offset_bottom = 75.7619
+text = "PLAYER NAME"
+label_settings = SubResource("LabelSettings_60mt3")
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 162
+
+[node name="buttonExit15" type="TextureButton" parent="playerHUD"]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 22.0
+offset_right = 231.0
+offset_bottom = 196.0
+theme = SubResource("Theme_lopji")
+texture_normal = ExtResource("9_bvu6k")
+metadata/_edit_group_ = true
+
+[node name="buttonExit5" type="TextureButton" parent="playerHUD"]
+layout_mode = 0
+offset_left = 374.0
+offset_top = 60.0
+offset_right = 409.0
+offset_bottom = 95.0
+theme = SubResource("Theme_lopji")
+texture_normal = ExtResource("10_epgx7")
+metadata/_edit_group_ = true
+
+[node name="buttonForces" type="TextureButton" parent="playerHUD"]
+layout_mode = 0
+offset_left = 333.0
+offset_top = 96.0
+offset_right = 521.0
+offset_bottom = 138.0
+theme = SubResource("Theme_lopji")
+texture_normal = ExtResource("11_f7s6u")
+script = SubResource("GDScript_kk0r1")
+
+[node name="forces" type="Label" parent="playerHUD/buttonForces"]
+layout_mode = 0
+offset_left = 47.9524
+offset_top = 12.3334
+offset_right = 163.952
+offset_bottom = 35.3334
+theme = SubResource("Theme_skht1")
+text = "5R  10M  5D"
+label_settings = SubResource("LabelSettings_goyfp")
+
+[node name="buttonExit7" type="TextureButton" parent="playerHUD"]
+layout_mode = 0
+offset_left = 333.0
+offset_top = 140.0
+offset_right = 521.0
+offset_bottom = 182.0
+theme = SubResource("Theme_lopji")
+texture_normal = ExtResource("12_jasq0")
+
+[node name="leaders" type="Label" parent="playerHUD/buttonExit7"]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 11.1905
+offset_right = 158.0
+offset_bottom = 34.1905
+theme = SubResource("Theme_skht1")
+text = "1  2  2  5  5  X"
+label_settings = SubResource("LabelSettings_goyfp")
+
+[node name="buttonExit8" type="TextureButton" parent="playerHUD"]
+layout_mode = 0
+offset_left = 401.0
+offset_top = 61.0
+offset_right = 518.0
+offset_bottom = 103.0
+theme = SubResource("Theme_lopji")
+texture_normal = ExtResource("13_ej40d")
+
+[node name="spice" type="Label" parent="playerHUD/buttonExit8"]
+layout_mode = 0
+offset_left = 41.8572
+offset_top = 9.23807
+offset_right = 74.8572
+offset_bottom = 32.2381
+theme = SubResource("Theme_skht1")
+text = "5"
+label_settings = SubResource("LabelSettings_goyfp")
+
+[node name="buttonExit11" type="TextureButton" parent="playerHUD"]
+layout_mode = 0
+offset_left = 524.0
+offset_top = 76.0
+offset_right = 845.0
+offset_bottom = 194.0
+theme = SubResource("Theme_lopji")
+texture_normal = ExtResource("14_6q7bw")
+metadata/_edit_group_ = true
+
+[node name="buttonExit9" type="TextureButton" parent="playerHUD"]
+layout_mode = 0
+offset_left = 476.0
+offset_top = 182.0
+offset_right = 896.0
+offset_bottom = 224.0
+theme = SubResource("Theme_lopji")
+texture_normal = ExtResource("15_xkqle")
+
+[node name="Label3" type="Label" parent="playerHUD/buttonExit9"]
+layout_mode = 0
+offset_left = 128.762
+offset_top = 9.66671
+offset_right = 298.762
+offset_bottom = 32.6667
+theme = SubResource("Theme_skht1")
+text = "WINNING CONDITIONS"
+label_settings = SubResource("LabelSettings_goyfp")
+
+[node name="buttonExit10" type="TextureButton" parent="playerHUD"]
+layout_mode = 0
+offset_left = 477.0
+offset_top = 56.0
+offset_right = 897.0
+offset_bottom = 98.0
+theme = SubResource("Theme_lopji")
+texture_normal = ExtResource("16_ltqj5")
+
+[node name="Label3" type="Label" parent="playerHUD/buttonExit10"]
+layout_mode = 0
+offset_left = 123.0
+offset_top = 7.09526
+offset_right = 239.0
+offset_bottom = 30.0953
+theme = SubResource("Theme_skht1")
+text = "FACTION INFORMATION"
+label_settings = SubResource("LabelSettings_goyfp")
+
+[node name="buttonExit12" type="TextureButton" parent="playerHUD"]
+layout_mode = 0
+offset_left = 849.0
+offset_top = 61.0
+offset_right = 1269.0
+offset_bottom = 179.0
+theme = SubResource("Theme_lopji")
+texture_normal = ExtResource("17_a0wlr")
+metadata/_edit_group_ = true
+
+[node name="buttonExit13" type="TextureButton" parent="playerHUD"]
+layout_mode = 0
+offset_left = 1089.0
+offset_top = 119.0
+offset_right = 1364.0
+offset_bottom = 204.0
+theme = SubResource("Theme_lopji")
+texture_normal = ExtResource("18_uebe1")
+
+[node name="Label" type="Label" parent="playerHUD/buttonExit13"]
+layout_mode = 0
+offset_left = 61.0
+offset_top = 22.6667
+offset_right = 232.0
+offset_bottom = 45.6667
+theme = SubResource("Theme_skht1")
+text = "TREATCHERY CARDS"
+label_settings = SubResource("LabelSettings_goyfp")
+
+[node name="buttonExit14" type="TextureButton" parent="playerHUD"]
+layout_mode = 0
+offset_left = 1087.0
+offset_top = 61.0
+offset_right = 1363.0
+offset_bottom = 118.0
+theme = SubResource("Theme_lopji")
+texture_normal = ExtResource("19_djhge")
+
+[node name="Label3" type="Label" parent="playerHUD/buttonExit14"]
+layout_mode = 0
+offset_left = 80.8572
+offset_top = 18.7619
+offset_right = 213.857
+offset_bottom = 41.7619
+theme = SubResource("Theme_skht1")
+text = "TRAITOR CARDS"
+label_settings = SubResource("LabelSettings_goyfp")
+
+[node name="otherPlayersHUD" type="TextureRect" parent="."]
+offset_left = -3.57143
+offset_top = -3.57143
+offset_right = 1375.43
+offset_bottom = 134.429
+texture = ExtResource("20_aihq0")
+
+[node name="TextureButton" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 550.0
+offset_top = 10.7143
+offset_right = 832.0
+offset_bottom = 92.7143
+texture_normal = ExtResource("21_1elrt")
+
+[node name="TextureButton7" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 667.619
+offset_top = 42.9048
+offset_right = 712.619
+offset_bottom = 87.9048
+texture_normal = ExtResource("22_jplrn")
+
+[node name="TextureButton9" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 700.952
+offset_top = 42.9048
+offset_right = 824.952
+offset_bottom = 87.9048
+texture_normal = ExtResource("23_oeyqg")
+flip_h = true
+
+[node name="TextureButton10" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 554.762
+offset_top = 42.8571
+offset_right = 678.762
+offset_bottom = 87.8571
+texture_normal = ExtResource("23_oeyqg")
+
+[node name="TextureButton11" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 558.0
+offset_top = 18.0
+offset_right = 823.0
+offset_bottom = 41.0
+texture_normal = ExtResource("24_j2nk6")
+
+[node name="player3" type="Label" parent="otherPlayersHUD/TextureButton11"]
+layout_mode = 0
+offset_left = 71.7619
+offset_top = 3.42857
+offset_right = 195.762
+offset_bottom = 21.4286
+theme = SubResource("Theme_skht1")
+text = "PLAYER NAME"
+label_settings = SubResource("LabelSettings_goyfp")
+
+[node name="TextureButton6" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 72.619
+offset_top = 95.2381
+offset_right = 1304.62
+offset_bottom = 129.238
+texture_normal = ExtResource("25_ru3ul")
+
+[node name="phase" type="Label" parent="otherPlayersHUD/TextureButton6"]
+layout_mode = 0
+offset_left = 475.0
+offset_top = 6.0
+offset_right = 760.0
+offset_bottom = 29.0
+text = "Phase 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton2" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 301.0
+offset_top = 11.0
+offset_right = 565.0
+offset_bottom = 93.0
+texture_normal = ExtResource("26_6gogh")
+
+[node name="TextureButton4" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 814.286
+offset_top = 10.7143
+offset_right = 1096.29
+offset_bottom = 92.7143
+texture_normal = ExtResource("26_6gogh")
+flip_h = true
+
+[node name="TextureButton5" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 1061.52
+offset_top = 11.8095
+offset_right = 1325.52
+offset_bottom = 93.8095
+texture_normal = ExtResource("26_6gogh")
+flip_h = true
+
+[node name="TextureButton3" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 53.5714
+offset_top = 10.7143
+offset_right = 335.571
+offset_bottom = 92.7143
+texture_normal = ExtResource("26_6gogh")
+
+[node name="TextureButton8" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 927.381
+offset_top = 44.0476
+offset_right = 972.381
+offset_bottom = 89.0476
+texture_normal = ExtResource("22_jplrn")
+
+[node name="TextureButton14" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 827.0
+offset_top = 18.0
+offset_right = 1070.0
+offset_bottom = 41.0
+texture_normal = ExtResource("27_5kowd")
+
+[node name="player4" type="Label" parent="otherPlayersHUD/TextureButton14"]
+layout_mode = 0
+offset_left = 59.9048
+offset_top = 3.42857
+offset_right = 183.905
+offset_bottom = 21.4286
+theme = SubResource("Theme_skht1")
+text = "PLAYER NAME"
+label_settings = SubResource("LabelSettings_goyfp")
+
+[node name="TextureButton12" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 961.0
+offset_top = 43.0
+offset_right = 1073.0
+offset_bottom = 88.0
+texture_normal = ExtResource("28_jbaol")
+
+[node name="TextureButton13" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 826.19
+offset_top = 44.0476
+offset_right = 939.19
+offset_bottom = 89.0476
+texture_normal = ExtResource("29_jitfh")
+
+[node name="TextureButton15" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 1175.0
+offset_top = 43.9048
+offset_right = 1220.0
+offset_bottom = 88.9048
+texture_normal = ExtResource("22_jplrn")
+
+[node name="TextureButton16" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 1074.62
+offset_top = 17.8571
+offset_right = 1317.62
+offset_bottom = 40.8571
+texture_normal = ExtResource("27_5kowd")
+
+[node name="player5" type="Label" parent="otherPlayersHUD/TextureButton16"]
+layout_mode = 0
+offset_left = 59.9048
+offset_top = 3.57143
+offset_right = 183.905
+offset_bottom = 21.5714
+theme = SubResource("Theme_skht1")
+text = "PLAYER NAME"
+label_settings = SubResource("LabelSettings_goyfp")
+
+[node name="TextureButton17" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 1208.62
+offset_top = 42.8571
+offset_right = 1320.62
+offset_bottom = 87.8571
+texture_normal = ExtResource("28_jbaol")
+
+[node name="TextureButton18" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 1073.81
+offset_top = 43.9048
+offset_right = 1186.81
+offset_bottom = 88.9048
+texture_normal = ExtResource("29_jitfh")
+
+[node name="TextureButton19" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 408.333
+offset_top = 42.7143
+offset_right = 453.333
+offset_bottom = 87.7143
+texture_normal = ExtResource("22_jplrn")
+flip_h = true
+
+[node name="TextureButton20" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 307.952
+offset_top = 16.6667
+offset_right = 550.952
+offset_bottom = 39.6667
+texture_normal = ExtResource("27_5kowd")
+flip_h = true
+
+[node name="player2" type="Label" parent="otherPlayersHUD/TextureButton20"]
+layout_mode = 0
+offset_left = 64.6667
+offset_top = 3.57143
+offset_right = 188.667
+offset_bottom = 21.5714
+theme = SubResource("Theme_skht1")
+text = "PLAYER NAME"
+label_settings = SubResource("LabelSettings_goyfp")
+
+[node name="TextureButton21" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 307.143
+offset_top = 42.8571
+offset_right = 419.143
+offset_bottom = 87.8571
+texture_normal = ExtResource("28_jbaol")
+flip_h = true
+
+[node name="TextureButton22" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 441.667
+offset_top = 42.8571
+offset_right = 554.667
+offset_bottom = 87.8571
+texture_normal = ExtResource("29_jitfh")
+flip_h = true
+
+[node name="TextureButton23" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 160.714
+offset_top = 42.7143
+offset_right = 205.714
+offset_bottom = 87.7143
+texture_normal = ExtResource("22_jplrn")
+flip_h = true
+
+[node name="TextureButton24" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 60.3333
+offset_top = 16.6667
+offset_right = 303.333
+offset_bottom = 39.6667
+texture_normal = ExtResource("27_5kowd")
+flip_h = true
+
+[node name="player1" type="Label" parent="otherPlayersHUD/TextureButton24"]
+layout_mode = 0
+offset_left = 65.8571
+offset_top = 3.57143
+offset_right = 189.857
+offset_bottom = 21.5714
+theme = SubResource("Theme_skht1")
+text = "PLAYER NAME"
+label_settings = SubResource("LabelSettings_goyfp")
+
+[node name="TextureButton25" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 59.5238
+offset_top = 42.8571
+offset_right = 171.524
+offset_bottom = 87.8571
+texture_normal = ExtResource("28_jbaol")
+flip_h = true
+
+[node name="TextureButton26" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 194.048
+offset_top = 42.8571
+offset_right = 307.048
+offset_bottom = 87.8571
+texture_normal = ExtResource("29_jitfh")
+flip_h = true
+
+[node name="TextureRect" type="TextureRect" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 14.2857
+offset_top = 10.7143
+offset_right = 111.286
+offset_bottom = 128.714
+texture = ExtResource("30_m248h")
+flip_h = true
+
+[node name="TextureRect2" type="TextureRect" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 1269.05
+offset_top = 10.7143
+offset_right = 1366.05
+offset_bottom = 128.714
+texture = ExtResource("30_m248h")
+
+[connection signal="pressed" from="playerHUD/buttonForces" to="popup" method="_on_button_forces_pressed"]

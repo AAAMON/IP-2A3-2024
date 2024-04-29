@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://ifbhonj2q2i5"]
+
+[ext_resource type="Script" path="res://baseGame/base_game.gd" id="1_anhmg"]
+[ext_resource type="Texture2D" uid="uid://dxgmy13s2g4un" path="res://assets/Asset 53.png" id="1_moo4w"]
+[ext_resource type="PackedScene" uid="uid://qb45g731sgmk" path="res://baseGame/base_game_hud.tscn" id="2_18ns3"]
+[ext_resource type="PackedScene" uid="uid://cinvbs12k12k7" path="res://baseGame/map.tscn" id="3_vn4hl"]
+
+[node name="BaseGame" type="Node"]
+script = ExtResource("1_anhmg")
+
+[node name="HUD" parent="." instance=ExtResource("2_18ns3")]
+
+[node name="Background" type="TextureRect" parent="."]
+offset_left = -103.0
+offset_top = -58.0
+offset_right = 1264.0
+offset_bottom = 710.0
+texture = ExtResource("1_moo4w")
+
+[node name="Map" parent="." instance=ExtResource("3_vn4hl")]
