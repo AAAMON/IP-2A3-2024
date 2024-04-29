@@ -21,6 +21,7 @@ namespace dune_library.Player_Resources {
       new ArgumentException("These two factions (" + a + " and " + b + ") are not allied " +
         "(" + a + "'s ally: " + Alliances[a] + ", " + b + "'s ally: " + Alliances[b] + ")", nameof(a));
 
+    [JsonInclude]
     private IDictionary<Faction, Option<Faction>> Alliances { get; }
 
     public Option<Faction> Ally_Of(Faction faction) => Alliances[faction];

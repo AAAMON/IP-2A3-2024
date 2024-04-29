@@ -61,6 +61,7 @@ namespace dune_library.Player_Resources {
       Revivable,
     }
 
+    [JsonInclude]
     private E_Status Status { get; set; }
 
     [JsonIgnore]

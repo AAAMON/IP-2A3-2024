@@ -18,10 +18,11 @@ namespace dune_library.Utils {
     }
 
     [JsonConstructor]
-    public Battle_Wheel(Option<Player> last_player) {
-      _last_player = last_player;
+    public Battle_Wheel(Option<Player> _last_player) {
+      this._last_player = _last_player;
     }
 
+    [JsonInclude]
     private Option<Player> _last_player;
     [JsonIgnore]
     public Player Last_Player {

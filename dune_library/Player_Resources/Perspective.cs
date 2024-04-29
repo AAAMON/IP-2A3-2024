@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace dune_library.Player_Resources {
@@ -22,13 +23,13 @@ namespace dune_library.Player_Resources {
 
     public Option<Phase> Phase { get; }
 
-    public Generals_Manager General_Manager { get; }
+    public Generals_Manager Generals_Manager { get; }
 
     public Alliances_Manager Alliances_Manager { get; }
 
     public Territory_Card Last_Spice_Card { get; }
 
-    public IDictionary<Faction, Public_Faction_Knowledge> Public_Faction_Knowledge { get; }
+    public Public_Faction_Knowledge_Manager Public_Faction_Knowledge_Manager { get; }
 
     public Special_Faction_Knowledge Special_Faction_Knowledge { get; }
 
@@ -36,27 +37,61 @@ namespace dune_library.Player_Resources {
       Faction = faction;
       Battle_Wheels = game.Battle_Wheels;
       Map = game.Map;
+      Round = game.Round;
       Phase = game.Phase;
-      General_Manager = game.General_Manager;
+      Generals_Manager = game.General_Manager;
       Alliances_Manager = game.Alliances_Manager;
       Last_Spice_Card = game.Last_Spice_Card;
-      Public_Faction_Knowledge = game.Public_Faction_Knowledge;
-      Special_Faction_Knowledge = game.Special_Faction_Knowledge[faction];
+      Public_Faction_Knowledge_Manager = game.Public_Faction_Knowledge_Manager;
+      Special_Faction_Knowledge = game.Special_Faction_Knowledge_Manager.Of(faction);
     }
-    public void SerializeToJson(string filePath)
-     {
-        try
-        {
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            string json = JsonSerializer.Serialize(this, options);
-            File.WriteAllText(filePath, json);
-            Console.WriteLine("Serialization successful.");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error occurred during serialization: {ex.Message}");
-        }
-     }
+
+    [JsonConstructor]
+    public Perspective(
+      Faction faction,
+      (Battle_Wheel A, Battle_Wheel B) battle_wheels,
+      Map_Resources.Map map,
+      int round,
+      Option<Phase> phase,
+      Generals_Manager generals_manager,
+      Alliances_Manager alliances_manager,
+      Territory_Card last_spice_card,
+      Public_Faction_Knowledge_Manager public_faction_knowledge_manager,
+      Special_Faction_Knowledge special_faction_knowledge
+    ) {
+      Faction = faction;
+      Battle_Wheels = battle_wheels;
+      Map = map;
+      Round = round;
+      Phase = phase;
+      Generals_Manager = generals_manager;
+      Alliances_Manager = alliances_manager;
+      Last_Spice_Card = last_spice_card;
+      Public_Faction_Knowledge_Manager = public_faction_knowledge_manager;
+      Special_Faction_Knowledge = special_faction_knowledge;
+    }
+    public void SerializeToJson(string filePath) {
+      try {
+          var options = new JsonSerializerOptions { WriteIndented = true, IncludeFields = true };
+          string json = JsonSerializer.Serialize(this, options);
+          File.WriteAllText(filePath, json);
+          Console.WriteLine("Serialization successful.");
+      } catch (Exception e) {
+          Console.WriteLine($"Error occurred during serialization: {e}");
+      }
+    }
+
+    public static Perspective? DeserializeFromJson(string filePath) {
+      try {
+        var options = new JsonSerializerOptions { IncludeFields = true };
+        options.Converters.Add(new Option_Json_Converter_Factory());
+        string json = File.ReadAllText(filePath);
+        return JsonSerializer.Deserialize<Perspective>(json, options);
+      } catch (Exception e) {
+        Console.WriteLine($"Error occurred during deserialization: {e}");
+        return null;
+      }
+    }
 
      /*public static Perspective DeserializeFromJson(string filePath)
      {

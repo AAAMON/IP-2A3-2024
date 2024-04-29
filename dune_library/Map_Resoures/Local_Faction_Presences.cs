@@ -19,6 +19,7 @@ namespace dune_library.Map_Resoures {
       Presences = presences;
     }
 
+    [JsonInclude]
     private IDictionary<Faction, Forces_Container> Presences { get; }
 
     public Forces_Container Of(Faction faction) {

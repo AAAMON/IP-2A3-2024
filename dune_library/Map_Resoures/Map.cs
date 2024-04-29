@@ -25,13 +25,15 @@ namespace dune_library.Map_Resources {
 
       Influenced_By_Family_Atomics = Influenced_By_Family_Atomics_Default;
 
+      Storm_Sector = 0;
+
       Shield_Wall_Was_Destroyed = false;
 
       Presences_Manager = new();
     }
 
     [JsonConstructor]
-    public Map(bool shield_wall_was_destroyed, Global_Faction_Presences presences_manager) {
+    public Map(int storm_sector, bool shield_wall_was_destroyed, Global_Faction_Presences presences_manager) {
       Territories = Territories_Default;
 
       Sections = Sections_Default;
@@ -43,6 +45,8 @@ namespace dune_library.Map_Resources {
       Storm_Affectable = Storm_Affectable_Default;
 
       Influenced_By_Family_Atomics = Influenced_By_Family_Atomics_Default;
+
+      Storm_Sector = storm_sector;
 
       Shield_Wall_Was_Destroyed = shield_wall_was_destroyed;
 
@@ -1037,7 +1041,6 @@ namespace dune_library.Map_Resources {
       return to_return;
     }*/
 
-    [JsonInclude]
     public Global_Faction_Presences Presences_Manager { get; }
 
     public bool Is_Accessible(Faction faction, Section section) {

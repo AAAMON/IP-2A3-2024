@@ -43,7 +43,7 @@ namespace dune_library {
 
     #region Information that everyone should know
 
-    public (Battle_Wheel A, Battle_Wheel B) Battle_Wheels { get; } = new();
+    public (Battle_Wheel A, Battle_Wheel B) Battle_Wheels { get; } = new(new(), new());
 
     public Map_Resources.Map Map { get; } = new();
 
@@ -59,9 +59,9 @@ namespace dune_library {
 
     public Territory_Card Last_Spice_Card { get; private set; } = new();
 
-    public IDictionary<Faction, Public_Faction_Knowledge> Public_Faction_Knowledge { get; private set; }
+    public Public_Faction_Knowledge_Manager Public_Faction_Knowledge_Manager { get; private set; } = new(Enum.GetValues<Faction>().ToHashSet());
 
-    public IDictionary<Faction, Special_Faction_Knowledge> Special_Faction_Knowledge { get; private set; }
+    public Special_Faction_Knowledge_Manager Special_Faction_Knowledge_Manager { get; private set; } = new(Enum.GetValues<Faction>().ToHashSet());
 
     #endregion
 

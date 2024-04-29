@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace dune_library.Map_Resoures {
@@ -22,6 +23,7 @@ namespace dune_library.Map_Resoures {
       );
     }
 
+    [JsonConstructor]
     public Global_Faction_Presences(
       IDictionary<Section, Local_Faction_Presences> presences,
       IReadOnlyDictionary<Faction, ISet<Section>> presences_by_faction
@@ -30,8 +32,10 @@ namespace dune_library.Map_Resoures {
       Presences_By_Faction = presences_by_faction;
     }
 
+    [JsonInclude]
     private IDictionary<Section, Local_Faction_Presences> Presences { get; }
 
+    [JsonInclude]
     private IReadOnlyDictionary<Faction, ISet<Section>> Presences_By_Faction { get; }
 
     public ISet<Section> Of(Faction faction) => Presences_By_Faction[faction];

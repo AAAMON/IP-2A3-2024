@@ -12,13 +12,13 @@ using dune_library.Map_Resources;
 namespace dune_library.Phases {
   internal class Set_up : Phase {
     public Set_up(Game game) {
-      Public_Faction_Knowledge = game.Public_Faction_Knowledge;
+      Public_Faction_Knowledge_Manager = game.Public_Faction_Knowledge_Manager;
       Map = game.Map;
     }
 
     public IList<Player> Players { get; }
 
-    public IDictionary<Faction, Public_Faction_Knowledge> Public_Faction_Knowledge { get; }
+    public Public_Faction_Knowledge_Manager Public_Faction_Knowledge_Manager { get; }
 
     public Map Map { get; }
 
@@ -31,12 +31,12 @@ namespace dune_library.Phases {
       Players[4].Faction = Faction.Harkonnen;
       Players[5].Faction = Faction.Fremen;*/
 
-      Public_Faction_Knowledge[Faction.Atreides] = new Public_Faction_Knowledge(Faction.Atreides, 10, 1, 10);
-      Public_Faction_Knowledge[Faction.Bene_Gesserit] = new Public_Faction_Knowledge(Faction.Bene_Gesserit, 5, 4, 19);
-      Public_Faction_Knowledge[Faction.Spacing_Guild] = new Public_Faction_Knowledge(Faction.Spacing_Guild, 5, 7, 15);
-      Public_Faction_Knowledge[Faction.Emperor] = new Public_Faction_Knowledge(Faction.Emperor, 10, 10, 20);
-      Public_Faction_Knowledge[Faction.Harkonnen] = new Public_Faction_Knowledge(Faction.Harkonnen, 10, 13, 10);
-      Public_Faction_Knowledge[Faction.Fremen] = new Public_Faction_Knowledge(Faction.Fremen, 3, 16, 10);
+      /*Public_Faction_Knowledge_Manager.Of(Faction.Atreides) = new Public_Faction_Knowledge(Faction.Atreides, 10, 1, 10);
+      Public_Faction_Knowledge_Manager.Of(Faction.Bene_Gesserit) = new Public_Faction_Knowledge(Faction.Bene_Gesserit, 5, 4, 19);
+      Public_Faction_Knowledge_Manager.Of(Faction.Spacing_Guild) = new Public_Faction_Knowledge(Faction.Spacing_Guild, 5, 7, 15);
+      Public_Faction_Knowledge_Manager.Of(Faction.Emperor) = new Public_Faction_Knowledge(Faction.Emperor, 10, 10, 20);
+      Public_Faction_Knowledge_Manager.Of(Faction.Harkonnen) = new Public_Faction_Knowledge(Faction.Harkonnen, 10, 13, 10);
+      Public_Faction_Knowledge_Manager.Of(Faction.Fremen) = new Public_Faction_Knowledge(Faction.Fremen, 3, 16, 10);*/
 
       // bene gesserit guesses who will win
 
