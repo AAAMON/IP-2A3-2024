@@ -5,9 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace dune_library.Player_Resources {
-  internal class Public_Faction_Knowledge {
+  public class Public_Faction_Knowledge {
     public Faction Faction { get; }
 
     public uint Spice { get; private set; }
@@ -27,6 +28,7 @@ namespace dune_library.Player_Resources {
 
     public uint Dead_Troops { get; }
 
+    [JsonConstructor]
     public Public_Faction_Knowledge(Faction faction, uint spice, uint player_Marker, uint reserves) {
       Faction = faction;
       Spice = spice;

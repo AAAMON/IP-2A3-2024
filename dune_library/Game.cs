@@ -20,7 +20,8 @@ namespace dune_library {
     }
 
     public Game() {
-      // might need to do something here for Players
+      // init players
+      Faction_Manager = new(Players);
     }
 
     private void Play() {
@@ -38,7 +39,7 @@ namespace dune_library {
       }
     }
 
-    public IList<Player> Players { get; private set; } = [];
+    public ISet<Player> Players { get; private set; } = new System.Collections.Generic.HashSet<Player>();
 
     #region Information that everyone should know
 
@@ -49,6 +50,8 @@ namespace dune_library {
     public int Round { get; private set; } = 0;
 
     public Option<Phase> Phase { get; private set; } = None;
+
+    public Faction_Manager Faction_Manager { get; }
 
     public Generals_Manager General_Manager { get; } = new();
 
@@ -64,9 +67,9 @@ namespace dune_library {
 
     #region Private Game Data
 
-    public Treachery_Deck Treachery_Deck { get; private set; } = new();
+    internal Treachery_Deck Treachery_Deck { get; private set; } = new();
 
-    public Spice_Deck Spice_Deck { get; private set; } = new();
+    internal Spice_Deck Spice_Deck { get; private set; } = new();
 
     #endregion
 

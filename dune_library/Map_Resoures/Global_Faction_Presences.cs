@@ -3,24 +3,38 @@ using dune_library.Player_Resources;
 using dune_library.Utils;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace dune_library.Map_Resoures {
-  internal class Global_Faction_Presences {
-    private Dictionary<Section, Local_Faction_Presences> Presences { get; } = [];
+  public class Global_Faction_Presences {
+    public Global_Faction_Presences() {
+      Presences = new Dictionary<Section, Local_Faction_Presences>();
 
-    private Dictionary<Faction, ISet<Section>> Presences_By_Factions { get; } = new Dictionary<Faction, ISet<Section>> {
-      [Faction.Atreides] = new HashSet<Section>(),
-      [Faction.Bene_Gesserit] = new HashSet<Section>(),
-      [Faction.Emperor] = new HashSet<Section>(),
-      [Faction.Fremen] = new HashSet<Section>(),
-      [Faction.Spacing_Guild] = new HashSet<Section>(),
-      [Faction.Harkonnen] = new HashSet<Section>(),
-    };
+      Presences_By_Faction = new ReadOnlyDictionary<Faction, ISet<Section>>(
+        new Dictionary<Faction, ISet<Section>>(
+          Enum.GetValues<Faction>().Select(faction =>
+            new KeyValuePair<Faction, ISet<Section>>(faction, new HashSet<Section>())
+          )
+        )
+      );
+    }
 
-    public ISet<Section> Of(Faction faction) => Presences_By_Factions[faction];
+    public Global_Faction_Presences(
+      IDictionary<Section, Local_Faction_Presences> presences,
+      IReadOnlyDictionary<Faction, ISet<Section>> presences_by_faction
+    ) {
+      Presences = presences;
+      Presences_By_Faction = presences_by_faction;
+    }
+
+    private IDictionary<Section, Local_Faction_Presences> Presences { get; }
+
+    private IReadOnlyDictionary<Faction, ISet<Section>> Presences_By_Faction { get; }
+
+    public ISet<Section> Of(Faction faction) => Presences_By_Faction[faction];
 
     public bool Has_Presences(Section section) => Presences.ContainsKey(section);
 
@@ -70,7 +84,7 @@ namespace dune_library.Map_Resoures {
         Presences[section] = new();
       }
       Presences[section].Add(faction, normal, special);
-      Presences_By_Factions[faction].Add(section);
+      Presences_By_Faction[faction].Add(section);
     }
 
     public void Add(Section section, Faction faction, Forces_Container other) => Add(section, faction, other.Normal, other.Special);
@@ -128,7 +142,7 @@ namespace dune_library.Map_Resoures {
       Throw_If_Does_Not_Have_Presences(section);
       Presences[section].Remove(faction, normal, special);
       if (!Presences[section].Is_Present(faction)) {
-        Presences_By_Factions[faction].Remove(section);
+        Presences_By_Faction[faction].Remove(section);
       }
       if (Is_Empty(section)) {
         Presences.Remove(section);

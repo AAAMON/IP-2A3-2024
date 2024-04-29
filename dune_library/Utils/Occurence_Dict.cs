@@ -9,24 +9,34 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace dune_library.Utils {
-  internal class Occurence_Dict<T> : IDictionary<T, uint>, IEnumerable<T> where T : notnull {
+  public class Occurence_Dict<T> : IDictionary<T, uint>, IEnumerable<T> where T : notnull {
     public Occurence_Dict() {
       underlying_dict = [];
     }
 
-    private readonly Dictionary<T, uint> underlying_dict;
+    [JsonConstructor]
+    public Occurence_Dict(Dictionary<T, uint> underlying_dict) {
+      this.underlying_dict = underlying_dict;
+    }
+
+    private Dictionary<T, uint> underlying_dict { get; }
 
     public uint this[T key] { get => underlying_dict[key]; set => throw new NotSupportedException(); }
 
+    [JsonIgnore]
     public ICollection<T> Keys => underlying_dict.Keys;
 
+    [JsonIgnore]
     public ICollection<uint> Values => underlying_dict.Values;
 
+    [JsonIgnore]
     public int Count => underlying_dict.Count;
 
+    [JsonIgnore]
     public bool IsReadOnly => false;
 
     public void Add(KeyValuePair<T, uint> item) {

@@ -3,18 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace dune_library.Utils {
-  internal class Forces_Container {
-    public uint Normal { get; private set; }
+  [method: JsonConstructor]
+  public class Forces_Container(uint normal, uint special) {
 
-    public uint Special { get; private set; }
+    public uint Normal { get; private set; } = normal;
 
-    public Forces_Container(uint normal, uint special) {
-      Normal = normal;
-      Special = special;
-    }
+    public uint Special { get; private set; } = special;
 
     #region Add, Bene Gesserit swaps and Remove
 
@@ -142,6 +140,7 @@ namespace dune_library.Utils {
       special = Special;
     }
 
+    [JsonIgnore]
     public Forces_Container Clone => new(Normal, Special); // ICloneable makes you cast
 
     public static implicit operator Forces_Container((uint normal, uint special) value) => new Forces_Container(value.normal, value.special);

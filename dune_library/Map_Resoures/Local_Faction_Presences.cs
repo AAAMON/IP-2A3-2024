@@ -5,12 +5,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace dune_library.Map_Resoures {
-  internal class Local_Faction_Presences {
+  public class Local_Faction_Presences {
+    public Local_Faction_Presences() {
+      Presences = new Dictionary<Faction, Forces_Container>();
+    }
 
-    private Dictionary<Faction, Forces_Container> Presences { get; } = [];
+    [JsonConstructor]
+    public Local_Faction_Presences(IDictionary<Faction, Forces_Container> presences) {
+      Presences = presences;
+    }
+
+    private IDictionary<Faction, Forces_Container> Presences { get; }
 
     public Forces_Container Of(Faction faction) {
       Throw_If_Not_Present(faction);
@@ -25,6 +34,7 @@ namespace dune_library.Map_Resoures {
       }
     }
 
+    [JsonIgnore]
     public int Number_Of_Factions_Present => Presences.Count;
 
     #region Add, Bene Gesserit swaps and Remove

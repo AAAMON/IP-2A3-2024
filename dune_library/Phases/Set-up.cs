@@ -12,7 +12,6 @@ using dune_library.Map_Resources;
 namespace dune_library.Phases {
   internal class Set_up : Phase {
     public Set_up(Game game) {
-      Players = game.Players;
       Public_Faction_Knowledge = game.Public_Faction_Knowledge;
       Map = game.Map;
     }
@@ -25,12 +24,12 @@ namespace dune_library.Phases {
 
     public override void Play_Out() {
       // shuffle spice and treachery deck
-      Players[0].Faction = Faction.Atreides;
+      /*Players[0].Faction = Faction.Atreides;
       Players[1].Faction = Faction.Bene_Gesserit;
       Players[2].Faction = Faction.Spacing_Guild;
       Players[3].Faction = Faction.Emperor;
       Players[4].Faction = Faction.Harkonnen;
-      Players[5].Faction = Faction.Fremen;
+      Players[5].Faction = Faction.Fremen;*/
 
       Public_Faction_Knowledge[Faction.Atreides] = new Public_Faction_Knowledge(Faction.Atreides, 10, 1, 10);
       Public_Faction_Knowledge[Faction.Bene_Gesserit] = new Public_Faction_Knowledge(Faction.Bene_Gesserit, 5, 4, 19);

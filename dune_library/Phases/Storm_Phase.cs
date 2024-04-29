@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace dune_library.Phases {
-  internal class Storm_Phase : Phase {
+  public class Storm_Phase : Phase {
     public Storm_Phase(Game game) {
       Map = game.Map;
       Storm_Sector = game.Map.Storm_Sector;

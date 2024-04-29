@@ -11,7 +11,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace dune_library.Player_Resources {
-  internal class Perspective {
+  public class Perspective {
     public Faction Faction { get; }
 
     public (Battle_Wheel A, Battle_Wheel B) Battle_Wheels { get; }

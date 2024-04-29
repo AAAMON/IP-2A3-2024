@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace dune_library.Map_Resources {
-  internal class Section(int sector, Territory territory) {
+  public class Section(int sector, Territory territory) {
     private static int counter = 0;
 
     public int Id { get; } = counter++;

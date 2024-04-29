@@ -6,20 +6,52 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
+using LanguageExt.UnsafeValueAccess;
+using System.Reflection.Metadata.Ecma335;
 
 namespace dune_library.Player_Resources {
-  internal class General(Faction faction, string name, int strength) {
+  public class General {
+    [JsonIgnore]
     private static int counter = 0;
 
-    public int Id { get; } = counter++;
+    public int Id { get; }
 
-    public readonly Faction Faction = faction;
+    public General(Faction faction, string name, int strength) {
+      Id = counter++;
+      Faction = faction;
+      Name = name;
+      Strength = strength;
+      Location = None;
+      Status = E_Status.Alive;
+    }
 
-    public readonly string Name = name;
+    [JsonConstructor]
+    public General(Faction faction, string name, int strength, int id, Option<Section> location, E_Status status) {
+      Id = id;
+      Faction = faction;
+      Name = name;
+      Strength = strength;
+      Location = location;
+      Status = status;
+    }
 
-    public readonly int Strength = strength;
+    public Faction Faction { get; }
 
-    public Option<Section> Location { get; set; } = None;
+    public string Name { get; }
+
+    public int Strength { get; }
+
+    public Option<Section> Location { get; private set; }
+
+    public bool Can_Be_In_Section(Section section) => Location.Match(
+      None: true,
+      Some: value => value == section
+    );
+
+    public void Place_In_Section(Section section) => Location = section;
+
+    public void Remove_From_Section() => Location = None;
 
     #region Status Management
 
@@ -29,14 +61,18 @@ namespace dune_library.Player_Resources {
       Revivable,
     }
 
-    private E_Status Status { get; set; } = E_Status.Alive;
+    private E_Status Status { get; set; }
 
+    [JsonIgnore]
     public bool Is_Alive => Status == E_Status.Alive;
 
+    [JsonIgnore]
     public bool Is_Dead => !Is_Alive;
 
+    [JsonIgnore]
     public bool Is_Revivable => Status == E_Status.Revivable;
 
+    [JsonIgnore]
     public bool Is_Not_Revivable => Status == E_Status.Not_Revivable;
 
     public void Kill() {

@@ -3,13 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace dune_library.Utils {
-  internal class Treachery_Cards_Intel : Intel<Occurence_Dict<Treachery_Card>, Treachery_Card> {
+  public class Treachery_Cards_Intel : Intel<Occurence_Dict<Treachery_Card>, Treachery_Card> {
     public Treachery_Cards_Intel() : base() {
     }
 
+    [JsonConstructor]
     public Treachery_Cards_Intel(Occurence_Dict<Treachery_Card> known, uint unknown) : base(known, unknown) {
     }
 

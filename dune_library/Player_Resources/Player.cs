@@ -12,21 +12,13 @@ using LanguageExt.UnsafeValueAccess;
 using dune_library.Utils;
 
 namespace dune_library.Player_Resources {
-  internal class Player {
+  public class Player {
 
     public Player(string name) {
       Name = name;
-      _faction = None;
     }
       
     public string Name { get; }
-
-    private Option<Faction> _faction;
-
-    public Faction Faction {
-      get => _faction.OrElseThrow(() => new ArgumentException("faction has not been assigned yet"));
-      set => _faction = value;
-    }
 
     /*public Player(string name, Faction faction, bool isHuman, ushort assigned_sector)
     {

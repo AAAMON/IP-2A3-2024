@@ -27,6 +27,21 @@ namespace dune_library.Utils {
       );
     }
 
+    public static T OrElseThrow<T>(this Option<T> option, Exception to_throw) {
+      return option.Match(
+          Some: value => value,
+          None: () => throw to_throw
+      );
+    }
+
+    #endregion
+
+    #region int
+
+    public static int To_Sector(this int raw_sector) => raw_sector % Map_Resources.Map.NUMBER_OF_SECTORS;
+
+    public static uint To_Sector(this uint raw_sector) => (uint)((int)raw_sector).To_Sector();
+
     #endregion
 
   }

@@ -9,9 +9,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace dune_library.Player_Resources {
-  internal class Generals_Manager {
-    public const int Number_Of_Generals_Per_Faction = 5;
-
+  public class Generals_Manager {
     public Generals_Manager() {
       Generals = new Dictionary<Faction, IReadOnlyCollection<General>> {
         [Faction.Atreides] = [
@@ -57,18 +55,25 @@ namespace dune_library.Player_Resources {
           new(Faction.Harkonnen, "Feyd-Rautha", 6),
         ],
       };
-      Generals_By_Id = Generals.SelectMany(kvp => kvp.Value).Select(v => (v.Id, v)).ToDictionary();
+      Generals_By_Id = Generals_By_Id_Default;
     }
 
+    [JsonConstructor]
     public Generals_Manager(IReadOnlyDictionary<Faction, IReadOnlyCollection<General>> generals) {
       Generals = generals;
-      Generals_By_Id = Generals.SelectMany(kvp => kvp.Value).Select(v => (v.Id, v)).ToDictionary();
+      Generals_By_Id = Generals_By_Id_Default;
     }
 
-    public readonly IReadOnlyDictionary<Faction, IReadOnlyCollection<General>> Generals;
+    [JsonIgnore]
+    public const int Number_Of_Generals_Per_Faction = 5;
+
+    public IReadOnlyDictionary<Faction, IReadOnlyCollection<General>> Generals { get; }
 
     [JsonIgnore]
-    public readonly IReadOnlyDictionary<int, General> Generals_By_Id;
+    public IReadOnlyDictionary<int, General> Generals_By_Id { get; }
+    [JsonIgnore]
+    private IReadOnlyDictionary<int, General> Generals_By_Id_Default =>
+      Generals.SelectMany(kvp => kvp.Value).Select(v => (v.Id, v)).ToDictionary();
 
     public IReadOnlyCollection<General> Of_Faction(Faction faction) => Generals[faction];
 

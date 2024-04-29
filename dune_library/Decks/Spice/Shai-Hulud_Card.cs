@@ -5,6 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace dune_library.Spice {
-  internal class Shai_Hulud_Card {
+  public class Shai_Hulud_Card {
   }
 }

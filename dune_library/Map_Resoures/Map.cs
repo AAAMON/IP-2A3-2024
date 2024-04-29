@@ -5,95 +5,51 @@ using static LanguageExt.Prelude;
 using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using dune_library.Map_Resoures;
+using System.Text.Json.Serialization;
 
 // storm sectors go from 0 to 17, the polar sink is considered to be the 18 th storm sector
 // 0 is considered to be the starting sector in the rulebook (aka the one with 8 spice capacity in the cielago north region)
 namespace dune_library.Map_Resources {
-  internal class Map {
-    public static int NUMBER_OF_SECTORS => 18;
-
-    public static int To_Sector(int raw_sector) {
-      return raw_sector % NUMBER_OF_SECTORS;
-    }
+  public class Map {
 
     public Map() {
-      #region Initialisation of every territory and their container
-      // territories have been initialised in increasing order by earliest sector crossed
-      // if more territories start in the same sector, the one closer to the polar sink gets priority
-      Territories = [
-        Cielago_North = new("Cielago North", 0, [None, None, 8]),
-        Cielago_Depression = new("Cielago Depression", 0, 3),
-        Meridian = new("Meridian", 0, 2),
+      Territories = Territories_Default;
 
-        Cielago_South = new("Cielago South", 1, [12, None]),
+      Sections = Sections_Default;
 
-        Cielago_East = new("Cielago East", 2, 2),
+      Sections_With_Spice = Sections_With_Spice_Default;
 
-        Harg_Pass = new("Harg Pass", 3, 2),
-        False_Wall_South = new("False Wall South", 3, 2),
-        South_Mesa = new("South Mesa", 3, [None, 10, None]),
+      Linking_Sections();
 
-        False_Wall_East = new("False_Wall_East", 4, 5),
-        The_Minor_Erg = new("The Minor Erg", 4, [None, None, None, 8]),
-        Pasty_Mesa = new("Pasty_Mesa", 4, 4),
-        Tuek_s_Sietch = new("Tuek's Sietch", 4),
+      Storm_Affectable = Storm_Affectable_Default;
 
+      Influenced_By_Family_Atomics = Influenced_By_Family_Atomics_Default;
 
-        Red_Chasm = new("Red Chasm", 6, [8]),
+      Shield_Wall_Was_Destroyed = false;
 
-        Shield_Wall = new("Shield_Wall", 7, 2),
-        Gara_Kulon = new("Gara Kulon", 7, 1),
+      Presences_Manager = new();
+    }
 
-        Imperial_Basin = new("Imperial Basin", 8, 3),
-        Hole_In_The_Rock = new("Hole In The Rock", 8, 1),
-        Rim_Wall_West = new("Rim Wall West", 8, 1),
-        Basin = new("Basin", 8, 1),
-        Sihaya_Ridge = new("Sihaya Ridge", 8, [6]),
-        Old_Gap = new("Old Gap", 8, [None, 6, None]),
+    [JsonConstructor]
+    public Map(bool shield_wall_was_destroyed, Global_Faction_Presences presences_manager) {
+      Territories = Territories_Default;
 
-        Arrakeen = new("Arrakeen", 9),
+      Sections = Sections_Default;
 
-        Arsunt = new("Arsunt", 10, 2),
-        Carthag = new("Carthag", 10),
-        Tsimpo = new("Tsimpo", 10, 3),
-        Broken_Land = new("Broken Land", 10, [None, 8]),
+      Sections_With_Spice = Sections_With_Spice_Default;
 
-        Hagga_Basin = new("Hagga_Basin", 11, [None, 6]),
-        Plastic_Basin = new("Plastic Basin", 11, 3),
+      Linking_Sections();
 
-        Rock_Outcroppings = new("Rock Outcroppings", 12, [None, 6]),
+      Storm_Affectable = Storm_Affectable_Default;
 
-        Wind_Pass = new("Wind Pass", 13, 4),
-        Sietch_Tabr = new("Sietch Tabr", 13),
-        Bight_Of_The_Cliff = new("Bight Of The Cliff", 13, 2),
+      Influenced_By_Family_Atomics = Influenced_By_Family_Atomics_Default;
 
-        The_Great_Flat = new("The Great Flat", 14, [10]),
-        Funeral_Plain = new("Funeral Plain", 14, [6]),
+      Shield_Wall_Was_Destroyed = shield_wall_was_destroyed;
 
-        The_Greater_Flat = new("The Greater Flat", 15, 1),
-        False_Wall_West = new("False Wall West", 15, 3),
-        Habbanya_Erg = new("Habbanya Erg", 15, [8, None]),
+      Presences_Manager = presences_manager;
+    }
 
-        Wind_Pass_North = new("Wind Pass North", 16, [6, None]),
-        Habbanya_Ridge_Flat = new("Habbanya Ridge Flat", 16, [None, 10]),
-        Habbanya_Sietch = new("Habbanya Sietch", 16),
-
-        Cielago_West = new("Cielago West", 17, 2),
-
-        Polar_Sink = new("Polar Sink"),
-      ];
-
-      #endregion
-
-      #region Initialising the Section Containers
-
-      Sections = Territories.SelectMany(l => l.Sections).ToList();
-
-      Sections_With_Spice = Sections.OfType<With_Spice>().ToList();
-
-      #endregion
-
-      #region Linking Sections
+    private void Linking_Sections() {
       // sections are taken from the polar sink to the meridian
       // neighbors are linked in approximate clockwise order starting from the north
       // (the direction of the polar sink)
@@ -704,237 +660,161 @@ namespace dune_library.Map_Resources {
       ]);
 
       #endregion
-
-      #endregion
-
-      #region Assigning sections for easier iteration in the storm phase
-      // sections are taken from the polar sink to the meridian
-      // commented sections would not be affected by the wind anyway
-      // they're followed by eirther one of these comments:
-      //     - rock section = rocks are not affected by wind
-      //     - strongholds = strongholds are not affected by wind
-      //     - family atomics = are not affected by wind before the family atomics card is played
-      //                        but are affected by wind after  the family atomics card is played
-      // none or all commented sections might get included later
-
-      Storm_Affectable = [ [
-          // 0
-          Cielago_North.Sections[0],
-          Cielago_West.Sections[1],
-          Cielago_Depression.Sections[0],
-          Meridian.Sections[0],
-        ], [
-          // 1
-          Cielago_North.Sections[1],
-          Cielago_Depression.Sections[1],
-          Meridian.Sections[1],
-          Cielago_South.Sections[0],
-        ], [
-          // 2
-          Cielago_North.Sections[2],
-          Cielago_East.Sections[0],
-          Cielago_Depression.Sections[2],
-          Cielago_South.Sections[1],
-        ], [
-          // 3
-          Harg_Pass.Sections[0],
-          /*False_Wall_South.Sections[0],*/ // rock section
-          Cielago_East.Sections[1],
-          South_Mesa.Sections[0],
-        ], [
-          // 4
-          /*False_Wall_East.Sections[0],*/ // rock section
-          Harg_Pass.Sections[1],
-          The_Minor_Erg.Sections[0],
-          /*False_Wall_South.Sections[1],*/ // rock section
-          /*Pasty_Mesa.Sections[0],*/ // rock section
-          /*Tuek_s_Sietch.Sections[0],*/ // strongholds
-          South_Mesa.Sections[1],
-        ], [
-          // 5
-          /*False_Wall_East.Sections[1],*/ // rock section
-          The_Minor_Erg.Sections[1],
-          /*Pasty_Mesa.Sections[1],*/ // rock section
-          South_Mesa.Sections[2],
-        ], [
-          // 6
-          /*False_Wall_East.Sections[2],*/ // rock section
-          The_Minor_Erg.Sections[2],
-          /*Pasty_Mesa.Sections[2],*/ // rock section
-          Red_Chasm.Sections[0],
-        ], [
-          // 7
-          /*False_Wall_East.Sections[3],*/ // rock section
-          /*Shield_Wall.Sections[0],*/ // rock section
-          The_Minor_Erg.Sections[3],
-          /*Pasty_Mesa.Sections[3],*/ // rock section
-          Gara_Kulon.Sections[0],
-        ], [
-          // 8
-          /*Imperial_Basin.Sections[0],*/ // family atomics
-          /*False_Wall_East.Sections[4],*/ // rock section
-          /*Shield_Wall.Sections[1],*/ // rock section
-          Hole_In_The_Rock.Sections[0],
-          /*Rim_Wall_West.Sections[0],*/ // rock section
-          Basin.Sections[0],
-          Sihaya_Ridge.Sections[0],
-          Old_Gap.Sections[0],
-        ], [
-          // 9
-          /*Imperial_Basin.Sections[1],*/ // family atomics
-          /*Arrakeen.Sections[0],*/ // family atomics
-          Old_Gap.Sections[1],
-        ], [
-          // 10
-          Arsunt.Sections[0],
-          /*Imperial_Basin.Sections[2],*/ // family atomics
-          /*Carthag.Sections[0],*/ // family atomics
-          Tsimpo.Sections[0],
-          Broken_Land.Sections[0],
-          Old_Gap.Sections[2],
-        ], [
-          // 11
-          Arsunt.Sections[1],
-          Hagga_Basin.Sections[0],
-          Tsimpo.Sections[1],
-          /*Plastic_Basin.Sections[0],*/ // rock section
-          Broken_Land.Sections[1],
-        ], [
-          // 12
-          Hagga_Basin.Sections[1],
-          /*Plastic_Basin.Sections[1],*/ // rock section
-          Tsimpo.Sections[2],
-          Rock_Outcroppings.Sections[0],
-        ], [
-          // 13
-          Wind_Pass.Sections[0],
-          /*Plastic_Basin.Sections[2],*/ // rock section
-          Bight_Of_The_Cliff.Sections[0],
-          /*Sietch_Tabr.Sections[0],*/ // strongholds
-          Rock_Outcroppings.Sections[1],
-        ], [
-          // 14
-          Wind_Pass.Sections[1],
-          The_Great_Flat.Sections[0],
-          Funeral_Plain.Sections[0],
-          Bight_Of_The_Cliff.Sections[1],
-        ], [
-          // 15
-          Wind_Pass.Sections[2],
-          The_Greater_Flat.Sections[0],
-          /*False_Wall_West.Sections[0],*/ // rock section
-          Habbanya_Erg.Sections[0],
-        ], [
-          // 16
-          Wind_Pass_North.Sections[0],
-          Wind_Pass.Sections[3],
-          /*False_Wall_West.Sections[1],*/ // rock section
-          Habbanya_Erg.Sections[1],
-          Habbanya_Ridge_Flat.Sections[0],
-          /*Habbanya_Sietch.Sections[0],*/ // strongholds
-        ], [
-          // 17
-          Wind_Pass_North.Sections[1],
-          Cielago_West.Sections[0],
-          /*False_Wall_West.Sections[2],*/ // rock section
-          Habbanya_Ridge_Flat.Sections[1],
-        ],
-      ];
-
-      #endregion
-
-      #region Assigning relevant sections to the influenced_by_family_atomics list
-      Influenced_By_Family_Atomics = [
-        Imperial_Basin.Sections[0],
-        Imperial_Basin.Sections[1],
-        Arrakeen.Sections[0],
-        Imperial_Basin.Sections[2],
-        Carthag.Sections[0],
-      ];
-      #endregion
     }
 
     #region Territories
+    // territories have been initialised in increasing order by earliest sector crossed
+    // if more territories start in the same sector, the one closer to the polar sink gets priority
 
-    public Sand Cielago_North { get; }
-    public Sand Cielago_Depression { get; }
-    public Sand Meridian { get; }
+    [JsonIgnore] public Sand Cielago_North { get; } = new("Cielago North", 0, [None, None, 8]);
+    [JsonIgnore] public Sand Cielago_Depression { get; } = new("Cielago Depression", 0, 3);
+    [JsonIgnore] public Sand Meridian { get; } = new("Meridian", 0, 2);
 
-    public Sand Cielago_South { get; }
+    [JsonIgnore] public Sand Cielago_South { get; } = new("Cielago South", 1, [12, None]);
 
-    public Sand Cielago_East { get; }
+    [JsonIgnore] public Sand Cielago_East { get; } = new("Cielago East", 2, 2);
 
-    public Sand Harg_Pass { get; }
-    public Rock False_Wall_South { get; }
-    public Sand South_Mesa { get; }
+    [JsonIgnore] public Sand Harg_Pass { get; } = new("Harg Pass", 3, 2);
+    [JsonIgnore] public Rock False_Wall_South { get; } = new("False Wall South", 3, 2);
+    [JsonIgnore] public Sand South_Mesa { get; } = new("South Mesa", 3, [None, 10, None]);
 
-    public Rock False_Wall_East { get; }
-    public Sand The_Minor_Erg { get; }
-    public Rock Pasty_Mesa { get; }
-    public Strongholds Tuek_s_Sietch { get; }
+    [JsonIgnore] public Rock False_Wall_East { get; } = new("False_Wall_East", 4, 5);
+    [JsonIgnore] public Sand The_Minor_Erg { get; } = new("The Minor Erg", 4, [None, None, None, 8]);
+    [JsonIgnore] public Rock Pasty_Mesa { get; } = new("Pasty_Mesa", 4, 4);
+    [JsonIgnore] public Strongholds Tuek_s_Sietch { get; } = new("Tuek's Sietch", 4);
 
 
-    public Sand Red_Chasm { get; }
+    [JsonIgnore] public Sand Red_Chasm { get; } = new("Red Chasm", 6, [8]);
 
-    public Rock Shield_Wall { get; }
-    public Sand Gara_Kulon { get; }
+    [JsonIgnore] public Rock Shield_Wall { get; } = new("Shield_Wall", 7, 2);
+    [JsonIgnore] public Sand Gara_Kulon { get; } = new("Gara Kulon", 7, 1);
 
-    public Sand Imperial_Basin { get; }
-    public Sand Hole_In_The_Rock { get; }
-    public Rock Rim_Wall_West { get; }
-    public Sand Basin { get; }
-    public Sand Sihaya_Ridge { get; }
-    public Sand Old_Gap { get; }
+    [JsonIgnore] public Sand Imperial_Basin { get; } = new("Imperial Basin", 8, 3);
+    [JsonIgnore] public Sand Hole_In_The_Rock { get; } = new("Hole In The Rock", 8, 1);
+    [JsonIgnore] public Rock Rim_Wall_West { get; } = new("Rim Wall West", 8, 1);
+    [JsonIgnore] public Sand Basin { get; } = new("Basin", 8, 1);
+    [JsonIgnore] public Sand Sihaya_Ridge { get; } = new("Sihaya Ridge", 8, [6]);
+    [JsonIgnore] public Sand Old_Gap { get; } = new("Old Gap", 8, [None, 6, None]);
 
-    public Strongholds Arrakeen { get; }
+    [JsonIgnore] public Strongholds Arrakeen { get; } = new("Arrakeen", 9);
 
-    public Sand Arsunt { get; }
-    public Strongholds Carthag { get; }
-    public Sand Tsimpo { get; }
-    public Sand Broken_Land { get; }
+    [JsonIgnore] public Sand Arsunt { get; } = new("Arsunt", 10, 2);
+    [JsonIgnore] public Strongholds Carthag { get; } = new("Carthag", 10);
+    [JsonIgnore] public Sand Tsimpo { get; } = new("Tsimpo", 10, 3);
+    [JsonIgnore] public Sand Broken_Land { get; } = new("Broken Land", 10, [None, 8]);
 
-    public Sand Hagga_Basin { get; }
-    public Rock Plastic_Basin { get; }
+    [JsonIgnore] public Sand Hagga_Basin { get; } = new("Hagga_Basin", 11, [None, 6]);
+    [JsonIgnore] public Rock Plastic_Basin { get; } = new("Plastic Basin", 11, 3);
 
-    public Sand Rock_Outcroppings { get; }
+    [JsonIgnore] public Sand Rock_Outcroppings { get; } = new("Rock Outcroppings", 12, [None, 6]);
 
-    public Sand Wind_Pass { get; }
-    public Strongholds Sietch_Tabr { get; }
-    public Sand Bight_Of_The_Cliff { get; }
+    [JsonIgnore] public Sand Wind_Pass { get; } = new("Wind Pass", 13, 4);
+    [JsonIgnore] public Strongholds Sietch_Tabr { get; } = new("Sietch Tabr", 13);
+    [JsonIgnore] public Sand Bight_Of_The_Cliff { get; } = new("Bight Of The Cliff", 13, 2);
 
-    public Sand The_Great_Flat { get; }
-    public Sand Funeral_Plain { get; }
+    [JsonIgnore] public Sand The_Great_Flat { get; } = new("The Great Flat", 14, [10]);
+    [JsonIgnore] public Sand Funeral_Plain { get; } = new("Funeral Plain", 14, [6]);
 
-    public Sand The_Greater_Flat { get; }
-    public Rock False_Wall_West { get; }
-    public Sand Habbanya_Erg { get; }
+    [JsonIgnore] public Sand The_Greater_Flat { get; } = new("The Greater Flat", 15, 1);
+    [JsonIgnore] public Rock False_Wall_West { get; } = new("False Wall West", 15, 3);
+    [JsonIgnore] public Sand Habbanya_Erg { get; } = new("Habbanya Erg", 15, [8, None]);
 
-    public Sand Wind_Pass_North { get; }
-    public Sand Habbanya_Ridge_Flat { get; }
-    public Strongholds Habbanya_Sietch { get; }
+    [JsonIgnore] public Sand Wind_Pass_North { get; } = new("Wind Pass North", 16, [6, None]);
+    [JsonIgnore] public Sand Habbanya_Ridge_Flat { get; } = new("Habbanya Ridge Flat", 16, [None, 10]);
+    [JsonIgnore] public Strongholds Habbanya_Sietch { get; } = new("Habbanya Sietch", 16);
 
-    public Sand Cielago_West { get; }
+    [JsonIgnore] public Sand Cielago_West { get; } = new("Cielago West", 17, 2);
 
-    public Polar_Sink Polar_Sink { get; }
+    [JsonIgnore] public Polar_Sink Polar_Sink { get; } = new("Polar Sink");
 
     #endregion
 
     #region Containers for Territories and Sections + Lookup functions by id
 
-    public IList<Territory> Territories { get; }
+    [JsonIgnore]
+    public IReadOnlyList<Territory> Territories { get; }
+    [JsonIgnore]
+    private IReadOnlyList<Territory> Territories_Default => [
+      Cielago_North,
+      Cielago_Depression,
+      Meridian,
 
-    public IList<Section> Sections { get; }
+      Cielago_South,
 
-    public ICollection<With_Spice> Sections_With_Spice { get; }
+      Cielago_East,
 
-    public Territory ToTerritory(int id) {
+      Harg_Pass,
+      False_Wall_South,
+      South_Mesa,
+
+      False_Wall_East,
+      The_Minor_Erg,
+      Pasty_Mesa,
+      Tuek_s_Sietch,
+
+
+      Red_Chasm,
+
+      Shield_Wall,
+      Gara_Kulon,
+
+      Imperial_Basin,
+      Hole_In_The_Rock,
+      Rim_Wall_West,
+      Basin,
+      Sihaya_Ridge,
+      Old_Gap,
+
+      Arrakeen,
+
+      Arsunt,
+      Carthag,
+      Tsimpo,
+      Broken_Land,
+
+      Hagga_Basin,
+      Plastic_Basin,
+
+      Rock_Outcroppings,
+
+      Wind_Pass,
+      Sietch_Tabr,
+      Bight_Of_The_Cliff,
+
+      The_Great_Flat,
+      Funeral_Plain,
+
+      The_Greater_Flat,
+      False_Wall_West,
+      Habbanya_Erg,
+
+      Wind_Pass_North,
+      Habbanya_Ridge_Flat,
+      Habbanya_Sietch,
+
+      Cielago_West,
+
+      Polar_Sink,
+    ];
+
+    [JsonIgnore]
+    public IReadOnlyList<Section> Sections { get; }
+    [JsonIgnore]
+    private IReadOnlyList<Section> Sections_Default => Territories.SelectMany(l => l.Sections).ToList();
+
+    [JsonIgnore]
+    public IReadOnlyCollection<With_Spice> Sections_With_Spice { get; }
+    [JsonIgnore]
+    private IReadOnlyCollection<With_Spice> Sections_With_Spice_Default => Sections.OfType<With_Spice>().ToList();
+
+    public Territory To_Territory(int id) {
       if (id > Territories.Count) {
         throw new ArgumentException("no territory is mapped to this id (max: " + Territories.Count + ", id: " + id + ")");
       }
       return Territories[id];
     }
 
-    public Section ToSection(int id) {
+    public Section To_Section(int id) {
       if (id > Sections.Count) {
         throw new ArgumentException("no territory is mapped to this id (max: " + Sections.Count + ", id: " + id + ")");
       }
@@ -943,10 +823,149 @@ namespace dune_library.Map_Resources {
 
     #endregion
 
-    #region Storm
+    #region Sectors Stuff
 
-    // make readonly later if possible (during storm phase impl, testing shield wall destruction)
-    public IReadOnlyList<ICollection<Section>> Storm_Affectable;
+    [JsonIgnore]
+    public const int NUMBER_OF_SECTORS = 18;
+
+    #endregion
+
+    #region Storm
+    
+    [JsonIgnore]
+    public IReadOnlyList<ICollection<Section>> Storm_Affectable { get; }
+    // sections are taken from the polar sink to the meridian
+    // commented sections would not be affected by the wind anyway
+    // they're followed by either one of these comments:
+    //     - rock section = rocks are not affected by wind
+    //     - strongholds = strongholds are not affected by wind
+    //     - family atomics = are not affected by wind before the family atomics card is played
+    //                        but are affected by wind after  the family atomics card is played
+    // none or all commented sections might get included later
+    [JsonIgnore]
+    private IReadOnlyList<ICollection<Section>> Storm_Affectable_Default => [ [
+        // 0
+        Cielago_North.Sections[0],
+        Cielago_West.Sections[1],
+        Cielago_Depression.Sections[0],
+        Meridian.Sections[0],
+      ], [
+        // 1
+        Cielago_North.Sections[1],
+        Cielago_Depression.Sections[1],
+        Meridian.Sections[1],
+        Cielago_South.Sections[0],
+      ], [
+        // 2
+        Cielago_North.Sections[2],
+        Cielago_East.Sections[0],
+        Cielago_Depression.Sections[2],
+        Cielago_South.Sections[1],
+      ], [
+        // 3
+        Harg_Pass.Sections[0],
+        /*False_Wall_South.Sections[0],*/ // rock section
+        Cielago_East.Sections[1],
+        South_Mesa.Sections[0],
+      ], [
+        // 4
+        /*False_Wall_East.Sections[0],*/ // rock section
+        Harg_Pass.Sections[1],
+        The_Minor_Erg.Sections[0],
+        /*False_Wall_South.Sections[1],*/ // rock section
+        /*Pasty_Mesa.Sections[0],*/ // rock section
+        /*Tuek_s_Sietch.Sections[0],*/ // strongholds
+        South_Mesa.Sections[1],
+      ], [
+        // 5
+        /*False_Wall_East.Sections[1],*/ // rock section
+        The_Minor_Erg.Sections[1],
+        /*Pasty_Mesa.Sections[1],*/ // rock section
+        South_Mesa.Sections[2],
+      ], [
+        // 6
+        /*False_Wall_East.Sections[2],*/ // rock section
+        The_Minor_Erg.Sections[2],
+        /*Pasty_Mesa.Sections[2],*/ // rock section
+        Red_Chasm.Sections[0],
+      ], [
+        // 7
+        /*False_Wall_East.Sections[3],*/ // rock section
+        /*Shield_Wall.Sections[0],*/ // rock section
+        The_Minor_Erg.Sections[3],
+        /*Pasty_Mesa.Sections[3],*/ // rock section
+        Gara_Kulon.Sections[0],
+      ], [
+        // 8
+        /*Imperial_Basin.Sections[0],*/ // family atomics
+        /*False_Wall_East.Sections[4],*/ // rock section
+        /*Shield_Wall.Sections[1],*/ // rock section
+        Hole_In_The_Rock.Sections[0],
+        /*Rim_Wall_West.Sections[0],*/ // rock section
+        Basin.Sections[0],
+        Sihaya_Ridge.Sections[0],
+        Old_Gap.Sections[0],
+      ], [
+        // 9
+        /*Imperial_Basin.Sections[1],*/ // family atomics
+        /*Arrakeen.Sections[0],*/ // family atomics
+        Old_Gap.Sections[1],
+      ], [
+        // 10
+        Arsunt.Sections[0],
+        /*Imperial_Basin.Sections[2],*/ // family atomics
+        /*Carthag.Sections[0],*/ // family atomics
+        Tsimpo.Sections[0],
+        Broken_Land.Sections[0],
+        Old_Gap.Sections[2],
+      ], [
+        // 11
+        Arsunt.Sections[1],
+        Hagga_Basin.Sections[0],
+        Tsimpo.Sections[1],
+        /*Plastic_Basin.Sections[0],*/ // rock section
+        Broken_Land.Sections[1],
+      ], [
+        // 12
+        Hagga_Basin.Sections[1],
+        /*Plastic_Basin.Sections[1],*/ // rock section
+        Tsimpo.Sections[2],
+        Rock_Outcroppings.Sections[0],
+      ], [
+        // 13
+        Wind_Pass.Sections[0],
+        /*Plastic_Basin.Sections[2],*/ // rock section
+        Bight_Of_The_Cliff.Sections[0],
+        /*Sietch_Tabr.Sections[0],*/ // strongholds
+        Rock_Outcroppings.Sections[1],
+      ], [
+        // 14
+        Wind_Pass.Sections[1],
+        The_Great_Flat.Sections[0],
+        Funeral_Plain.Sections[0],
+        Bight_Of_The_Cliff.Sections[1],
+      ], [
+        // 15
+        Wind_Pass.Sections[2],
+        The_Greater_Flat.Sections[0],
+        /*False_Wall_West.Sections[0],*/ // rock section
+        Habbanya_Erg.Sections[0],
+      ], [
+        // 16
+        Wind_Pass_North.Sections[0],
+        Wind_Pass.Sections[3],
+        /*False_Wall_West.Sections[1],*/ // rock section
+        Habbanya_Erg.Sections[1],
+        Habbanya_Ridge_Flat.Sections[0],
+        /*Habbanya_Sietch.Sections[0],*/ // strongholds
+      ], [
+        // 17
+        Wind_Pass_North.Sections[1],
+        Cielago_West.Sections[0],
+        /*False_Wall_West.Sections[2],*/ // rock section
+        Habbanya_Ridge_Flat.Sections[1],
+      ],
+    ];
 
     public int Storm_Sector { get; private set; }
 
@@ -957,16 +976,25 @@ namespace dune_library.Map_Resources {
                     section.Delete_Spice();
                   })
                 );
-      Storm_Sector = To_Sector(Storm_Sector + sectors_to_move);
+      Storm_Sector = (Storm_Sector + sectors_to_move).To_Sector();
     }
 
     #endregion
 
     #region Family Atomics
 
-    public bool Shield_Wall_Was_Destroyed { get; private set; } = false;
+    public bool Shield_Wall_Was_Destroyed { get; private set; }
 
-    private readonly IReadOnlyCollection<Section> Influenced_By_Family_Atomics;
+    [JsonIgnore]
+    private IReadOnlyCollection<Section> Influenced_By_Family_Atomics { get; }
+    [JsonIgnore]
+    private IReadOnlyCollection<Section> Influenced_By_Family_Atomics_Default => [
+      Imperial_Basin.Sections[0],
+      Imperial_Basin.Sections[1],
+      Arrakeen.Sections[0],
+      Imperial_Basin.Sections[2],
+      Carthag.Sections[0],
+    ];
 
     public void Destroy_Shield_Wall() {
       Shield_Wall_Was_Destroyed = true;
@@ -1009,7 +1037,8 @@ namespace dune_library.Map_Resources {
       return to_return;
     }*/
 
-    public Global_Faction_Presences Presences_Manager { get; } = new();
+    [JsonInclude]
+    public Global_Faction_Presences Presences_Manager { get; }
 
     public bool Is_Accessible(Faction faction, Section section) {
       return section.Origin_Sector != Storm_Sector &&
