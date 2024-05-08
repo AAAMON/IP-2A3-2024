@@ -36,11 +36,18 @@ namespace dune_library.Utils {
 
     #endregion
 
-    #region int
+    #region (u)int to sector
 
     public static int To_Sector(this int raw_sector) => raw_sector % Map_Resources.Map.NUMBER_OF_SECTORS;
 
     public static uint To_Sector(this uint raw_sector) => (uint)((int)raw_sector).To_Sector();
+
+    #endregion
+
+    #region bool to (u)int
+    public static int To_Int(this bool value) => value ? 1 : 0;
+
+    public static uint To_Uint(this bool value) => (uint)(value ? 1 : 0);
 
     #endregion
 

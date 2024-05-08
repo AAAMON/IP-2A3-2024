@@ -15,21 +15,12 @@ namespace dune_library.Utils {
   }
 
   /// <summary>
-  /// serialize Option&lt;T&gt; like T? 
+  /// <para>
+  /// serializer + deserializer for Option&lt;THIS_TYPE&gt as arrays of either 0 (none) or 1 (some) elements;
+  /// </para>
   /// </summary>
-  /// <remarks>Add [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] to the property to disable writing 'null' for None into json</remarks>
-  [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
-  public class Option_As_Nullable_Json_Converter_Attribute : JsonConverterAttribute {
-    public override JsonConverter? CreateConverter(Type typeToConvert) =>
-        Activator.CreateInstance(typeof(Option_Json_Converter_Factory.Option_As_Nullable_Json_Converter<>)
-                 .MakeGenericType(typeToConvert.Is_Generic_Type(typeof(Option<>)) ?
-                    typeToConvert.GetGenericArguments().Head() :
-                    typeToConvert)) as JsonConverter;
-  }
-
-  internal class Option_Json_Converter_Factory : JsonConverterFactory {
+  public class Option_Json_Converter_Factory : JsonConverterFactory {
     public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options) {
-      // var innerType = typeToConvert.GetSingleGenericTypeArgument();
       var innerType = typeToConvert.GetGenericArguments().Match(
           () => throw new Exception("no generic type argument"),
           x => x,
@@ -41,55 +32,40 @@ namespace dune_library.Utils {
     public override bool CanConvert(Type typeToConvert) => typeToConvert.Is_Generic_Type(typeof(Option<>));
 
     private class Option_Json_Converter<T> : JsonConverter<Option<T>> {
-      private readonly JsonConverter<T> _innerConverter;
+      private readonly JsonConverter<T> _inner_converter;
 
       public Option_Json_Converter(JsonSerializerOptions options) =>
-        _innerConverter = (JsonConverter<T>)options.GetConverter(typeof(T));
+        _inner_converter = (JsonConverter<T>)options.GetConverter(typeof(T));
 
       public override Option<T> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) {
         if (reader.TokenType == JsonTokenType.Null) {
-          return None;
-        } else {
-          if (reader.TokenType != JsonTokenType.StartArray) {
-            throw new JsonException($"expected {JsonTokenType.StartArray} but found {reader.TokenType}");
-          }
-          if (!reader.Read()) {
-            throw new JsonException($"could not read element in array or {JsonTokenType.EndArray}");
-          }
-          if (reader.TokenType != JsonTokenType.EndArray) {
-            // non-empty-array
-            var value = _innerConverter.Read(ref reader, typeof(T), options);
-            if (!reader.Read()) {
-              throw new JsonException("could not read next token");
-            }
-            if (reader.TokenType != JsonTokenType.EndArray) {
-              throw new JsonException($"expected token {JsonTokenType.EndArray} but found {reader.TokenType}");
-            }
-            return Option<T>.Some(value!);
-          } else {
-            return Option<T>.None;
-          }
+          return Option<T>.None;
         }
+        if (reader.TokenType != JsonTokenType.StartArray) {
+          throw new JsonException($"expected {JsonTokenType.StartArray} but found {reader.TokenType}");
+        }
+        if (!reader.Read()) {
+          throw new JsonException($"could not read element in array or {JsonTokenType.EndArray}");
+        }
+        if (reader.TokenType == JsonTokenType.EndArray) {
+          // empty array
+          return Option<T>.None;
+        }
+        // non-empty-array
+        var value = _inner_converter.Read(ref reader, typeof(T), options)!;
+        if (!reader.Read()) {
+          throw new JsonException("could not read next token");
+        }
+        if (reader.TokenType != JsonTokenType.EndArray) {
+          throw new JsonException($"expected token {JsonTokenType.EndArray} but found {reader.TokenType}");
+        }
+        return Option<T>.Some(value);
       }
 
       public override void Write(Utf8JsonWriter writer, Option<T> value, JsonSerializerOptions options) {
         writer.WriteStartArray();
-        value.IfSome(some => _innerConverter.Write(writer, some, options));
+        value.IfSome(inner_value => _inner_converter.Write(writer, inner_value, options));
         writer.WriteEndArray();
-      }
-    }
-
-    internal class Option_As_Nullable_Json_Converter<T> : JsonConverter<Option<T>> {
-      public override Option<T> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
-              reader.TokenType == JsonTokenType.Null ? None : Some((options.GetConverter(typeof(T?)) as JsonConverter<T> ??
-                throw new JsonException($"Could not get converter for {typeof(T)}")).Read(ref reader, typeof(T), options)!);
-
-      public override void Write(Utf8JsonWriter writer, Option<T> value, JsonSerializerOptions options) {
-        if (value.Case is T some) {
-          ((JsonConverter<T>)options.GetConverter(typeof(T))).Write(writer, some, options);
-        } else {
-          writer.WriteNullValue();
-        }
       }
     }
   }

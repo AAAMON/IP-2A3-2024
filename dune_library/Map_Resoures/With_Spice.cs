@@ -25,5 +25,9 @@ namespace dune_library.Map_Resoures {
     public override void Delete_Spice() {
       Spice_Avaliable = 0;
     }
+
+    public void Copy_Spice_From(int spice) {
+      Spice_Avaliable = spice;
+    }
   }
 }

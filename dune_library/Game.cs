@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using dune_library.Spice;
+using dune_library.Map_Resoures;
 
 namespace dune_library {
   public class Game {
@@ -58,6 +59,10 @@ namespace dune_library {
     public Alliances_Manager Alliances_Manager { get; } = new();
 
     public Territory_Card Last_Spice_Card { get; private set; } = new();
+
+    public Section_Forces Reserves { get; private set; } = new();
+
+    public Tleilaxu_Tanks Tleilaxu_Tanks { get; private set; } = new();
 
     public Public_Faction_Knowledge_Manager Public_Faction_Knowledge_Manager { get; private set; } = new(Enum.GetValues<Faction>().ToHashSet());
 
