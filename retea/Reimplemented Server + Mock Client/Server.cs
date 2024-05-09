@@ -13,7 +13,8 @@ namespace HttpServer
         private static readonly Dictionary<string, string> users = new Dictionary<string, string>
         {
             { "girlboss", "password1" },
-            { "player2", "password2" }
+            { "player2", "password2" },
+            {"player1","password1" }
         };
 
         /*  private static readonly Dictionary<string, string> authTokens = new Dictionary<string, string>(); */
