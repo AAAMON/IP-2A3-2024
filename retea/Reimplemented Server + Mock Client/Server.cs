@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace HttpServer
 {
@@ -11,13 +12,14 @@ namespace HttpServer
     {
         private static readonly Dictionary<string, string> users = new Dictionary<string, string>
         {
-            { "player1", "password1" },
+            { "girlboss", "password1" },
             { "player2", "password2" }
         };
 
-/*        private static readonly Dictionary<string, string> authTokens = new Dictionary<string, string>();*/
+        /*  private static readonly Dictionary<string, string> authTokens = new Dictionary<string, string>(); */
         static async Task Main(string[] args)
         {
+            int connectedUsers = 0;
             // Create an HTTP listener.
             HttpListener listener = new HttpListener();
             listener.Prefixes.Add("http://localhost:1234/");
@@ -36,11 +38,11 @@ namespace HttpServer
                 // Process requests
                 if (request.HttpMethod == "POST" && request.Url.AbsolutePath == "/auth")
                 {
-                    await HandleAuthRequest(request, response);
+                    await HandleAuthRequest(request, response, connectedUsers);
                 }
-                else if (request.HttpMethod == "GET" && request.Url.AbsolutePath.StartsWith( "/gamestate"))
+                else if (request.HttpMethod == "GET" && request.Url.AbsolutePath.StartsWith("/gamestate"))
                 {
-                    await HandleGameStateGetRequest(request, response);
+                    await HandleGameStateGetRequest(request, response, connectedUsers);
                 }
                 else if (request.HttpMethod == "POST" && request.Url.AbsolutePath == "/initialization")
                 {
@@ -53,7 +55,8 @@ namespace HttpServer
             }
         }
 
-        static async Task HandleAuthRequest(HttpListenerRequest request, HttpListenerResponse response)
+
+        static async Task HandleAuthRequest(HttpListenerRequest request, HttpListenerResponse response, int connectedUsers)
         {
             // Read the request body containing the username and password
             string requestBody = await ReadRequestBody(request.InputStream);
@@ -63,9 +66,11 @@ namespace HttpServer
             string username = requestBody.Split(':')[0];
             if (isAuthenticated)
             {
-
-                // Send a successful response with the auth token
-                await SendResponse(response, HttpStatusCode.OK, username);
+                // returns auth token as player1, player2.. player6
+                connectedUsers++;
+                if (connectedUsers > 6)
+                    await SendResponse(response, HttpStatusCode.BadRequest, "Game room is already full");
+                await SendResponse(response, HttpStatusCode.OK, "player" + connectedUsers.ToString());
             }
             else
             {
@@ -74,7 +79,7 @@ namespace HttpServer
             }
         }
 
-        static async Task HandleGameStateGetRequest(HttpListenerRequest request, HttpListenerResponse response)
+        static async Task HandleGameStateGetRequest(HttpListenerRequest request, HttpListenerResponse response, int connectedUsers)
         {
             // Validate the authentication token
             string authToken = request.Headers["Authorization"];
@@ -82,6 +87,13 @@ namespace HttpServer
             {
                 await SendResponse(response, HttpStatusCode.Unauthorized, "Invalid auth token");
                 return;
+            }
+            if (connectedUsers != 6)
+            {
+                /* [!] the comments should be removed after testing
+                   await SendResponse(response, HttpStatusCode.Unauthorized, "Not enough players to start the game");
+                   return;
+                */
             }
 
             // Get the player ID from the URL
@@ -132,8 +144,12 @@ namespace HttpServer
 
         static bool ValidateAuthToken(string authToken)
         {
+            HashSet<string> playerNames = new HashSet<string>();
+            for (int i = 0; i < 6; i++)
+                playerNames.Add("player" + i.ToString());
+
             // Check if the auth token is valid
-            return !string.IsNullOrEmpty(authToken) && users.ContainsKey(authToken);
+            return !string.IsNullOrEmpty(authToken) && playerNames.Contains(authToken);
         }
 
         static async Task<string> ReadRequestBody(Stream inputStream)
