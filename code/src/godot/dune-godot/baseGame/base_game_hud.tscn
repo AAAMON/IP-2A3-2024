@@ -401,13 +401,22 @@ offset_right = 1304.62
 offset_bottom = 129.238
 texture_normal = ExtResource("25_ru3ul")
 
+[node name="turn" type="Label" parent="otherPlayersHUD/TextureButton6"]
+offset_left = 228.572
+offset_top = 9.5238
+offset_right = 513.572
+offset_bottom = 32.5238
+text = "turn -1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="phase" type="Label" parent="otherPlayersHUD/TextureButton6"]
 layout_mode = 0
 offset_left = 475.0
 offset_top = 6.0
 offset_right = 760.0
 offset_bottom = 29.0
-text = "Phase 1"
+text = "Phase -1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -638,4 +647,19 @@ offset_right = 1366.05
 offset_bottom = 128.714
 texture = ExtResource("30_m248h")
 
+[node name="deleteme1" type="Button" parent="."]
+offset_left = 177.381
+offset_top = 146.429
+offset_right = 301.381
+offset_bottom = 177.429
+text = "Get Gamestate"
+
+[node name="deleteme2" type="Button" parent="."]
+offset_left = 316.667
+offset_top = 142.857
+offset_right = 440.667
+offset_bottom = 173.857
+text = "Next Phase"
+
 [connection signal="pressed" from="playerHUD/buttonForces" to="popup" method="_on_button_forces_pressed"]
+[connection signal="pressed" from="deleteme2" to="." method="_on_deleteme_2_pressed"]

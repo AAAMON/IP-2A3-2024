@@ -20,7 +20,7 @@ func _on_player_info_request_completed(_result, _response_code, _headers, body):
 	if (json == null):
 		push_error("ERROR: NULL RESPONSE FROM SERVER")
 	else:
-		print("Got other players data from api")
+		print("Got player data from api")
 		PlayerData.turnId = json["turnId"]
 		PlayerData.faction = json["faction"]
 		PlayerData.spice = json["spice"]

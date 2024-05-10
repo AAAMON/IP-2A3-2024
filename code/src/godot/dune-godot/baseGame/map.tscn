@@ -1,6 +1,7 @@
-[gd_scene load_steps=44 format=3 uid="uid://cinvbs12k12k7"]
+[gd_scene load_steps=45 format=3 uid="uid://cinvbs12k12k7"]
 
 [ext_resource type="Texture2D" uid="uid://dgu7lj6aspil6" path="res://assets/map/Asset 2.png" id="1_j2uwv"]
+[ext_resource type="Script" path="res://baseGame/map.gd" id="1_srwj2"]
 [ext_resource type="Texture2D" uid="uid://glngpxalkf62" path="res://assets/map/Asset 3.png" id="2_m4hp5"]
 [ext_resource type="Texture2D" uid="uid://dihiwrrso65n8" path="res://assets/map/Asset 4.png" id="3_o656o"]
 [ext_resource type="Texture2D" uid="uid://cdwx012nstvdh" path="res://assets/map/Asset 5.png" id="4_vb1hk"]
@@ -48,6 +49,7 @@
 [node name="Map" type="Node2D"]
 position = Vector2(348, 140)
 scale = Vector2(0.6, 0.6)
+script = ExtResource("1_srwj2")
 
 [node name="TextureButton" type="TextureButton" parent="."]
 offset_left = 281.0

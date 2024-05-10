@@ -1,0 +1,62 @@
+[gd_scene load_steps=2 format=3 uid="uid://ehvm1mbkgc7g"]
+
+[ext_resource type="Texture2D" uid="uid://dxgmy13s2g4un" path="res://assets/Asset 53.png" id="1_yvi76"]
+
+[node name="phase4" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 420.0
+offset_top = 208.0
+offset_right = 719.0
+offset_bottom = 432.0
+texture = ExtResource("1_yvi76")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 19.0
+offset_right = 267.0
+offset_bottom = 42.0
+text = "Bidding"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="TextureRect"]
+layout_mode = 0
+offset_left = 219.0
+offset_top = 171.0
+offset_right = 257.0
+offset_bottom = 202.0
+text = "Bid!"
+
+[node name="LineEdit" type="LineEdit" parent="TextureRect"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 174.0
+offset_right = 210.0
+offset_bottom = 203.0
+theme_override_font_sizes/font_size = 12
+placeholder_text = "Enter amount of spice to bid"
+
+[node name="Label2" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 58.0
+offset_right = 171.0
+offset_bottom = 81.0
+text = "First Bidder: Dude1"
+
+[node name="Label3" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 103.0
+offset_right = 227.0
+offset_bottom = 126.0
+text = "Last bid: 3 spice by Dude 2"

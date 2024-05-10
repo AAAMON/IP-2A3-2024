@@ -1,0 +1,65 @@
+[gd_scene load_steps=2 format=3 uid="uid://p15o423f6pf3"]
+
+[ext_resource type="Texture2D" uid="uid://dxgmy13s2g4un" path="res://assets/Asset 53.png" id="1_8xq0q"]
+
+[node name="phase7" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 322.0
+offset_top = 146.0
+offset_right = -385.0
+offset_bottom = -175.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 31.0
+offset_right = 353.0
+offset_bottom = 273.0
+texture = ExtResource("1_8xq0q")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 19.0
+offset_right = 267.0
+offset_bottom = 42.0
+text = "Battle plan"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="TextureRect"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 101.0
+offset_right = 127.0
+offset_bottom = 132.0
+text = "Pick Leader"
+
+[node name="Button2" type="Button" parent="TextureRect"]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 144.0
+offset_right = 128.0
+offset_bottom = 175.0
+text = "Pick Tretchery Cards"
+
+[node name="Button3" type="Button" parent="TextureRect"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 197.0
+offset_right = 232.0
+offset_bottom = 228.0
+text = "Submit"
+
+[node name="LineEdit" type="LineEdit" parent="."]
+offset_left = 83.0
+offset_top = 94.0
+offset_right = 229.0
+offset_bottom = 121.0
+theme_override_font_sizes/font_size = 12
+placeholder_text = "Enter amount of forces"

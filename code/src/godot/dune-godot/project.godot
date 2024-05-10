@@ -20,6 +20,7 @@ config/icon="res://assets/icon.svg"
 PlayerData="*res://playerData.gd"
 LobbyData="*res://lobbyData.gd"
 OtherPlayersData="*res://otherPlayersData.gd"
+GameData="*res://gameData.gd"
 
 [display]
 

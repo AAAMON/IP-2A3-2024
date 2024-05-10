@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://bt062g8xbodaf"]
+
+[ext_resource type="Texture2D" uid="uid://dxgmy13s2g4un" path="res://assets/Asset 53.png" id="1_r4ql8"]
+
+[node name="phase7" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 322.0
+offset_top = 146.0
+offset_right = -385.0
+offset_bottom = -175.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 76.0
+offset_top = 77.0
+offset_right = 375.0
+offset_bottom = 136.0
+texture = ExtResource("1_r4ql8")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 19.0
+offset_right = 280.0
+offset_bottom = 42.0
+text = "You received 3 spice from area X!"

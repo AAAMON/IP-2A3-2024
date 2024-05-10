@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://s5bftn1e0wg3"]
+
+[ext_resource type="Texture2D" uid="uid://dxgmy13s2g4un" path="res://assets/Asset 53.png" id="1_j0grl"]
+[ext_resource type="Script" path="res://phases/phase_1_storm.gd" id="1_jy8qy"]
+
+[node name="phase1" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jy8qy")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 420.0
+offset_top = 208.0
+offset_right = 719.0
+offset_bottom = 420.0
+texture = ExtResource("1_j0grl")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 13.0
+offset_right = 188.0
+offset_bottom = 36.0
+text = "Storm"
+horizontal_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="TextureRect"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 94.0
+offset_right = 223.0
+offset_bottom = 120.0
+theme_override_font_sizes/font_size = 10
+placeholder_text = "Enter a number from 1 to 3"
+
+[node name="Button" type="Button" parent="TextureRect"]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 166.0
+offset_right = 181.0
+offset_bottom = 197.0
+text = "Submit"
