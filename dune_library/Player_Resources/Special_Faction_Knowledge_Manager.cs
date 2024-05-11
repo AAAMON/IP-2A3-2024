@@ -9,7 +9,7 @@ namespace dune_library.Player_Resources {
   public class Special_Faction_Knowledge_Manager {
     public Special_Faction_Knowledge_Manager(ISet<Faction> factions) {
       Special_Faction_Knowledge = factions.Select(faction =>
-        new KeyValuePair<Faction, Special_Faction_Knowledge>(faction, new())
+        new KeyValuePair<Faction, Special_Faction_Knowledge>(faction, new(factions))
       ).ToDictionary();
     }
 

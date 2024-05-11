@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace dune_library.Map_Resources {
   public class Strongholds : Territory {
-    public override List<Section> Sections { get; }
-    public Strongholds(string name, int sector) : base(name) {
-      Sections = [new Section(sector.To_Sector(), this)];
+    public override IReadOnlyList<Section> Sections { get; }
+    public Strongholds(string name, uint sector, uint id, ref uint section_counter) : base(name, id) {
+      Sections = [new Section(sector.To_Sector(), this, section_counter++)];
     }
   }
 }

@@ -9,42 +9,28 @@ using System.Threading.Tasks;
 
 namespace dune_library.Player_Resources {
   public class Special_Faction_Knowledge {
+    public uint Spice { get; private set; }
+
     public IList<Treachery_Card> Treachery_Cards { get; }
 
     public IList<General> Traitors { get; }
 
     public IList<General> Discarded_Traitors { get; }
 
-    public IDictionary<Faction, Treachery_Cards_Intel> Treachery_Cards_Intel { get; }
+    public IDictionary<Faction, uint> Number_Of_Treachery_Cards_Of_Other_Players { get; }
 
-    public IDictionary<Faction, Traitors_Intel> Traitors_Intel { get; }
-
-    public IDictionary<Faction, Traitors_Intel> Discarded_Traitors_Intel { get; }
-
-    public Special_Faction_Knowledge() {
+    public Special_Faction_Knowledge(IEnumerable<Faction> factions_in_play) {
       Treachery_Cards = [];
       Traitors = [];
       Discarded_Traitors = [];
-      Treachery_Cards_Intel = new Dictionary<Faction, Treachery_Cards_Intel>();
-      Traitors_Intel = new Dictionary<Faction, Traitors_Intel>();
-      Discarded_Traitors_Intel = new Dictionary<Faction, Traitors_Intel>();
+      Number_Of_Treachery_Cards_Of_Other_Players = new Dictionary<Faction, uint>();
+      Spice = 0;
     }
 
-    [JsonConstructor]
-    public Special_Faction_Knowledge(
-      IList<Treachery_Card> treachery_cards,
-      IList<General> traitors,
-      IList<General> discarded_traitors,
-      IDictionary<Faction, Treachery_Cards_Intel> treachery_cards_intel,
-      IDictionary<Faction, Traitors_Intel> traitors_intel,
-      IDictionary<Faction, Traitors_Intel> discarded_traitors_intel
-    ) {
-      Treachery_Cards = treachery_cards;
-      Traitors = traitors;
-      Discarded_Traitors = discarded_traitors;
-      Treachery_Cards_Intel = treachery_cards_intel;
-      Traitors_Intel = traitors_intel;
-      Discarded_Traitors_Intel = discarded_traitors_intel;
+    public void Add_Spice(uint to_add) => Spice += to_add;
+
+    public bool Remove_Spice(uint to_remove) {
+      return false;
     }
   }
 }

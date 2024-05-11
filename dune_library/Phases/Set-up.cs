@@ -8,47 +8,63 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using dune_library.Map_Resources;
+using dune_library.Map_Resoures;
 
 namespace dune_library.Phases {
   internal class Set_up : Phase {
     public Set_up(Game game) {
-      Public_Faction_Knowledge_Manager = game.Public_Faction_Knowledge_Manager;
       Map = game.Map;
+      Reserves = game.Reserves;
     }
 
-    public IList<Player> Players { get; }
+/*public IList<Player> Players { get; }*/
 
-    public Public_Faction_Knowledge_Manager Public_Faction_Knowledge_Manager { get; }
+    private Map Map { get; }
 
-    public Map Map { get; }
+    private Forces Reserves { get; set; }
 
     public override void Play_Out() {
-      // shuffle spice and treachery deck
-      /*Players[0].Faction = Faction.Atreides;
-      Players[1].Faction = Faction.Bene_Gesserit;
-      Players[2].Faction = Faction.Spacing_Guild;
-      Players[3].Faction = Faction.Emperor;
-      Players[4].Faction = Faction.Harkonnen;
-      Players[5].Faction = Faction.Fremen;*/
 
-      /*Public_Faction_Knowledge_Manager.Presence_Of(Faction.Atreides) = new Public_Faction_Knowledge(Faction.Atreides, 10, 1, 10);
-      Public_Faction_Knowledge_Manager.Presence_Of(Faction.Bene_Gesserit) = new Public_Faction_Knowledge(Faction.Bene_Gesserit, 5, 4, 19);
-      Public_Faction_Knowledge_Manager.Presence_Of(Faction.Spacing_Guild) = new Public_Faction_Knowledge(Faction.Spacing_Guild, 5, 7, 15);
-      Public_Faction_Knowledge_Manager.Presence_Of(Faction.Emperor) = new Public_Faction_Knowledge(Faction.Emperor, 10, 10, 20);
-      Public_Faction_Knowledge_Manager.Presence_Of(Faction.Harkonnen) = new Public_Faction_Knowledge(Faction.Harkonnen, 10, 13, 10);
-      Public_Faction_Knowledge_Manager.Presence_Of(Faction.Fremen) = new Public_Faction_Knowledge(Faction.Fremen, 3, 16, 10);*/
+      #region faction reserve allocation
+      //Fremen 10 forces in reserves
+      //Atreides 10 forces in reserves
+      //Harkonnen 10 forces in reserves
+      //BENE GESSERIT 19 forces in reserves
+      //Space Guild 15 forces in reserves
+      //Emperor 20 forces in reserves
 
-      // bene gesserit guesses who will win
+      Reserves = Forces.Initial_Reserves_From(Enum.GetValues<Faction>().ToHashSet());
 
-      // picking traitors
+      Map.Arrakeen.Sections[0].Forces.Transfer_From(Faction.Atreides, Reserves, 10);
+      Map.Polar_Sink.Sections[0].Forces.Transfer_From(Faction.Bene_Gesserit, Reserves, 1);
+      Map.Tuek_s_Sietch.Sections[0].Forces.Transfer_From(Faction.Spacing_Guild, Reserves, 5);
+      Map.Carthag.Sections[0].Forces.Transfer_From(Faction.Harkonnen, Reserves, 10);
 
-      //
-/*Fremen => 10 between Sietch Tabr, False Wall West and False Wall South, 10 in reserve
-Atreides => 10 in Arrakeen, 10 in reserve
-Harkonnen => 10 in Carthag, 10 in reserve
-Bene Gesserit => 1 in Polar Sink, 19 in reserve
-Spacing Guild => 5 in Tuek’s Sietch, 15 in reserve
-Emperor => 20 in reserve*/
+      Forces To_Place_Now = new();
+      To_Place_Now.Transfer_From(Faction.Fremen, Reserves, 10);
+
+      //custom for fremen, change later
+      Map.Sietch_Tabr.Sections[0].Forces.Transfer_From(Faction.Atreides, To_Place_Now, 10);
+
+      #endregion
+      #region faction force allocation
+
+       #endregion
+      //Fremen 3 spice
+      //Atreides 10 spice
+      //Harkonnen 10 spice
+      //BENE GESSERIT 5 spice
+      //Space Guild 5 spice
+      //Emperor 10 spice
+
+
+
+
+      //faction set player marker
+
+      //faction set Traitors
+
+      //faction add Treachery Card
 
     }
   }

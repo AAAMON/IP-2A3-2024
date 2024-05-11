@@ -20,23 +20,19 @@ namespace dune_library.Player_Resources {
 
     public Map_Resources.Map Map { get; }
 
-    public int Round { get; }
+    public uint Round { get; }
 
     public Option<Phase> Phase { get; }
 
-    public Generals_Manager Generals_Manager { get; }
+    public Player_Markers Player_Markers { get; }
 
-    public Alliances_Manager Alliances_Manager { get; }
+    public Alliances Alliances { get; }
 
     public Territory_Card Last_Spice_Card { get; }
 
-    public Section_Forces Reserves { get; }
-
     public Tleilaxu_Tanks Tleilaxu_Tanks { get; }
 
-    public Public_Faction_Knowledge_Manager Public_Faction_Knowledge_Manager { get; }
-
-    public Special_Faction_Knowledge Special_Faction_Knowledge { get; }
+    public Special_Faction_Knowledge Special_Faction_Knowledge { get; } // can be destructured into individual properties
 
     public Perspective(Faction faction, Game game) {
       Faction = faction;
@@ -44,43 +40,13 @@ namespace dune_library.Player_Resources {
       Map = game.Map;
       Round = game.Round;
       Phase = game.Phase;
-      Generals_Manager = game.General_Manager;
-      Alliances_Manager = game.Alliances_Manager;
+      Player_Markers = game.Player_Markers;
+      Alliances = game.Alliances;
       Last_Spice_Card = game.Last_Spice_Card;
-      Reserves = game.Reserves;
       Tleilaxu_Tanks = game.Tleilaxu_Tanks;
-      Public_Faction_Knowledge_Manager = game.Public_Faction_Knowledge_Manager;
-      Special_Faction_Knowledge = game.Special_Faction_Knowledge_Manager.Of(faction);
+      // Special_Faction_Knowledge = game.Special_Faction_Knowledge_Manager.Of(faction);
     }
 
-    [JsonConstructor]
-    public Perspective(
-      Faction faction,
-      (Battle_Wheel A, Battle_Wheel B) battle_wheels,
-      Map_Resources.Map map,
-      int round,
-      Option<Phase> phase,
-      Generals_Manager generals_manager,
-      Alliances_Manager alliances_manager,
-      Territory_Card last_spice_card,
-      Section_Forces reserves,
-      Tleilaxu_Tanks tleilaxu_tanks,
-      Public_Faction_Knowledge_Manager public_faction_knowledge_manager,
-      Special_Faction_Knowledge special_faction_knowledge
-    ) {
-      Faction = faction;
-      Battle_Wheels = battle_wheels;
-      Map = map;
-      Round = round;
-      Phase = phase;
-      Generals_Manager = generals_manager;
-      Alliances_Manager = alliances_manager;
-      Last_Spice_Card = last_spice_card;
-      Reserves = reserves;
-      Tleilaxu_Tanks = tleilaxu_tanks;
-      Public_Faction_Knowledge_Manager = public_faction_knowledge_manager;
-      Special_Faction_Knowledge = special_faction_knowledge;
-    }
     public void SerializeToJson(string filePath) {
       try {
           var options = new JsonSerializerOptions { WriteIndented = true, IncludeFields = true };
@@ -92,7 +58,7 @@ namespace dune_library.Player_Resources {
       }
     }
 
-    public static Perspective? DeserializeFromJson(string filePath) {
+    /*public static Perspective? DeserializeFromJson(string filePath) {
       try {
         var options = new JsonSerializerOptions { IncludeFields = true };
         options.Converters.Add(new Option_Json_Converter_Factory());
@@ -102,7 +68,7 @@ namespace dune_library.Player_Resources {
         Console.WriteLine($"Error occurred during deserialization: {e}");
         return null;
       }
-    }
+    }*/ /* !!! DESERIALIZATION NO LONGER NEEDED !!! */
 
      /*public static Perspective DeserializeFromJson(string filePath)
      {

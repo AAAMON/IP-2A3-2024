@@ -6,20 +6,21 @@ using System.Text;
 namespace MyApp {
   internal class Program {
     static void Main(string[] args) {
-      Game game = new Game();
+      System.Collections.Generic.HashSet<Player> players = [new("0"), new("1"), new("2"), new("3"), new("4"), new("5")];
+      Game game = new(players);
       Faction faction = Faction.Atreides;
 
       game.Generate_Perspective(faction);
       Perspective perspective = new Perspective(faction, game);
       perspective.SerializeToJson("perspective.json");
-      var perspective2 = Perspective.DeserializeFromJson("perspective.json");
+      /*var perspective2 = Perspective.DeserializeFromJson("perspective.json");*/
       PostJSONForPlayerI("perspective.json", 1);
       PostJSONForPlayerI("perspective.json", 2);
       PostJSONForPlayerI("perspective.json", 3);
       PostJSONForPlayerI("perspective.json", 4);
       PostJSONForPlayerI("perspective.json", 5);
       PostJSONForPlayerI("perspective.json", 6);
-        }
+    }
     static async Task ForcedPost(string endpoint, string json)
     {
         HttpClient client = new HttpClient();

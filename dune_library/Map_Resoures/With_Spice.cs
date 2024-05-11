@@ -4,16 +4,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace dune_library.Map_Resoures {
-  public class With_Spice(int sector, Territory territory, int spice_capacity) : Section(sector, territory) {
-    public int Spice_Capacity => spice_capacity;
+  public class With_Spice(uint sector, Territory territory, uint id, uint spice_capacity) : Section(sector, territory, id) {
+    public uint Spice_Capacity { get; } = spice_capacity;
 
-    public int Spice_Avaliable { get; private set; } = 0;
+    public uint Spice_Avaliable { get; private set; } = 0;
 
-    public int Take_Spice(int amount) {
-      int to_take = int.Min(Spice_Avaliable, amount);
+    public uint Take_Spice(uint how_much_can_be_carried_by_forces) {
+      uint to_take = uint.Min(Spice_Avaliable, how_much_can_be_carried_by_forces);
       Spice_Avaliable -= to_take;
       return to_take;
     }
@@ -24,10 +26,6 @@ namespace dune_library.Map_Resoures {
 
     public override void Delete_Spice() {
       Spice_Avaliable = 0;
-    }
-
-    public void Copy_Spice_From(int spice) {
-      Spice_Avaliable = spice;
     }
   }
 }

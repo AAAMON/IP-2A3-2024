@@ -7,35 +7,79 @@ using System.ComponentModel.DataAnnotations;
 using dune_library.Map_Resoures;
 using System.Text.Json.Serialization;
 using static System.Collections.Specialized.BitVector32;
+using Extensions = dune_library.Utils.Extensions;
 
 // storm sectors go from 0 to 17, the polar sink is considered to be the 18 th storm sector
 // 0 is considered to be the starting sector in the rulebook (aka the one with 8 spice capacity in the cielago north region)
 namespace dune_library.Map_Resources {
-  static public class Lookup {
-    static public Territory To_Territory(this int id) {
-      if (id > Map.Territories.Count) {
-        throw new ArgumentException("no territory is mapped to this id (max: " + Map.Territories.Count + ", id: " + id + ")");
-      }
-      return Map.Territories[id];
-    }
-    static public Section To_Section(this int id) {
-      if (id > Map.Sections.Count) {
-        throw new ArgumentException("no section is mapped to this id (max: " + Map.Sections.Count + ", id: " + id + ")");
-      }
-      return Map.Sections[id];
-    }
-
-    static public With_Spice To_Section_With_Spice(this int id) {
-      if (id > Map.Sections_With_Spice.Count) {
-        throw new ArgumentException("no section with spice is mapped to this id (max: " + Map.Sections_With_Spice.Count + ", id: " + id + ")");
-      }
-      return Map.Sections_With_Spice[id];
-    }
-  }
-
   public class Map {
-    static Map() {
+    public Map() {
       #region Territories Initialization
+      // territories have been initialised in increasing order by earliest sector crossed
+      // if more territories start in the same sector, the one closer to the polar sink gets priority
+      uint territory_counter = 0;
+      uint section_counter = 0;
+
+      Cielago_North = new("Cielago North", 0, [None, None, 8], territory_counter++, ref section_counter);
+      Cielago_Depression = new("Cielago Depression", 0, 3, territory_counter++, ref section_counter);
+      Meridian = new("Meridian", 0, 2, territory_counter++, ref section_counter);
+
+      Cielago_South = new("Cielago South", 1, [12, None], territory_counter++, ref section_counter);
+
+      Cielago_East = new("Cielago East", 2, 2, territory_counter++, ref section_counter);
+
+      Harg_Pass = new("Harg Pass", 3, 2, territory_counter++, ref section_counter);
+      False_Wall_South = new("False Wall South", 3, 2, territory_counter++, ref section_counter);
+      South_Mesa = new("South Mesa", 3, [None, 10, None], territory_counter++, ref section_counter);
+
+      False_Wall_East = new("False_Wall_East", 4, 5, territory_counter++, ref section_counter);
+      The_Minor_Erg = new("The Minor Erg", 4, [None, None, None, 8], territory_counter++, ref section_counter);
+      Pasty_Mesa = new("Pasty_Mesa", 4, 4, territory_counter++, ref section_counter);
+      Tuek_s_Sietch = new("Tuek's Sietch", 4, territory_counter++, ref section_counter);
+
+
+      Red_Chasm = new("Red Chasm", 6, [8], territory_counter++, ref section_counter);
+
+      Shield_Wall = new("Shield_Wall", 7, 2, territory_counter++, ref section_counter);
+      Gara_Kulon = new("Gara Kulon", 7, 1, territory_counter++, ref section_counter);
+
+      Imperial_Basin = new("Imperial Basin", 8, 3, territory_counter++, ref section_counter);
+      Hole_In_The_Rock = new("Hole In The Rock", 8, 1, territory_counter++, ref section_counter);
+      Rim_Wall_West = new("Rim Wall West", 8, 1, territory_counter++, ref section_counter);
+      Basin = new("Basin", 8, 1, territory_counter++, ref section_counter);
+      Sihaya_Ridge = new("Sihaya Ridge", 8, [6], territory_counter++, ref section_counter);
+      Old_Gap = new("Old Gap", 8, [None, 6, None], territory_counter++, ref section_counter);
+
+      Arrakeen = new("Arrakeen", 9, territory_counter++, ref section_counter);
+
+      Arsunt = new("Arsunt", 10, 2, territory_counter++, ref section_counter);
+      Carthag = new("Carthag", 10, territory_counter++, ref section_counter);
+      Tsimpo = new("Tsimpo", 10, 3, territory_counter++, ref section_counter);
+      Broken_Land = new("Broken Land", 10, [None, 8], territory_counter++, ref section_counter);
+
+      Hagga_Basin = new("Hagga_Basin", 11, [None, 6], territory_counter++, ref section_counter);
+      Plastic_Basin = new("Plastic Basin", 11, 3, territory_counter++, ref section_counter);
+
+      Rock_Outcroppings = new("Rock Outcroppings", 12, [None, 6], territory_counter++, ref section_counter);
+
+      Wind_Pass = new("Wind Pass", 13, 4, territory_counter++, ref section_counter);
+      Sietch_Tabr = new("Sietch Tabr", 13, territory_counter++, ref section_counter);
+      Bight_Of_The_Cliff = new("Bight Presence_Of The Cliff", 13, 2, territory_counter++, ref section_counter);
+
+      The_Great_Flat = new("The Great Flat", 14, [10], territory_counter++, ref section_counter);
+      Funeral_Plain = new("Funeral Plain", 14, [6], territory_counter++, ref section_counter);
+
+      The_Greater_Flat = new("The Greater Flat", 15, 1, territory_counter++, ref section_counter);
+      False_Wall_West = new("False Wall West", 15, 3, territory_counter++, ref section_counter);
+      Habbanya_Erg = new("Habbanya Erg", 15, [8, None], territory_counter++, ref section_counter);
+
+      Wind_Pass_North = new("Wind Pass North", 16, [6, None], territory_counter++, ref section_counter);
+      Habbanya_Ridge_Flat = new("Habbanya Ridge Flat", 16, [None, 10], territory_counter++, ref section_counter);
+      Habbanya_Sietch = new("Habbanya Sietch", 16, territory_counter++, ref section_counter);
+
+      Cielago_West = new("Cielago West", 17, 2, territory_counter++, ref section_counter);
+
+      Polar_Sink = new("Polar Sink", territory_counter++, ref section_counter);
 
       Territories = [
         Cielago_North,
@@ -105,6 +149,11 @@ namespace dune_library.Map_Resources {
       Sections = Territories.SelectMany(l => l.Sections).ToList();
 
       Sections_With_Spice = Sections.OfType<With_Spice>().ToList();
+
+      Spice_Dict = new Dictionary<uint, Capacity_Avaliable_Pair>(Sections_With_Spice.Select(section =>
+        new KeyValuePair<uint, Capacity_Avaliable_Pair>(section.Id, new(section))
+      ));
+
 
       #region Linking Sections
 
@@ -865,137 +914,117 @@ namespace dune_library.Map_Resources {
         Imperial_Basin.Sections[2],
         Carthag.Sections[0],
       ];
-    }
 
-    public Map() {
       Storm_Sector = 0;
 
       Shield_Wall_Was_Destroyed = false;
-    }
-
-    [JsonConstructor]
-    public Map(int storm_sector, bool shield_wall_was_destroyed, IEnumerable<Section_Forces> section_forces_list, IEnumerable<int> spice_list) {
-      Storm_Sector = storm_sector;
-
-      ((Action)(shield_wall_was_destroyed switch {
-        true => Destroy_Shield_Wall,
-        false => () => { shield_wall_was_destroyed = false; }
-      })).Invoke();
-
-      int index = 0;
-      section_forces_list.ForEach(forces => index++.To_Section().Copy_Forces_From(forces));
-
-      index = 0;
-      spice_list.ForEach(spice => index++.To_Section_With_Spice().Copy_Spice_From(spice));
     }
 
     #region Territories
     // territories have been initialised in increasing order by earliest sector crossed
     // if more territories start in the same sector, the one closer to the polar sink gets priority
 
-    [JsonIgnore] static public Sand Cielago_North { get; } = new("Cielago North", 0, [None, None, 8]);
-    [JsonIgnore] static public Sand Cielago_Depression { get; } = new("Cielago Depression", 0, 3);
-    [JsonIgnore] static public Sand Meridian { get; } = new("Meridian", 0, 2);
+    [JsonIgnore] public Sand Cielago_North { get; }
+    [JsonIgnore] public Sand Cielago_Depression { get; }
+    [JsonIgnore] public Sand Meridian { get; }
 
-    [JsonIgnore] static public Sand Cielago_South { get; } = new("Cielago South", 1, [12, None]);
+    [JsonIgnore] public Sand Cielago_South { get; }
 
-    [JsonIgnore] static public Sand Cielago_East { get; } = new("Cielago East", 2, 2);
+    [JsonIgnore] public Sand Cielago_East { get; }
 
-    [JsonIgnore] static public Sand Harg_Pass { get; } = new("Harg Pass", 3, 2);
-    [JsonIgnore] static public Rock False_Wall_South { get; } = new("False Wall South", 3, 2);
-    [JsonIgnore] static public Sand South_Mesa { get; } = new("South Mesa", 3, [None, 10, None]);
+    [JsonIgnore] public Sand Harg_Pass { get; }
+    [JsonIgnore] public Rock False_Wall_South { get; }
+    [JsonIgnore] public Sand South_Mesa { get; }
 
-    [JsonIgnore] static public Rock False_Wall_East { get; } = new("False_Wall_East", 4, 5);
-    [JsonIgnore] static public Sand The_Minor_Erg { get; } = new("The Minor Erg", 4, [None, None, None, 8]);
-    [JsonIgnore] static public Rock Pasty_Mesa { get; } = new("Pasty_Mesa", 4, 4);
-    [JsonIgnore] static public Strongholds Tuek_s_Sietch { get; } = new("Tuek's Sietch", 4);
+    [JsonIgnore] public Rock False_Wall_East { get; }
+    [JsonIgnore] public Sand The_Minor_Erg { get; }
+    [JsonIgnore] public Rock Pasty_Mesa { get; }
+    [JsonIgnore] public Strongholds Tuek_s_Sietch { get; }
 
 
-    [JsonIgnore] static public Sand Red_Chasm { get; } = new("Red Chasm", 6, [8]);
+    [JsonIgnore] public Sand Red_Chasm { get; }
 
-    [JsonIgnore] static public Rock Shield_Wall { get; } = new("Shield_Wall", 7, 2);
-    [JsonIgnore] static public Sand Gara_Kulon { get; } = new("Gara Kulon", 7, 1);
+    [JsonIgnore] public Rock Shield_Wall { get; }
+    [JsonIgnore] public Sand Gara_Kulon { get; }
 
-    [JsonIgnore] static public Sand Imperial_Basin { get; } = new("Imperial Basin", 8, 3);
-    [JsonIgnore] static public Sand Hole_In_The_Rock { get; } = new("Hole In The Rock", 8, 1);
-    [JsonIgnore] static public Rock Rim_Wall_West { get; } = new("Rim Wall West", 8, 1);
-    [JsonIgnore] static public Sand Basin { get; } = new("Basin", 8, 1);
-    [JsonIgnore] static public Sand Sihaya_Ridge { get; } = new("Sihaya Ridge", 8, [6]);
-    [JsonIgnore] static public Sand Old_Gap { get; } = new("Old Gap", 8, [None, 6, None]);
+    [JsonIgnore] public Sand Imperial_Basin { get; }
+    [JsonIgnore] public Sand Hole_In_The_Rock { get; }
+    [JsonIgnore] public Rock Rim_Wall_West { get; }
+    [JsonIgnore] public Sand Basin { get; }
+    [JsonIgnore] public Sand Sihaya_Ridge { get; }
+    [JsonIgnore] public Sand Old_Gap { get; }
 
-    [JsonIgnore] static public Strongholds Arrakeen { get; } = new("Arrakeen", 9);
+    [JsonIgnore] public Strongholds Arrakeen { get; }
 
-    [JsonIgnore] static public Sand Arsunt { get; } = new("Arsunt", 10, 2);
-    [JsonIgnore] static public Strongholds Carthag { get; } = new("Carthag", 10);
-    [JsonIgnore] static public Sand Tsimpo { get; } = new("Tsimpo", 10, 3);
-    [JsonIgnore] static public Sand Broken_Land { get; } = new("Broken Land", 10, [None, 8]);
+    [JsonIgnore] public Sand Arsunt { get; }
+    [JsonIgnore] public Strongholds Carthag { get; }
+    [JsonIgnore] public Sand Tsimpo { get; }
+    [JsonIgnore] public Sand Broken_Land { get; }
 
-    [JsonIgnore] static public Sand Hagga_Basin { get; } = new("Hagga_Basin", 11, [None, 6]);
-    [JsonIgnore] static public Rock Plastic_Basin { get; } = new("Plastic Basin", 11, 3);
+    [JsonIgnore] public Sand Hagga_Basin { get; }
+    [JsonIgnore] public Rock Plastic_Basin { get; }
 
-    [JsonIgnore] static public Sand Rock_Outcroppings { get; } = new("Rock Outcroppings", 12, [None, 6]);
+    [JsonIgnore] public Sand Rock_Outcroppings { get; }
 
-    [JsonIgnore] static public Sand Wind_Pass { get; } = new("Wind Pass", 13, 4);
-    [JsonIgnore] static public Strongholds Sietch_Tabr { get; } = new("Sietch Tabr", 13);
-    [JsonIgnore] static public Sand Bight_Of_The_Cliff { get; } = new("Bight Presence_Of The Cliff", 13, 2);
+    [JsonIgnore] public Sand Wind_Pass { get; }
+    [JsonIgnore] public Strongholds Sietch_Tabr { get; }
+    [JsonIgnore] public Sand Bight_Of_The_Cliff { get; }
 
-    [JsonIgnore] static public Sand The_Great_Flat { get; } = new("The Great Flat", 14, [10]);
-    [JsonIgnore] static public Sand Funeral_Plain { get; } = new("Funeral Plain", 14, [6]);
+    [JsonIgnore] public Sand The_Great_Flat { get; }
+    [JsonIgnore] public Sand Funeral_Plain { get; }
 
-    [JsonIgnore] static public Sand The_Greater_Flat { get; } = new("The Greater Flat", 15, 1);
-    [JsonIgnore] static public Rock False_Wall_West { get; } = new("False Wall West", 15, 3);
-    [JsonIgnore] static public Sand Habbanya_Erg { get; } = new("Habbanya Erg", 15, [8, None]);
+    [JsonIgnore] public Sand The_Greater_Flat { get; }
+    [JsonIgnore] public Rock False_Wall_West { get; }
+    [JsonIgnore] public Sand Habbanya_Erg { get; }
 
-    [JsonIgnore] static public Sand Wind_Pass_North { get; } = new("Wind Pass North", 16, [6, None]);
-    [JsonIgnore] static public Sand Habbanya_Ridge_Flat { get; } = new("Habbanya Ridge Flat", 16, [None, 10]);
-    [JsonIgnore] static public Strongholds Habbanya_Sietch { get; } = new("Habbanya Sietch", 16);
+    [JsonIgnore] public Sand Wind_Pass_North { get; }
+    [JsonIgnore] public Sand Habbanya_Ridge_Flat { get; }
+    [JsonIgnore] public Strongholds Habbanya_Sietch { get; }
 
-    [JsonIgnore] static public Sand Cielago_West { get; } = new("Cielago West", 17, 2);
+    [JsonIgnore] public Sand Cielago_West { get; }
 
-    [JsonIgnore] static public Polar_Sink Polar_Sink { get; } = new("Polar Sink");
+    [JsonIgnore] public Polar_Sink Polar_Sink { get; }
 
     #endregion
 
     #region Containers for Territories and Sections + List of Presences/Spice for serialization
 
-    [JsonIgnore]
-    static public IReadOnlyList<Territory> Territories { get; }
+    public IReadOnlyList<Territory> Territories { get; }
 
-    [JsonIgnore]
-    static public IReadOnlyList<Section> Sections { get; }
+    [JsonIgnore] public IReadOnlyList<Section> Sections { get; }
 
-    [JsonIgnore]
-    static public IReadOnlyList<With_Spice> Sections_With_Spice { get; }
-
-    [JsonInclude]
-    private IEnumerable<Section_Forces> Section_Forces_list => Sections.Select(section => section.Forces);
-
-    [JsonInclude]
-    private IEnumerable<int> Spice_List => Sections_With_Spice.Select(section => section.Spice_Avaliable);
+    [JsonIgnore] public IReadOnlyList<With_Spice> Sections_With_Spice { get; }
+    private class Capacity_Avaliable_Pair {
+      private readonly With_Spice section;
+      public Capacity_Avaliable_Pair(With_Spice section) {
+        this.section = section;
+      }
+      public uint Capacity => section.Spice_Capacity;
+      public uint Avaliable => section.Spice_Avaliable;
+    }
+    [JsonInclude] private IReadOnlyDictionary<uint, Capacity_Avaliable_Pair> Spice_Dict { get; }
 
     #endregion
 
     #region Sectors Stuff
 
-    [JsonIgnore]
-    public const int NUMBER_OF_SECTORS = 18;
+    [JsonIgnore] public const uint NUMBER_OF_SECTORS = 18;
 
     #endregion
 
     #region Storm
     
-    [JsonIgnore]
-    static public IReadOnlyList<System.Collections.Generic.HashSet<Section>> Storm_Affectable { get; }
+    [JsonIgnore] public IReadOnlyList<System.Collections.Generic.HashSet<Section>> Storm_Affectable { get; }
 
-    public int Storm_Sector { get; private set; }
+    public uint Storm_Sector { get; private set; }
 
-    public void Move_Storm_Sector_Forward(int sectors_to_move) =>
+    public void Move_Storm_Sector_Forward(uint sectors_to_move) =>
       Storm_Sector = (Storm_Sector + sectors_to_move).To_Sector();
 
-    public void Move_Storm(int sectors_to_move) {
-      Enumerable.Range(Storm_Sector + 1, sectors_to_move).ToList().ForEach(pos =>
-        Storm_Affectable[pos].ForEach(section => {
-          Section_Forces graveyard = new(); // !!! Replace with actual graveyard !!!
+    public void Move_Storm(uint sectors_to_move) { /* !!! Move to Storm Phase, makes more sense for it to be there !!! */
+      Extensions.Range(Storm_Sector + 1, sectors_to_move).ToList().ForEach(pos =>
+        Storm_Affectable[(int)pos].ForEach(section => {
+          Forces graveyard = new(); /* !!! Replace with actual graveyard !!! */
           section.Forces.Remove_By_Storm(graveyard);
           section.Delete_Spice();
         })
@@ -1009,14 +1038,13 @@ namespace dune_library.Map_Resources {
 
     public bool Shield_Wall_Was_Destroyed { get; private set; }
 
-    [JsonIgnore]
-    static private IReadOnlyCollection<Section> Influenced_By_Family_Atomics { get; }
+    private IReadOnlyCollection<Section> Influenced_By_Family_Atomics { get; }
 
     public void Destroy_Shield_Wall() {
       Shield_Wall_Was_Destroyed = true;
       // basically adds the imperial basin, arrakeen and carthag to the sections affected by the storm
       Influenced_By_Family_Atomics.ForEach(section => {
-        Storm_Affectable[section.Origin_Sector].Add(section);
+        Storm_Affectable[(int)section.Origin_Sector].Add(section);
       });
     }
 
@@ -1053,9 +1081,29 @@ namespace dune_library.Map_Resources {
       return to_return;
     }*/
 
-    public bool Is_Accessible(Faction_Class faction, Section section) {
+    public bool Is_Accessible(Faction faction, Section section) {
       return section.Origin_Sector != Storm_Sector &&
         !(section.Is_Full_Strongholds && !section.Forces.Is_Present(faction));
     }
+
+      public Territory To_Territory(uint id) {
+        if (id > Territories.Count) {
+          throw new ArgumentException("no territory is mapped to this id (max: " + Territories.Count + ", id: " + id + ")");
+        }
+        return Territories[(int)id];
+      }
+      public Section To_Section(uint id) {
+        if (id > Sections.Count) {
+          throw new ArgumentException("no section is mapped to this id (max: " + Sections.Count + ", id: " + id + ")");
+        }
+        return Sections[(int)id];
+      }
+
+      public With_Spice To_Section_With_Spice(uint id) {
+        if (id > Sections_With_Spice.Count) {
+          throw new ArgumentException("no section with spice is mapped to this id (max: " + Sections_With_Spice.Count + ", id: " + id + ")");
+        }
+        return Sections_With_Spice[(int)id];
+      }
   }
 }

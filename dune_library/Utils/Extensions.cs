@@ -14,7 +14,10 @@ namespace dune_library.Utils {
       foreach (var item in source) {
         action(item);
       }
+      Range(0, 10);
     }
+
+    public static IEnumerable<uint> Range(uint start, uint count) => Enumerable.Range((int)start, (int)count).Select(i => (uint)i);
 
     #endregion
 
@@ -34,13 +37,10 @@ namespace dune_library.Utils {
       );
     }
 
-    #endregion
-
+    #endregion    
     #region (u)int to sector
 
-    public static int To_Sector(this int raw_sector) => raw_sector % Map_Resources.Map.NUMBER_OF_SECTORS;
-
-    public static uint To_Sector(this uint raw_sector) => (uint)((int)raw_sector).To_Sector();
+    public static uint To_Sector(this uint raw_sector) => raw_sector % Map_Resources.Map.NUMBER_OF_SECTORS;
 
     #endregion
 

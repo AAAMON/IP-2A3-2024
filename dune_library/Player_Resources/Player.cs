@@ -13,13 +13,11 @@ using dune_library.Utils;
 
 namespace dune_library.Player_Resources {
   public class Player {
-
-    public Player(string name) {
-      Name = name;
+    public Player(string id) {
+      Id = id;
     }
-      
-    public string Name { get; }
-
+    
+    public string Id { get; }
     /*public Player(string name, Faction faction, bool isHuman, ushort assigned_sector)
     {
       Name = name;
@@ -41,9 +39,9 @@ namespace dune_library.Player_Resources {
     }
 
     public void ReviveGeneral(General general) {
-      if (Faction.Graveyard.Generals.Contains(general) && Faction.Graveyard.CanReviveGenerals) {
-        Faction.Graveyard.Generals.Remove(general);
-        Faction.Generals.Add(general);
+      if (Faction.Graveyard.Generals_Manager.Contains(general) && Faction.Graveyard.CanReviveGenerals) {
+        Faction.Graveyard.Generals_Manager.Remove(general);
+        Faction.Generals_Manager.Add(general);
       } else {
         Console.WriteLine("Cannot revive the general.");
       }

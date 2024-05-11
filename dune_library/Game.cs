@@ -16,18 +16,22 @@ using dune_library.Map_Resoures;
 namespace dune_library {
   public class Game {
     public static void Main() {
-      Game game = new();
+      System.Collections.Generic.HashSet<Player> players = [new("0"), new("1"), new("2"), new("3"), new("4"), new("5")];
+      Game game = new(players);
       game.Play();
     }
 
-    public Game() {
+    public Game(ISet<Player> players) {
+      Players = players;
       // init players
       Faction_Manager = new(Players);
     }
 
     private void Play() {
-      
-      for (Round = 1; Round <= 10; Round += 1) {
+        Set_up set_Up = new Set_up(this);
+        set_Up.Play_Out();
+
+        for (Round = 1; Round <= 10; Round += 1) {
         //storm
         //spice blow
         //choam charity
@@ -40,7 +44,7 @@ namespace dune_library {
       }
     }
 
-    public ISet<Player> Players { get; private set; } = new System.Collections.Generic.HashSet<Player>();
+    public ISet<Player> Players { get; set; }
 
     #region Information that everyone should know
 
@@ -48,25 +52,23 @@ namespace dune_library {
 
     public Map_Resources.Map Map { get; } = new();
 
-    public int Round { get; private set; } = 0;
+    public uint Round { get; private set; } = 0;
 
     public Option<Phase> Phase { get; private set; } = None;
 
     public Faction_Manager Faction_Manager { get; }
 
-    public Generals_Manager General_Manager { get; } = new();
+    public Player_Markers Player_Markers { get; private set; }
 
-    public Alliances_Manager Alliances_Manager { get; } = new();
+    public Alliances Alliances { get; private set; }
 
     public Territory_Card Last_Spice_Card { get; private set; } = new();
 
-    public Section_Forces Reserves { get; private set; } = new();
+    public Forces Reserves { get; private set; }
 
     public Tleilaxu_Tanks Tleilaxu_Tanks { get; private set; } = new();
 
-    public Public_Faction_Knowledge_Manager Public_Faction_Knowledge_Manager { get; private set; } = new(Enum.GetValues<Faction>().ToHashSet());
-
-    public Special_Faction_Knowledge_Manager Special_Faction_Knowledge_Manager { get; private set; } = new(Enum.GetValues<Faction>().ToHashSet());
+    public Special_Faction_Knowledge_Manager Special_Faction_Knowledge_Manager { get; private set; }
 
     #endregion
 

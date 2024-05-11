@@ -23,7 +23,7 @@ namespace dune_library.Phases {
 
     public Map_Resources.Map Map { get; }
 
-    public int Storm_Sector { get; private set; }
+    public uint Storm_Sector { get; private set; }
 
     public bool Is_First_Turn { get; }
     

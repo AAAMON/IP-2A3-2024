@@ -5,10 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace dune_library.Map_Resources {
-  public abstract class Territory(string name) {
-    private static int counter = 0;
-
-    public int Id { get; } = counter++;
+  public abstract class Territory(string name, uint id) {
+    public uint Id { get; } = id;
 
     public string Name { get; } = name;
 
