@@ -7,14 +7,34 @@ using System.Threading.Tasks;
 
 namespace dune_library.Utils {
   public static class Extensions {
+    private static Random rng = new Random();
 
     #region IEnumerable
 
+    public static void Shuffle<T>(this IList<T> to_shuffle) {
+      int n = to_shuffle.Count;
+      while (n > 1) {
+        n--;
+        int k = rng.Next(n + 1);
+        T value = to_shuffle[k];
+        to_shuffle[k] = to_shuffle[n];
+        to_shuffle[n] = value;
+      }
+    }
+
+    public static IList<T> Shuffle<T>(this IReadOnlyList<T> source) {
+      List<T> copy = new(source);
+      (copy as IList<T>).Shuffle();
+      return copy;
+    }
     public static void ForEach<T>(this IEnumerable<T> source, Action<T> action) {
       foreach (var item in source) {
         action(item);
       }
-      Range(0, 10);
+    }
+
+    public static IEnumerable<T> Repeat<T>(this Func<T> producer, uint count) {
+      return Range(0, count).Select(_ => producer.Invoke());
     }
 
     public static IEnumerable<uint> Range(uint start, uint count) => Enumerable.Range((int)start, (int)count).Select(i => (uint)i);

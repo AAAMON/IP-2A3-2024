@@ -6,13 +6,8 @@ using System.Text;
 namespace MyApp {
   internal class Program {
     static void Main(string[] args) {
-      System.Collections.Generic.HashSet<Player> players = [new("0"), new("1"), new("2"), new("3"), new("4"), new("5")];
-      Game game = new(players);
-      Faction faction = Faction.Atreides;
-
-      game.Generate_Perspective(faction);
-      Perspective perspective = new Perspective(faction, game);
-      perspective.SerializeToJson("perspective.json");
+      HashSet<Player> players = [new("0"), new("1"), new("2"), new("3"), new("4"), new("5")];
+      Game.Start(players);
       /*var perspective2 = Perspective.DeserializeFromJson("perspective.json");*/
       PostJSONForPlayerI("perspective.json", 1);
       PostJSONForPlayerI("perspective.json", 2);

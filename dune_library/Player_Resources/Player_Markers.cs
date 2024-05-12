@@ -70,6 +70,7 @@ namespace dune_library.Player_Resources {
 
     #endregion
 
+    [JsonInclude]
     private IDictionary<Faction, Option<uint>> Faction_To_Marker { get; }
 
     public bool Has_Player_Marker(Faction faction) {
@@ -89,6 +90,7 @@ namespace dune_library.Player_Resources {
       return Faction_To_Marker[faction].Value();
     }
 
+    [JsonInclude]
     private IDictionary<uint, Option<Faction>> Marker_To_Faction { get; }
 
     public Option<Faction> Faction_At(uint position) {
@@ -108,7 +110,7 @@ namespace dune_library.Player_Resources {
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
     // Wanted to assign default values for default_marker_positions if none were passed
     // but they need to be known at compile time and, apparently, that can't be done
-    public Player_Markers(ISet<Faction> factions_in_play, ISet<uint> default_marker_positions = null) {
+    public Player_Markers(IReadOnlySet<Faction> factions_in_play, IReadOnlySet<uint> default_marker_positions = null) {
       in_player_markers_initialization = true;
       if (default_marker_positions is null) {
         default_marker_positions = new System.Collections.Generic.HashSet<uint>() { 1, 4, 7, 10, 13, 16 };

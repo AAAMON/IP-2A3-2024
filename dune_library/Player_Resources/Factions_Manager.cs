@@ -11,9 +11,10 @@ using System.Reactive.Linq;
 using LanguageExt.UnsafeValueAccess;
 using static dune_library.Player_Resources.Player_Markers;
 using static dune_library.Utils.Exceptions;
+using System.Collections.Immutable;
 
 namespace dune_library.Player_Resources {
-  public class Faction_Manager {
+  public class Factions_Manager {
 
     #region Exceptions
 
@@ -66,7 +67,7 @@ namespace dune_library.Player_Resources {
       if (players_without_factions.Count() > 0) {
         throw new Players_Without_Factions_Exist(players_without_factions);
       }
-      factions_in_play = Player_To_Faction.Select(kvp => kvp.Value.Value());
+      factions_in_play = Player_To_Faction.Select(kvp => kvp.Value.Value()).ToImmutableHashSet();
       players_can_choose_factions = false;
     }
 
@@ -81,7 +82,7 @@ namespace dune_library.Player_Resources {
       return Player_To_Faction[player].IsSome;
     }
 
-    public Faction Faction_OF(Player player) {
+    public Faction Faction_Of(Player player) {
       if (players_can_choose_factions) {
         throw new Faction_Selection_Ongoing();
       }
@@ -101,11 +102,11 @@ namespace dune_library.Player_Resources {
     }
 
     [JsonIgnore]
-    public IEnumerable<Faction> Free_Factions =>
-      Faction_To_Player.Where(kvp => kvp.Value.IsNone).Select(kvp => kvp.Key);
+    public IReadOnlySet<Faction> Free_Factions =>
+      Faction_To_Player.Where(kvp => kvp.Value.IsNone).Select(kvp => kvp.Key).ToImmutableHashSet();
 
-    private IEnumerable<Faction> factions_in_play;
-    public IEnumerable<Faction> Factions_In_Play {
+    private IReadOnlySet<Faction> factions_in_play;
+    public IReadOnlySet<Faction> Factions_In_Play {
       get {
         if (players_can_choose_factions) {
           throw new Faction_Selection_Ongoing();
@@ -114,7 +115,7 @@ namespace dune_library.Player_Resources {
       }
     }
 
-    public Faction_Manager(ISet<Player> players) {
+    public Factions_Manager(ISet<Player> players) {
       players_can_choose_factions = true;
       Player_To_Faction = players.Select(player =>
         new KeyValuePair<Player, Option<Faction>>(player, None)
@@ -145,7 +146,7 @@ namespace dune_library.Player_Resources {
     }
 
     // a and b swap factions
-    public void Trade_Player_Markers(Player a, Player b) {
+    public void Trade_Factions(Player a, Player b) {
       if (players_can_choose_factions == false) {
         throw new Faction_Selection_Ended();
       }
@@ -169,7 +170,7 @@ namespace dune_library.Player_Resources {
     }
 
     // transfers faction from b to a
-    public void Take_Player_Marker(Player a, Player b) {
+    public void Take_Faction(Player a, Player b) {
       if (players_can_choose_factions == false) {
         throw new Faction_Selection_Ended();
       }

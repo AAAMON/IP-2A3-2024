@@ -7,27 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using static dune_library.Utils.Exceptions;
 
 namespace dune_library.Player_Resources {
   public class Tleilaxu_Tanks {
-    public Tleilaxu_Tanks() {
+    public Tleilaxu_Tanks(IReadOnlySet<Faction> factions_in_play) {
       Forces = new();
-      Non_Revivable_Generals = new Dictionary<Faction, ICollection<General>>(Enum.GetValues<Faction>().Select(faction =>
+      Non_Revivable_Generals = factions_in_play.Select(faction =>
         new KeyValuePair<Faction, ICollection<General>>(faction, [])
-      ));
-      Revivable_Generals = new Dictionary<Faction, ICollection<General>>(Enum.GetValues<Faction>().Select(faction =>
+      ).ToDictionary();
+      Revivable_Generals = factions_in_play.Select(faction =>
         new KeyValuePair<Faction, ICollection<General>>(faction, [])
-      ));
-    }
-
-    [JsonConstructor]
-    public Tleilaxu_Tanks(
-      Forces forces,
-      IReadOnlyDictionary<Faction, ICollection<General>> non_revivable_generals,
-      IReadOnlyDictionary<Faction, ICollection<General>> revivable_generals) {
-      Forces = forces;
-      Non_Revivable_Generals = non_revivable_generals;
-      Revivable_Generals = revivable_generals;
+      ).ToDictionary();
     }
 
     public Forces Forces { get; }
@@ -45,6 +36,9 @@ namespace dune_library.Player_Resources {
     public void Kill(int general_id) {
       General to_kill = general_id.To_General();
       Faction faction = to_kill.Faction;
+      if (Non_Revivable_Generals.ContainsKey(faction) == false || Revivable_Generals.ContainsKey(faction) == false) {
+        throw new Faction_Not_In_Play(faction);
+      }
       if (Non_Revivable_Generals[faction].Contains(to_kill) || Revivable_Generals[faction].Contains(to_kill)) {
         throw new ArgumentException("General " + to_kill + "is already dead");
       }
@@ -58,6 +52,9 @@ namespace dune_library.Player_Resources {
     public void Revive(int general_id) {
       General to_revive = general_id.To_General();
       Faction faction = to_revive.Faction;
+      if (Non_Revivable_Generals.ContainsKey(faction) == false || Revivable_Generals.ContainsKey(faction) == false) {
+        throw new Faction_Not_In_Play(faction);
+      }
       if (Revivable_Generals[faction].Contains(to_revive) == false) {
         throw new ArgumentException("General " + to_revive + "is not revivable");
       }

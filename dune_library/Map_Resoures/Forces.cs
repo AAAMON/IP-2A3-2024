@@ -15,7 +15,7 @@ namespace dune_library.Map_Resoures {
       Forces_Dict = [];
     }
 
-    public static Forces Initial_Reserves_From(ISet<Faction> factions_in_play) => new(new Occurence_Dict<Faction>(
+    public static Forces Initial_Reserves_From(IReadOnlySet<Faction> factions_in_play) => new(new Occurence_Dict<Faction>(
       factions_in_play.Select(faction => new KeyValuePair<Faction, uint>(faction, 20))
     ));
 

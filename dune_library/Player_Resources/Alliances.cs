@@ -56,7 +56,7 @@ namespace dune_library.Player_Resources {
 
     #endregion
 
-    public Alliances(ISet<Faction> factions_in_play) {
+    public Alliances(IReadOnlySet<Faction> factions_in_play) {
       Ally_Dict = factions_in_play.Select(faction =>
         new KeyValuePair<Faction, Option<Faction>>(faction, None)
       ).ToDictionary();

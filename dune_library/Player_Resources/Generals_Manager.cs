@@ -1,6 +1,9 @@
-﻿using LanguageExt.ClassInstances.Const;
+﻿using dune_library.Utils;
+using LanguageExt;
+using LanguageExt.ClassInstances.Const;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -114,6 +117,15 @@ namespace dune_library.Player_Resources {
         throw new ArgumentException("no section with spice is mapped to this id (max: " + Generals.Count + ", id: " + id + ")");
       }
       return Generals[id];
+    }
+
+    public static IReadOnlyDictionary<Faction, IList<General>> Random_Traitors(IReadOnlySet<Faction> factions_in_play) {
+      Queue<General> shuffled_generals = [];
+      Generals.Shuffle().ForEach(shuffled_generals.Enqueue);
+      Func<General> dequeue = shuffled_generals.Dequeue;
+      return factions_in_play.Select(faction =>
+        new KeyValuePair<Faction, IList<General>>(faction, dequeue.Repeat(4).ToList())
+      ).ToImmutableDictionary();
     }
   };
 }

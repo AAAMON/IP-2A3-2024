@@ -9,31 +9,80 @@ using System.Text;
 using System.Threading.Tasks;
 using dune_library.Map_Resources;
 using dune_library.Map_Resoures;
+using dune_library.Treachery_Cards;
 
 namespace dune_library.Phases {
   internal class Set_up : Phase {
     public Set_up(Game game) {
-      Map = game.Map;
-      Reserves = game.Reserves;
+      Game = game;
     }
 
-/*public IList<Player> Players { get; }*/
+    private Game Game { get; }
 
-    private Map Map { get; }
+    private ISet<Player> Players => Game.Players;
 
-    private Forces Reserves { get; set; }
+    private Factions_Manager Factions_Manager => Game.Factions_Manager;
+
+    private IReadOnlySet<Faction> Factions_In_Play => Factions_Manager.Factions_In_Play;
+
+    private Player_Markers Player_Markers => Game.Player_Markers;
+
+    private Alliances Alliances => Game.Alliances;
+
+    private Forces Reserves => Game.Reserves;
+
+    private Knowledge_Manager Knowledge_Manager => Game.Knowledge_Manager;
+
+    private Map Map => Game.Map;
+
+    private Treachery_Deck Treachery_Deck => Game.Treachery_Deck;
+
+    //temporary
+    private Faction First_Free_Faction => Factions_Manager.Free_Factions.First();
+
+    //also temporary
+    private uint First_Free_Player_Marker_position => Player_Markers.Free_Player_Markers.First();
 
     public override void Play_Out() {
 
-      #region faction reserve allocation
-      //Fremen 10 forces in reserves
-      //Atreides 10 forces in reserves
-      //Harkonnen 10 forces in reserves
-      //BENE GESSERIT 19 forces in reserves
-      //Space Guild 15 forces in reserves
-      //Emperor 20 forces in reserves
+      #region faction selection
+      Players.ForEach(player => Factions_Manager.Assign_Faction(player, First_Free_Faction));
 
-      Reserves = Forces.Initial_Reserves_From(Enum.GetValues<Faction>().ToHashSet());
+      Factions_Manager.Mark_Faction_Selection_End();
+      #endregion
+
+      Game.Init_Faction_Dependent_Objects();
+
+      #region player marker placement
+      Factions_Manager.Factions_In_Play.ForEach(faction => Player_Markers.Assign_Player_Marker(faction, First_Free_Player_Marker_position));
+      #endregion
+
+      #region traitor selection
+      IReadOnlyDictionary<Faction, IList<General>> traitors_dict = Generals_Manager.Random_Traitors(Factions_In_Play);
+      Factions_In_Play.ForEach(faction => {
+        if (faction == Faction.Harkonnen) {
+          Knowledge_Manager.Init_Traitors(faction, traitors_dict[faction].ToList(), []);
+        } else {
+          // this should take an imput from the user, an int from 0 to 4 exclusive
+          // for now, it takes the first traitor
+          var index = 0;
+          General traitor = traitors_dict[faction][index];
+          traitors_dict[faction].RemoveAt(index);
+          Knowledge_Manager.Init_Traitors(faction, [traitor], traitors_dict[faction].ToList());
+        }
+      });
+      #endregion
+
+      #region spice allocation
+      Knowledge_Manager.Add_Spice(Faction.Atreides, 10);
+      Knowledge_Manager.Add_Spice(Faction.Bene_Gesserit, 5);
+      Knowledge_Manager.Add_Spice(Faction.Emperor, 10);
+      Knowledge_Manager.Add_Spice(Faction.Fremen, 3);
+      Knowledge_Manager.Add_Spice(Faction.Spacing_Guild, 5);
+      Knowledge_Manager.Add_Spice(Faction.Harkonnen, 10);
+      #endregion
+
+      #region faction reserve and force allocation
 
       Map.Arrakeen.Sections[0].Forces.Transfer_From(Faction.Atreides, Reserves, 10);
       Map.Polar_Sink.Sections[0].Forces.Transfer_From(Faction.Bene_Gesserit, Reserves, 1);
@@ -44,27 +93,26 @@ namespace dune_library.Phases {
       To_Place_Now.Transfer_From(Faction.Fremen, Reserves, 10);
 
       //custom for fremen, change later
-      Map.Sietch_Tabr.Sections[0].Forces.Transfer_From(Faction.Atreides, To_Place_Now, 10);
-
+      Map.Sietch_Tabr.Sections[0].Forces.Transfer_From(Faction.Fremen, To_Place_Now, 10);
       #endregion
-      #region faction force allocation
 
-       #endregion
-      //Fremen 3 spice
-      //Atreides 10 spice
-      //Harkonnen 10 spice
-      //BENE GESSERIT 5 spice
-      //Space Guild 5 spice
-      //Emperor 10 spice
+      #region temporary treachery card allocation
+
+      Treachery_Deck.Shuffle_Deck();
+
+      /*Factions_In_Play.ForEach(faction => {
+        if (faction == Faction.Harkonnen) {
+          Knowledge_Manager.Add_Treachery_Card(faction, Treachery_Deck.Pop());
+        }
+        Knowledge_Manager.Add_Treachery_Card(faction, Treachery_Deck.Pop());
+      });*/
+      #endregion
 
 
 
+      Game.Generate_Perspective(Players.First()).SerializeToJson("perspective.json");
 
-      //faction set player marker
-
-      //faction set Traitors
-
-      //faction add Treachery Card
+      //round is set to 1 in 'Game' after this
 
     }
   }

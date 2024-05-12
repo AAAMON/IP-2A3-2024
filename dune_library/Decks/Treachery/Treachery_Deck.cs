@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using dune_library.Utils;
 
 namespace dune_library.Treachery_Cards {
   public class Treachery_Deck {
-        public IList<Treachery_Card> treachery_deck;
+        public IList<Treachery_Card> treachery_deck { get; }
         public Treachery_Deck()
         {
-            IList<Treachery_Card> default_treachery_deck = [
+            treachery_deck = [
                 new Treachery_Card("Crysknife","Weapon", "Projectile"),
                 new Treachery_Card("Maula Pistol", "Weapon", "Projectile"),
                 new Treachery_Card("Slip Tip", "Weapon", "Projectile"),
@@ -34,16 +35,13 @@ namespace dune_library.Treachery_Cards {
                 new Treachery_Card("La, La, La", "Worthless", "Other"),
                 new Treachery_Card("Trip to Gamont", "Worthless", "Other")
             ];
-
-            /* one way to shuffle a deck
-            Random rnd = new Random();
-            while(default_treachery_deck.Count() > 0) {
-                treachery_deck.Add(default_treachery_deck[rnd.Next(default_treachery_deck.Count())]);
-            }
-            */
-            treachery_deck = default_treachery_deck;
         }
         public Treachery_Card Read_First() => treachery_deck[0];
-        
+        public void Shuffle_Deck() => treachery_deck.Shuffle();
+        public Treachery_Card Pop(){
+            Treachery_Card card = treachery_deck[0];
+            treachery_deck.Remove(card);
+            return card;
+        }
   }
 }

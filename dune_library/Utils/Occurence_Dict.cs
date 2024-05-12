@@ -16,7 +16,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace dune_library.Utils {
-  public class Occurence_Dict<T> : IDictionary<T, uint>, IDictionary, IReadOnlyDictionary<T, uint>, ISerializable, IDeserializationCallback where T : notnull {
+  public class Occurence_Dict<T> : I_Occurence_Dict<T> where T : notnull {
     public Occurence_Dict() {
       Underlying_Dict = [];
       out_of_constructor = true;
@@ -25,7 +25,7 @@ namespace dune_library.Utils {
     public Occurence_Dict(IDictionary<T, uint> dictionary) : this(dictionary as IEnumerable<KeyValuePair<T, uint>>) { }
 
     public Occurence_Dict(IEnumerable<KeyValuePair<T, uint>> collection) {
-      Underlying_Dict = new(collection.Filter(kvp => kvp.Value == 0));
+      Underlying_Dict = new(collection.Filter(kvp => kvp.Value != 0));
       out_of_constructor = true;
     }
 
