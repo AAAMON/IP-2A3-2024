@@ -9,8 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using dune_library.Map_Resources;
 using dune_library.Map_Resoures;
-using dune_library.Treachery_Cards;
 using System.Text.Json.Serialization;
+using dune_library.Decks.Treachery;
 
 namespace dune_library.Phases {
   internal class Set_Up : Phase {
@@ -120,9 +120,9 @@ namespace dune_library.Phases {
 
       moment = "treachery card distribution";
 
-      Treachery_Deck.Shuffle_Deck();
+      /*Treachery_Deck.Shuffle_Deck();
 
-      /*Factions_In_Play.ForEach(faction => {
+      Factions_In_Play.ForEach(faction => {
         if (faction == Faction.Harkonnen) {
           Knowledge_Manager.Add_Treachery_Card(faction, Treachery_Deck.Pop());
         }

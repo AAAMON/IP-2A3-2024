@@ -1,7 +1,6 @@
 ﻿using dune_library.Map_Resources;
 using dune_library.Phases;
 using dune_library.Player_Resources;
-using dune_library.Treachery_Cards;
 using dune_library.Utils;
 using LanguageExt;
 using static LanguageExt.Prelude;
@@ -15,6 +14,7 @@ using dune_library.Map_Resoures;
 using static dune_library.Utils.Exceptions;
 using static dune_library.Player_Resources.Factions_Manager;
 using LanguageExt.UnsafeValueAccess;
+using dune_library.Decks.Treachery;
 
 namespace dune_library {
   public class Game {

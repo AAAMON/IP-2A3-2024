@@ -1,5 +1,4 @@
-﻿using dune_library.Treachery_Cards;
-using dune_library.Utils;
+﻿using dune_library.Utils;
 using LanguageExt;
 using static LanguageExt.Prelude;
 using LanguageExt.UnsafeValueAccess;
@@ -10,6 +9,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using static dune_library.Utils.Exceptions;
+using dune_library.Decks.Treachery;
 
 namespace dune_library.Player_Resources {
   public class Faction_Knowledge : I_Faction_Knowledge {
@@ -70,39 +70,39 @@ namespace dune_library.Player_Resources {
     #endregion
 
     #region Number of Treachery Cards Of Other Factions
-
-    [JsonInclude]
-    private IDictionary<Faction, uint> Number_Of_Treachery_Cards_Of_Other_Factions { get; }
+    
+    private Dictionary<Faction, uint> number_of_treachery_cards_of_other_factions { get; }
+    public IReadOnlyDictionary<Faction, uint> Number_Of_Treachery_Cards_Of_Other_Factions { get => number_of_treachery_cards_of_other_factions; }
 
     public uint Number_Of_Treachery_Cards_Of(Faction faction) {
-      if (Number_Of_Treachery_Cards_Of_Other_Factions.ContainsKey(faction)) {
+      if (number_of_treachery_cards_of_other_factions.ContainsKey(faction)) {
         throw new Faction_Not_In_Play(faction);
       }
-      return Number_Of_Treachery_Cards_Of_Other_Factions[faction];
+      return number_of_treachery_cards_of_other_factions[faction];
     }
 
     public bool Number_Of_Treachery_Cards_Is_Not_Zero(Faction faction) {
-      if (Number_Of_Treachery_Cards_Of_Other_Factions.ContainsKey(faction)) {
+      if (number_of_treachery_cards_of_other_factions.ContainsKey(faction)) {
         throw new Faction_Not_In_Play(faction);
       }
-      return Number_Of_Treachery_Cards_Of_Other_Factions[faction] != 0;
+      return number_of_treachery_cards_of_other_factions[faction] != 0;
     }
 
     public void Add_To_Number_Of_Treachery_Cards_Of(Faction faction) {
-      if (Number_Of_Treachery_Cards_Of_Other_Factions.ContainsKey(faction)) {
+      if (number_of_treachery_cards_of_other_factions.ContainsKey(faction)) {
         throw new Faction_Not_In_Play(faction);
       }
-      Number_Of_Treachery_Cards_Of_Other_Factions[faction] += 1;
+      number_of_treachery_cards_of_other_factions[faction] += 1;
     }
 
     public bool Remove_From_Number_Of_Treachery_Cards_Of(Faction faction) {
-      if (Number_Of_Treachery_Cards_Of_Other_Factions.ContainsKey(faction)) {
+      if (number_of_treachery_cards_of_other_factions.ContainsKey(faction)) {
         throw new Faction_Not_In_Play(faction);
       }
-      if (Number_Of_Treachery_Cards_Of_Other_Factions[faction] == 0) {
+      if (number_of_treachery_cards_of_other_factions[faction] == 0) {
         return false;
       }
-      Number_Of_Treachery_Cards_Of_Other_Factions[faction] -= 1;
+      number_of_treachery_cards_of_other_factions[faction] -= 1;
       return true;
     }
 
@@ -113,7 +113,7 @@ namespace dune_library.Player_Resources {
       treachery_cards = new Occurence_Dict<Treachery_Card>();
       traitors = None;
       discarded_traitors = None;
-      Number_Of_Treachery_Cards_Of_Other_Factions = factions_in_play.Select(faction
+      number_of_treachery_cards_of_other_factions = factions_in_play.Select(faction
         => new KeyValuePair<Faction, uint>(faction, 0)
       ).ToDictionary();
       Spice = 0;

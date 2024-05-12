@@ -1,4 +1,4 @@
-﻿using dune_library.Treachery_Cards;
+﻿using dune_library.Decks.Treachery;
 using dune_library.Utils;
 using System;
 using System.Collections.Generic;
@@ -15,6 +15,8 @@ namespace dune_library.Player_Resources {
     public IReadOnlyList<General> Traitors { get; }
 
     public IReadOnlyList<General> Discarded_Traitors { get; }
+
+    IReadOnlyDictionary<Faction, uint> Number_Of_Treachery_Cards_Of_Other_Factions { get; }
 
     public uint Number_Of_Treachery_Cards_Of(Faction faction);
 

@@ -1,4 +1,4 @@
-﻿using dune_library.Treachery_Cards;
+﻿using dune_library.Decks.Treachery;
 using dune_library.Utils;
 using System;
 using System.Collections.Generic;

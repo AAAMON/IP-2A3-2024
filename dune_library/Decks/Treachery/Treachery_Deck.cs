@@ -7,7 +7,7 @@ using dune_library.Utils;
 
 namespace dune_library.Decks.Treachery {
   public class Treachery_Deck {
-        public IList<Treachery_Card> treachery_deck { get; }
+        /*public IList<Treachery_Card> treachery_deck { get; }
         public Treachery_Deck()
         {
             treachery_deck = [
@@ -42,6 +42,6 @@ namespace dune_library.Decks.Treachery {
             Treachery_Card card = treachery_deck[0];
             treachery_deck.Remove(card);
             return card;
-        }
+        }*/
   }
 }
