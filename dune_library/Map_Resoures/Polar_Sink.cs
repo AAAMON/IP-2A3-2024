@@ -11,5 +11,6 @@ namespace dune_library.Map_Resources {
     public Polar_Sink(string name, uint id, ref uint section_counter) : base(name, id) {
       Sections = [new(18, this, section_counter++)];
     }
+    public static implicit operator Section(Polar_Sink obj) => obj.Sections[0];
   }
 }

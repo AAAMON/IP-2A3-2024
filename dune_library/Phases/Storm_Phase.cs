@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace dune_library.Phases {
@@ -20,6 +21,10 @@ namespace dune_library.Phases {
       // arguably the logic for this stuff should be here
       Battle_Wheels = game.Battle_Wheels;
     }
+
+    public override string name => "Storm";
+
+    public override string moment { get; protected set; }
 
     public Map_Resources.Map Map { get; }
 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using dune_library.Utils;
 
-namespace dune_library.Treachery_Cards {
+namespace dune_library.Decks.Treachery {
   public class Treachery_Deck {
         public IList<Treachery_Card> treachery_deck { get; }
         public Treachery_Deck()

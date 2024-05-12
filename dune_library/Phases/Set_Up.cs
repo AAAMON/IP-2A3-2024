@@ -10,12 +10,17 @@ using System.Threading.Tasks;
 using dune_library.Map_Resources;
 using dune_library.Map_Resoures;
 using dune_library.Treachery_Cards;
+using System.Text.Json.Serialization;
 
 namespace dune_library.Phases {
-  internal class Set_up : Phase {
-    public Set_up(Game game) {
+  internal class Set_Up : Phase {
+    public Set_Up(Game game) {
       Game = game;
     }
+
+    public override string name => "Set-up";
+
+    public override string moment { get; protected set; }
 
     private Game Game { get; }
 
@@ -45,19 +50,20 @@ namespace dune_library.Phases {
 
     public override void Play_Out() {
 
-      #region faction selection
+      moment = "faction selection";
+
       Players.ForEach(player => Factions_Manager.Assign_Faction(player, First_Free_Faction));
 
       Factions_Manager.Mark_Faction_Selection_End();
-      #endregion
 
       Game.Init_Faction_Dependent_Objects();
 
-      #region player marker placement
-      Factions_Manager.Factions_In_Play.ForEach(faction => Player_Markers.Assign_Player_Marker(faction, First_Free_Player_Marker_position));
-      #endregion
+      moment = "player marker placement";
 
-      #region traitor selection
+      Factions_Manager.Factions_In_Play.ForEach(faction => Player_Markers.Assign_Player_Marker(faction, First_Free_Player_Marker_position));
+
+      moment = "traitor selection";
+
       IReadOnlyDictionary<Faction, IList<General>> traitors_dict = Generals_Manager.Random_Traitors(Factions_In_Play);
       Factions_In_Play.ForEach(faction => {
         if (faction == Faction.Harkonnen) {
@@ -71,32 +77,48 @@ namespace dune_library.Phases {
           Knowledge_Manager.Init_Traitors(faction, [traitor], traitors_dict[faction].ToList());
         }
       });
-      #endregion
 
-      #region spice allocation
-      Knowledge_Manager.Add_Spice(Faction.Atreides, 10);
-      Knowledge_Manager.Add_Spice(Faction.Bene_Gesserit, 5);
-      Knowledge_Manager.Add_Spice(Faction.Emperor, 10);
-      Knowledge_Manager.Add_Spice(Faction.Fremen, 3);
-      Knowledge_Manager.Add_Spice(Faction.Spacing_Guild, 5);
-      Knowledge_Manager.Add_Spice(Faction.Harkonnen, 10);
-      #endregion
+      moment = "spice distribution";
 
-      #region faction reserve and force allocation
+      Factions_In_Play.ForEach(faction => {
+        Knowledge_Manager.Add_Spice(faction, faction switch {
+          Faction.Atreides => 10,
+          Faction.Bene_Gesserit => 5,
+          Faction.Emperor => 10,
+          Faction.Fremen => 3,
+          Faction.Spacing_Guild => 5,
+          Faction.Harkonnen => 10,
+          _ => throw new NotImplementedException(),
+        });
+      });
+
+      moment = "initial faction forces placement";
 
       Map.Arrakeen.Sections[0].Forces.Transfer_From(Faction.Atreides, Reserves, 10);
       Map.Polar_Sink.Sections[0].Forces.Transfer_From(Faction.Bene_Gesserit, Reserves, 1);
       Map.Tuek_s_Sietch.Sections[0].Forces.Transfer_From(Faction.Spacing_Guild, Reserves, 5);
       Map.Carthag.Sections[0].Forces.Transfer_From(Faction.Harkonnen, Reserves, 10);
 
-      Forces To_Place_Now = new();
-      To_Place_Now.Transfer_From(Faction.Fremen, Reserves, 10);
+
+      Factions_In_Play.ForEach(faction => ((Action)(faction switch {
+          Faction.Atreides => () => Map.Arrakeen.Sections[0].Forces.Transfer_From(Faction.Atreides, Reserves, 10),
+          Faction.Bene_Gesserit => () => Map.Polar_Sink.Sections[0].Forces.Transfer_From(Faction.Bene_Gesserit, Reserves, 1),
+          Faction.Emperor => () => { },
+          Faction.Fremen => () => { },
+          Faction.Spacing_Guild => () => Map.Tuek_s_Sietch.Sections[0].Forces.Transfer_From(Faction.Spacing_Guild, Reserves, 5),
+          Faction.Harkonnen => () => Map.Carthag.Sections[0].Forces.Transfer_From(Faction.Harkonnen, Reserves, 10),
+        _ => throw new NotImplementedException(),
+      })).Invoke());
+
+      if (Factions_In_Play.Contains(Faction.Fremen)) {
+        Forces To_Place_Now = new();
+        To_Place_Now.Transfer_From(Faction.Fremen, Reserves, 10);
 
       //custom for fremen, change later
       Map.Sietch_Tabr.Sections[0].Forces.Transfer_From(Faction.Fremen, To_Place_Now, 10);
-      #endregion
+      }
 
-      #region temporary treachery card allocation
+      moment = "treachery card distribution";
 
       Treachery_Deck.Shuffle_Deck();
 
@@ -106,9 +128,8 @@ namespace dune_library.Phases {
         }
         Knowledge_Manager.Add_Treachery_Card(faction, Treachery_Deck.Pop());
       });*/
-      #endregion
 
-
+      moment = "end of set-up";
 
       Game.Generate_Perspective(Players.First()).SerializeToJson("perspective.json");
 

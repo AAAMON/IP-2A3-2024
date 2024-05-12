@@ -14,6 +14,7 @@ using dune_library.Spice;
 using dune_library.Map_Resoures;
 using static dune_library.Utils.Exceptions;
 using static dune_library.Player_Resources.Factions_Manager;
+using LanguageExt.UnsafeValueAccess;
 
 namespace dune_library {
   public class Game {
@@ -29,8 +30,8 @@ namespace dune_library {
     }
 
     public void Play() {
-        Set_up set_Up = new(this);
-        set_Up.Play_Out();
+        Phase = new Set_Up(this);
+        Phase.ValueUnsafe().Play_Out();
 
         for (Round = 1; Round <= 10; Round += 1) {
         //storm
