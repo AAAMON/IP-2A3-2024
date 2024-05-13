@@ -24,8 +24,10 @@ class BotManager:
         
     def get_move(self, bot_name, game_state):
 
-        if bot_name != "bg-easy":
+        alowed_bots = ["bg-easy", "fremen-easy"]
+
+        if bot_name not in alowed_bots:
             return "bot not found"
         
-        my_module = self.load_module('bg-easy.py')
+        my_module = self.load_module(bot_name + '.py')
         return my_module.get_move(game_state)
