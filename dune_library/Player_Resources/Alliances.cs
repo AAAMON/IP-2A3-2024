@@ -9,22 +9,15 @@ using System.Text.Json.Serialization;
 using LanguageExt.UnsafeValueAccess;
 using dune_library.Utils;
 using static dune_library.Utils.Exceptions;
+using static dune_library.Player_Resources.I_Alliances;
 
 namespace dune_library.Player_Resources {
-  public class Alliances {
-    #region Conditions for altering state
-
-    private bool is_in_nexus;
-
-    public void Enter_Nexus() => is_in_nexus = true;
-
-    public void Exit_Nexus() => is_in_nexus = false;
-
-    public class Not_In_Nexus : InvalidOperationException {
-      public Not_In_Nexus() : base("this operation can not be attempted if not in nexus") { }
+  public class Alliances : I_Alliances {
+    public Alliances(IReadOnlySet<Faction> factions_in_play) {
+      Ally_Dict = factions_in_play.Select(faction =>
+        new KeyValuePair<Faction, Option<Faction>>(faction, None)
+      ).ToDictionary();
     }
-
-    #endregion
 
     private IDictionary<Faction, Option<Faction>> Ally_Dict { get; }
 
@@ -56,22 +49,14 @@ namespace dune_library.Player_Resources {
 
     #endregion
 
-    public Alliances(IReadOnlySet<Faction> factions_in_play) {
-      Ally_Dict = factions_in_play.Select(faction =>
-        new KeyValuePair<Faction, Option<Faction>>(faction, None)
-      ).ToDictionary();
-      is_in_nexus = false;
-    }
-
-    public class Already_Has_An_Ally : ArgumentException {
-      public Already_Has_An_Ally(Faction faction, Faction ally) :
-        base("This faction (" + faction + ") is already allied to another faction (" + ally + ")") { }
+    public Option<Faction> Ally_Of(Faction faction) {
+      if (Ally_Dict.ContainsKey(faction) == false) {
+        throw new Faction_Not_In_Play(faction);
+      }
+      return Ally_Dict[faction];
     }
 
     public void Ally(Faction a, Faction b) {
-      if (is_in_nexus == false) {
-        throw new Not_In_Nexus();
-      }
       if (Ally_Dict.ContainsKey(a) == false) {
         throw new Faction_Not_In_Play(a);
       }
@@ -86,21 +71,7 @@ namespace dune_library.Player_Resources {
       }
     }
 
-    public class Doesn_t_Have_An_Ally : ArgumentException {
-      public Doesn_t_Have_An_Ally(Faction faction) :
-        base("This faction (" + faction + ") doesn't have an ally") { }
-    }
-
-    public class Are_Not_Allied : ArgumentException {
-      public Are_Not_Allied(Faction a, Faction ally_of_a, Faction b, Faction ally_of_b) :
-        base("These two factions (" + a + " and " + b + ") are not allied " +
-          "(" + a + "'s ally: " + ally_of_a + ", " + b + "'s ally: " + ally_of_b + ")") { }
-    }
-
     public void Break_Alliance(Faction a, Faction b) {
-      if (is_in_nexus == false) {
-        throw new Not_In_Nexus();
-      }
       if (Ally_Dict.ContainsKey(a) == false) {
         throw new Faction_Not_In_Play(a);
       }
@@ -119,9 +90,6 @@ namespace dune_library.Player_Resources {
     }
 
     public void Break_Alliance(Faction faction) {
-      if (is_in_nexus == false) {
-        throw new Not_In_Nexus();
-      }
       if (Ally_Dict.ContainsKey(faction) == false) {
         throw new Faction_Not_In_Play(faction);
       }

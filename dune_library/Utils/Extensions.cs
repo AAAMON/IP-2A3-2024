@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace dune_library.Utils {
   public static class Extensions {
-    private static Random rng = new Random();
+    private static readonly Random rng = new();
 
     #region IEnumerable
 
@@ -16,17 +16,16 @@ namespace dune_library.Utils {
       while (n > 1) {
         n--;
         int k = rng.Next(n + 1);
-        T value = to_shuffle[k];
-        to_shuffle[k] = to_shuffle[n];
-        to_shuffle[n] = value;
+        (to_shuffle[n], to_shuffle[k]) = (to_shuffle[k], to_shuffle[n]);
       }
     }
 
-    public static IList<T> Shuffle<T>(this IReadOnlyList<T> source) {
+    public static IList<T> Clone_Shuffled<T>(this IReadOnlyList<T> source) {
       List<T> copy = new(source);
-      (copy as IList<T>).Shuffle();
+      copy.Shuffle();
       return copy;
     }
+
     public static void ForEach<T>(this IEnumerable<T> source, Action<T> action) {
       foreach (var item in source) {
         action(item);

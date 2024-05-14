@@ -17,6 +17,12 @@ using System.Threading.Tasks;
 
 namespace dune_library.Player_Resources {
   public class Perspective {
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public IReadOnlySet<Faction>? Free_Factions { get; }
+
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    private IReadOnlySet<Faction>? Taken_Factions { get; }
+
     public Option<Faction> Faction { get; }
 
     public (Battle_Wheel A, Battle_Wheel B) Battle_Wheels { get; }
@@ -31,7 +37,7 @@ namespace dune_library.Player_Resources {
 
     public Option<Alliances> Alliances { get; }
 
-    public Territory_Card Last_Spice_Card { get; }
+    public Option<Territory_Card> Last_Spice_Card { get; }
 
     public Option<Forces> Reserves { get; }
 
@@ -42,22 +48,36 @@ namespace dune_library.Player_Resources {
     
     public Perspective(
       Player player,
-      Game game,
+      (Battle_Wheel A, Battle_Wheel B) battle_wheels,
+      Map_Resources.Map map,
+      uint round,
+      Option<Phase> phase,
+      Factions_Distribution_Manager factions_distribution_manager,
+      Option<Final_Factions_Distribution> final_factions_distribution,
       Option<Player_Markers> player_markers,
       Option<Alliances> alliances,
       Option<Forces> reserves,
       Option<Tleilaxu_Tanks> tleilaxu_tanks,
-      Option<Knowledge_Manager> knowledge_manager
+      Option<Knowledge_Manager> knowledge_manager,
+      Option<Territory_Card> last_spice_card
     ) {
-      Faction = game.Factions_Manager.Has_Faction(player) ? game.Factions_Manager.Faction_Of(player) : None;
-      Battle_Wheels = game.Battle_Wheels;
-      Map = game.Map;
-      Round = game.Round;
-      Phase = game.Phase;
+      if (final_factions_distribution.IsNone) {
+        Free_Factions = factions_distribution_manager.Free_Factions;
+        Taken_Factions = factions_distribution_manager.Taken_Factions;
+        Faction = factions_distribution_manager.Faction_Of(player);
+      } else {
+        Free_Factions = null;
+        Taken_Factions = null;
+        Faction = final_factions_distribution.ValueUnsafe().Faction_Of(player);
+      }
+      Battle_Wheels = battle_wheels;
+      Map = map;
+      Round = round;
+      Phase = phase;
       Player_Markers = player_markers;
       Alliances = alliances;
       Reserves = reserves;
-      Last_Spice_Card = game.Last_Spice_Card;
+      Last_Spice_Card = last_spice_card;
       Tleilaxu_Tanks = tleilaxu_tanks;
       if (knowledge_manager.IsSome) {
         Faction_Knowledge = Some(knowledge_manager.ValueUnsafe().Of(Faction.Value()));

@@ -12,20 +12,22 @@ using System.Text.Json.Serialization;
 namespace dune_library.Map_Resoures {
   public class Forces {
     public Forces() {
-      Forces_Dict = [];
+      Forces_Dict = new Occurence_Dict<Faction>();
     }
 
     public static Forces Initial_Reserves_From(IReadOnlySet<Faction> factions_in_play) => new(new Occurence_Dict<Faction>(
       factions_in_play.Select(faction => new KeyValuePair<Faction, uint>(faction, 20))
     ));
 
-    public Forces(Occurence_Dict<Faction> forces_dict) {
+    public Forces(I_Occurence_Dict<Faction> forces_dict) {
       Forces_Dict = forces_dict;
     }
 
-    public uint this[Faction faction] { get => Forces_Dict[faction]; init => Forces_Dict[faction] = value; }
+    public uint this[Faction faction] {
+      init => Forces_Dict[faction] = value;
+    }
 
-    private Occurence_Dict<Faction> Forces_Dict { get; }
+    private I_Occurence_Dict<Faction> Forces_Dict { get; }
 
     #region Serialization stuff
 
@@ -68,7 +70,7 @@ namespace dune_library.Map_Resoures {
 
     public void Transfer_To(Faction faction, Forces destination) {
       if (Forces_Dict.Remove(faction, out uint to_transfer) == false) {
-        throw new ArgumentException("no forces in source for faction " + faction);
+        return;
       }
       destination.Forces_Dict.Add(faction, to_transfer);
     }
@@ -79,9 +81,7 @@ namespace dune_library.Map_Resoures {
 
     public void Remove_By_Storm(Forces graveyard) {
       Forces_Dict.Keys.ForEach(faction => {
-        try {
-          Transfer_To(faction, graveyard);
-        } catch (ArgumentException) { }
+        Transfer_To(faction, graveyard);
       });
     }
 

@@ -121,7 +121,7 @@ namespace dune_library.Player_Resources {
 
     public static IReadOnlyDictionary<Faction, IList<General>> Random_Traitors(IReadOnlySet<Faction> factions_in_play) {
       Queue<General> shuffled_generals = [];
-      Generals.Shuffle().ForEach(shuffled_generals.Enqueue);
+      Generals.Clone_Shuffled().ForEach(shuffled_generals.Enqueue);
       Func<General> dequeue = shuffled_generals.Dequeue;
       return factions_in_play.Select(faction =>
         new KeyValuePair<Faction, IList<General>>(faction, dequeue.Repeat(4).ToList())

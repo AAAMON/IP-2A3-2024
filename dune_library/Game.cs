@@ -12,25 +12,24 @@ using System.Threading.Tasks;
 using dune_library.Spice;
 using dune_library.Map_Resoures;
 using static dune_library.Utils.Exceptions;
-using static dune_library.Player_Resources.Factions_Manager;
 using LanguageExt.UnsafeValueAccess;
 using dune_library.Decks.Treachery;
 
 namespace dune_library {
-  public class Game {
-    public static void Start(ISet<Player> players) {
+  public class Game : I_Faction_Dependent_Initializator_And_Getters, I_Final_Player_Markers_Distribution_Initializer, I_Perspective_Generator {
+    public static void Start(IReadOnlySet<Player> players) {
       Game game = new(players);
       game.Play();
     }
 
-    private Game(ISet<Player> players) {
+    private Game(IReadOnlySet<Player> players) {
       Players = players;
       // init players
-      Factions_Manager = new(Players);
+      Factions_Distribution_Manager = new(Players);
     }
 
     public void Play() {
-        Phase = new Set_Up(this);
+        Phase = new Set_Up(this, this, Players, Factions_Distribution_Manager, Map);
         Phase.ValueUnsafe().Play_Out();
 
         for (Round = 1; Round <= 10; Round += 1) {
@@ -46,9 +45,16 @@ namespace dune_library {
       }
     }
 
-    public ISet<Player> Players { get; set; }
+    public IReadOnlySet<Player> Players { get; set; }
 
     #region Information that everyone should know
+
+    private Factions_Distribution_Manager Factions_Distribution_Manager { get; }
+    private Option<Final_Factions_Distribution> final_factions_distribution = None;
+    public Final_Factions_Distribution Final_Factions_Distribution {
+      get => final_factions_distribution.OrElseThrow(new Faction_Selection_Ongoing());
+      private set => final_factions_distribution = value;
+    }
 
     public (Battle_Wheel A, Battle_Wheel B) Battle_Wheels { get; } = new(new(), new());
 
@@ -70,7 +76,7 @@ namespace dune_library {
       private set => alliances = value;
     }
 
-    public Territory_Card Last_Spice_Card { get; private set; } = new();
+    public Option<Territory_Card> Last_Spice_Card { get; private set; } = new();
 
     private Option<Forces> reserves = None;
     public Forces Reserves {
@@ -100,17 +106,15 @@ namespace dune_library {
       if (faction_in_play_dependent_objects_are_initialized == true) {
         return false;
       }
-      IReadOnlySet<Faction> factions_in_play;
-      try {
-        factions_in_play = Factions_Manager.Factions_In_Play;
-      } catch (Faction_Selection_Ongoing) {
-        return false;
+      if (Factions_Distribution_Manager.Can_Convert_To_Final == false) {
+        throw new Faction_Selection_Ongoing();
       }
-      Player_Markers = new(factions_in_play);
-      Alliances = new(factions_in_play);
-      Reserves = Forces.Initial_Reserves_From(factions_in_play);
-      Tleilaxu_Tanks = new(factions_in_play);
-      Knowledge_Manager = new(factions_in_play);
+      Final_Factions_Distribution = new(Players, Factions_Distribution_Manager);
+      Player_Markers = new(Final_Factions_Distribution.Factions_In_Play);
+      Alliances = new(Final_Factions_Distribution.Factions_In_Play);
+      Reserves = Forces.Initial_Reserves_From(Final_Factions_Distribution.Factions_In_Play);
+      Tleilaxu_Tanks = new(Final_Factions_Distribution.Factions_In_Play);
+      Knowledge_Manager = new(Final_Factions_Distribution.Factions_In_Play, Treachery_Deck);
       faction_in_play_dependent_objects_are_initialized = true;
       return true;
     }
@@ -119,8 +123,6 @@ namespace dune_library {
 
     #region Private Game Data
 
-    internal Factions_Manager Factions_Manager { get; }
-
     internal Treachery_Deck Treachery_Deck { get; private set; } = new();
 
     internal Spice_Deck Spice_Deck { get; private set; } = new();
@@ -128,6 +130,20 @@ namespace dune_library {
     #endregion
 
     public Perspective Generate_Perspective(Player player) =>
-      new Perspective(player, this, player_markers, alliances, reserves, tleilaxus_tanks, knowledge_manager);
+      new(
+        player,
+        Battle_Wheels,
+        Map,
+        Round,
+        Phase,
+        Factions_Distribution_Manager,
+        final_factions_distribution,
+        player_markers,
+        alliances,
+        reserves,
+        tleilaxus_tanks,
+        knowledge_manager,
+        Last_Spice_Card
+      );
   }
 }
