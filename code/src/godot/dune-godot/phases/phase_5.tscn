@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://j5kxiqtw6qub"]
+[gd_scene load_steps=3 format=3 uid="uid://j5kxiqtw6qub"]
 
+[ext_resource type="Script" path="res://phases/phase_5.gd" id="1_2sev0"]
 [ext_resource type="Texture2D" uid="uid://dxgmy13s2g4un" path="res://assets/Asset 53.png" id="1_4a43s"]
 
 [node name="phase5" type="Control"]
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_2sev0")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
@@ -18,6 +20,15 @@ offset_right = 719.0
 offset_bottom = 432.0
 texture = ExtResource("1_4a43s")
 expand_mode = 1
+
+[node name="Label2" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 57.0
+offset_right = 211.0
+offset_bottom = 80.0
+text = "Enter amount of forces:"
+horizontal_alignment = 1
 
 [node name="Label" type="Label" parent="TextureRect"]
 layout_mode = 0
@@ -36,16 +47,15 @@ offset_right = 227.0
 offset_bottom = 110.0
 text = "Revive!"
 
-[node name="LineEdit" type="LineEdit" parent="TextureRect"]
+[node name="SpinBox" type="SpinBox" parent="TextureRect"]
 layout_mode = 0
 offset_left = 25.0
 offset_top = 81.0
 offset_right = 171.0
 offset_bottom = 108.0
-theme_override_font_sizes/font_size = 12
-placeholder_text = "Enter amount of forces"
+update_on_text_changed = true
 
-[node name="Label2" type="Label" parent="TextureRect"]
+[node name="Label3" type="Label" parent="TextureRect"]
 layout_mode = 0
 offset_left = 37.0
 offset_top = 136.0
