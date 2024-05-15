@@ -13,11 +13,9 @@ using LanguageExt.UnsafeValueAccess;
 namespace dune_library.Decks.Spice {
   public class Spice_Deck {
     public Spice_Deck(Map_Resources.Map map) {
-      Map = map;
-
       Discard_Pile = [];
 
-      IEnumerable<Territory_Card> territory_cards = Range(0, (uint)Map.Sections_With_Spice.Count).Select(i => new Territory_Card(i));
+      IEnumerable<Territory_Card> territory_cards = Range(0, (uint)map.Sections_With_Spice.Count).Select(i => new Territory_Card(i));
 
       var shai_hulud_producer = () => new Shai_Hulud_Card();
       IEnumerable<Shai_Hulud_Card> shai_hulud_cards = shai_hulud_producer.Repeat(6);

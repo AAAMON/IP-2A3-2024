@@ -1,13 +1,11 @@
 ﻿using dune_library.Decks.Spice;
 using dune_library.Map_Resources;
 using dune_library.Player_Resources;
-using dune_library.Spice;
 using dune_library.Utils;
 using System;
 using System.Security.Policy;
 
-namespace dune_library.Phases
-{
+namespace dune_library.Phases {
   /*internal class SpiceBlowPhase : Phase
   {
       private Game game;
@@ -58,20 +56,20 @@ namespace dune_library.Phases
           Console.WriteLine($"Spice Blow in sector {card.Sector}. {card.Amount} spice added to the territory.");
       }
 
-  public void Handling_Spice_Card(Map_Resources.Map map) {
-    var card = Take_Next_Card();
-    ((Action)(card switch {
-      Territory_Card territory_card => () => {
-        var section_with_spice = map.To_Section_With_Spice(territory_card.Section_Position_In_List);
-        section_with_spice.Add_Spice();
-      }
-      ,
-      Shai_Hulud_Card shai_hulud_card => () => {
-        var last_section_with_spice = map.To_Section_With_Spice((Top_OF_Discard_Pile.ValueUnsafe() as Territory_Card)!.Section_Position_In_List);
-      }
-      ,
-      _ => () => throw new Exception(),
-    })).Invoke();
+    public void Handling_Spice_Card(Map_Resources.Map map) {
+      var card = Take_Next_Card();
+      ((Action)(card switch {
+        Territory_Card territory_card => () => {
+          var section_with_spice = map.To_Section_With_Spice(territory_card.Section_Position_In_List);
+          section_with_spice.Add_Spice();
+        }
+        ,
+        Shai_Hulud_Card shai_hulud_card => () => {
+          var last_section_with_spice = map.To_Section_With_Spice((Top_OF_Discard_Pile.ValueUnsafe() as Territory_Card)!.Section_Position_In_List);
+        }
+        ,
+        _ => () => throw new Exception(),
+      })).Invoke();
+    }
   }*/
-  }
 }

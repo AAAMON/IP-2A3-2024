@@ -1,7 +1,6 @@
 ﻿using dune_library.Map_Resources;
 using dune_library.Map_Resoures;
 using dune_library.Phases;
-using dune_library.Spice;
 using dune_library.Utils;
 using LanguageExt;
 using static LanguageExt.Prelude;
@@ -14,6 +13,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using dune_library.Decks.Spice;
 
 namespace dune_library.Player_Resources {
   public class Perspective {
@@ -37,7 +37,7 @@ namespace dune_library.Player_Resources {
 
     public Option<Alliances> Alliances { get; }
 
-    public Option<Territory_Card> Last_Spice_Card { get; }
+    public Option<Spice_Card> Last_Spice_Card { get; }
 
     public Option<Forces> Reserves { get; }
 
@@ -58,7 +58,7 @@ namespace dune_library.Player_Resources {
       Option<Forces> reserves,
       Option<Tleilaxu_Tanks> tleilaxu_tanks,
       Option<Knowledge_Manager> knowledge_manager,
-      Option<Territory_Card> last_spice_card
+      Option<Spice_Card> last_spice_card
     ) {
       if (factions_distribution.IsLeft) {
         Free_Factions = factions_distribution.Left().Free_Factions;

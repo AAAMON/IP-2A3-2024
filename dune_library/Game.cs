@@ -9,11 +9,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using dune_library.Spice;
 using dune_library.Map_Resoures;
 using static dune_library.Utils.Exceptions;
 using LanguageExt.UnsafeValueAccess;
 using dune_library.Decks.Treachery;
+using dune_library.Decks.Spice;
 
 namespace dune_library {
   public class Game : I_Setup_Initializers_And_Getters, I_Perspective_Generator {
@@ -26,6 +26,7 @@ namespace dune_library {
       Players = players;
       // init players
       factions_distribution = new Factions_Distribution_Manager(Players);
+      Spice_Deck = new(Map);
     }
 
     public void Play() {
@@ -79,7 +80,7 @@ namespace dune_library {
       private set => alliances = value;
     }
 
-    public Option<Territory_Card> Last_Spice_Card { get; private set; } = new();
+    public Option<Spice_Card> Last_Spice_Card => Spice_Deck.Top_OF_Discard_Pile;
 
     private Option<Forces> reserves = None;
     public Forces Reserves {
@@ -138,9 +139,9 @@ namespace dune_library {
 
     #region Private Game Data
 
-    internal Treachery_Deck Treachery_Deck { get; private set; } = new();
+    internal Treachery_Deck Treachery_Deck { get; } = new();
 
-    internal Spice_Deck Spice_Deck { get; private set; } = new();
+    internal Spice_Deck Spice_Deck { get; }
 
     #endregion
 
