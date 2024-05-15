@@ -1,9 +1,7 @@
 import json
 
 def get_move(game_state):
-        with open("perspective3.json", "r") as file:
-            game_state = json.load(file)
-
+        
         spice_list = game_state["Map"]["Spice_List"]
         territories = game_state["Map"]["Section_Forces_list"]
         round =game_state["Round"]
