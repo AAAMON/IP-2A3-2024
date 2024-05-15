@@ -20,7 +20,7 @@ def get_move(game_state):
             if mySpice<2:
                 return {"action:" "“CHOAM Charity"}
         
-        if phase == "bidding " or phase==3:
+        if phase == "Bidding " or phase==3:
              my_spice = game_state["Public_Faction_Knowledge_Manager"]["Public_Faction_Knowledge"]["Emperor"]["Spice"]
     
              min_bid = min(spice_list)
