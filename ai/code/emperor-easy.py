@@ -41,10 +41,7 @@ def get_move(game_state):
                     return {"action:" "Revive one force.)"}
             else:
                 return {"action:" "No revival."}
-        if (mySpice < 5) & (max(spice_list)>5) :
-            return {"action": "merg sa colectez spice"}
-        
-    
+                   
         if phase == "Shipment and movement" or phase == 5:
          ans = {}
          if off_planet_reserves > 0 and mySpice >= 7:
