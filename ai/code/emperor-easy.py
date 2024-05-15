@@ -1,14 +1,14 @@
 import json
 
 def get_move(game_state):
-       
+
         spice_list = game_state["Map"]["Spice_List"]
         territories = game_state["Map"]["Section_Forces_list"]
         round =game_state["Round"]
         phase =game_state["Phase"]
-        mySpice=game_state["Public_Faction_Knowledge_Manager"]["Public_Faction_Knowledge"]["Spacing_Guild"]["Spice"]
-        deadTroops=game_state["Public_Faction_Knowledge_Manager"]["Public_Faction_Knowledge"]["Spacing_Guild"]["Dead_Troops"]
-        off_planet_reserves = game_state["Reserves"]["Spacing_Guild_Forces"]["Forces_Nr"]
+        mySpice=game_state["Public_Faction_Knowledge_Manager"]["Public_Faction_Knowledge"]["Emperor"]["Spice"]
+        deadTroops=game_state["Public_Faction_Knowledge_Manager"]["Public_Faction_Knowledge"]["Emperor"]["Dead_Troops"]
+        off_planet_reserves = game_state["Reserves"]["Emperor_Forces"]["Normal"]
 
         if phase=="Storm" or phase==0:
             return {"action:" "It's Storm phase.Se ocupa api nu voi fi apelat"}
@@ -20,7 +20,7 @@ def get_move(game_state):
             if mySpice<2:
                 return {"action:" "“CHOAM Charity"}
         
-        if phase == "Bidding " or phase==3:
+        if phase == "Bidding" or phase==3:
              my_spice = game_state["Public_Faction_Knowledge_Manager"]["Public_Faction_Knowledge"]["Emperor"]["Spice"]
     
              min_bid = min(spice_list)
@@ -29,7 +29,7 @@ def get_move(game_state):
               return {"action": "bid", "bid_amount": min_bid}
              else:
        
-              return {"action": "none"}
+              return {"action": "no bid"}
 
             
             
@@ -62,8 +62,8 @@ def get_move(game_state):
             mov = 'movement: action : collect spice unde e mai aproape daca pot'
          else:
             for territory in territories:
-                if territory["forces"]["Emperor_Forces"]["Forces_Nr"] > 0:
-                    if territory["forces"]["Emperor_Forces"]["Forces_Nr"] < 6:
+                if territory["forces"]["Emperor_Forces"]["Normal"] > 0:
+                    if territory["forces"]["Emperor_Forces"]["Normal"] < 6:
                         if mySpice >= 1: 
                             mov = 'movement : action: consolidate_position cu  2'
          if not mov:
