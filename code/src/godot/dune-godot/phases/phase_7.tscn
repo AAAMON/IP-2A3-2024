@@ -35,6 +35,7 @@ text = "Battle plan"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="TextureRect"]
+layout_mode = 0
 offset_left = 29.0
 offset_top = 61.0
 offset_right = 215.0
