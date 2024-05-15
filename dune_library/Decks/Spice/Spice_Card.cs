@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dune_library.Spice {
+namespace dune_library.Decks.Spice {
   public class Spice_Card {
   }
 }

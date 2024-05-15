@@ -21,7 +21,7 @@ namespace dune_library.Player_Resources {
     public IReadOnlySet<Faction>? Free_Factions { get; }
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    private IReadOnlySet<Faction>? Taken_Factions { get; }
+    public IReadOnlySet<Faction>? Taken_Factions { get; }
 
     public Option<Faction> Faction { get; }
 
@@ -33,7 +33,7 @@ namespace dune_library.Player_Resources {
 
     public Option<Phase> Phase { get; }
 
-    public Option<Player_Markers> Player_Markers { get; }
+    public Option<Either<Player_Markers_Manager, Final_Player_Markers>> Player_Markers { get; }
 
     public Option<Alliances> Alliances { get; }
 
@@ -52,23 +52,22 @@ namespace dune_library.Player_Resources {
       Map_Resources.Map map,
       uint round,
       Option<Phase> phase,
-      Factions_Distribution_Manager factions_distribution_manager,
-      Option<Final_Factions_Distribution> final_factions_distribution,
-      Option<Player_Markers> player_markers,
+      Either<Factions_Distribution_Manager, Final_Factions_Distribution> factions_distribution,
+      Option<Either<Player_Markers_Manager, Final_Player_Markers>> player_markers,
       Option<Alliances> alliances,
       Option<Forces> reserves,
       Option<Tleilaxu_Tanks> tleilaxu_tanks,
       Option<Knowledge_Manager> knowledge_manager,
       Option<Territory_Card> last_spice_card
     ) {
-      if (final_factions_distribution.IsNone) {
-        Free_Factions = factions_distribution_manager.Free_Factions;
-        Taken_Factions = factions_distribution_manager.Taken_Factions;
-        Faction = factions_distribution_manager.Faction_Of(player);
+      if (factions_distribution.IsLeft) {
+        Free_Factions = factions_distribution.Left().Free_Factions;
+        Taken_Factions = factions_distribution.Left().Taken_Factions;
+        Faction = factions_distribution.Left().Faction_Of(player);
       } else {
         Free_Factions = null;
         Taken_Factions = null;
-        Faction = final_factions_distribution.ValueUnsafe().Faction_Of(player);
+        Faction = factions_distribution.Right().Faction_Of(player);
       }
       Battle_Wheels = battle_wheels;
       Map = map;
@@ -79,11 +78,7 @@ namespace dune_library.Player_Resources {
       Reserves = reserves;
       Last_Spice_Card = last_spice_card;
       Tleilaxu_Tanks = tleilaxu_tanks;
-      if (knowledge_manager.IsSome) {
-        Faction_Knowledge = Some(knowledge_manager.ValueUnsafe().Of(Faction.Value()));
-      } else {
-        Faction_Knowledge = None;
-      }
+      Faction_Knowledge = knowledge_manager.Map(km => km.Of(Faction.Value())); //if 'knowledge_manager' is some, then factions are initialized, and 'Faction' is some
     }
 
     public void SerializeToJson(string filePath) {

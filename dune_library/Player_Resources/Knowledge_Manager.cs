@@ -17,14 +17,14 @@ using static dune_library.Utils.Exceptions;
 namespace dune_library.Player_Resources
 {
     public class Knowledge_Manager : I_Knowledge_Manager {
-    public Knowledge_Manager(IReadOnlySet<Faction> factions_in_play, I_Treachery_Deck treachery_deck) {
+    public Knowledge_Manager(IReadOnlySet<Faction> factions_in_play, Treachery_Deck treachery_deck) {
       Faction_Knowledge_Dict = factions_in_play.Select(faction =>
         new KeyValuePair<Faction, I_Faction_Knowledge>(faction, new Faction_Knowledge(factions_in_play))
       ).ToDictionary();
       Treachery_Deck = treachery_deck; 
     }
 
-    private I_Treachery_Deck Treachery_Deck { get; }
+    private Treachery_Deck Treachery_Deck { get; }
 
     private IDictionary<Faction, I_Faction_Knowledge> Faction_Knowledge_Dict { get; }
 

@@ -26,7 +26,6 @@ namespace dune_library.Player_Resources {
 
     public bool Can_Convert_To_Final => Player_To_Faction.All(kvp => kvp.Value.IsSome);
 
-
     #region Exceptions
 
     public class Faction_Is_Taken : ArgumentException {

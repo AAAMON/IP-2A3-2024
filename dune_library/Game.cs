@@ -16,7 +16,7 @@ using LanguageExt.UnsafeValueAccess;
 using dune_library.Decks.Treachery;
 
 namespace dune_library {
-  public class Game : I_Faction_Dependent_Initializator_And_Getters, I_Final_Player_Markers_Distribution_Initializer, I_Perspective_Generator {
+  public class Game : I_Setup_Initializers_And_Getters, I_Perspective_Generator {
     public static void Start(IReadOnlySet<Player> players) {
       Game game = new(players);
       game.Play();
@@ -25,11 +25,11 @@ namespace dune_library {
     private Game(IReadOnlySet<Player> players) {
       Players = players;
       // init players
-      Factions_Distribution_Manager = new(Players);
+      factions_distribution = new Factions_Distribution_Manager(Players);
     }
 
     public void Play() {
-        Phase = new Set_Up(this, this, Players, Factions_Distribution_Manager, Map);
+        Phase = new Set_Up(this, this, Players, factions_distribution, player_markers, Map);
         Phase.ValueUnsafe().Play_Out();
 
         for (Round = 1; Round <= 10; Round += 1) {
@@ -49,11 +49,10 @@ namespace dune_library {
 
     #region Information that everyone should know
 
-    private Factions_Distribution_Manager Factions_Distribution_Manager { get; }
-    private Option<Final_Factions_Distribution> final_factions_distribution = None;
-    public Final_Factions_Distribution Final_Factions_Distribution {
-      get => final_factions_distribution.OrElseThrow(new Faction_Selection_Ongoing());
-      private set => final_factions_distribution = value;
+    private Either<Factions_Distribution_Manager, Final_Factions_Distribution> factions_distribution;
+    public Final_Factions_Distribution Factions_Distribution {
+      get => factions_distribution.RightOrThrow(new Faction_Selection_Ongoing());
+      private set => factions_distribution = value;
     }
 
     public (Battle_Wheel A, Battle_Wheel B) Battle_Wheels { get; } = new(new(), new());
@@ -64,10 +63,14 @@ namespace dune_library {
 
     public Option<Phase> Phase { get; private set; } = None;
 
-    private Option<Player_Markers> player_markers = None;
-    public Player_Markers Player_Markers {
+    private Option<Either<Player_Markers_Manager, Final_Player_Markers>> player_markers;
+    public Either<Player_Markers_Manager, Final_Player_Markers> Player_Markers_Intermediary {
       get => player_markers.OrElseThrow(new Variable_Is_Not_Initialized(player_markers));
       private set => player_markers = value;
+    }
+    public Final_Player_Markers Player_Markers {
+      get => Player_Markers_Intermediary.RightOrThrow(new Player_Marker_Selection_Ongoing());
+      private set => Player_Markers_Intermediary = value;
     }
 
     private Option<Alliances> alliances = None;
@@ -100,22 +103,34 @@ namespace dune_library {
 
     #region Factions in play dependent objects
 
-    private bool faction_in_play_dependent_objects_are_initialized;
-
     public bool Init_Faction_Dependent_Objects() {
-      if (faction_in_play_dependent_objects_are_initialized == true) {
+      if (factions_distribution.IsRight) {
         return false;
       }
-      if (Factions_Distribution_Manager.Can_Convert_To_Final == false) {
+      if (factions_distribution.Left().Can_Convert_To_Final == false) {
         throw new Faction_Selection_Ongoing();
       }
-      Final_Factions_Distribution = new(Players, Factions_Distribution_Manager);
-      Player_Markers = new(Final_Factions_Distribution.Factions_In_Play);
-      Alliances = new(Final_Factions_Distribution.Factions_In_Play);
-      Reserves = Forces.Initial_Reserves_From(Final_Factions_Distribution.Factions_In_Play);
-      Tleilaxu_Tanks = new(Final_Factions_Distribution.Factions_In_Play);
-      Knowledge_Manager = new(Final_Factions_Distribution.Factions_In_Play, Treachery_Deck);
-      faction_in_play_dependent_objects_are_initialized = true;
+      Factions_Distribution = new(Players, factions_distribution.Left());
+      Player_Markers_Intermediary = new Player_Markers_Manager(Factions_Distribution.Factions_In_Play);
+      Alliances = new(Factions_Distribution.Factions_In_Play);
+      Reserves = Forces.Initial_Reserves_From(Factions_Distribution.Factions_In_Play);
+      Tleilaxu_Tanks = new(Factions_Distribution.Factions_In_Play);
+      Knowledge_Manager = new(Factions_Distribution.Factions_In_Play, Treachery_Deck);
+      return true;
+    }
+
+
+    public bool Make_Player_Markers_Distribution_Final() {
+      if (player_markers.IsNone) {
+        throw new Faction_Selection_Ongoing();
+      }
+      if (player_markers.Value().IsRight) {
+        return false;
+      }
+      if (player_markers.Value().Left().Can_Convert_To_Final == false) {
+        throw new Player_Marker_Selection_Ongoing();
+      }
+      Player_Markers = new(Factions_Distribution.Factions_In_Play, player_markers.Value().Left());
       return true;
     }
 
@@ -136,8 +151,7 @@ namespace dune_library {
         Map,
         Round,
         Phase,
-        Factions_Distribution_Manager,
-        final_factions_distribution,
+        factions_distribution,
         player_markers,
         alliances,
         reserves,

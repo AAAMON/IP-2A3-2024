@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 using static dune_library.Utils.Exceptions;
 
 namespace dune_library.Utils {
-  public interface I_Faction_Dependent_Initializator_And_Getters {
+  public interface I_Setup_Initializers_And_Getters {
     public bool Init_Faction_Dependent_Objects();
 
-    public Player_Markers Player_Markers { get; }
+    public Final_Player_Markers Player_Markers { get; }
 
     public Alliances Alliances { get; }
 
@@ -23,6 +23,10 @@ namespace dune_library.Utils {
 
     public Knowledge_Manager Knowledge_Manager { get; }
 
-    public Final_Factions_Distribution Final_Factions_Distribution { get; }
+    public Final_Factions_Distribution Factions_Distribution { get; }
+
+    public Either<Player_Markers_Manager, Final_Player_Markers> Player_Markers_Intermediary { get; }
+
+    public bool Make_Player_Markers_Distribution_Final();
   }
 }

@@ -36,13 +36,13 @@ namespace dune_library.Player_Resources {
 
     private Option<IReadOnlyList<General>> traitors;
     public IReadOnlyList<General> Traitors {
-      get => traitors.OrElseThrow(new Variable_Is_Not_Initialized(traitors));
+      get => traitors.Or([]);
       private set => traitors = Some(value);
     }
 
     private Option<IReadOnlyList<General>> discarded_traitors;
     public IReadOnlyList<General> Discarded_Traitors {
-      get => discarded_traitors.OrElseThrow(new Variable_Is_Not_Initialized(discarded_traitors));
+      get => discarded_traitors.Or([]);
       private set => discarded_traitors = Some(value);
     }
     

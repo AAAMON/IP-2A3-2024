@@ -12,6 +12,11 @@ namespace dune_library.Utils {
         base("The faction selection process is still ongoing") { }
     }
 
+    public class Player_Marker_Selection_Ongoing : InvalidOperationException {
+      public Player_Marker_Selection_Ongoing() :
+        base("The player marker selection process is still ongoing") { }
+    }
+
     public class Player_Not_In_Game : ArgumentException {
       public Player_Not_In_Game(Player player) :
         base("Player " + player + " is not in game") { }

@@ -1086,24 +1086,24 @@ namespace dune_library.Map_Resources {
         !(section.Is_Full_Strongholds && !section.Forces.Is_Present(faction));
     }
 
-      public Territory To_Territory(uint id) {
-        if (id > Territories.Count) {
-          throw new ArgumentException("no territory is mapped to this id (max: " + Territories.Count + ", id: " + id + ")");
-        }
-        return Territories[(int)id];
+    public Territory To_Territory(uint id) {
+      if (id > Territories.Count) {
+        throw new ArgumentException("no territory is mapped to this id (max: " + Territories.Count + ", id: " + id + ")");
       }
-      public Section To_Section(uint id) {
-        if (id > Sections.Count) {
-          throw new ArgumentException("no section is mapped to this id (max: " + Sections.Count + ", id: " + id + ")");
-        }
-        return Sections[(int)id];
+      return Territories[(int)id];
+    }
+    public Section To_Section(uint id) {
+      if (id > Sections.Count) {
+        throw new ArgumentException("no section is mapped to this id (max: " + Sections.Count + ", id: " + id + ")");
       }
+      return Sections[(int)id];
+    }
 
-      public With_Spice To_Section_With_Spice(uint id) {
-        if (id > Sections_With_Spice.Count) {
-          throw new ArgumentException("no section with spice is mapped to this id (max: " + Sections_With_Spice.Count + ", id: " + id + ")");
-        }
-        return Sections_With_Spice[(int)id];
+    public With_Spice To_Section_With_Spice(uint id) {
+      if (id > Sections_With_Spice.Count) {
+        throw new ArgumentException("no section with spice is mapped to this id (max: " + Sections_With_Spice.Count + ", id: " + id + ")");
       }
+      return Sections_With_Spice[(int)id];
+    }
   }
 }

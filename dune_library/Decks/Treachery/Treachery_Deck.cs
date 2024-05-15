@@ -9,11 +9,16 @@ using EnumsNET;
 using static dune_library.Decks.Treachery.Treachery_Cards;
 
 namespace dune_library.Decks.Treachery {
-  public class Treachery_Deck : I_Treachery_Deck {
+  public class Treachery_Deck {
+    public Treachery_Deck() {
+      Discard_Pile = Default_Treachery_Deck_Composition.Clone();
+      Card_Stack = [];
+      rng = new Random();
+    }
+
     private readonly Random rng;
 
     private I_Occurence_Dict<Treachery_Card> Discard_Pile { get; }
-
 
     private Stack<Treachery_Card> Card_Stack { get; }
 
@@ -45,12 +50,6 @@ namespace dune_library.Decks.Treachery {
         return;
       }
       Discard_Pile.Add(to_discard);
-    }
-
-    public Treachery_Deck() {
-      Discard_Pile = Default_Treachery_Deck_Composition.Clone();
-      Card_Stack = [];
-      rng = new Random();
     }
   }
 }

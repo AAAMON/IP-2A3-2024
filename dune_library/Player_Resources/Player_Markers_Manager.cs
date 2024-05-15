@@ -12,27 +12,27 @@ using System.Text.Json.Serialization;
 
 namespace dune_library.Player_Resources {
   // after player markers initialization, all players have a player marker position
-  public class Player_Markers {
+  public class Player_Markers_Manager {
+
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+    // Wanted to assign default values for default_marker_positions if none were passed
+    // but they need to be known at compile time and, apparently, that can't be done
+    public Player_Markers_Manager(IReadOnlySet<Faction> factions_in_play, IReadOnlySet<uint> default_marker_positions = null) {
+      if (default_marker_positions is null) {
+        default_marker_positions = new System.Collections.Generic.HashSet<uint>() { 1, 4, 7, 10, 13, 16 };
+      }
+      Faction_To_Marker = factions_in_play.Select(faction =>
+        new KeyValuePair<Faction, Option<uint>>(faction, None)
+      ).ToDictionary();
+      Marker_To_Faction = default_marker_positions.Select(position =>
+        new KeyValuePair<uint, Option<Faction>>(position, None)
+      ).ToDictionary();
+    }
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+
+    public bool Can_Convert_To_Final => Faction_To_Marker.All(kvp => kvp.Value.IsSome);
 
     #region Exceptions
-
-    public class Factions_Without_Player_Markers_Exist : InvalidOperationException {
-      public IEnumerable<Faction> Factions_Without_Player_Markers { get; }
-      public Factions_Without_Player_Markers_Exist(IEnumerable<Faction> factions) :
-        base("the following factions don't have a player marker assigned: " + factions) {
-        Factions_Without_Player_Markers = factions;
-      }
-    }
-
-    public class Player_Marker_Initialization_Ended : InvalidOperationException {
-      public Player_Marker_Initialization_Ended() :
-        base("The time to change the player marker positions has passed") { }
-    }
-
-    public class Player_Marker_Initialization_Did_Not_End : InvalidOperationException {
-      public Player_Marker_Initialization_Did_Not_End() :
-        base("This operation is valid only after the player marker positions initialization has ended") { }
-    }
 
     public class Invalid_Player_Marker_Position : ArgumentException {
       public Invalid_Player_Marker_Position(uint position, IEnumerable<uint> valid_positions) :
@@ -56,20 +56,6 @@ namespace dune_library.Player_Resources {
 
     #endregion
 
-    #region Stop conditions
-
-    private bool in_player_markers_initialization;
-
-    public void End_Player_Markers_Initialization() {
-      var factions_without_player_markers = Faction_To_Marker.Where(kvp => kvp.Value == None).Select(kvp => kvp.Key);
-      if (factions_without_player_markers.Count() > 0) {
-        throw new Factions_Without_Player_Markers_Exist(factions_without_player_markers);
-      }
-      in_player_markers_initialization = false;
-    }
-
-    #endregion
-
     [JsonInclude]
     private IDictionary<Faction, Option<uint>> Faction_To_Marker { get; }
 
@@ -80,23 +66,17 @@ namespace dune_library.Player_Resources {
       return Faction_To_Marker[faction].IsSome;
     }
 
-    public uint Marker_Of(Faction faction) {
-      if (in_player_markers_initialization) {
-        throw new Player_Marker_Initialization_Did_Not_End();
-      }
+    public Option<uint> Marker_Of(Faction faction) {
       if (Faction_To_Marker.ContainsKey(faction) == false) {
         throw new Faction_Not_In_Play(faction);
       }
-      return Faction_To_Marker[faction].Value();
+      return Faction_To_Marker[faction];
     }
 
     [JsonInclude]
     private IDictionary<uint, Option<Faction>> Marker_To_Faction { get; }
 
     public Option<Faction> Faction_At(uint position) {
-      if (in_player_markers_initialization) {
-        throw new Player_Marker_Initialization_Did_Not_End();
-      }
       if (Marker_To_Faction.ContainsKey(position) == false) {
         throw new Invalid_Player_Marker_Position(position, Marker_To_Faction.Keys);
       }
@@ -105,30 +85,10 @@ namespace dune_library.Player_Resources {
 
     [JsonIgnore]
     public IEnumerable<uint> Free_Player_Markers =>
-      Marker_To_Faction.Where(kvp => kvp.Value.IsNone).Select(kvp => kvp.Key);
-
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
-    // Wanted to assign default values for default_marker_positions if none were passed
-    // but they need to be known at compile time and, apparently, that can't be done
-    public Player_Markers(IReadOnlySet<Faction> factions_in_play, IReadOnlySet<uint> default_marker_positions = null) {
-      in_player_markers_initialization = true;
-      if (default_marker_positions is null) {
-        default_marker_positions = new System.Collections.Generic.HashSet<uint>() { 1, 4, 7, 10, 13, 16 };
-      }
-      Faction_To_Marker = factions_in_play.Select(faction =>
-        new KeyValuePair<Faction, Option<uint>>(faction, None)
-      ).ToDictionary();
-      Marker_To_Faction = default_marker_positions.Select(position =>
-        new KeyValuePair<uint, Option<Faction>>(position, None)
-      ).ToDictionary();
-    }
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+      Marker_To_Faction.Where(kvp => kvp.Value.IsNone).Select(kvp => kvp.Key).ToHashSet();
 
     // faction takes position
     public void Assign_Player_Marker(Faction faction, uint position) {
-      if (in_player_markers_initialization == false) {
-        throw new Player_Marker_Initialization_Ended();
-      }
       if (Faction_To_Marker.ContainsKey(faction) == false) {
         throw new Faction_Not_In_Play(faction);
       }
@@ -149,9 +109,6 @@ namespace dune_library.Player_Resources {
 
     // a and b swap positions
     public void Trade_Player_Markers(Faction a, Faction b) {
-      if (in_player_markers_initialization == false) {
-        throw new Player_Marker_Initialization_Ended();
-      }
       if (Faction_To_Marker.ContainsKey(a) == false) {
         throw new Faction_Not_In_Play(a);
       }
@@ -173,9 +130,6 @@ namespace dune_library.Player_Resources {
 
     // transfers position from b to a
     public void Take_Player_Marker(Faction a, Faction b) {
-      if (in_player_markers_initialization == false) {
-        throw new Player_Marker_Initialization_Ended();
-      }
       if (Faction_To_Marker.ContainsKey(a) == false) {
         throw new Faction_Not_In_Play(a);
       }

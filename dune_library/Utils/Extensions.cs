@@ -9,7 +9,7 @@ namespace dune_library.Utils {
   public static class Extensions {
     private static readonly Random rng = new();
 
-    #region IEnumerable
+    #region IList and IReadOnlyList
 
     public static void Shuffle<T>(this IList<T> to_shuffle) {
       int n = to_shuffle.Count;
@@ -25,6 +25,10 @@ namespace dune_library.Utils {
       copy.Shuffle();
       return copy;
     }
+
+    #endregion
+
+    #region IEnumerable
 
     public static void ForEach<T>(this IEnumerable<T> source, Action<T> action) {
       foreach (var item in source) {
@@ -44,19 +48,62 @@ namespace dune_library.Utils {
 
     public static T OrElseThrow<T>(this Option<T> option, Func<Exception> to_throw) {
       return option.Match(
-          Some: value => value,
-          None: () => throw to_throw.Invoke()
+        Some: value => value,
+        None: () => throw to_throw.Invoke()
       );
     }
 
     public static T OrElseThrow<T>(this Option<T> option, Exception to_throw) {
       return option.Match(
-          Some: value => value,
-          None: () => throw to_throw
+        Some: value => value,
+        None: () => throw to_throw
       );
     }
 
-    #endregion    
+    public static T Or<T>(this Option<T> option, T fallback) {
+      return option.Match(
+        Some: value => value,
+        None: () => fallback
+      );
+    }
+
+    #endregion
+
+    #region Either
+
+    public static L LeftOrThrow<L, R>(this Either<L, R> either, Func<Exception> to_throw) {
+      return either.Match(
+        Left: value => value,
+        Right: _ => throw to_throw.Invoke()
+      );
+    }
+
+    public static R RightOrThrow<L, R>(this Either<L, R> either, Func<Exception> to_throw) => either.Swap().LeftOrThrow(to_throw);
+
+    public static L LeftOrThrow<L, R>(this Either<L, R> either, Exception to_throw) {
+      return either.Match(
+        Left: value => value,
+        Right: _ => throw to_throw
+      );
+    }
+
+    public static R RightOrThrow<L, R>(this Either<L, R> either, Exception to_throw) => either.Swap().LeftOrThrow(to_throw);
+
+    public static L LeftOr<L, R>(this Either<L, R> either, L fallback) {
+      return either.Match(
+        Left: value => value,
+        Right: _ => fallback
+      );
+    }
+
+    public static R RightOr<L, R>(this Either<L, R> either, R fallback) => either.Swap().LeftOr(fallback);
+
+    public static L Left<L, R>(this Either<L, R> either) => (L)either;
+
+    public static R Right<L, R>(this Either<L, R> either) => either.Swap().Left();
+
+    #endregion
+
     #region (u)int to sector
 
     public static uint To_Sector(this uint raw_sector) => raw_sector % Map_Resources.Map.NUMBER_OF_SECTORS;

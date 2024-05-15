@@ -12,9 +12,13 @@ using static dune_library.Utils.Exceptions;
 namespace dune_library.Player_Resources {
   public class Final_Factions_Distribution {
     public Final_Factions_Distribution(IReadOnlySet<Player> players, Factions_Distribution_Manager faction_manager) {
-      Player_To_Faction = players.Select(player => new KeyValuePair<Player, Faction>(player, faction_manager.Faction_Of(player).Value())).ToFrozenDictionary();
+      Player_To_Faction = players.Select(player =>
+        new KeyValuePair<Player, Faction>(player, faction_manager.Faction_Of(player).Value())
+      ).ToFrozenDictionary();
       Factions_In_Play = Player_To_Faction.Values.ToFrozenSet();
-      Faction_To_Player = Factions_In_Play.Select(faction => new KeyValuePair<Faction, Player>(faction, faction_manager.Player_Of(faction).ValueUnsafe())).ToFrozenDictionary();
+      Faction_To_Player = Factions_In_Play.Select(faction =>
+        new KeyValuePair<Faction, Player>(faction, faction_manager.Player_Of(faction).ValueUnsafe())
+      ).ToFrozenDictionary();
     }
 
     private IReadOnlyDictionary<Player, Faction> Player_To_Faction { get; }

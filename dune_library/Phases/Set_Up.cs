@@ -14,20 +14,23 @@ using dune_library.Decks.Treachery;
 using static dune_library.Utils.Exceptions;
 using dune_library.Player_Resources.Knowledge_Manager_Interfaces;
 using LanguageExt;
+using LanguageExt.UnsafeValueAccess;
 
 namespace dune_library.Phases {
   internal class Set_Up : Phase {
     public Set_Up(
       I_Perspective_Generator perspective_generator,
-      I_Faction_Dependent_Initializator_And_Getters init,
+      I_Setup_Initializers_And_Getters init,
       IReadOnlySet<Player> players,
-      Factions_Distribution_Manager factions_distribution_manager,
+      Either<Factions_Distribution_Manager, Final_Factions_Distribution> factions_distribution_raw,
+      Option<Either<Player_Markers_Manager, Final_Player_Markers>> player_markers_raw,
       Map_Resources.Map map
     ) {
       Perspective_Generator = perspective_generator;
       Init = init;
       Players = players;
-      Factions_Distribution_Manager = factions_distribution_manager;
+      Factions_Distribution_Raw = factions_distribution_raw;
+      Player_Markers_Raw = player_markers_raw;
       Map = map;
     }
 
@@ -37,11 +40,11 @@ namespace dune_library.Phases {
 
     private I_Perspective_Generator Perspective_Generator { get; }
 
-    private I_Faction_Dependent_Initializator_And_Getters Init { get; }
+    private I_Setup_Initializers_And_Getters Init { get; }
 
-    private IReadOnlySet<Faction> Factions_In_Play => Init.Final_Factions_Distribution.Factions_In_Play;
+    private IReadOnlySet<Faction> Factions_In_Play => Init.Factions_Distribution.Factions_In_Play;
 
-    private Player_Markers Player_Markers => Init.Player_Markers;
+    private Option<Either<Player_Markers_Manager, Final_Player_Markers>> Player_Markers_Raw { get; }
 
     private Forces Reserves => Init.Reserves;
 
@@ -53,31 +56,39 @@ namespace dune_library.Phases {
 
     private IReadOnlySet<Player> Players { get; }
 
-    private Factions_Distribution_Manager Factions_Distribution_Manager { get; }
+    private Either<Factions_Distribution_Manager, Final_Factions_Distribution> Factions_Distribution_Raw { get; }
 
     private Map_Resources.Map Map { get; }
-
-    //temporary
-    private Faction First_Free_Faction => Factions_Distribution_Manager.Free_Factions.First();
-
-    //also temporary
-    private uint First_Free_Player_Marker_position => Player_Markers.Free_Player_Markers.First();
 
     public override void Play_Out() {
 
       moment = "faction selection";
+      {
+        Factions_Distribution_Manager Factions_Distribution_Manager = Factions_Distribution_Raw.Left();
 
-      Players.ForEach(player => Factions_Distribution_Manager.Assign_Faction(player, First_Free_Faction));
+        //temporary assignment of the first faction from the free factions
+        Players.ForEach(player => Factions_Distribution_Manager.Assign_Faction(player, Factions_Distribution_Manager.Free_Factions.First()));
 
-      try {
-        Init.Init_Faction_Dependent_Objects();
-      } catch (Faction_Selection_Ongoing) {
-        // keep the faction selection going
+        try {
+          Init.Init_Faction_Dependent_Objects();
+        } catch (Faction_Selection_Ongoing) {
+          // keep the faction selection going
+        }
       }
 
       moment = "player marker placement";
+      {
+        Player_Markers_Manager Player_Markers_Manager = Init.Player_Markers_Intermediary.Left();
 
-      Factions_In_Play.ForEach(faction => Player_Markers.Assign_Player_Marker(faction, First_Free_Player_Marker_position));
+        //temoporary assignment of the first player marker form the free markers
+        Factions_In_Play.ForEach(faction => Player_Markers_Manager.Assign_Player_Marker(faction, Player_Markers_Manager.Free_Player_Markers.First()));
+
+        try {
+          Init.Make_Player_Markers_Distribution_Final();
+        } catch (Player_Marker_Selection_Ongoing) {
+          // keep the player marker selection ongoing
+        }
+      }
 
       moment = "traitor selection";
 
