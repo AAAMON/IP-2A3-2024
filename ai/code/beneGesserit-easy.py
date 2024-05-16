@@ -1,5 +1,3 @@
-
-
 def get_money(game_state):
     game_state = game_state['Public_Faction_Knowledge_Manager']
     game_state = game_state['Public_Faction_Knowledge']
@@ -37,11 +35,10 @@ def get_move(game_state):
         else: 
             return {'revive': 0}
     
-    elif game_state['Phase'] == 'Movement':  #de adaugat de la api ca atunci cand ceilalti fac shipment sa pot si eu sa imi pun un force
+    if game_state['Phase'] == 'Movement':  #de adaugat de la api ca atunci cand ceilalti fac shipment sa pot si eu sa imi pun un force
         return {'action': 'none'}
     
-    elif game_state['Phase'] == 'Aliance':  #probabil ar trebui facut cu Atreides (great combat)
+    if game_state['Phase'] == 'Aliance':  #probabil ar trebui facut cu Atreides (great combat)
         return {'action': 'deny'}
 
-    else:
-        return {'status': 'phase unknown'}
+    return {'status': 'phase unknown'}
