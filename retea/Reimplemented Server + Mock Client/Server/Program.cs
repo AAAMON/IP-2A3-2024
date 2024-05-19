@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net;
 using System.Threading.Tasks;
 using System.IO;
@@ -49,6 +49,19 @@ namespace HttpServer
                 {
                     await HandleInitializationRequest(request, response);
                 }
+                else if (request.HttpMethod == "POST" && request.Url.AbsolutePath == "/validatemove")
+                {
+                    await HandleValidateMoveRequest(request, response, connectedUsers);
+                }
+                else if (request.HttpMethod == "POST" && request.Url.AbsolutePath.StartsWith("/gamestatecalculator"))
+                {
+                    await HandleGameStateCalculatorRequest(request, response);
+                }
+                else if (request.HttpMethod == "POST" && request.Url.AbsolutePath.StartsWith("/gamestateprediction"))
+                {
+                    await HandleGameStatePredictionRequest(request, response);
+                }
+
                 else
                 {
                     await SendResponse(response, HttpStatusCode.NotFound, "Not found");
@@ -175,5 +188,62 @@ namespace HttpServer
             await response.OutputStream.WriteAsync(buffer, 0, buffer.Length);
             response.OutputStream.Close();
         }
+
+        static async Task HandleValidateMoveRequest(
+            HttpListenerRequest request,
+            HttpListenerResponse response,
+            int connectedUsers
+        )
+        {
+            string requestBody = await ReadRequestBody(request.InputStream);
+            // Process the move validation
+            string playerName = request.Headers["Authorization"];
+            string filePath = Path.Combine("validatemove", $"{playerName}Gamestate.json");
+            Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+            File.WriteAllText(filePath, requestBody);
+            filePath = Path.Combine("validatemove", $"{playerName}Move.json");
+            Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+            File.WriteAllText(filePath, requestBody);
+
+            using (HttpClient client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Add("Authorization", playerName);
+                // nu sunt sigur daca ar trebui trimis la toti jucatorii sau daca se trimite tot gamestate-ul
+                // ramane de gandit
+                // cum am gandit eu e ca in game logic se pune valid in header daca miscarea e valida
+                // si vine gamestate-ul sau ce o fi cu totul , si se trimite catre client , iar
+                // in momentul in care vine asta in client care va trebui si el sa poate primi
+                // request-uri (cred) , trimite post aici gamestate?turn=..\playerX 
+                // de unde va fi trimis catre restul
+                var valid = await client.GetAsync($"http://localhost:1235/validatemove");//portul la care ruleaza game logic pentru a valida
+                string responseContent = await valid.Content.ReadAsStringAsync();
+                await SendResponse(response, valid.StatusCode, responseContent);
+            }
+        }
+
+        static async Task HandleGameStateCalculatorRequest(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            // Get the player turn from the URL
+            string playerTurn = request.Url.Segments[2].TrimEnd('/');
+
+            // TODO
+
+            // Send the updated gamestate as the response
+            string updatedGamestate = ""; // Replace with the actual updated gamestate
+            await SendResponse(response, HttpStatusCode.OK, updatedGamestate);
+        }
+
+        static async Task HandleGameStatePredictionRequest(HttpListenerRequest request, HttpListenerResponse response)
+        {
+            // Get the player turn from the URL
+            string playerTurn = request.Url.Segments[2].TrimEnd('/');
+
+            // TODO
+
+            // Send the AI prediction as the response
+            string aiPrediction = ""; // Replace with the actual AI prediction
+            await SendResponse(response, HttpStatusCode.OK, aiPrediction);
+        }
+
     }
 }
