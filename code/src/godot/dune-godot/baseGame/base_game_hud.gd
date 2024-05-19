@@ -61,6 +61,9 @@ func _process(_delta):
 	phaseLabel.text = "Phase " + str(GameData.phase)
 	var turnLabel = get_node("otherPlayersHUD/TextureButton6/turn")
 	turnLabel.text = "Turn " + str(GameData.turn)
+	# ERASE THIS
+	var factionLabel = get_node("playerHUD/buttonExit15/faction")
+	factionLabel.text = str(PlayerData.faction)
 
 
 func _on_deleteme_2_pressed():

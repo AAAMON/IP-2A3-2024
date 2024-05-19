@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://p15o423f6pf3"]
+[gd_scene load_steps=2 format=3 uid="uid://p15o423f6pf3"]
 
 [ext_resource type="Texture2D" uid="uid://dxgmy13s2g4un" path="res://assets/Asset 53.png" id="1_8xq0q"]
-[ext_resource type="Script" path="res://phases/phase_7.gd" id="1_fusfg"]
 
 [node name="phase7" type="Control"]
 layout_mode = 3
@@ -14,7 +13,6 @@ offset_right = -385.0
 offset_bottom = -175.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_fusfg")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
@@ -34,37 +32,20 @@ offset_bottom = 42.0
 text = "Battle plan"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="TextureRect"]
-layout_mode = 0
-offset_left = 29.0
-offset_top = 61.0
-offset_right = 215.0
-offset_bottom = 84.0
-text = "Enter amount of forces:"
-horizontal_alignment = 1
-
-[node name="SpinBox" type="SpinBox" parent="TextureRect"]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 91.0
-offset_right = 178.0
-offset_bottom = 118.0
-update_on_text_changed = true
-
 [node name="Button" type="Button" parent="TextureRect"]
 layout_mode = 0
-offset_left = 33.0
-offset_top = 131.0
-offset_right = 130.0
-offset_bottom = 162.0
+offset_left = 30.0
+offset_top = 101.0
+offset_right = 127.0
+offset_bottom = 132.0
 text = "Pick Leader"
 
 [node name="Button2" type="Button" parent="TextureRect"]
 layout_mode = 0
 offset_left = 31.0
-offset_top = 163.0
-offset_right = 198.0
-offset_bottom = 194.0
+offset_top = 144.0
+offset_right = 128.0
+offset_bottom = 175.0
 text = "Pick Tretchery Cards"
 
 [node name="Button3" type="Button" parent="TextureRect"]
@@ -74,3 +55,12 @@ offset_top = 197.0
 offset_right = 232.0
 offset_bottom = 228.0
 text = "Submit"
+
+[node name="inputBattleForces" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 94.0
+offset_right = 229.0
+offset_bottom = 121.0
+theme_override_font_sizes/font_size = 12
+placeholder_text = "Enter amount of forces"

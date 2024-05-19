@@ -169,7 +169,15 @@ offset_right = 231.0
 offset_bottom = 196.0
 theme = SubResource("Theme_lopji")
 texture_normal = ExtResource("9_bvu6k")
-metadata/_edit_group_ = true
+
+[node name="faction" type="Label" parent="playerHUD/buttonExit15"]
+layout_mode = 0
+offset_left = 59.6667
+offset_top = 76.8094
+offset_right = 113.667
+offset_bottom = 99.8094
+text = "faction
+"
 
 [node name="buttonExit5" type="TextureButton" parent="playerHUD"]
 layout_mode = 0
@@ -402,6 +410,7 @@ offset_bottom = 129.238
 texture_normal = ExtResource("25_ru3ul")
 
 [node name="turn" type="Label" parent="otherPlayersHUD/TextureButton6"]
+layout_mode = 0
 offset_left = 228.572
 offset_top = 9.5238
 offset_right = 513.572
