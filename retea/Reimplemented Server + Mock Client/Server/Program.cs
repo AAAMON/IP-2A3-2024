@@ -1,10 +1,10 @@
 using System;
-using System.Net;
-using System.Threading.Tasks;
-using System.IO;
-using System.Text;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
 using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace HttpServer
 {
@@ -14,7 +14,7 @@ namespace HttpServer
         {
             { "girlboss", "password1" },
             { "player2", "password2" },
-            {"player1","password1" }
+            { "player1", "password1" }
         };
 
         /*  private static readonly Dictionary<string, string> authTokens = new Dictionary<string, string>(); */
@@ -41,27 +41,27 @@ namespace HttpServer
                 {
                     await HandleAuthRequest(request, response, connectedUsers);
                 }
-                else if (request.HttpMethod == "GET" && request.Url.AbsolutePath.StartsWith("/gamestate"))
+                else if (
+                    request.HttpMethod == "GET"
+                    && request.Url.AbsolutePath.StartsWith("/gamestate")
+                )
                 {
                     await HandleGameStateGetRequest(request, response, connectedUsers);
                 }
-                else if (request.HttpMethod == "POST" && request.Url.AbsolutePath == "/initialization")
+                else if (
+                    request.HttpMethod == "POST"
+                    && request.Url.AbsolutePath == "/initialization"
+                )
                 {
                     await HandleInitializationRequest(request, response);
                 }
-                else if (request.HttpMethod == "POST" && request.Url.AbsolutePath == "/validatemove")
+                else if (
+                    request.HttpMethod == "POST"
+                    && request.Url.AbsolutePath == "/validatemove"
+                )
                 {
                     await HandleValidateMoveRequest(request, response, connectedUsers);
                 }
-                else if (request.HttpMethod == "POST" && request.Url.AbsolutePath.StartsWith("/gamestatecalculator"))
-                {
-                    await HandleGameStateCalculatorRequest(request, response);
-                }
-                else if (request.HttpMethod == "POST" && request.Url.AbsolutePath.StartsWith("/gamestateprediction"))
-                {
-                    await HandleGameStatePredictionRequest(request, response);
-                }
-
                 else
                 {
                     await SendResponse(response, HttpStatusCode.NotFound, "Not found");
@@ -69,8 +69,11 @@ namespace HttpServer
             }
         }
 
-
-        static async Task HandleAuthRequest(HttpListenerRequest request, HttpListenerResponse response, int connectedUsers)
+        static async Task HandleAuthRequest(
+            HttpListenerRequest request,
+            HttpListenerResponse response,
+            int connectedUsers
+        )
         {
             // Read the request body containing the username and password
             string requestBody = await ReadRequestBody(request.InputStream);
@@ -83,8 +86,16 @@ namespace HttpServer
                 // returns auth token as player1, player2.. player6
                 connectedUsers++;
                 if (connectedUsers > 6)
-                    await SendResponse(response, HttpStatusCode.BadRequest, "Game room is already full");
-                await SendResponse(response, HttpStatusCode.OK, "player" + connectedUsers.ToString());
+                    await SendResponse(
+                        response,
+                        HttpStatusCode.BadRequest,
+                        "Game room is already full"
+                    );
+                await SendResponse(
+                    response,
+                    HttpStatusCode.OK,
+                    "player" + connectedUsers.ToString()
+                );
             }
             else
             {
@@ -93,7 +104,11 @@ namespace HttpServer
             }
         }
 
-        static async Task HandleGameStateGetRequest(HttpListenerRequest request, HttpListenerResponse response, int connectedUsers)
+        static async Task HandleGameStateGetRequest(
+            HttpListenerRequest request,
+            HttpListenerResponse response,
+            int connectedUsers
+        )
         {
             // Validate the authentication token
             string authToken = request.Headers["Authorization"];
@@ -127,7 +142,10 @@ namespace HttpServer
             }
         }
 
-        static async Task HandleInitializationRequest(HttpListenerRequest request, HttpListenerResponse response)
+        static async Task HandleInitializationRequest(
+            HttpListenerRequest request,
+            HttpListenerResponse response
+        )
         {
             // Read the request body containing the initial gamestate
             string requestBody = await ReadRequestBody(request.InputStream);
@@ -155,7 +173,6 @@ namespace HttpServer
             return users.ContainsKey(username) && users[username] == password;
         }
 
-
         static bool ValidateAuthToken(string authToken)
         {
             HashSet<string> playerNames = new HashSet<string>();
@@ -175,7 +192,11 @@ namespace HttpServer
             }
         }
 
-        static async Task SendResponse(HttpListenerResponse response, HttpStatusCode statusCode, string content)
+        static async Task SendResponse(
+            HttpListenerResponse response,
+            HttpStatusCode statusCode,
+            string content
+        )
         {
             // Set the response status code
             response.StatusCode = (int)statusCode;
@@ -196,54 +217,49 @@ namespace HttpServer
         )
         {
             string requestBody = await ReadRequestBody(request.InputStream);
+
+            // Validate the authentication token
+            string authToken = request.Headers["Authorization"];
+            if (!ValidateAuthToken(authToken))
+            {
+                await SendResponse(response, HttpStatusCode.Unauthorized, "Invalid auth token");
+                return;
+            }
+
             // Process the move validation
-            string playerName = request.Headers["Authorization"];
-            string filePath = Path.Combine("validatemove", $"{playerName}Gamestate.json");
+            string filePath = Path.Combine("validatemove", $"{authToken}Gamestate.json");
             Directory.CreateDirectory(Path.GetDirectoryName(filePath));
             File.WriteAllText(filePath, requestBody);
-            filePath = Path.Combine("validatemove", $"{playerName}Move.json");
+            filePath = Path.Combine("validatemove", $"{authToken}Move.json");
             Directory.CreateDirectory(Path.GetDirectoryName(filePath));
             File.WriteAllText(filePath, requestBody);
 
+            // Create HttpClient instance
             using (HttpClient client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Add("Authorization", playerName);
-                // nu sunt sigur daca ar trebui trimis la toti jucatorii sau daca se trimite tot gamestate-ul
-                // ramane de gandit
-                // cum am gandit eu e ca in game logic se pune valid in header daca miscarea e valida
-                // si vine gamestate-ul sau ce o fi cu totul , si se trimite catre client , iar
-                // in momentul in care vine asta in client care va trebui si el sa poate primi
-                // request-uri (cred) , trimite post aici gamestate?turn=..\playerX 
-                // de unde va fi trimis catre restul
-                var valid = await client.GetAsync($"http://localhost:1235/validatemove");//portul la care ruleaza game logic pentru a valida
-                string responseContent = await valid.Content.ReadAsStringAsync();
-                await SendResponse(response, valid.StatusCode, responseContent);
+                client.DefaultRequestHeaders.Add("Authorization", authToken);
+
+                var requestContent = new StringContent(
+                    requestBody,
+                    Encoding.UTF8,
+                    "application/json"
+                );
+
+                // Send POST request to move validator service
+                //Client for API - Game Logic
+                HttpResponseMessage moveValidatorResponse = await client.PostAsync(
+                    "http://localhost:1235/movevalidator",
+                    requestContent
+                );
+
+                string responseContent = await moveValidatorResponse.Content.ReadAsStringAsync();
+                filePath = Path.Combine("validatemove", $"{authToken}Gamestate.json");
+                File.WriteAllText(filePath, responseContent);
+
+                // Forward the response from the move validator to the GUI client
+                await SendResponse(response, moveValidatorResponse.StatusCode, responseContent);
+                HttpResponseMessage forwardResponse = await client.PostAsync("http://localost:1236/gameprediction", new StringContent(responseContent, Encoding.UTF8, "application/json"));
             }
         }
-
-        static async Task HandleGameStateCalculatorRequest(HttpListenerRequest request, HttpListenerResponse response)
-        {
-            // Get the player turn from the URL
-            string playerTurn = request.Url.Segments[2].TrimEnd('/');
-
-            // TODO
-
-            // Send the updated gamestate as the response
-            string updatedGamestate = ""; // Replace with the actual updated gamestate
-            await SendResponse(response, HttpStatusCode.OK, updatedGamestate);
-        }
-
-        static async Task HandleGameStatePredictionRequest(HttpListenerRequest request, HttpListenerResponse response)
-        {
-            // Get the player turn from the URL
-            string playerTurn = request.Url.Segments[2].TrimEnd('/');
-
-            // TODO
-
-            // Send the AI prediction as the response
-            string aiPrediction = ""; // Replace with the actual AI prediction
-            await SendResponse(response, HttpStatusCode.OK, aiPrediction);
-        }
-
     }
 }
