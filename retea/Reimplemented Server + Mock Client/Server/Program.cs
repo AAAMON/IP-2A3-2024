@@ -62,6 +62,10 @@ namespace HttpServer
                 {
                     await HandleValidateMoveRequest(request, response, connectedUsers);
                 }
+                else if (request.HttpMethod == "POST" && request.Url.AbsolutePath == "/gamestate")
+                {
+                    await HandleUpdateGamestateRequest(request, response, connectedUsers);
+                }
                 else
                 {
                     await SendResponse(response, HttpStatusCode.NotFound, "Not found");
@@ -258,7 +262,43 @@ namespace HttpServer
 
                 // Forward the response from the move validator to the GUI client
                 await SendResponse(response, moveValidatorResponse.StatusCode, responseContent);
-                HttpResponseMessage forwardResponse = await client.PostAsync("http://localost:1236/gameprediction", new StringContent(responseContent, Encoding.UTF8, "application/json"));
+                HttpResponseMessage forwardResponse = await client.PostAsync(
+                    "http://localost:1236/gameprediction",
+                    new StringContent(responseContent, Encoding.UTF8, "application/json")
+                );
+            }
+        }
+
+        //aici fac update fara verificare de la api , desi nu inteleg de ce mai este nevoie si de
+        //update daca eu trimit miscarea la validator si imi intoarce o perspectiva cu care fac
+        //update
+        static async Task HandleUpdateGamestateRequest(
+            HttpListenerRequest request,
+            HttpListenerResponse response,
+            int connectedUsers
+        )
+        {
+            string requestBody = await ReadRequestBody(request.InputStream);
+
+            // Validate the authentication token
+            string authToken = request.Headers["Authorization"];
+            if (!ValidateAuthToken(authToken))
+            {
+                await SendResponse(response, HttpStatusCode.Unauthorized, "Invalid auth token");
+                return;
+            }
+            string filePath = Path.Combine("gamestate", $"{authToken}.json");
+            File.WriteAllText(filePath, requestBody);
+            using (HttpClient client = new HttpClient())
+            {
+                string gamestate = File.ReadAllText(filePath);
+                //forward the post to AI client
+                HttpResponseMessage forwardResponse = await client.PostAsync(
+                    "http://localost:1236/gameprediction",
+                    new StringContent(gamestate, Encoding.UTF8, "application/json")
+                );
+                //then send to client -- TO DO send to all clients
+                await SendResponse(response, forwardResponse.StatusCode, gamestate);
             }
         }
     }
