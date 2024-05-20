@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
 
-
 // aici restul de informatii
 
 
@@ -27,18 +26,19 @@ public class GameClient
     public playerData playerData1 = new playerData();
     public int playerID; /* 1 -> 6 */
     public string authToken; /* playerX */
-
+    public CommunicationProtocolStandards Cp;
     static readonly HttpClient client = new HttpClient();
     private readonly string baseUrl = "http://localhost:1234/";
     private string username { get; set; }
     private string password { get; set; }
+
 
     public async Task Run(string[] args)
     {
         // Authentication
         authToken = await AuthenticateUser(username, password);
         Console.WriteLine($"Auth Token: {authToken}");
-
+        
         playerID = GetPlayerID();
 
         // Get Gamestate for a specific player

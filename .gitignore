@@ -1,5 +1,2 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
-
-/retea/Reimplemented Server + Mock Client/.vs/Reimplemented Server + Mock Client/FileContentIndex/8ee3346f-b47e-47cd-ace3-4f61834c0a43.vsidx
+﻿/retea/Reimplemented Server + Mock Client/.vs/Reimplemented Server + Mock Client/FileContentIndex/8ee3346f-b47e-47cd-ace3-4f61834c0a43.vsidx
+.vs/
