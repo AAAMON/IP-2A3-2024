@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\IP\\Work\\IP-2A3-2024\\retea\\Reimplemented Server + Mock Client\\ClientAPIforGUI\\ClientAPIforGUI.csproj": {}
+    "D:\\facultate\\Anul_2\\semestrul2\\IP\\Folder nou\\IP-2A3-2024\\retea\\Reimplemented Server + Mock Client\\ClientAPIforGUI\\ClientAPIforGUI.csproj": {}
   },
   "projects": {
-    "D:\\IP\\Work\\IP-2A3-2024\\retea\\Reimplemented Server + Mock Client\\ClientAPIforGUI\\ClientAPIforGUI.csproj": {
+    "D:\\facultate\\Anul_2\\semestrul2\\IP\\Folder nou\\IP-2A3-2024\\retea\\Reimplemented Server + Mock Client\\ClientAPIforGUI\\ClientAPIforGUI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\IP\\Work\\IP-2A3-2024\\retea\\Reimplemented Server + Mock Client\\ClientAPIforGUI\\ClientAPIforGUI.csproj",
+        "projectUniqueName": "D:\\facultate\\Anul_2\\semestrul2\\IP\\Folder nou\\IP-2A3-2024\\retea\\Reimplemented Server + Mock Client\\ClientAPIforGUI\\ClientAPIforGUI.csproj",
         "projectName": "ClientAPIforGUI",
-        "projectPath": "D:\\IP\\Work\\IP-2A3-2024\\retea\\Reimplemented Server + Mock Client\\ClientAPIforGUI\\ClientAPIforGUI.csproj",
-        "packagesPath": "C:\\Users\\.adia\\.nuget\\packages\\",
-        "outputPath": "D:\\IP\\Work\\IP-2A3-2024\\retea\\Reimplemented Server + Mock Client\\ClientAPIforGUI\\obj\\",
+        "projectPath": "D:\\facultate\\Anul_2\\semestrul2\\IP\\Folder nou\\IP-2A3-2024\\retea\\Reimplemented Server + Mock Client\\ClientAPIforGUI\\ClientAPIforGUI.csproj",
+        "packagesPath": "C:\\Users\\bolot\\.nuget\\packages\\",
+        "outputPath": "D:\\facultate\\Anul_2\\semestrul2\\IP\\Folder nou\\IP-2A3-2024\\retea\\Reimplemented Server + Mock Client\\ClientAPIforGUI\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\.adia\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\bolot\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -38,11 +34,22 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -59,7 +66,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

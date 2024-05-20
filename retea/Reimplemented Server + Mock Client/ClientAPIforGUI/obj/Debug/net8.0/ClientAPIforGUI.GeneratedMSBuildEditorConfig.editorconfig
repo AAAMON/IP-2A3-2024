@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ClientAPIforGUI
-build_property.ProjectDir = D:\IP\Work\IP-2A3-2024\retea\Reimplemented Server + Mock Client\ClientAPIforGUI\
+build_property.ProjectDir = D:\facultate\Anul_2\semestrul2\IP\Folder nou\IP-2A3-2024\retea\Reimplemented Server + Mock Client\ClientAPIforGUI\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

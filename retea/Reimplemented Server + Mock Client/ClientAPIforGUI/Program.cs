@@ -26,7 +26,7 @@ public class GameClient
     public playerData playerData1 = new playerData();
     public int playerID; /* 1 -> 6 */
     public string authToken; /* playerX */
-    public CommunicationProtocolStandards Cp;
+    //public CommunicationProtocolStandards Cp;
     static readonly HttpClient client = new HttpClient();
     private readonly string baseUrl = "http://localhost:1234/";
     private string username { get; set; }
@@ -38,7 +38,7 @@ public class GameClient
         // Authentication
         authToken = await AuthenticateUser(username, password);
         Console.WriteLine($"Auth Token: {authToken}");
-        
+
         playerID = GetPlayerID();
 
         // Get Gamestate for a specific player
@@ -121,14 +121,14 @@ public class GameClient
         response.EnsureSuccessStatusCode();
     }
 
-    static async Task<string> AuthenticateUser(string username, string password)
+    public async Task<string> AuthenticateUser(string username, string password)
     {
         var requestBody = new StringContent($"{username}:{password}", Encoding.UTF8, "application/x-www-form-urlencoded");
         var response = await client.PostAsync(baseUrl + "auth", requestBody);
         return await response.Content.ReadAsStringAsync();
     }
 
-    static async Task<string> GetGamestate(string theAuthToken)
+    public async Task<string> GetGamestate(string theAuthToken)
     {
         client.DefaultRequestHeaders.Remove("Authorization");
         client.DefaultRequestHeaders.Add("Authorization", theAuthToken);
@@ -136,7 +136,7 @@ public class GameClient
         return await response.Content.ReadAsStringAsync();
     }
 
-    static async Task<string> InitializeGamestate(string theAuthToken, string gamestate)
+    public async Task<string> InitializeGamestate(string theAuthToken, string gamestate)
     {
         client.DefaultRequestHeaders.Remove("Authorization");
         client.DefaultRequestHeaders.Add("Authorization", theAuthToken);
@@ -144,7 +144,20 @@ public class GameClient
         var response = await client.PostAsync(baseUrl + "initialization", requestBody);
         return await response.Content.ReadAsStringAsync();
     }
+    public async Task<string> PostMoveForPlayer(string theAuthToken, string move)
+        {
+        client.DefaultRequestHeaders.Remove("Authorization");
+        client.DefaultRequestHeaders.Add("Authorization", theAuthToken);
+        var requestBody = new StringContent(move, Encoding.UTF8, "application/json");
+        var response = await client.PostAsync(baseUrl + $"/validatemove/{theAuthToken}", requestBody);
+        return await response.Content.ReadAsStringAsync();
+    }
 
+    public async Task<string> GetCharittyInfo()
+    {
+        var response = await client.GetAsync(baseUrl+"/phase_3_info");
+        return await response.Content.ReadAsStringAsync();
+    }
 
     // STUFF FOR COMMUNICATION WITH API ////////////////////////////////////////
 
