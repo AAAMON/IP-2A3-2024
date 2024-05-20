@@ -1,3 +1,4 @@
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,17 +11,14 @@ namespace HttpServer
 {
     class Server
     {
-        private static readonly Dictionary<string, string> users = new Dictionary<string, string>
-        {
-            { "girlboss", "password1" },
-            { "player2", "password2" },
-            { "player1", "password1" }
-        };
+
+        private static readonly string connectionString = "Host=localhost;Port=5432;Database=postgres;Username=postgres;Password=Valeria";//aici sunt datele pentru conexiunea la BD-postgres
+        private static int connectedUsers = 0;
 
         /*  private static readonly Dictionary<string, string> authTokens = new Dictionary<string, string>(); */
         static async Task Main(string[] args)
         {
-            int connectedUsers = 0;
+            
             // Create an HTTP listener.
             HttpListener listener = new HttpListener();
             listener.Prefixes.Add("http://localhost:1234/");
@@ -39,7 +37,7 @@ namespace HttpServer
                 // Process requests
                 if (request.HttpMethod == "POST" && request.Url.AbsolutePath == "/auth")
                 {
-                    await HandleAuthRequest(request, response, connectedUsers);
+                    await HandleAuthRequest(request, response);
                 }
                 else if (
                     request.HttpMethod == "GET"
@@ -73,23 +71,30 @@ namespace HttpServer
             }
         }
 
+
+
+
+
         static async Task HandleAuthRequest(
-            HttpListenerRequest request,
-            HttpListenerResponse response,
-            int connectedUsers
-        )
+        HttpListenerRequest request,
+        HttpListenerResponse response
+)
         {
             // Read the request body containing the username and password
             string requestBody = await ReadRequestBody(request.InputStream);
 
             // Validate the username and password
-            bool isAuthenticated = AuthenticateUser(requestBody);
+            bool isAuthenticated = await AuthenticateUser(requestBody);
             string username = requestBody.Split(':')[0];
+            string parola = requestBody.Split(":")[1];
+
             if (isAuthenticated)
             {
-                // returns auth token as player1, player2.. player6
-                connectedUsers++;
-                if (connectedUsers > 6)
+                // Increment the count of connected users atomically
+                int userCount = Interlocked.Increment(ref connectedUsers);
+
+                Console.WriteLine("Numarul de utilizatori conectati este:" + userCount);
+                if (userCount > 6)
                     await SendResponse(
                         response,
                         HttpStatusCode.BadRequest,
@@ -98,13 +103,14 @@ namespace HttpServer
                 await SendResponse(
                     response,
                     HttpStatusCode.OK,
-                    "player" + connectedUsers.ToString()
+                    "player" + userCount.ToString()+" username:"+username
                 );
             }
             else
             {
                 // Send an unauthorized response
-                await SendResponse(response, HttpStatusCode.Unauthorized, "Invalid credentials");
+
+                await SendResponse(response, HttpStatusCode.Unauthorized, "Invalid credentials" + username + parola);
             }
         }
 
@@ -166,17 +172,37 @@ namespace HttpServer
             await SendResponse(response, HttpStatusCode.OK, "Initial gamestate received");
         }
 
-        static bool AuthenticateUser(string requestBody)
+        static async Task<bool> AuthenticateUser(string requestBody)
         {
             // Parse the request body to get the username and password
             string[] credentials = requestBody.Split(':');
             string username = credentials[0];
             string password = credentials[1];
+    
+      
+           using (var conn = new NpgsqlConnection(connectionString))
+           {
+                    conn.Open(); 
 
-            // Check if the username and password are valid
-            return users.ContainsKey(username) && users[username] == password;
+                  
+                    using (var cmd = new NpgsqlCommand("SELECT * FROM users WHERE username = @username AND password = @password", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@username", username);
+                        cmd.Parameters.AddWithValue("@password", password);
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if(reader.FieldCount > 0) { conn.Close(); return true; }
+                            else { conn.Close(); return false; }
+                        }
+                    }
+
+            }
+            
+            
+            
         }
-
+    
         static bool ValidateAuthToken(string authToken)
         {
             HashSet<string> playerNames = new HashSet<string>();
