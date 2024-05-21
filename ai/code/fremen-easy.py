@@ -13,8 +13,16 @@ def get_dead(game_state):
     return game_state['Normal']
 
 
-def calc_bid():
-    return {'bid': get_money()}
+def bid_phase(game_state):
+    #fremen is generally poor, so bidding too much is generally bad
+
+    my_money = get_money(game_state)
+    last_bid = game_state['last_bid']
+
+    if last_bid['value'] > max(2, my_money):
+        return {'action': 'pass'}
+    
+    return {'action': last_bid['value']+1}
 
 
 def get_move(game_state):
@@ -23,7 +31,7 @@ def get_move(game_state):
         return {'status': 'bad format'}
     
     if game_state['Phase'] == 'Bidding':
-        return calc_bid()
+        return bid_phase(game_state)
     
     elif game_state['Phase'] == 'Revival':
         return {'revive': min(3, get_dead(game_state))}
