@@ -82,8 +82,9 @@ def get_move(game_state):
                     last_bid = game_state.get("Last_Bid", 0)
                     max_bid = int(0.30 * my_spice)
                     if last_bid + 1 < max_bid:
-                        my_bid = last_bid + 1
-                        answer += f"looked at {first_card}, bid {my_bid} spice"
+                        if first_card in ["Crysknife","Maula Pistol","Slip Tip","Stunner","Chaumas","Chaumurky","Ellaca Drug","Gom Jabbar","Cheap Hero","Family Atomics","Karama","Truthtrance"]:
+                            my_bid = last_bid + 1
+                            answer += f"looked at {first_card}, bid {my_bid} spice"
                     else:
                         answer += f"looked at {first_card}, no bid"
 
@@ -107,7 +108,21 @@ def get_move(game_state):
         top_spice_card = game_state["Spice_Deck"][0]
         top_spice_location = top_spice_card["Location"]
         storm_distance = abs(storm_sector - top_spice_location)
-        
+         # Shipment logic
+        if off_planet_reserves > 0 and my_spice >= 7:
+            for territory in territories:
+                if territory["forces"]["Spacing_Guild_Forces"]["Forces_Nr"] == 0 and \
+                   territory["forces"]["Atreides_Forces"]["Forces_Nr"] == 0 and \
+                   territory["forces"]["Bene_Gesserit_Forces"]["Forces_Nr"] == 0 and \
+                   territory["forces"]["Emperor_Forces"]["Sardaukar"] == 0 and \
+                   territory["forces"]["Emperor_Forces"]["Normal"] == 0 and \
+                   territory["forces"]["Fremen_Forces"]["Normal"] == 0 and \
+                   territory["forces"]["Harkonnen_Forces"]["Forces_Nr"] == 0:
+                    ans = 'shippment: action: occupy_territory with 4 forces'
+                    break
+
+        if not answer:
+            answer = 'no_shippment'
         # Move forces logic for Atreides
         if my_spice < 5 and min(spice_list) > 2:
             mov = 'movement: action: collect spice at closest location if possible'
