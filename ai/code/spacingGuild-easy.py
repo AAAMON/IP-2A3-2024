@@ -142,17 +142,18 @@ def get_move(game_state):
                         number_opponent_forces=territory["forces"][player]["Forces_Nr"]
                     #stiu cate forte are jucatorul
                     number_forces=territory["forces"]["Spacing_Guild_Forces"]["Forces_Nr"]
+                    my_generals=game_state["Public_Faction_Knowledge_Manager"]["Public_Faction_Knowledge"]["Spacing_Guild"]["Generals"]
 
                     if number_opponent_forces-number_forces<=3 and number_forces-1>0:
                         #imi fac plan de lupta calumea
-                         my_generals=game_state["Public_Faction_Knowledge_Manager"]["Public_Faction_Knowledge"]["Spacing_Guild"]["Generals"]
+                         my_general=""
                          for general in my_generals:
                              my_general=general #aleg cel mai puternic general disponibil
                              break
-                         if not my_general:
+                         if my_general=="":
                              if "Special-Leader" in my_trachery_card:
                                  my_general="Special-Leader"
-                         if not my_general:
+                         if my_general=="":
                              forces=number_forces-1
                              answer="general:none , forces: "+str(forces)+" ,weapon: none , defense: none"
                              return {"action ": answer}
@@ -163,19 +164,51 @@ def get_move(game_state):
                                 chosen_cards["weapon"]=my_card
                             elif not chosen_cards["defense"] and my_card in defense_posion+defense_projectile:
                                 if chosen_cards["weapon"]=="Lasgun":
-                                    break
+                                    chosen_cards["defense"]=" none"
                                 else:
                                     chosen_cards["defense"]=my_card
+                                    #print(chosen_cards["defense"])
+                                    break
                             if chosen_cards["weapon"] and chosen_cards["defense"]:
                                 break
-                            answer="general: "+my_general
-                            answer+=" , forces: "+str(number_forces-1)+" ,weapon :"+chosen_cards["weapon"]+" ,defense: "
-                            answer+=str(chosen_cards["defense"])
+                         answer="general: "+my_general
+                         print(chosen_cards["defense"])
+                         answer+=" , forces: "+str(number_forces-1)+" ,weapon :"+chosen_cards["weapon"]+" ,defense: "+chosen_cards["defense"]
                          return {"action" : answer}
+                    else:
+                        #fac sa pierd cat mai putin
+                        my_general=""
+                        if "Special-Leader" in my_trachery_card:
+                                 my_general="Special-Leader"
+                        if my_general=="":
+                            for general in my_generals:
+                             my_general=general #aleg cel mai slab general disponibil
+                        if my_general=="":
+                            return {"action ": "no general no nothing"}
+                        else:
+                            card1=""
+                            card2=""
+                            for useles_card in worthless_card:
+                                if  useles_card in my_trachery_card:
+                                    if card1=="":
+                                        card1=useles_card
+                                    else:
+                                        if card2=="":
+                                            card2=useles_card
+                                        else:
+                                            break
+                            ans="general: "+my_general+" , weapon: "
+                            if not card1:
+                                ans+=card1+" , defense: "
+                            else:
+                                ans+="none , defense: "
+                            if not card2:
+                                ans+=card2
+                            else:
+                                ans+="none"
+                            return {"action" :ans}
                     break
-                         
-                         
-                                               
+                                                          
             #cumva dupa ce mi am pus ce battle plan am si ce battle plan are oponentul, ar trebui sa zic @Traitor@ daca si l-a pus pe el
             return {"action ": "Choose leader, weapon, shield and threachery cards"}
             
