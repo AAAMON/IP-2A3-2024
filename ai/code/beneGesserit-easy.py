@@ -27,7 +27,17 @@ def shipment(game_state):
                     #nu am forte acolo
                     if territory["forces"]["Bene_Gesserit_Forces"]["Forces_Nr"] == 0:
                         #nu e ocupata de alte doua factiuni
-                        if( (int)(territory["forces"]["Atreides_Forces"]["Forces_Nr"] > 0) + (int)(territory["forces"]["Emperor_Forces"]["Sardaukar"] > 0) + (int)(territory["forces"]["Emperor_Forces"]["Normal"] > 0) + (int)(territory["forces"]["Fremen_Forces"]["Normal"] > 0) + (int)(territory["forces"]["Harkonnen_Forces"]["Forces_Nr"] > 0) + (int)(territory["forces"]["Spacing_Guild_Forces"]["Forces_Nr"] > 0) < 2): 
+                        nr_fact=0
+                        fact = ["Atreides_Forces", "Harkonnen_Forces", "Spacing_Guild_Forces"]
+                        for i in fact:
+                            if territory["forces"][i]["Forces_Nr"] > 0:
+                                nr_fact+=1
+                        if territory["forces"]["Emperor_Forces"]["Sardaukar"] > 0 or territory["forces"]["Emperor_Forces"]["Normal"] > 0:
+                            nr_fact+=1
+                        if territory["forces"]["Fremen_Forces"]["Normal"] > 0:
+                            nr_fact+=1
+                        
+                        if nr_fact < 2:
                             if territory["forces"]["Atreides_Forces"]["Forces_Nr"] <= 2:
                                 if territory["forces"]["Emperor_Forces"]["Sardaukar"]  <= 2:
                                     if territory["forces"]["Emperor_Forces"]["Normal"]  <= 2:
