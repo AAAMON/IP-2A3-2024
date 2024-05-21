@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace HttpServer
 {
@@ -89,7 +90,7 @@ namespace HttpServer
         private static async void HandleGUIInputRequest(HttpListenerContext context)
         {
             string url = context.Request.Url.AbsolutePath;
-            if (url.Contains("input") && context.Request.HttpMethod == "POST")
+            if (url.Contains("_input") && context.Request.HttpMethod == "POST")
             {
                 int phase1Input = int.Parse(url.Substring("/phase_1_input/".Length));
 
@@ -103,6 +104,7 @@ namespace HttpServer
                         phaseMatrix[phase1Input] = new Dictionary<int, int>();
                     }
                     phaseMatrix[phase1Input][inputModel.PlayerID] = phase1Input;
+                    string jsonPhaseMat = ConvertPhaseMatrixToJson(phaseMatrix);
 
                     Console.WriteLine($"Updated matrix: Phase 1 Input: {phase1Input}, PlayerID: {inputModel.PlayerID}");
                 }
@@ -111,24 +113,60 @@ namespace HttpServer
                 await context.Response.OutputStream.WriteAsync(Encoding.UTF8.GetBytes("Success"));
                 context.Response.Close();
             }
-            else if (url.Contains("info"))
+            else if (url.Contains("_info"))
             {
-                string filePath = Path.Combine(url+"");
+                string filePath = Path.Combine(url + "");
                 Console.WriteLine(filePath);
                 if (File.Exists(filePath))
                 {
-                    string gamestate = File.ReadAllText(filePath);
-                    await SendResponse(context.Response, HttpStatusCode.OK, gamestate);
+                    string phaseInput = File.ReadAllText(filePath);
+                    await SendResponse(context.Response, HttpStatusCode.OK, phaseInput);
                 }
                 else
                 {
                     await SendResponse(context.Response, HttpStatusCode.NotFound, "Phase info not found");
                 }
             }
-            else {
+            else if (url.Contains("get_phase_info"))
+            {
+                HandleGetForJSONOnlyReqs(context.Request, context.Response);
+            }
+            else if (url.Contains("allinput"))
+            {
+                string jsonResponse = ConvertPhaseMatrixToJson(phaseMatrix);
+
+                context.Response.ContentType = "application/json";
+                context.Response.StatusCode = (int)HttpStatusCode.OK;
+                byte[] buffer = Encoding.UTF8.GetBytes(jsonResponse);
+                await context.Response.OutputStream.WriteAsync(buffer, 0, buffer.Length);
+                context.Response.Close();
+            }
+            else
+            {
                 context.Response.StatusCode = (int)HttpStatusCode.NotFound;
                 await context.Response.OutputStream.WriteAsync(Encoding.UTF8.GetBytes("Not Found"));
                 context.Response.Close();
+            }
+        }
+        public static string ConvertPhaseMatrixToJson(Dictionary<int, Dictionary<int, int>> matrix)
+        {
+            return JsonConvert.SerializeObject(matrix, Formatting.Indented);
+        }
+
+        static async Task HandleGetForJSONOnlyReqs(HttpListenerRequest request,
+        HttpListenerResponse response)
+        {
+            string filePath = Path.Combine(request.Url + "");
+            Console.WriteLine(filePath);
+            if (File.Exists(filePath))
+            {
+                string inputFromFile = File.ReadAllText(filePath);
+                Console.WriteLine("found: "+ inputFromFile);
+                await SendResponse(response, HttpStatusCode.OK, inputFromFile);
+            }
+            else
+            {
+                await SendResponse(response, HttpStatusCode.NotFound, "Phase info not found");
             }
         }
 
