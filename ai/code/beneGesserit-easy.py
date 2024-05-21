@@ -118,7 +118,7 @@ def get_move(game_state):
         return battle(game_state)
     
     #probabil ar trebui facut cu Atreides (great combat), Harkonen (strong when Harks have a lot of cards), Emperor ( support in shipping/revive/fighting), other if they have a lot of money
-    if game_state['Phase'] == 'Aliance':  
+    if game_state['Phase'] == 'Alliance':  
         return {'action': 'deny'}
 
     return {'status': 'phase unknown'}
