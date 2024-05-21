@@ -156,31 +156,31 @@ def get_move(game_state):
             
         
 
-        if phase == "Bidding" or phase == 4:
-         harkonnen_bid = faction_bids.get("Harkonnen", 0)
-         atreides_bid = faction_bids.get("Atreides", 0)
+       # if phase == "Bidding" or phase == 4:
+        # harkonnen_bid = faction_bids.get("Harkonnen", 0)
+        # atreides_bid = faction_bids.get("Atreides", 0)
 
-         if harkonnen_bid > 0:
-            bid_amount = harkonnen_bid + 1
-        elif atreides_bid > 0:
-            bid_amount = atreides_bid + 1
+         #if harkonnen_bid > 0:
+          #  bid_amount = harkonnen_bid + 1
+        #elif atreides_bid > 0:
+         #   bid_amount = atreides_bid + 1
     
-        else:
-            min_bid = min(spice_list)
-            bid_amount = min_bid if min_bid <= mySpice else 0
+        #else:
+         #   min_bid = min(spice_list)
+          #  bid_amount = min_bid if min_bid <= mySpice else 0
 
         # Nu licita mai mult de 70% din spice-ul disponibil
-        if bid_amount > mySpice * 0.7:
-            bid_amount = 0
+        #if bid_amount > mySpice * 0.7:
+         #   bid_amount = 0
 
-        if bid_amount > 0:
-            return {"action": "bid", "bid_amount": bid_amount}
-        else:
-            return {"action": "no bid"}
+        #if bid_amount > 0:
+         #   return {"action": "bid", "bid_amount": bid_amount}
+        #else:
+         #   return {"action": "no bid"}
             
        
             
-        if phase=="Revival" or phase==4:
+        if phase=="Revival" or phase==5:
             if deadTroops>2:
                 if mySpice>10:
                     return {"action:" "Revive 3 ."}
