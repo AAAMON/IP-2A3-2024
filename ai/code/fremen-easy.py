@@ -25,6 +25,19 @@ def bid_phase(game_state):
     return {'action': last_bid['value']+1}
 
 
+def aliance_phase(game_state):
+    #fremen is generally left last for aliance we agree to any aliance we can get
+    #but we prefeer emperor aliance
+
+    if 'aliance_request' in game_state.keys():
+        return {'action': 'accept'}
+    
+    ans = {}
+    ans['action'] = 'propose'
+    ans['target'] = 'Emperor'
+    return ans
+
+
 def get_move(game_state):
     
     if 'Phase' not in game_state.keys():
@@ -40,7 +53,7 @@ def get_move(game_state):
         return {'action': 'none'}
     
     elif game_state['Phase'] == 'Aliance':
-        return {'action': 'deny'}
+        return aliance_phase(game_state)
 
     else:
         return {'status': 'phase unknown'}
