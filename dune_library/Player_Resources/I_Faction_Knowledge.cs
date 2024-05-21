@@ -26,5 +26,6 @@ namespace dune_library.Player_Resources {
     public void Add_To_Number_Of_Treachery_Cards_Of(Faction faction);
 
     public bool Remove_From_Number_Of_Treachery_Cards_Of(Faction faction);
+
   }
 }

@@ -32,17 +32,46 @@ namespace dune_library {
     public void Play() {
         Phase = new Set_Up(this, this, Players, factions_distribution, player_markers, Map);
         Phase.ValueUnsafe().Play_Out();
-
         for (Round = 1; Round <= 10; Round += 1) {
         //storm
+        Console.WriteLine("Storm Phase");
+        Phase = new Storm_Phase(this, Round);
+        Phase.ValueUnsafe().Play_Out();
         //spice blow
+        Console.WriteLine("Spice Blow Phase");
+
         //choam charity
+        Console.WriteLine("Chom Charity Phase");
+        Phase = new CharityPhase(this);
+        Phase.ValueUnsafe().Play_Out();
+
         //bidding
+        Console.WriteLine("Bidding Phase");
+
         //revival
+        Console.WriteLine("Revival Phase");
+        Phase = new Revival_Phase(this,Tleilaxu_Tanks);
+        Phase.ValueUnsafe().Play_Out();
+
         //shipment and movement
+        Console.WriteLine("Shipment And Movement Phase");
+        Phase = new ShipmentAndMovementPhase(this, Map);
+        Phase.ValueUnsafe().Play_Out();
+
         //battle
+        Console.WriteLine("Battle Phase");
+
+
         //spice harvest
+        Console.WriteLine("Spice Harvest Phase");
+        Phase = new SpiceCollectionPhase(this, Map);
+        Phase.ValueUnsafe().Play_Out();
+
+
         //mentat pause
+        Console.WriteLine("Mentat Pause Phase");
+        Phase = new MentatPausePhase(this);
+        Phase.ValueUnsafe().Play_Out();
       }
     }
 

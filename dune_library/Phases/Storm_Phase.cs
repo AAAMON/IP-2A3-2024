@@ -11,8 +11,9 @@ using System.Threading.Tasks;
 
 namespace dune_library.Phases {
   public class Storm_Phase : Phase {
-    public Storm_Phase(Game game) {
+    public Storm_Phase(Game game, uint turn) {
       Map = game.Map;
+      this.turn = turn;
       Storm_Sector = game.Map.Storm_Sector;
       Can_Play_Family_Atomics = null;
       // more complicated
@@ -30,7 +31,7 @@ namespace dune_library.Phases {
 
     public uint Storm_Sector { get; private set; }
 
-    public bool Is_First_Turn { get; }
+    private uint turn;
     
     public Option<Player> Can_Play_Family_Atomics { get; }
 
@@ -39,7 +40,10 @@ namespace dune_library.Phases {
     public (Battle_Wheel first, Battle_Wheel second) Battle_Wheels { get; }
 
     public int Calculate_Storm(int min, int max) {
-      return Battle_Wheel.Get_From_Range_Closed(min, max) + Battle_Wheel.Get_From_Range_Closed(min, max);
+      Console.WriteLine("Introduceti nr de sectoare cu care sa fie mutat storm-ul");
+      String response = Console.ReadLine();
+      return Convert.ToInt32(response);
+      //return Battle_Wheel.Get_From_Range_Closed(min, max) + Battle_Wheel.Get_From_Range_Closed(min, max);
     }
 
     /*public void Move_Storm(int number_of_sectors) {
@@ -51,7 +55,7 @@ namespace dune_library.Phases {
     }*/
     public override void Play_Out() {
       int sectors_to_move = 0;
-      if (Is_First_Turn) {
+      if (turn == 1) {
         // select the players before and after the initial storm marker
         sectors_to_move = Calculate_Storm(0, 20);
         /*Move_Storm(sectors_to_move);*/
@@ -69,6 +73,7 @@ namespace dune_library.Phases {
         
         // poll for the two threads, as is the case
 
+        Map.Move_Storm_Sector_Forward((uint)sectors_to_move);
         /*Move_Storm(sectors_to_move);*/
       }
     }

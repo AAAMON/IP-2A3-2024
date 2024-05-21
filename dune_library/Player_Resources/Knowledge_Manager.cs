@@ -68,6 +68,14 @@ namespace dune_library.Player_Resources
       return Faction_Knowledge_Dict[source].Remove_Spice(to_remove);
     }
 
+    public uint getSpice(Faction source)
+    {
+       if (Faction_Knowledge_Dict.ContainsKey(source) == false) {
+        throw new Faction_Not_In_Play(source);
+      }
+      return Faction_Knowledge_Dict[source].Spice;
+    }
+
     #endregion
 
     #region I_Treachery_Cards_Manager implementation

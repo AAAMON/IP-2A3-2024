@@ -26,5 +26,7 @@ namespace dune_library.Player_Resources.Knowledge_Manager_Interfaces {
     public void Add_Spice_To(Faction reciever, uint to_add);
 
     public bool Remove_Spice_From(Faction source, uint to_remove);
-  }
+
+    public uint getSpice(Faction faction);
+    }
 }

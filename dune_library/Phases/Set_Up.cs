@@ -138,9 +138,60 @@ namespace dune_library.Phases {
         To_Place_Now.Transfer_From(Faction.Fremen, Reserves, 10);
 
       //custom for fremen, change later
-      Map.Sietch_Tabr.Sections[0].Forces.Transfer_From(Faction.Fremen, To_Place_Now, 10);
-      }
+      int forces_distributed = 0;
+        while (forces_distributed != 10)
+        {
+            System.Console.WriteLine("Choose city for fremen and number of troops");
+            String line = Console.ReadLine();
 
+
+            while (line == null)
+            {
+                System.Console.WriteLine("Invalid input.");
+                line = Console.ReadLine();
+            }
+            String[] arg = line.Split(" ");
+            if (arg[0].Equals("SietchTabr"))
+            {
+                if (arg[1].ToString().Length() == 2)
+                {
+                    Map.Sietch_Tabr.Sections[0].Forces.Transfer_From(Faction.Fremen, To_Place_Now, 10);
+                    forces_distributed = 10;
+                }
+                else
+                {
+                    forces_distributed += Convert.ToInt32(arg[1].ToString());
+                    Map.Sietch_Tabr.Sections[0].Forces.Transfer_From(Faction.Fremen, To_Place_Now, 10);
+                }
+            }
+            else if (arg[0].Equals("WallSouth"))
+            {
+                if (arg[1].ToString().Length() == 2)
+                {
+                    Map.False_Wall_South.Sections[0].Forces.Transfer_From(Faction.Fremen, To_Place_Now, 10);
+                    forces_distributed = 10;
+                }
+                else
+                {
+                    forces_distributed += Convert.ToInt32(arg[1].ToString());
+                    Map.False_Wall_South.Sections[0].Forces.Transfer_From(Faction.Fremen, To_Place_Now, 10);
+                }
+            }
+            else if (arg[0].Equals("FalseWallWest"))
+            {
+                if (arg[1].ToString().Length() == 2)
+                {
+                    Map.False_Wall_West.Sections[0].Forces.Transfer_From(Faction.Fremen, To_Place_Now, 10);
+                    forces_distributed = 10;
+                }
+                else
+                {
+                    forces_distributed += Convert.ToInt32(arg[1].ToString());
+                    Map.False_Wall_West.Sections[0].Forces.Transfer_From(Faction.Fremen, To_Place_Now, 10);
+                }
+            }
+        }
+      }
       moment = "treachery card distribution";
 
       Factions_In_Play.ForEach(faction => {
