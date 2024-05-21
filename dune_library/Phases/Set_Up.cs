@@ -141,9 +141,8 @@ namespace dune_library.Phases {
       int forces_distributed = 0;
         while (forces_distributed != 10)
         {
-            System.Console.WriteLine("Choose city for fremen and number of troops");
+            System.Console.WriteLine("Choose city for fremen and number of troops (ex WallSouth 10)");
             String line = Console.ReadLine();
-
 
             while (line == null)
             {

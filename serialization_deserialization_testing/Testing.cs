@@ -16,6 +16,5 @@ namespace serialization_deserialization_testing
             Game.Start(players);
 
         }
-        //Game game = new Game();
     }
 }

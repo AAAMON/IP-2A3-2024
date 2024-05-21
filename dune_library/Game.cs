@@ -30,8 +30,27 @@ namespace dune_library {
     }
 
     public void Play() {
+        
+
+        //pentru a testa un singur phase si ca sa fie totul ok am ales sa fac un phase nou numit custom_set_up pe care il puteti modifica cum doriti
+        //un exemplu pe care l-am gandit pentru charity phase e sa modific in custom_set_up cati bani primeste fiecare si sa vad daca chiar imi modifica cum trebuie
+        //daca credeti ca trebuie sa modificati ceva inafara clasei cu phase-ul(custom-set-up/phase-ul pe care il testati) mai intai vorbiti cu Cosmin
+        //deoarece e posibil ca ceea ce doriti sa adaugati sa fie deja intr-o forma sau alta
+
+        //rulati codul din testing -> Testing.cs
+
+
+        //exemplu de cod 
+        //Phase = new Custom_Set_Up(this, this, Players, factions_distribution, player_markers, Map);
+        //Phase.ValueUnsafe().Play_Out();
+        //Phase = new CharityPhase(this);
+        //Phase.ValueUnsafe().Play_Out();
+
+
+        //commentati de aici in jos daca vreti sa testati mai rapid
         Phase = new Set_Up(this, this, Players, factions_distribution, player_markers, Map);
         Phase.ValueUnsafe().Play_Out();
+
         for (Round = 1; Round <= 10; Round += 1) {
         //storm
         Console.WriteLine("Storm Phase");

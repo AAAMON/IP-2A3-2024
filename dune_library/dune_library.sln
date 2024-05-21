@@ -5,9 +5,9 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dune_library", "dune_library.csproj", "{E871BF66-1A7B-4F0F-BD32-E32BABE9288D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "serialization_deserialization_testing", "..\serialization_deserialization_testing\serialization_deserialization_testing.csproj", "{EB8F8F2C-8C07-4F3E-9198-A5C208235CD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "testing", "..\serialization_deserialization_testing\testing.csproj", "{EB8F8F2C-8C07-4F3E-9198-A5C208235CD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "library_tests", "..\library_tests\library_tests.csproj", "{8383F2A6-3510-4C5F-96A9-562D88526B86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "library_tests", "..\library_tests\library_tests.csproj", "{8383F2A6-3510-4C5F-96A9-562D88526B86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
