@@ -13,7 +13,7 @@ public class ClientAI
     
     private readonly string baseUrl = "http://localhost:8000/";
     private readonly string getMoveBodyUrl = "http://localhost:8000/get-move-body";
-    private readonly string getMoveHeadUrl = "http://localhost:8000/get-move-head";
+    private readonly string getMoveHeadUrl = "http://localhost:8000/get-move-header";
     static readonly HttpClient client = new HttpClient();
 
 
