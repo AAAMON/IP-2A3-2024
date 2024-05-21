@@ -284,7 +284,7 @@ namespace HttpServer
 
                     using (var reader = cmd.ExecuteReader())
                     {
-                        if (reader.FieldCount > 0) { conn.Close(); return true; }
+                        if (reader.Read() > 0) { conn.Close(); return true; }
                         else { conn.Close(); return false; }
                     }
                 }
