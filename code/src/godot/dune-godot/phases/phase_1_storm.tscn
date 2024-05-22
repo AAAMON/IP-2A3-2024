@@ -4,25 +4,29 @@
 [ext_resource type="Script" path="res://phases/phase_1_storm.gd" id="1_jy8qy"]
 [ext_resource type="Script" path="res://phases/LineEdit.gd" id="3_ml3dp"]
 
-[node name="phase1" type="Control"]
+[node name="Phase1" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = 173.0
+offset_right = -431.0
+offset_bottom = -274.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jy8qy")
+metadata/_edit_group_ = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="InputBox" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 420.0
-offset_top = 208.0
-offset_right = 719.0
-offset_bottom = 420.0
+offset_left = 400.0
+offset_right = 700.0
+offset_bottom = 200.0
 texture = ExtResource("1_j0grl")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="TextureRect"]
+[node name="Title" type="Label" parent="InputBox"]
 layout_mode = 0
 offset_left = 103.0
 offset_top = 13.0
@@ -31,7 +35,7 @@ offset_bottom = 36.0
 text = "Storm"
 horizontal_alignment = 1
 
-[node name="LineEdit" type="LineEdit" parent="TextureRect"]
+[node name="Input" type="LineEdit" parent="InputBox"]
 layout_mode = 0
 offset_left = 71.0
 offset_top = 94.0
@@ -42,12 +46,41 @@ placeholder_text = "Enter a number from 1 to 3"
 virtual_keyboard_type = 2
 script = ExtResource("3_ml3dp")
 
-[node name="Button" type="Button" parent="TextureRect"]
+[node name="Submit" type="Button" parent="InputBox"]
 layout_mode = 0
-offset_left = 118.0
-offset_top = 166.0
-offset_right = 181.0
-offset_bottom = 197.0
+offset_left = 115.0
+offset_top = 152.0
+offset_right = 178.0
+offset_bottom = 183.0
 text = "Submit"
 
-[connection signal="text_changed" from="TextureRect/LineEdit" to="TextureRect/LineEdit" method="_on_text_changed"]
+[node name="MessageBox" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 100.0
+texture = ExtResource("1_j0grl")
+expand_mode = 1
+
+[node name="Title" type="Label" parent="MessageBox"]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 13.0
+offset_right = 188.0
+offset_bottom = 36.0
+text = "Storm"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="MessageBox"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 56.0
+offset_right = 291.0
+offset_bottom = 79.0
+theme_override_font_sizes/font_size = 13
+text = "Players x and y are choosing storm..."
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="text_changed" from="InputBox/Input" to="InputBox/Input" method="_on_text_changed"]
+[connection signal="pressed" from="InputBox/Submit" to="." method="_on_submit_pressed"]

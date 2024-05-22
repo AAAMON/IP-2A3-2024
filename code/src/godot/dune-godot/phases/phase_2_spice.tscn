@@ -1,28 +1,35 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdfffv880mmoa"]
+[gd_scene load_steps=3 format=3 uid="uid://cdfffv880mmoa"]
 
+[ext_resource type="Script" path="res://phases/phase_2_spice.gd" id="1_doe86"]
 [ext_resource type="Texture2D" uid="uid://dxgmy13s2g4un" path="res://assets/Asset 53.png" id="1_l47yq"]
 
-[node name="phase2" type="Control"]
+[node name="Phase2" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 34.0
+offset_top = 150.0
+offset_right = -818.0
+offset_bottom = -438.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_doe86")
+metadata/_edit_group_ = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="MessageBox" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 420.0
-offset_top = 208.0
-offset_right = 719.0
-offset_bottom = 267.0
+offset_right = 300.0
+offset_bottom = 60.0
 texture = ExtResource("1_l47yq")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="TextureRect"]
+[node name="Description" type="Label" parent="MessageBox"]
 layout_mode = 0
 offset_left = 41.0
 offset_top = 21.0
 offset_right = 255.0
 offset_bottom = 44.0
 text = "Territory X received Y spice!"
+
+[node name="Timer" type="Timer" parent="."]

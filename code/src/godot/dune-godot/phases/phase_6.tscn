@@ -2,28 +2,27 @@
 
 [ext_resource type="Texture2D" uid="uid://dxgmy13s2g4un" path="res://assets/Asset 53.png" id="1_6rg3p"]
 
-[node name="phase5" type="Control"]
+[node name="Phase5" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 27.0
-offset_top = 138.0
-offset_right = -805.0
-offset_bottom = -335.0
+offset_left = 408.0
+offset_top = 212.0
+offset_right = -444.0
+offset_bottom = -286.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_group_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -3.0
-offset_top = 18.0
-offset_right = 296.0
-offset_bottom = 160.0
+offset_right = 300.0
+offset_bottom = 150.0
 texture = ExtResource("1_6rg3p")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="TextureRect"]
+[node name="Title" type="Label" parent="TextureRect"]
 layout_mode = 0
 offset_left = 27.0
 offset_top = 19.0
@@ -32,7 +31,7 @@ offset_bottom = 42.0
 text = "Shipment"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="TextureRect"]
+[node name="Skip" type="Button" parent="TextureRect"]
 layout_mode = 0
 offset_left = 31.0
 offset_top = 107.0
@@ -40,7 +39,7 @@ offset_right = 85.0
 offset_bottom = 138.0
 text = "Skip..."
 
-[node name="Label2" type="Label" parent="TextureRect"]
+[node name="Description" type="Label" parent="TextureRect"]
 layout_mode = 0
 offset_left = 35.0
 offset_top = 50.0

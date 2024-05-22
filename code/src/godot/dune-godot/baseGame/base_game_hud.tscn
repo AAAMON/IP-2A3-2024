@@ -350,112 +350,7 @@ offset_right = 1375.43
 offset_bottom = 134.429
 texture = ExtResource("20_aihq0")
 
-[node name="TextureButton" type="TextureButton" parent="otherPlayersHUD"]
-layout_mode = 0
-offset_left = 550.0
-offset_top = 10.7143
-offset_right = 832.0
-offset_bottom = 92.7143
-texture_normal = ExtResource("21_1elrt")
-
-[node name="TextureButton7" type="TextureButton" parent="otherPlayersHUD"]
-layout_mode = 0
-offset_left = 667.619
-offset_top = 42.9048
-offset_right = 712.619
-offset_bottom = 87.9048
-texture_normal = ExtResource("22_jplrn")
-
-[node name="TextureButton9" type="TextureButton" parent="otherPlayersHUD"]
-layout_mode = 0
-offset_left = 700.952
-offset_top = 42.9048
-offset_right = 824.952
-offset_bottom = 87.9048
-texture_normal = ExtResource("23_oeyqg")
-flip_h = true
-
-[node name="TextureButton10" type="TextureButton" parent="otherPlayersHUD"]
-layout_mode = 0
-offset_left = 554.762
-offset_top = 42.8571
-offset_right = 678.762
-offset_bottom = 87.8571
-texture_normal = ExtResource("23_oeyqg")
-
-[node name="TextureButton11" type="TextureButton" parent="otherPlayersHUD"]
-layout_mode = 0
-offset_left = 558.0
-offset_top = 18.0
-offset_right = 823.0
-offset_bottom = 41.0
-texture_normal = ExtResource("24_j2nk6")
-
-[node name="player3" type="Label" parent="otherPlayersHUD/TextureButton11"]
-layout_mode = 0
-offset_left = 71.7619
-offset_top = 3.42857
-offset_right = 195.762
-offset_bottom = 21.4286
-theme = SubResource("Theme_skht1")
-text = "PLAYER NAME"
-label_settings = SubResource("LabelSettings_goyfp")
-
-[node name="TextureButton6" type="TextureButton" parent="otherPlayersHUD"]
-layout_mode = 0
-offset_left = 72.619
-offset_top = 95.2381
-offset_right = 1304.62
-offset_bottom = 129.238
-texture_normal = ExtResource("25_ru3ul")
-
-[node name="turn" type="Label" parent="otherPlayersHUD/TextureButton6"]
-layout_mode = 0
-offset_left = 228.572
-offset_top = 9.5238
-offset_right = 513.572
-offset_bottom = 32.5238
-text = "turn -1"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="phase" type="Label" parent="otherPlayersHUD/TextureButton6"]
-layout_mode = 0
-offset_left = 475.0
-offset_top = 6.0
-offset_right = 760.0
-offset_bottom = 29.0
-text = "Phase -1"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TextureButton2" type="TextureButton" parent="otherPlayersHUD"]
-layout_mode = 0
-offset_left = 301.0
-offset_top = 11.0
-offset_right = 565.0
-offset_bottom = 93.0
-texture_normal = ExtResource("26_6gogh")
-
-[node name="TextureButton4" type="TextureButton" parent="otherPlayersHUD"]
-layout_mode = 0
-offset_left = 814.286
-offset_top = 10.7143
-offset_right = 1096.29
-offset_bottom = 92.7143
-texture_normal = ExtResource("26_6gogh")
-flip_h = true
-
-[node name="TextureButton5" type="TextureButton" parent="otherPlayersHUD"]
-layout_mode = 0
-offset_left = 1061.52
-offset_top = 11.8095
-offset_right = 1325.52
-offset_bottom = 93.8095
-texture_normal = ExtResource("26_6gogh")
-flip_h = true
-
-[node name="TextureButton3" type="TextureButton" parent="otherPlayersHUD"]
+[node name="Player1" type="TextureButton" parent="otherPlayersHUD"]
 layout_mode = 0
 offset_left = 53.5714
 offset_top = 10.7143
@@ -463,155 +358,44 @@ offset_right = 335.571
 offset_bottom = 92.7143
 texture_normal = ExtResource("26_6gogh")
 
-[node name="TextureButton8" type="TextureButton" parent="otherPlayersHUD"]
+[node name="Player1SpiceBox" type="TextureButton" parent="otherPlayersHUD/Player1"]
 layout_mode = 0
-offset_left = 927.381
-offset_top = 44.0476
-offset_right = 972.381
-offset_bottom = 89.0476
-texture_normal = ExtResource("22_jplrn")
-
-[node name="TextureButton14" type="TextureButton" parent="otherPlayersHUD"]
-layout_mode = 0
-offset_left = 827.0
-offset_top = 18.0
-offset_right = 1070.0
-offset_bottom = 41.0
-texture_normal = ExtResource("27_5kowd")
-
-[node name="player4" type="Label" parent="otherPlayersHUD/TextureButton14"]
-layout_mode = 0
-offset_left = 59.9048
-offset_top = 3.42857
-offset_right = 183.905
-offset_bottom = 21.4286
-theme = SubResource("Theme_skht1")
-text = "PLAYER NAME"
-label_settings = SubResource("LabelSettings_goyfp")
-
-[node name="TextureButton12" type="TextureButton" parent="otherPlayersHUD"]
-layout_mode = 0
-offset_left = 961.0
-offset_top = 43.0
-offset_right = 1073.0
-offset_bottom = 88.0
-texture_normal = ExtResource("28_jbaol")
-
-[node name="TextureButton13" type="TextureButton" parent="otherPlayersHUD"]
-layout_mode = 0
-offset_left = 826.19
-offset_top = 44.0476
-offset_right = 939.19
-offset_bottom = 89.0476
-texture_normal = ExtResource("29_jitfh")
-
-[node name="TextureButton15" type="TextureButton" parent="otherPlayersHUD"]
-layout_mode = 0
-offset_left = 1175.0
-offset_top = 43.9048
-offset_right = 1220.0
-offset_bottom = 88.9048
-texture_normal = ExtResource("22_jplrn")
-
-[node name="TextureButton16" type="TextureButton" parent="otherPlayersHUD"]
-layout_mode = 0
-offset_left = 1074.62
-offset_top = 17.8571
-offset_right = 1317.62
-offset_bottom = 40.8571
-texture_normal = ExtResource("27_5kowd")
-
-[node name="player5" type="Label" parent="otherPlayersHUD/TextureButton16"]
-layout_mode = 0
-offset_left = 59.9048
-offset_top = 3.57143
-offset_right = 183.905
-offset_bottom = 21.5714
-theme = SubResource("Theme_skht1")
-text = "PLAYER NAME"
-label_settings = SubResource("LabelSettings_goyfp")
-
-[node name="TextureButton17" type="TextureButton" parent="otherPlayersHUD"]
-layout_mode = 0
-offset_left = 1208.62
-offset_top = 42.8571
-offset_right = 1320.62
-offset_bottom = 87.8571
-texture_normal = ExtResource("28_jbaol")
-
-[node name="TextureButton18" type="TextureButton" parent="otherPlayersHUD"]
-layout_mode = 0
-offset_left = 1073.81
-offset_top = 43.9048
-offset_right = 1186.81
-offset_bottom = 88.9048
-texture_normal = ExtResource("29_jitfh")
-
-[node name="TextureButton19" type="TextureButton" parent="otherPlayersHUD"]
-layout_mode = 0
-offset_left = 408.333
-offset_top = 42.7143
-offset_right = 453.333
-offset_bottom = 87.7143
-texture_normal = ExtResource("22_jplrn")
-flip_h = true
-
-[node name="TextureButton20" type="TextureButton" parent="otherPlayersHUD"]
-layout_mode = 0
-offset_left = 307.952
-offset_top = 16.6667
-offset_right = 550.952
-offset_bottom = 39.6667
-texture_normal = ExtResource("27_5kowd")
-flip_h = true
-
-[node name="player2" type="Label" parent="otherPlayersHUD/TextureButton20"]
-layout_mode = 0
-offset_left = 64.6667
-offset_top = 3.57143
-offset_right = 188.667
-offset_bottom = 21.5714
-theme = SubResource("Theme_skht1")
-text = "PLAYER NAME"
-label_settings = SubResource("LabelSettings_goyfp")
-
-[node name="TextureButton21" type="TextureButton" parent="otherPlayersHUD"]
-layout_mode = 0
-offset_left = 307.143
-offset_top = 42.8571
-offset_right = 419.143
-offset_bottom = 87.8571
+offset_left = 5.9524
+offset_top = 32.1428
+offset_right = 117.953
+offset_bottom = 77.1428
 texture_normal = ExtResource("28_jbaol")
 flip_h = true
 
-[node name="TextureButton22" type="TextureButton" parent="otherPlayersHUD"]
+[node name="Player1Spice" type="Label" parent="otherPlayersHUD/Player1/Player1SpiceBox"]
 layout_mode = 0
-offset_left = 441.667
-offset_top = 42.8571
-offset_right = 554.667
-offset_bottom = 87.8571
+offset_left = 23.0
+offset_top = 15.0
+offset_right = 77.0
+offset_bottom = 33.0
+theme = SubResource("Theme_skht1")
+text = "spice"
+label_settings = SubResource("LabelSettings_goyfp")
+
+[node name="Player1CardsBox" type="TextureButton" parent="otherPlayersHUD/Player1"]
+layout_mode = 0
+offset_left = 140.477
+offset_top = 32.1428
+offset_right = 253.477
+offset_bottom = 77.1428
 texture_normal = ExtResource("29_jitfh")
 flip_h = true
 
-[node name="TextureButton23" type="TextureButton" parent="otherPlayersHUD"]
+[node name="Player1NameBox" type="TextureButton" parent="otherPlayersHUD/Player1"]
 layout_mode = 0
-offset_left = 160.714
-offset_top = 42.7143
-offset_right = 205.714
-offset_bottom = 87.7143
-texture_normal = ExtResource("22_jplrn")
-flip_h = true
-
-[node name="TextureButton24" type="TextureButton" parent="otherPlayersHUD"]
-layout_mode = 0
-offset_left = 60.3333
-offset_top = 16.6667
-offset_right = 303.333
-offset_bottom = 39.6667
+offset_left = 6.7619
+offset_top = 5.9524
+offset_right = 249.762
+offset_bottom = 28.9524
 texture_normal = ExtResource("27_5kowd")
 flip_h = true
 
-[node name="player1" type="Label" parent="otherPlayersHUD/TextureButton24"]
+[node name="Player1Name" type="Label" parent="otherPlayersHUD/Player1/Player1NameBox"]
 layout_mode = 0
 offset_left = 65.8571
 offset_top = 3.57143
@@ -621,25 +405,292 @@ theme = SubResource("Theme_skht1")
 text = "PLAYER NAME"
 label_settings = SubResource("LabelSettings_goyfp")
 
-[node name="TextureButton25" type="TextureButton" parent="otherPlayersHUD"]
+[node name="Player1Faction" type="TextureButton" parent="otherPlayersHUD/Player1"]
 layout_mode = 0
-offset_left = 59.5238
-offset_top = 42.8571
-offset_right = 171.524
-offset_bottom = 87.8571
+offset_left = 107.143
+offset_top = 32.0
+offset_right = 152.143
+offset_bottom = 77.0
+texture_normal = ExtResource("22_jplrn")
+flip_h = true
+
+[node name="Player2" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 301.0
+offset_top = 11.0
+offset_right = 565.0
+offset_bottom = 93.0
+texture_normal = ExtResource("26_6gogh")
+
+[node name="Player2Faction" type="TextureButton" parent="otherPlayersHUD/Player2"]
+layout_mode = 0
+offset_left = 107.333
+offset_top = 31.7143
+offset_right = 152.333
+offset_bottom = 76.7143
+texture_normal = ExtResource("22_jplrn")
+flip_h = true
+
+[node name="Player2NameBox" type="TextureButton" parent="otherPlayersHUD/Player2"]
+layout_mode = 0
+offset_left = 6.952
+offset_top = 5.6667
+offset_right = 249.952
+offset_bottom = 28.6667
+texture_normal = ExtResource("27_5kowd")
+flip_h = true
+
+[node name="Player2Name" type="Label" parent="otherPlayersHUD/Player2/Player2NameBox"]
+layout_mode = 0
+offset_left = 64.6667
+offset_top = 3.57143
+offset_right = 188.667
+offset_bottom = 21.5714
+theme = SubResource("Theme_skht1")
+text = "PLAYER NAME"
+label_settings = SubResource("LabelSettings_goyfp")
+
+[node name="Player2SpiceBox" type="TextureButton" parent="otherPlayersHUD/Player2"]
+layout_mode = 0
+offset_left = 6.14301
+offset_top = 31.8571
+offset_right = 118.143
+offset_bottom = 76.8571
 texture_normal = ExtResource("28_jbaol")
 flip_h = true
 
-[node name="TextureButton26" type="TextureButton" parent="otherPlayersHUD"]
+[node name="Player2Spice" type="Label" parent="otherPlayersHUD/Player2/Player2SpiceBox"]
 layout_mode = 0
-offset_left = 194.048
-offset_top = 42.8571
-offset_right = 307.048
-offset_bottom = 87.8571
+offset_left = 24.0
+offset_top = 14.0
+offset_right = 74.0
+offset_bottom = 32.0
+theme = SubResource("Theme_skht1")
+text = "spice
+"
+label_settings = SubResource("LabelSettings_goyfp")
+
+[node name="Player2CardsBox" type="TextureButton" parent="otherPlayersHUD/Player2"]
+layout_mode = 0
+offset_left = 140.667
+offset_top = 31.8571
+offset_right = 253.667
+offset_bottom = 76.8571
 texture_normal = ExtResource("29_jitfh")
 flip_h = true
 
-[node name="TextureRect" type="TextureRect" parent="otherPlayersHUD"]
+[node name="Player3" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 550.0
+offset_top = 10.7143
+offset_right = 832.0
+offset_bottom = 92.7143
+texture_normal = ExtResource("21_1elrt")
+
+[node name="Player3Faction" type="TextureButton" parent="otherPlayersHUD/Player3"]
+layout_mode = 0
+offset_left = 117.619
+offset_top = 32.1905
+offset_right = 162.619
+offset_bottom = 77.1905
+texture_normal = ExtResource("22_jplrn")
+
+[node name="Player3CardsBox" type="TextureButton" parent="otherPlayersHUD/Player3"]
+layout_mode = 0
+offset_left = 150.952
+offset_top = 32.1905
+offset_right = 274.952
+offset_bottom = 77.1905
+texture_normal = ExtResource("23_oeyqg")
+flip_h = true
+
+[node name="Player3NameBox" type="TextureButton" parent="otherPlayersHUD/Player3"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 7.2857
+offset_right = 273.0
+offset_bottom = 30.2857
+texture_normal = ExtResource("24_j2nk6")
+
+[node name="Player3Name" type="Label" parent="otherPlayersHUD/Player3/Player3NameBox"]
+layout_mode = 0
+offset_left = 71.7619
+offset_top = 3.42857
+offset_right = 195.762
+offset_bottom = 21.4286
+theme = SubResource("Theme_skht1")
+text = "PLAYER NAME"
+label_settings = SubResource("LabelSettings_goyfp")
+
+[node name="Player3SpiceBox" type="TextureButton" parent="otherPlayersHUD/Player3"]
+layout_mode = 0
+offset_left = 4.76202
+offset_top = 32.1428
+offset_right = 128.762
+offset_bottom = 77.1428
+texture_normal = ExtResource("23_oeyqg")
+
+[node name="Player3Spice" type="Label" parent="otherPlayersHUD/Player3/Player3SpiceBox"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 14.0
+offset_right = 84.0
+offset_bottom = 32.0
+theme = SubResource("Theme_skht1")
+text = "spice"
+label_settings = SubResource("LabelSettings_goyfp")
+
+[node name="Player4" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 814.286
+offset_top = 10.7143
+offset_right = 1096.29
+offset_bottom = 92.7143
+texture_normal = ExtResource("26_6gogh")
+flip_h = true
+
+[node name="Player4Faction" type="TextureButton" parent="otherPlayersHUD/Player4"]
+layout_mode = 0
+offset_left = 113.095
+offset_top = 33.3333
+offset_right = 158.095
+offset_bottom = 78.3333
+texture_normal = ExtResource("22_jplrn")
+
+[node name="Player4CardsBox" type="TextureButton" parent="otherPlayersHUD/Player4"]
+layout_mode = 0
+offset_left = 146.714
+offset_top = 32.2857
+offset_right = 258.714
+offset_bottom = 77.2857
+texture_normal = ExtResource("28_jbaol")
+
+[node name="Player4NameBox" type="TextureButton" parent="otherPlayersHUD/Player4"]
+layout_mode = 0
+offset_left = 12.714
+offset_top = 7.2857
+offset_right = 255.714
+offset_bottom = 30.2857
+texture_normal = ExtResource("27_5kowd")
+
+[node name="Player4Name" type="Label" parent="otherPlayersHUD/Player4/Player4NameBox"]
+layout_mode = 0
+offset_left = 59.9048
+offset_top = 3.42857
+offset_right = 183.905
+offset_bottom = 21.4286
+theme = SubResource("Theme_skht1")
+text = "PLAYER NAME"
+label_settings = SubResource("LabelSettings_goyfp")
+
+[node name="Player4SpiceBox" type="TextureButton" parent="otherPlayersHUD/Player4"]
+layout_mode = 0
+offset_left = 11.904
+offset_top = 33.3333
+offset_right = 124.904
+offset_bottom = 78.3333
+texture_normal = ExtResource("29_jitfh")
+
+[node name="Player4Spice" type="Label" parent="otherPlayersHUD/Player4/Player4SpiceBox"]
+layout_mode = 0
+offset_left = 30.9529
+offset_top = 13.0953
+offset_right = 76.9529
+offset_bottom = 31.0953
+theme = SubResource("Theme_skht1")
+text = "spice"
+label_settings = SubResource("LabelSettings_goyfp")
+
+[node name="Player5" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 1061.52
+offset_top = 11.8095
+offset_right = 1325.52
+offset_bottom = 93.8095
+texture_normal = ExtResource("26_6gogh")
+flip_h = true
+
+[node name="Player5Faction" type="TextureButton" parent="otherPlayersHUD/Player5"]
+layout_mode = 0
+offset_left = 113.48
+offset_top = 32.0953
+offset_right = 158.48
+offset_bottom = 77.0953
+texture_normal = ExtResource("22_jplrn")
+
+[node name="Player5NameBox" type="TextureButton" parent="otherPlayersHUD/Player5"]
+layout_mode = 0
+offset_left = 13.1
+offset_top = 6.0476
+offset_right = 256.1
+offset_bottom = 29.0476
+texture_normal = ExtResource("27_5kowd")
+
+[node name="Player5Name" type="Label" parent="otherPlayersHUD/Player5/Player5NameBox"]
+layout_mode = 0
+offset_left = 59.9048
+offset_top = 3.57143
+offset_right = 183.905
+offset_bottom = 21.5714
+theme = SubResource("Theme_skht1")
+text = "PLAYER NAME"
+label_settings = SubResource("LabelSettings_goyfp")
+
+[node name="Player5CardsBox" type="TextureButton" parent="otherPlayersHUD/Player5"]
+layout_mode = 0
+offset_left = 147.1
+offset_top = 31.0476
+offset_right = 259.1
+offset_bottom = 76.0476
+texture_normal = ExtResource("28_jbaol")
+
+[node name="Player5SpiceBox" type="TextureButton" parent="otherPlayersHUD/Player5"]
+layout_mode = 0
+offset_left = 12.29
+offset_top = 32.0953
+offset_right = 125.29
+offset_bottom = 77.0953
+texture_normal = ExtResource("29_jitfh")
+
+[node name="Player5Spice" type="Label" parent="otherPlayersHUD/Player5/Player5SpiceBox"]
+layout_mode = 0
+offset_left = 32.1424
+offset_top = 14.4285
+offset_right = 76.1424
+offset_bottom = 32.4285
+theme = SubResource("Theme_skht1")
+text = "spice"
+label_settings = SubResource("LabelSettings_goyfp")
+
+[node name="Status" type="TextureButton" parent="otherPlayersHUD"]
+layout_mode = 0
+offset_left = 72.619
+offset_top = 95.2381
+offset_right = 1304.62
+offset_bottom = 129.238
+texture_normal = ExtResource("25_ru3ul")
+
+[node name="turn" type="Label" parent="otherPlayersHUD/Status"]
+layout_mode = 0
+offset_left = 228.572
+offset_top = 9.5238
+offset_right = 513.572
+offset_bottom = 32.5238
+text = "turn -1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="phase" type="Label" parent="otherPlayersHUD/Status"]
+layout_mode = 0
+offset_left = 475.0
+offset_top = 6.0
+offset_right = 760.0
+offset_bottom = 29.0
+text = "Phase -1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="deleteme1" type="TextureRect" parent="otherPlayersHUD"]
 layout_mode = 0
 offset_left = 14.2857
 offset_top = 10.7143
@@ -648,7 +699,7 @@ offset_bottom = 128.714
 texture = ExtResource("30_m248h")
 flip_h = true
 
-[node name="TextureRect2" type="TextureRect" parent="otherPlayersHUD"]
+[node name="deletemeee" type="TextureRect" parent="otherPlayersHUD"]
 layout_mode = 0
 offset_left = 1269.05
 offset_top = 10.7143
@@ -656,19 +707,4 @@ offset_right = 1366.05
 offset_bottom = 128.714
 texture = ExtResource("30_m248h")
 
-[node name="deleteme1" type="Button" parent="."]
-offset_left = 177.381
-offset_top = 146.429
-offset_right = 301.381
-offset_bottom = 177.429
-text = "Get Gamestate"
-
-[node name="deleteme2" type="Button" parent="."]
-offset_left = 316.667
-offset_top = 142.857
-offset_right = 440.667
-offset_bottom = 173.857
-text = "Next Phase"
-
 [connection signal="pressed" from="playerHUD/buttonForces" to="popup" method="_on_button_forces_pressed"]
-[connection signal="pressed" from="deleteme2" to="." method="_on_deleteme_2_pressed"]

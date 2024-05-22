@@ -3,24 +3,27 @@
 [ext_resource type="Texture2D" uid="uid://dxgmy13s2g4un" path="res://assets/Asset 53.png" id="1_yvi76"]
 [ext_resource type="Script" path="res://phases/inputBid.gd" id="2_dxhjn"]
 
-[node name="phase4" type="Control"]
+[node name="Phase4" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 418.0
+offset_top = 196.0
+offset_right = -434.0
+offset_bottom = -227.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_group_ = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="MessageBox" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 420.0
-offset_top = 208.0
-offset_right = 719.0
-offset_bottom = 432.0
+offset_right = 300.0
+offset_bottom = 225.0
 texture = ExtResource("1_yvi76")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="TextureRect"]
+[node name="Title" type="Label" parent="MessageBox"]
 layout_mode = 0
 offset_left = 27.0
 offset_top = 19.0
@@ -29,7 +32,7 @@ offset_bottom = 42.0
 text = "Bidding"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="TextureRect"]
+[node name="Submit" type="Button" parent="MessageBox"]
 layout_mode = 0
 offset_left = 219.0
 offset_top = 171.0
@@ -37,7 +40,7 @@ offset_right = 257.0
 offset_bottom = 202.0
 text = "Bid!"
 
-[node name="inputBid" type="LineEdit" parent="TextureRect"]
+[node name="InputBid" type="LineEdit" parent="MessageBox"]
 layout_mode = 0
 offset_left = 22.0
 offset_top = 174.0
@@ -47,15 +50,15 @@ theme_override_font_sizes/font_size = 12
 placeholder_text = "Enter amount of spice to bid"
 script = ExtResource("2_dxhjn")
 
-[node name="Label2" type="Label" parent="TextureRect"]
+[node name="CardBidded" type="Label" parent="MessageBox"]
 layout_mode = 0
 offset_left = 22.0
 offset_top = 58.0
 offset_right = 171.0
 offset_bottom = 81.0
-text = "First Bidder: Dude1"
+text = "Card: <put card here>"
 
-[node name="Label3" type="Label" parent="TextureRect"]
+[node name="LastBid" type="Label" parent="MessageBox"]
 layout_mode = 0
 offset_left = 23.0
 offset_top = 103.0
@@ -63,4 +66,4 @@ offset_right = 227.0
 offset_bottom = 126.0
 text = "Last bid: 3 spice by Dude 2"
 
-[connection signal="text_changed" from="TextureRect/inputBid" to="TextureRect/inputBid" method="_on_text_changed"]
+[connection signal="text_changed" from="MessageBox/InputBid" to="MessageBox/InputBid" method="_on_text_changed"]

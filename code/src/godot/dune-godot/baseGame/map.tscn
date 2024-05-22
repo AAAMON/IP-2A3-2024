@@ -18,4 +18,504 @@ position = Vector2(-1, 0)
 texture = ExtResource("3_tu7ex")
 centered = false
 
+[node name="MapLabels" type="Node2D" parent="Nice"]
+position = Vector2(-190, 40)
+
+[node name="meridian" type="Label" parent="Nice/MapLabels"]
+offset_left = 460.0
+offset_top = 686.0
+offset_right = 518.0
+offset_bottom = 702.0
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "MERIDIAN	"
+
+[node name="cielago-depression" type="Label" parent="Nice/MapLabels"]
+offset_left = 520.0
+offset_top = 592.0
+offset_right = 645.0
+offset_bottom = 608.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "CIELAGO DEPRESSION"
+
+[node name="cielago-south" type="Label" parent="Nice/MapLabels"]
+offset_left = 578.0
+offset_top = 706.0
+offset_right = 671.0
+offset_bottom = 723.0
+rotation = -0.0682601
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "CIELAGO SOUTH"
+
+[node name="cielago-north" type="Label" parent="Nice/MapLabels"]
+offset_left = 543.0
+offset_top = 484.0
+offset_right = 636.0
+offset_bottom = 501.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "CIELAGO NORTH"
+
+[node name="cielago-east" type="Label" parent="Nice/MapLabels"]
+offset_left = 711.0
+offset_top = 689.0
+offset_right = 787.0
+offset_bottom = 706.0
+rotation = -0.463648
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "CIELAGO EAST"
+
+[node name="false-wall-south" type="Label" parent="Nice/MapLabels"]
+offset_left = 720.0
+offset_top = 540.0
+offset_right = 824.0
+offset_bottom = 557.0
+rotation = -0.790802
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "FALSE WALL SOUTH"
+
+[node name="harg-pass" type="Label" parent="Nice/MapLabels"]
+offset_left = 626.0
+offset_top = 424.0
+offset_right = 657.0
+offset_bottom = 459.0
+rotation = -0.794509
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "HARG
+PASS"
+
+[node name="minor-erg" type="Label" parent="Nice/MapLabels"]
+offset_left = 694.0
+offset_top = 337.0
+offset_right = 756.0
+offset_bottom = 372.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "THE MINOR
+ERG"
+horizontal_alignment = 1
+
+[node name="pasty-mesa" type="Label" parent="Nice/MapLabels"]
+offset_left = 808.0
+offset_top = 350.0
+offset_right = 874.0
+offset_bottom = 366.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "PASTY MESA"
+horizontal_alignment = 1
+
+[node name="tueks-sietch" type="Label" parent="Nice/MapLabels"]
+offset_left = 838.0
+offset_top = 532.0
+offset_right = 904.0
+offset_bottom = 567.0
+rotation = -1.00421
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "TUEK'S
+SIETCH"
+horizontal_alignment = 1
+
+[node name="south-mesa" type="Label" parent="Nice/MapLabels"]
+offset_left = 898.0
+offset_top = 562.0
+offset_right = 969.0
+offset_bottom = 580.0
+rotation = -1.07521
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "SOUTH-MESA
+"
+horizontal_alignment = 1
+
+[node name="false-wall-east" type="Label" parent="Nice/MapLabels"]
+offset_left = 652.0
+offset_top = 395.0
+offset_right = 745.0
+offset_bottom = 413.0
+rotation = -1.57848
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "FALSE WALL EAST
+"
+horizontal_alignment = 1
+
+[node name="wind-pass-north" type="Label" parent="Nice/MapLabels"]
+offset_left = 518.0
+offset_top = 403.0
+offset_right = 557.0
+offset_bottom = 457.0
+rotation = 0.701306
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "WIND
+PASS
+NORTH"
+horizontal_alignment = 1
+
+[node name="wind-pass" type="Label" parent="Nice/MapLabels"]
+offset_left = 478.0
+offset_top = 343.0
+offset_right = 517.0
+offset_bottom = 378.0
+rotation = -0.0037861
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "WIND
+PASS"
+horizontal_alignment = 1
+
+[node name="habbanya-ridge-flat" type="Label" parent="Nice/MapLabels"]
+offset_left = 293.0
+offset_top = 551.0
+offset_right = 417.0
+offset_bottom = 586.0
+rotation = 0.847563
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "HABBANYA RIDGE FLAT"
+horizontal_alignment = 1
+
+[node name="habbanya-sietch" type="Label" parent="Nice/MapLabels"]
+offset_left = 322.0
+offset_top = 494.0
+offset_right = 382.0
+offset_bottom = 529.0
+rotation = 0.93944
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "HABBANYA
+SIETCH"
+horizontal_alignment = 1
+
+[node name="habbanya-erg" type="Label" parent="Nice/MapLabels"]
+offset_left = 265.0
+offset_top = 432.0
+offset_right = 349.0
+offset_bottom = 448.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "HABBANYA ERG"
+horizontal_alignment = 1
+
+[node name="false-wall-west" type="Label" parent="Nice/MapLabels"]
+offset_left = 419.0
+offset_top = 435.0
+offset_right = 451.0
+offset_bottom = 489.0
+rotation = 0.514165
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "FALSE
+WALL
+WEST"
+horizontal_alignment = 1
+
+[node name="the-greater-flat" type="Label" parent="Nice/MapLabels"]
+offset_left = 231.0
+offset_top = 378.0
+offset_right = 331.0
+offset_bottom = 394.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "THE GREATER FLAT"
+horizontal_alignment = 1
+
+[node name="the-great-flat" type="Label" parent="Nice/MapLabels"]
+offset_left = 231.0
+offset_top = 326.0
+offset_right = 331.0
+offset_bottom = 342.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "THE GREAT FLAT"
+horizontal_alignment = 1
+
+[node name="the-great-flat-spice" type="Label" parent="Nice/MapLabels/the-great-flat"]
+offset_left = 18.0
+offset_top = 12.0
+offset_right = 49.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 9
+text = "spice"
+horizontal_alignment = 1
+
+[node name="the-great-flat-forces" type="Label" parent="Nice/MapLabels/the-great-flat"]
+visible = false
+offset_left = 104.0
+offset_top = -11.0
+offset_right = 169.0
+offset_bottom = 24.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 9
+text = "forces"
+horizontal_alignment = 1
+
+[node name="funeral-plain" type="Label" parent="Nice/MapLabels"]
+offset_left = 237.0
+offset_top = 277.0
+offset_right = 337.0
+offset_bottom = 293.0
+rotation = 0.0850731
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "FUNERAL PLAIN"
+horizontal_alignment = 1
+
+[node name="funeral-plain-spice" type="Label" parent="Nice/MapLabels/funeral-plain"]
+offset_left = 11.0
+offset_top = 11.0
+offset_right = 42.0
+offset_bottom = 24.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 9
+text = "spice"
+horizontal_alignment = 1
+
+[node name="funeral-plain-forces" type="Label" parent="Nice/MapLabels/funeral-plain"]
+visible = false
+offset_left = 88.7398
+offset_top = -18.6076
+offset_right = 119.74
+offset_bottom = -5.60757
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 9
+text = "forces"
+horizontal_alignment = 1
+
+[node name="bight-cliff" type="Label" parent="Nice/MapLabels"]
+offset_left = 220.0
+offset_top = 248.0
+offset_right = 275.0
+offset_bottom = 283.0
+rotation = -1.16634
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "BIGHT OF 
+THE CLIFF"
+horizontal_alignment = 1
+
+[node name="sietch-tabr" type="Label" parent="Nice/MapLabels"]
+offset_left = 286.0
+offset_top = 208.0
+offset_right = 341.0
+offset_bottom = 243.0
+rotation = -0.89635
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "SIETCH
+TABR"
+horizontal_alignment = 1
+
+[node name="plastic-basin" type="Label" parent="Nice/MapLabels"]
+offset_left = 359.0
+offset_top = 160.0
+offset_right = 437.0
+offset_bottom = 176.0
+rotation = -0.707582
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "PLASTIC BASIN"
+horizontal_alignment = 1
+
+[node name="rock-outcroppings" type="Label" parent="Nice/MapLabels"]
+offset_left = 281.0
+offset_top = 128.0
+offset_right = 399.0
+offset_bottom = 144.0
+rotation = -0.766795
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "ROCK OUTCROPPINGS"
+horizontal_alignment = 1
+
+[node name="broken-land" type="Label" parent="Nice/MapLabels"]
+offset_left = 451.0
+offset_top = 2.99999
+offset_right = 569.0
+offset_bottom = 19.0
+rotation = -0.210835
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "BROKEN LAND"
+horizontal_alignment = 1
+
+[node name="tsimpo" type="Label" parent="Nice/MapLabels"]
+offset_left = 511.0
+offset_top = 53.0
+offset_right = 561.0
+offset_bottom = 69.0
+rotation = -0.164214
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "TSIMPO"
+horizontal_alignment = 1
+
+[node name="hagga-basin" type="Label" parent="Nice/MapLabels"]
+offset_left = 459.0
+offset_top = 197.0
+offset_right = 534.0
+offset_bottom = 213.0
+rotation = -0.366701
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "HAGGA BASIN"
+horizontal_alignment = 1
+
+[node name="arsunt" type="Label" parent="Nice/MapLabels"]
+offset_left = 549.0
+offset_top = 224.0
+offset_right = 593.0
+offset_bottom = 240.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "ARSUNT"
+horizontal_alignment = 1
+
+[node name="carthag" type="Label" parent="Nice/MapLabels"]
+offset_left = 555.0
+offset_top = 107.0
+offset_right = 606.0
+offset_bottom = 123.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "CARTHAG"
+horizontal_alignment = 1
+
+[node name="imperial-basin" type="Label" parent="Nice/MapLabels"]
+offset_left = 633.0
+offset_top = 162.0
+offset_right = 684.0
+offset_bottom = 197.0
+rotation = 0.393068
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "IMPERIAL
+BASIN"
+horizontal_alignment = 1
+
+[node name="arrakeen" type="Label" parent="Nice/MapLabels"]
+offset_left = 687.0
+offset_top = 66.0
+offset_right = 744.0
+offset_bottom = 82.0
+rotation = 0.393068
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "ARRAKEEN
+"
+horizontal_alignment = 1
+
+[node name="old-gap" type="Label" parent="Nice/MapLabels"]
+offset_left = 689.0
+offset_top = -9.00002
+offset_right = 746.0
+offset_bottom = 6.99998
+rotation = 0.345744
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "OLD GAP"
+horizontal_alignment = 1
+
+[node name="basin" type="Label" parent="Nice/MapLabels"]
+offset_left = 810.0
+offset_top = 48.0
+offset_right = 843.0
+offset_bottom = 64.0
+rotation = 0.672654
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "BASIN"
+horizontal_alignment = 1
+
+[node name="sihaya-ridge" type="Label" parent="Nice/MapLabels"]
+offset_left = 850.0
+offset_top = 78.0
+offset_right = 889.0
+offset_bottom = 113.0
+rotation = 0.808833
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "SIHAYA
+RIDGE"
+horizontal_alignment = 1
+
+[node name="gara-kulon" type="Label" parent="Nice/MapLabels"]
+offset_left = 900.0
+offset_top = 136.0
+offset_right = 939.0
+offset_bottom = 171.0
+rotation = 1.01255
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "GARA
+KULON"
+horizontal_alignment = 1
+
+[node name="rim-wall-west" type="Label" parent="Nice/MapLabels"]
+offset_left = 709.0
+offset_top = 155.0
+offset_right = 794.0
+offset_bottom = 171.0
+rotation = -1.03619
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "RIM WALL WEST"
+horizontal_alignment = 1
+
+[node name="hole-in-rock" type="Label" parent="Nice/MapLabels"]
+offset_left = 713.0
+offset_top = 179.0
+offset_right = 813.0
+offset_bottom = 195.0
+rotation = -0.655242
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "HOLE IN THE ROCK"
+horizontal_alignment = 1
+
+[node name="shield-wall" type="Label" parent="Nice/MapLabels"]
+offset_left = 747.0
+offset_top = 197.0
+offset_right = 785.0
+offset_bottom = 232.0
+rotation = 0.859638
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "SHIELD
+WALL
+"
+horizontal_alignment = 1
+
+[node name="red-chasm" type="Label" parent="Nice/MapLabels"]
+offset_left = 935.0
+offset_top = 296.0
+offset_right = 974.0
+offset_bottom = 331.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "RED
+CHASM
+"
+horizontal_alignment = 1
+
+[node name="polar-sink" type="Label" parent="Nice/MapLabels"]
+offset_left = 548.0
+offset_top = 357.0
+offset_right = 612.0
+offset_bottom = 373.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "POLAR SINK
+"
+horizontal_alignment = 1
+
 [node name="Regions" type="Node2D" parent="."]

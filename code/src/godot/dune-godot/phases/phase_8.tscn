@@ -2,28 +2,27 @@
 
 [ext_resource type="Texture2D" uid="uid://dxgmy13s2g4un" path="res://assets/Asset 53.png" id="1_r4ql8"]
 
-[node name="phase7" type="Control"]
+[node name="Phase8" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 322.0
-offset_top = 146.0
-offset_right = -385.0
-offset_bottom = -175.0
+offset_left = 48.0
+offset_top = 168.0
+offset_right = -804.0
+offset_bottom = -420.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_group_ = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="MessageBox" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 76.0
-offset_top = 77.0
-offset_right = 375.0
-offset_bottom = 136.0
+offset_right = 300.0
+offset_bottom = 60.0
 texture = ExtResource("1_r4ql8")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="TextureRect"]
+[node name="Description" type="Label" parent="MessageBox"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 19.0
