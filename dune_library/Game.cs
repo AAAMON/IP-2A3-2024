@@ -54,7 +54,7 @@ namespace dune_library {
         for (Round = 1; Round <= 10; Round += 1) {
         //storm
         Console.WriteLine("Storm Phase");
-        Phase = new Storm_Phase(this, Round);
+        Phase = new Storm_Phase(this);
         Phase.ValueUnsafe().Play_Out();
         //spice blow
         Console.WriteLine("Spice Blow Phase");

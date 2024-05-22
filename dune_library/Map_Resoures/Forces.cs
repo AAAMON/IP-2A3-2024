@@ -79,9 +79,9 @@ namespace dune_library.Map_Resoures {
 
     public void Transfer_From(Faction faction, Forces source) => source.Transfer_To(faction, this);
 
-    public void Remove_By_Storm(Forces graveyard) {
+    public void Remove_By_Storm(Tleilaxu_Tanks graveyard) {
       Forces_Dict.Keys.ForEach(faction => {
-        Transfer_To(faction, graveyard);
+        Transfer_To(faction, graveyard.Forces);
       });
     }
 

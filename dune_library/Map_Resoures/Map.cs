@@ -1021,17 +1021,6 @@ namespace dune_library.Map_Resources {
     public void Move_Storm_Sector_Forward(uint sectors_to_move) =>
       Storm_Sector = (Storm_Sector + sectors_to_move).To_Sector();
 
-    public void Move_Storm(uint sectors_to_move) { /* !!! Move to Storm Phase, makes more sense for it to be there !!! */
-      Extensions.Range(Storm_Sector + 1, sectors_to_move).ToList().ForEach(pos =>
-        Storm_Affectable[(int)pos].ForEach(section => {
-          Forces graveyard = new(); /* !!! Replace with actual graveyard !!! */
-          section.Forces.Remove_By_Storm(graveyard);
-          section.Delete_Spice();
-        })
-      );
-      Move_Storm_Sector_Forward(sectors_to_move);
-    }
-
     #endregion
 
     #region Family Atomics
