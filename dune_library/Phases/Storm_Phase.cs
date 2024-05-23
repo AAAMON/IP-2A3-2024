@@ -35,7 +35,7 @@ namespace dune_library.Phases {
 
     public (Battle_Wheel first, Battle_Wheel second) Battle_Wheels { get; }
 
-    public int Calculate_Storm(uint turn) {
+    public int Calculate_Storm() {
       if(turn == 1)
       {
          return new Random().Next(20);
@@ -63,7 +63,7 @@ namespace dune_library.Phases {
         Map.Move_Storm_Sector_Forward(sectors_to_move);
     }
         public override void Play_Out() {
-        int sectors_to_move = Calculate_Storm(turn);
+        int sectors_to_move = Calculate_Storm();
         Move_Storm((uint)sectors_to_move);
         /*Move_Storm(sectors_to_move);*/
       }

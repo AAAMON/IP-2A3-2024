@@ -4,24 +4,44 @@ using dune_library.Player_Resources;
 using dune_library.Utils;
 using System;
 using System.Security.Policy;
+using static System.Collections.Specialized.BitVector32;
 
 namespace dune_library.Phases {
-  /*internal class SpiceBlowPhase : Phase
+  internal class Spice_Blow_And_Nexus : Phase
   {
       private Game game;
 
-      public SpiceBlowPhase(Game game)
+        public override string name => "Spice Blow and Nexus";
+
+        internal Spice_Deck Spice_Deck { get; }
+
+        public override string moment { get; protected set; } = "";
+
+        private uint turn;
+
+        public Spice_Blow_And_Nexus(Game game)
       {
           this.game = game;
+          Spice_Deck = game.Spice_Deck;
+          turn = game.Round;
       }
 
       public override void Play_Out()
       {
-          Spice_Card topCard = game.Spice_Deck.DrawTopCard();
+          Spice_Card topCard = Spice_Deck.Take_Next_Card();
+
+          while (topCard is Shai_Hulud_Card && turn == 1) { 
+              topCard = Spice_Deck.Take_Next_Card();
+          }
 
           if (topCard is Shai_Hulud_Card)
           {
               HandleShaiHuludCard(topCard);
+              while (topCard is Shai_Hulud_Card)
+              {
+                  topCard = Spice_Deck.Take_Next_Card();
+              }
+              HandleTerritoryCard((Territory_Card)topCard);
           }
           else if (topCard is Territory_Card)
           {
@@ -36,40 +56,31 @@ namespace dune_library.Phases {
       private void HandleShaiHuludCard(Spice_Card card)
       {
           Console.WriteLine("Shai-Hulud card drawn. Initiating Nexus Phase...");
-          // logic for Nexus Phase
-          // start nexus_asking_thread
+          //se asteapta lista cu jucatori
+          
       }
 
       private void HandleTerritoryCard(Territory_Card card)
       {
-          if (game.Map.Storm.IsInStorm(card.Sector))
+          bool is_in_storm = false;
+          foreach (var item in game.Map.Storm_Affectable[(int)game.Map.Storm_Sector])
+          {
+            if (card.Section_Position_In_List == item.Id)
+            {
+                is_in_storm = true;
+                break;
+            }
+          }
+
+          if (is_in_storm)
           {
               Console.WriteLine("The Spice Blow icon is currently in the storm. No spice is placed this turn.");
               return;
           }
-
-          Sector sector = game.Map.GetSector(card.Sector);
-          sector.AddSpice(card.Amount);
-
-          game.Spice_Deck.Discard(card);
-
-          Console.WriteLine($"Spice Blow in sector {card.Sector}. {card.Amount} spice added to the territory.");
-      }
-
-    public void Handling_Spice_Card(Map_Resources.Map map) {
-      var card = Take_Next_Card();
-      ((Action)(card switch {
-        Territory_Card territory_card => () => {
-          var section_with_spice = map.To_Section_With_Spice(territory_card.Section_Position_In_List);
+          var section_with_spice = game.Map.To_Section_With_Spice(card.Section_Position_In_List);
           section_with_spice.Add_Spice();
-        }
-        ,
-        Shai_Hulud_Card shai_hulud_card => () => {
-          var last_section_with_spice = map.To_Section_With_Spice((Top_OF_Discard_Pile.ValueUnsafe() as Territory_Card)!.Section_Position_In_List);
-        }
-        ,
-        _ => () => throw new Exception(),
-      })).Invoke();
-    }
-  }*/
+
+          Console.WriteLine($"Spice Blow in sector {card.Section_Position_In_List}. {section_with_spice.Spice_Capacity} spice added to the territory.");
+      }
+  }
 }

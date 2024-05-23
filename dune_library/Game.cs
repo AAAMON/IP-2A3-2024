@@ -57,6 +57,8 @@ namespace dune_library {
         Phase = new Storm_Phase(this);
         Phase.ValueUnsafe().Play_Out();
         //spice blow
+        Phase = new Spice_Blow_And_Nexus(this);
+        Phase.ValueUnsafe().Play_Out();
         Console.WriteLine("Spice Blow Phase");
 
         //choam charity
@@ -147,7 +149,6 @@ namespace dune_library {
       get => knowledge_manager.OrElseThrow(new Variable_Is_Not_Initialized(knowledge_manager));
       private set => knowledge_manager = value;
     }
-
     #endregion
 
     #region Factions in play dependent objects
