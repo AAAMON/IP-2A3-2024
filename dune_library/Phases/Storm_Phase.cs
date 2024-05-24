@@ -38,7 +38,7 @@ namespace dune_library.Phases {
     public int Calculate_Storm() {
       if(turn == 1)
       {
-         return new Random().Next(20);
+         return new Random().Next(18);
       }
       else
       {
@@ -64,6 +64,7 @@ namespace dune_library.Phases {
     }
         public override void Play_Out() {
         int sectors_to_move = Calculate_Storm();
+            Console.WriteLine("Storm ul s a mutat " + sectors_to_move);
         Move_Storm((uint)sectors_to_move);
         /*Move_Storm(sectors_to_move);*/
       }

@@ -62,18 +62,7 @@ namespace dune_library.Phases {
 
       private void HandleTerritoryCard(Territory_Card card)
       {
-          bool is_in_storm = false;
-          foreach (var item in game.Map.Storm_Affectable[(int)game.Map.Storm_Sector])
-          {
-            if (card.Section_Position_In_List == item.Id)
-            {
-                is_in_storm = true;
-                break;
-            }
-          }
-
-          if (is_in_storm)
-          {
+          if(game.Map.To_Section_With_Spice(card.Section_Position_In_List).Origin_Sector == game.Map.Storm_Sector) {
               Console.WriteLine("The Spice Blow icon is currently in the storm. No spice is placed this turn.");
               return;
           }
