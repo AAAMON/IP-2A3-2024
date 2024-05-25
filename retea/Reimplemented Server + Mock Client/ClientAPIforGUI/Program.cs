@@ -61,7 +61,7 @@ public class GameClient
         //////////////////////////////////////////////////////////////////////////////////////////
         // COMMUNICATION WITH GUI ////////////////////////////////////////////////////////////////////
         HttpListener listener = new HttpListener();
-        listener.Prefixes.Add(baseUrl);
+        listener.Prefixes.Add("http://localhost:1236/");
         listener.Start();
         Console.WriteLine("Listening...");
 
