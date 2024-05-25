@@ -209,7 +209,7 @@ namespace HttpServer
                 await SendResponse(
                     response,
                     HttpStatusCode.OK,
-                    "player" + userCount.ToString() + " username:" + username
+                    "player" + userCount.ToString()
                 );
             }
             else
