@@ -102,19 +102,19 @@ namespace dune_library.Phases
             }
 
             moment = "traitor selection";
-
             IReadOnlyDictionary<Faction, IList<General>> traitors_dict = Generals_Manager.Random_Traitors(Factions_In_Play);
             Factions_In_Play.ForEach(faction => {
                 if (faction == Faction.Harkonnen)
                 {
                     Traitors_Initializer.Init_Traitors(faction, traitors_dict[faction].ToList(), []);
+                    Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json");
                 }
                 else
                 {
                     Traitors_Initializer.Init_Traitors(faction, traitors_dict[faction].ToList(), []);
                     // this should take an imput from the user, an int from 0 to 4 exclusive
                     // for now, it takes the first traitor
-                    Perspective_Generator.Generate_Perspective(Players.First()).SerializeToJson("perspective.json");
+                    Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json");
 
                     Console.WriteLine(faction.ToString() + " You have the traitors: ");
                     for(int i = 0; i  < 4; i++)
@@ -125,7 +125,8 @@ namespace dune_library.Phases
 
                     string line = Console.ReadLine();
                     var index = Convert.ToInt32(line);
-                    Perspective_Generator.Generate_Perspective(Players.First()).SerializeToJson("perspective.json");
+                    Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json");
+
                     General traitor = traitors_dict[faction][index];
                     traitors_dict[faction].RemoveAt(index);
 
@@ -239,8 +240,10 @@ namespace dune_library.Phases
             });
 
             moment = "end of set-up";
-
-            Perspective_Generator.Generate_Perspective(Players.First()).SerializeToJson("perspective.json");
+            Factions_In_Play.ForEach(faction =>
+            {
+                Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json");
+            });
 
             //round is set to 1 in 'Game' after this
 

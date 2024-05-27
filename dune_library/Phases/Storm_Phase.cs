@@ -21,11 +21,14 @@ namespace dune_library.Phases {
       this.Tleilaxu_Tanks = game.Tleilaxu_Tanks;
       Perspective_Generator = game;
       Players = game.Players;
+      Init = game;
     }
 
     public override string name => "Storm";
 
     public override string moment { get; protected set; }
+
+    private I_Setup_Initializers_And_Getters Init { get; }
 
     public Map_Resources.Map Map { get; }
 
@@ -80,8 +83,7 @@ namespace dune_library.Phases {
         Move_Storm((uint)sectors_to_move);
 
         moment = "storm was moved";
-
-        Perspective_Generator.Generate_Perspective(Players.First()).SerializeToJson("perspective.json");
+        Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
         /*Move_Storm(sectors_to_move);*/
       }
     }

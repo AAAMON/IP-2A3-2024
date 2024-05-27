@@ -121,7 +121,8 @@ namespace dune_library.Phases
                     Tleilaxu_Tanks.Forces.Transfer_To(faction, Reserves, troops_to_revive);
                 }
             }
-            Perspective_Generator.Generate_Perspective(Factions_Distribution.Player_Of(faction)).SerializeToJson("perspective.json");
+            Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+
         }
         private bool ForceRevival(Faction faction, uint troops)
         {

@@ -76,7 +76,7 @@ namespace dune_library.Phases {
           game.Map.To_Section_With_Spice(card.Section_Position_In_List).Add_Spice();
 
           Console.WriteLine($"Spice Blow in sector {game.Map.To_Section_With_Spice(card.Section_Position_In_List).Id}. {game.Map.To_Section_With_Spice(card.Section_Position_In_List).Spice_Capacity} spice added to the territory.");
-          Perspective_Generator.Generate_Perspective(Players.First()).SerializeToJson("perspective.json");
+          game.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(game.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{game.Factions_Distribution.Player_Of(faction).Id}.json"));
         }
   }
 }

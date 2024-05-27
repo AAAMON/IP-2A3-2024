@@ -48,7 +48,8 @@ namespace dune_library.Phases
                     Spice_Manager.Add_Spice_To(faction, 2 - Spice_Manager.getSpice(faction));
                 }
             });
-            Perspective_Generator.Generate_Perspective(Players.First()).SerializeToJson("perspective.json");
+            Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+
         }
     }
 }

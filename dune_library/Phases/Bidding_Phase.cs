@@ -89,7 +89,8 @@ namespace dune_library.Phases
                 {
                     var currentBidder = biddingOrder.Dequeue();
                     var bid = GetBidFromPlayer(currentBidder, highestBidder);
-                    Perspective_Generator.Generate_Perspective(Players.First()).SerializeToJson("perspective.json");
+                    Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+
 
                     if (bid > highestBidder.bid)
                     {
@@ -129,7 +130,7 @@ namespace dune_library.Phases
                 }
             }
             moment = "end of bidding";
-            Perspective_Generator.Generate_Perspective(Players.First()).SerializeToJson("perspective.json");
+            Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
         }
 
         private int GetBidFromPlayer(Faction faction, HighestBidder currentHighestBid)
