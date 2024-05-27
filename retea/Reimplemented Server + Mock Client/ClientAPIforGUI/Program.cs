@@ -1,8 +1,8 @@
-﻿using System;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
+using System.Threading.Tasks;
 
 // aici restul de informatii
 
@@ -26,12 +26,12 @@ public class GameClient
     public playerData playerData1 = new playerData();
     public int playerID; /* 1 -> 6 */
     public string authToken; /* playerX */
+
     //public CommunicationProtocolStandards Cp;
     static readonly HttpClient client = new HttpClient();
     private readonly string baseUrl = "http://localhost:1234/";
     private string username { get; set; }
     private string password { get; set; }
-
 
     public async Task Run(string[] args)
     {
@@ -48,20 +48,22 @@ public class GameClient
         Console.WriteLine(game);
 
         // Deserialize the JSON string into a JObject
+        // Deserialize the JSON string into a JObject
         dynamic jsonObject = Newtonsoft.Json.JsonConvert.DeserializeObject(gamestate);
 
         // Access the "Faction" property
         var factionn = jsonObject.Faction;
-        playerData1.faction = factionn[0];
 
         // Output the value of "Faction"
-        Console.WriteLine($"Faction: {factionn[0]}");
+        Console.WriteLine($"Faction: {factionn}");
 
+        // Store the value of "Faction" in playerData1
+        playerData1.faction = factionn;
 
         //////////////////////////////////////////////////////////////////////////////////////////
         // COMMUNICATION WITH GUI ////////////////////////////////////////////////////////////////////
         HttpListener listener = new HttpListener();
-        listener.Prefixes.Add("http://localhost:1236/");
+        listener.Prefixes.Add("http://localhost:1237/");
         listener.Start();
         Console.WriteLine("Listening...");
 
@@ -75,7 +77,6 @@ public class GameClient
             byte[] buffer = Encoding.UTF8.GetBytes(responseString);
             Console.WriteLine("{0} request received for {1}", request.HttpMethod, request.RawUrl);
 
-
             response.ContentType = "application/json"; // Set content type to JSON
             response.ContentLength64 = buffer.Length;
             response.OutputStream.Write(buffer, 0, buffer.Length);
@@ -87,6 +88,7 @@ public class GameClient
     {
         InitializeDefaultCredentials();
     }
+
     public GameClient(string theUsername, string thePassword)
     {
         this.username = theUsername;
@@ -123,7 +125,11 @@ public class GameClient
 
     public async Task<string> AuthenticateUser(string username, string password)
     {
-        var requestBody = new StringContent($"{username}:{password}", Encoding.UTF8, "application/x-www-form-urlencoded");
+        var requestBody = new StringContent(
+            $"{username}:{password}",
+            Encoding.UTF8,
+            "application/x-www-form-urlencoded"
+        );
         var response = await client.PostAsync(baseUrl + "auth", requestBody);
         return await response.Content.ReadAsStringAsync();
     }
@@ -138,24 +144,28 @@ public class GameClient
 
     public async Task<string> InitializeGamestate(string theAuthToken, string gamestate)
     {
-        client.DefaultRequestHeaders.Remove("Authorization");
+        client.DefaultRequestHeaders.Clear();
         client.DefaultRequestHeaders.Add("Authorization", theAuthToken);
         var requestBody = new StringContent(gamestate, Encoding.UTF8, "application/json");
         var response = await client.PostAsync(baseUrl + "initialization", requestBody);
         return await response.Content.ReadAsStringAsync();
     }
+
     public async Task<string> PostMoveForPlayer(string theAuthToken, string move)
-        {
+    {
         client.DefaultRequestHeaders.Remove("Authorization");
         client.DefaultRequestHeaders.Add("Authorization", theAuthToken);
         var requestBody = new StringContent(move, Encoding.UTF8, "application/json");
-        var response = await client.PostAsync(baseUrl + $"/validatemove/{theAuthToken}", requestBody);
+        var response = await client.PostAsync(
+            baseUrl + $"/validatemove/{theAuthToken}",
+            requestBody
+        );
         return await response.Content.ReadAsStringAsync();
     }
 
     public async Task<string> GetCharittyInfo()
     {
-        var response = await client.GetAsync(baseUrl+"/phase_3_info");
+        var response = await client.GetAsync(baseUrl + "/phase_3_info");
         return await response.Content.ReadAsStringAsync();
     }
 
@@ -188,14 +198,10 @@ public class GameClient
         }
     }
 
-
     static string CheckConnection()
     {
         // Retrieve player data from the database or another source
-        var playerData = new
-        {
-            message = "ok!"
-        };
+        var playerData = new { message = "ok!" };
 
         // Serialize playerData object to JSON
         return Newtonsoft.Json.JsonConvert.SerializeObject(playerData);
@@ -207,24 +213,16 @@ public class GameClient
         // Retrieve player data from the database or another source
         if (username == "andy" && password == "coolpassword")
         {
-            var playerData = new
-            {
-                username = "andy"
-            };
+            var playerData = new { username = "andy" };
             // Serialize playerData object to JSON
             return Newtonsoft.Json.JsonConvert.SerializeObject(playerData);
         }
         else
         {
-            var playerData = new
-            {
-                username = "error"
-            };
+            var playerData = new { username = "error" };
             // Serialize playerData object to JSON
             return Newtonsoft.Json.JsonConvert.SerializeObject(playerData);
         }
-
-
     }
 
     public string GetPlayerData()
@@ -241,11 +239,46 @@ public class GameClient
             forcesDead = 0,
             leaders = new[]
             {
-                new { name = "Leader1", faction = "Atreides", power = 1, @protected = false, status = "alive" },
-                new { name = "Leader2", faction = "Atreides", power = 2, @protected = false, status = "alive" },
-                new { name = "Leader3", faction = "Atreides", power = 3, @protected = false, status = "alive" },
-                new { name = "Leader4", faction = "Atreides", power = 4, @protected = false, status = "alive" },
-                new { name = "Leader5", faction = "Atreides", power = 5, @protected = false, status = "alive" }
+                new
+                {
+                    name = "Leader1",
+                    faction = "Atreides",
+                    power = 1,
+                    @protected = false,
+                    status = "alive"
+                },
+                new
+                {
+                    name = "Leader2",
+                    faction = "Atreides",
+                    power = 2,
+                    @protected = false,
+                    status = "alive"
+                },
+                new
+                {
+                    name = "Leader3",
+                    faction = "Atreides",
+                    power = 3,
+                    @protected = false,
+                    status = "alive"
+                },
+                new
+                {
+                    name = "Leader4",
+                    faction = "Atreides",
+                    power = 4,
+                    @protected = false,
+                    status = "alive"
+                },
+                new
+                {
+                    name = "Leader5",
+                    faction = "Atreides",
+                    power = 5,
+                    @protected = false,
+                    status = "alive"
+                }
             },
             territories = new object[0],
             traitors = new object[0],
@@ -254,23 +287,51 @@ public class GameClient
         // Serialize playerData object to JSON
         return Newtonsoft.Json.JsonConvert.SerializeObject(playerDat);
     }
+
     static string GetOtherPlayersData()
     {
         // Retrieve player data from the database or another source
         // MAKE SURE TURN ID'S ARE IN ORDER ASCENDING !!!
         var otherPlayers = new[]
         {
-            new { turnId = 2, username = "SomeDude", faction = "harkonnen", bot = "no" },
-            new { turnId = 3, username = "Luffy", faction = "space_guild", bot = "no" },
-            new { turnId = 4, username = "Bahhhh", faction = "bene_gesserit", bot = "no" },
-            new { turnId = 5, username = "Noob420", faction = "emperor", bot = "no" },
-            new { turnId = 6, username = "Bot1", faction = "fremen", bot = "yes" }
+            new
+            {
+                turnId = 2,
+                username = "SomeDude",
+                faction = "harkonnen",
+                bot = "no"
+            },
+            new
+            {
+                turnId = 3,
+                username = "Luffy",
+                faction = "space_guild",
+                bot = "no"
+            },
+            new
+            {
+                turnId = 4,
+                username = "Bahhhh",
+                faction = "bene_gesserit",
+                bot = "no"
+            },
+            new
+            {
+                turnId = 5,
+                username = "Noob420",
+                faction = "emperor",
+                bot = "no"
+            },
+            new
+            {
+                turnId = 6,
+                username = "Bot1",
+                faction = "fremen",
+                bot = "yes"
+            }
         };
 
         // Serialize playerData object to JSON
         return Newtonsoft.Json.JsonConvert.SerializeObject(otherPlayers);
     }
 }
-
-
-
