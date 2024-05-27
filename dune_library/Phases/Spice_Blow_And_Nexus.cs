@@ -19,17 +19,24 @@ namespace dune_library.Phases {
 
         private uint turn;
 
+        private I_Perspective_Generator Perspective_Generator { get; }
+
+        private IReadOnlySet<Player> Players { get; }
+
         public Spice_Blow_And_Nexus(Game game)
       {
           this.game = game;
           Spice_Deck = game.Spice_Deck;
           turn = game.Round;
+          Players = game.Players;
+          Perspective_Generator = game;
       }
 
       public override void Play_Out()
       {
+          moment = "before choosing a spice card";
           Spice_Card topCard = Spice_Deck.Take_Next_Card();
-
+            moment = "spice card was chosen";
           while (topCard is Shai_Hulud_Card && turn == 1) { 
               topCard = Spice_Deck.Take_Next_Card();
           }
@@ -66,10 +73,10 @@ namespace dune_library.Phases {
               Console.WriteLine("The Spice Blow icon is currently in the storm. No spice is placed this turn.");
               return;
           }
-          var section_with_spice = game.Map.To_Section_With_Spice(card.Section_Position_In_List);
-          section_with_spice.Add_Spice();
+          game.Map.To_Section_With_Spice(card.Section_Position_In_List).Add_Spice();
 
-          Console.WriteLine($"Spice Blow in sector {card.Section_Position_In_List}. {section_with_spice.Spice_Capacity} spice added to the territory.");
-      }
+          Console.WriteLine($"Spice Blow in sector {game.Map.To_Section_With_Spice(card.Section_Position_In_List).Id}. {game.Map.To_Section_With_Spice(card.Section_Position_In_List).Spice_Capacity} spice added to the territory.");
+          Perspective_Generator.Generate_Perspective(Players.First()).SerializeToJson("perspective.json");
+        }
   }
 }

@@ -44,7 +44,7 @@ namespace dune_library.Phases
 
             Factions_In_Play.ForEach(faction =>
             {
-                Console.WriteLine($"{faction}: You have {Faction_Knowledge.getSpice} spice.");
+                Console.WriteLine($"{faction}: You have {Faction_Knowledge.getSpice(faction)} spice.");
 
                 // Example: add commands to insert and move troops
                 Console.WriteLine("Enter command (insert troops or move troops):");

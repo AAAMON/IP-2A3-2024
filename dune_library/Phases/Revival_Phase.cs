@@ -17,11 +17,14 @@ namespace dune_library.Phases
     public class Revival_Phase : Phase
     {
         
-        public Revival_Phase(I_Setup_Initializers_And_Getters init, Tleilaxu_Tanks Tleilaxu_Tanks)
+        public Revival_Phase(I_Setup_Initializers_And_Getters init, Tleilaxu_Tanks Tleilaxu_Tanks, Game game)
         {
 
             this.Init = init;
             this.Tleilaxu_Tanks = Tleilaxu_Tanks;
+            Players = game.Players;
+            Perspective_Generator = game;
+            Factions_Distribution = game.Factions_Distribution;
         }
         private I_Setup_Initializers_And_Getters Init { get; }
 
@@ -32,6 +35,12 @@ namespace dune_library.Phases
         private I_Spice_Manager Spice_Manager => Init.Knowledge_Manager;
 
         private Forces Reserves;
+
+        private I_Perspective_Generator Perspective_Generator { get; }
+
+        private IReadOnlySet<Player> Players { get; }
+
+        private Final_Factions_Distribution Factions_Distribution { get; }
         public override string name => "Revival";
 
         public override string moment { get; protected set; }
@@ -74,41 +83,45 @@ namespace dune_library.Phases
                 ,
                 _ => throw new Faction_Is_Not_Fully_Implemented(faction),
             })).Invoke());
+
         }
         private void Revive(Faction faction) {
             if (!Tleilaxu_Tanks.Forces.Is_Present(faction))
             {
                 Console.WriteLine("No troopes to be revived");
-                return;
-            }
-            String factionInput = Console.ReadLine();
-            uint troops_to_revive = Convert.ToUInt32(factionInput);
-            Console.WriteLine(troops_to_revive);
-            uint freeRevival = faction switch
-            {
-                Faction.Fremen => 3,
-                Faction.Atreides => 2,
-                Faction.Harkonnen => 2,
-                Faction.Bene_Gesserit => 1,
-                Faction.Spacing_Guild => 1,
-                Faction.Emperor => 1,
-                _ => 0
-            };
-            if (troops_to_revive > freeRevival)
-            {
-                if (!ForceRevival(faction, troops_to_revive - freeRevival))
-                {
-                    Console.WriteLine("You don't have enough spice to perform the force revival.");
-                }
-                else
-                {
-                    Console.WriteLine("Succes");
-                }
             }
             else
             {
-                Tleilaxu_Tanks.Forces.Transfer_To(faction, Reserves, troops_to_revive);
+                String factionInput = Console.ReadLine();
+                uint troops_to_revive = Convert.ToUInt32(factionInput);
+                Console.WriteLine(troops_to_revive);
+                uint freeRevival = faction switch
+                {
+                    Faction.Fremen => 3,
+                    Faction.Atreides => 2,
+                    Faction.Harkonnen => 2,
+                    Faction.Bene_Gesserit => 1,
+                    Faction.Spacing_Guild => 1,
+                    Faction.Emperor => 1,
+                    _ => 0
+                };
+                if (troops_to_revive > freeRevival)
+                {
+                    if (!ForceRevival(faction, troops_to_revive - freeRevival))
+                    {
+                        Console.WriteLine("You don't have enough spice to perform the force revival.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Succes");
+                    }
+                }
+                else
+                {
+                    Tleilaxu_Tanks.Forces.Transfer_To(faction, Reserves, troops_to_revive);
+                }
             }
+            Perspective_Generator.Generate_Perspective(Factions_Distribution.Player_Of(faction)).SerializeToJson("perspective.json");
         }
         private bool ForceRevival(Faction faction, uint troops)
         {

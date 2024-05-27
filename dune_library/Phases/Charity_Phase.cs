@@ -19,10 +19,15 @@ namespace dune_library.Phases
         private IReadOnlySet<Faction> Factions_In_Play => Init.Factions_Distribution.Factions_In_Play;
         private I_Setup_Initializers_And_Getters Init { get; }
 
-        public CharityPhase(I_Setup_Initializers_And_Getters init)
+        private I_Perspective_Generator Perspective_Generator { get; }
+
+        private IReadOnlySet<Player> Players { get; }
+
+        public CharityPhase(I_Setup_Initializers_And_Getters init, Game game)
         {
             this.Init = init;
-
+            Perspective_Generator = game;
+            Players = game.Players;
         }
 
         public override string name => "Charity Phase";
@@ -43,6 +48,7 @@ namespace dune_library.Phases
                     Spice_Manager.Add_Spice_To(faction, 2 - Spice_Manager.getSpice(faction));
                 }
             });
+            Perspective_Generator.Generate_Perspective(Players.First()).SerializeToJson("perspective.json");
         }
     }
 }

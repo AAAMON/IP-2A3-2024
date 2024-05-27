@@ -63,15 +63,17 @@ namespace dune_library {
 
         //choam charity
         Console.WriteLine("Chom Charity Phase");
-        Phase = new CharityPhase(this);
+        Phase = new CharityPhase(this, this);
         Phase.ValueUnsafe().Play_Out();
 
         //bidding
         Console.WriteLine("Bidding Phase");
+        Phase = new Bidding_Phase(this,this,Players,Treachery_Deck);
+        Phase.ValueUnsafe().Play_Out();
 
         //revival
         Console.WriteLine("Revival Phase");
-        Phase = new Revival_Phase(this,Tleilaxu_Tanks);
+        Phase = new Revival_Phase(this,Tleilaxu_Tanks, this);
         Phase.ValueUnsafe().Play_Out();
 
         //shipment and movement

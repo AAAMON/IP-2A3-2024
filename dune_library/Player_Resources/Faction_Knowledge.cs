@@ -77,10 +77,11 @@ namespace dune_library.Player_Resources {
 
     private bool traitors_are_initialized;
 
+
     public void Init_Traitors(IReadOnlyList<General> traitors, IReadOnlyList<General> discarded_traitors) {
-      if (traitors_are_initialized == true) {
-        throw new Traitors_Have_Already_Been_Initialized();
-      }
+      //if (traitors_are_initialized == true) {
+      //  throw new Traitors_Have_Already_Been_Initialized();
+      //}
       Traitors = traitors;
       Discarded_Traitors = discarded_traitors;
       traitors_are_initialized = true;

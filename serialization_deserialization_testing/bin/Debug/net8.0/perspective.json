@@ -1,6 +1,6 @@
 {
   "Faction": [
-    "Atreides"
+    "Harkonnen"
   ],
   "Battle_Wheels": {
     "Item1": {
@@ -1255,7 +1255,7 @@
       },
       "17": {
         "Capacity": 10,
-        "Avaliable": 0
+        "Avaliable": 10
       },
       "27": {
         "Capacity": 8,
@@ -1306,14 +1306,14 @@
         "Avaliable": 0
       }
     },
-    "Storm_Sector": 0,
+    "Storm_Sector": 8,
     "Shield_Wall_Was_Destroyed": false
   },
-  "Round": 0,
+  "Round": 1,
   "Phase": [
     {
-      "name": "Set-up",
-      "moment": "end of set-up"
+      "name": "Revival",
+      "moment": null
     }
   ],
   "Player_Markers": [
@@ -1396,36 +1396,36 @@
     {
       "Spice": 10,
       "Treachery_Cards": {
-        "Ellaca_Drug": 1
+        "Maula_Pistol": 1,
+        "Trip_To_Gamont": 1
       },
       "Traitors": [
+        {
+          "Id": 2,
+          "Faction": "Atreides",
+          "Name": "Gurney Halleck",
+          "Strength": 4
+        },
         {
           "Id": 11,
           "Faction": "Emperor",
           "Name": "Burseg",
           "Strength": 3
-        }
-      ],
-      "Discarded_Traitors": [
-        {
-          "Id": 5,
-          "Faction": "Bene_Gesserit",
-          "Name": "Wanna Yueh",
-          "Strength": 5
         },
         {
-          "Id": 26,
-          "Faction": "Harkonnen",
-          "Name": "Captain Iakin Nefud",
-          "Strength": 2
-        },
-        {
-          "Id": 24,
+          "Id": 20,
           "Faction": "Spacing_Guild",
-          "Name": "Staban Tuek",
-          "Strength": 5
+          "Name": "Guild Rep.",
+          "Strength": 1
+        },
+        {
+          "Id": 21,
+          "Faction": "Spacing_Guild",
+          "Name": "Soo-Soo Sook",
+          "Strength": 2
         }
       ],
+      "Discarded_Traitors": [],
       "Number_Of_Treachery_Cards_Of_Other_Factions": {
         "Atreides": 1,
         "Bene_Gesserit": 1,

@@ -15,7 +15,7 @@ using static dune_library.Utils.Exceptions;
 using dune_library.Player_Resources.Knowledge_Manager_Interfaces;
 using LanguageExt;
 using LanguageExt.UnsafeValueAccess;
-using clientApi;
+//using clientApi;
 
 namespace dune_library.Phases
 {
@@ -111,14 +111,28 @@ namespace dune_library.Phases
                 }
                 else
                 {
+                    Traitors_Initializer.Init_Traitors(faction, traitors_dict[faction].ToList(), []);
                     // this should take an imput from the user, an int from 0 to 4 exclusive
                     // for now, it takes the first traitor
-                    var index = 0;
+                    Perspective_Generator.Generate_Perspective(Players.First()).SerializeToJson("perspective.json");
+
+                    Console.WriteLine(faction.ToString() + " You have the traitors: ");
+                    for(int i = 0; i  < 4; i++)
+                    {
+                        Console.WriteLine(traitors_dict[faction][i].Name);
+                    }
+                    Console.WriteLine("Choose one");
+
+                    string line = Console.ReadLine();
+                    var index = Convert.ToInt32(line);
+                    Perspective_Generator.Generate_Perspective(Players.First()).SerializeToJson("perspective.json");
                     General traitor = traitors_dict[faction][index];
                     traitors_dict[faction].RemoveAt(index);
+
                     Traitors_Initializer.Init_Traitors(faction, [traitor], traitors_dict[faction].ToList());
                 }
             });
+            
 
             moment = "spice distribution";
 
@@ -156,21 +170,20 @@ namespace dune_library.Phases
                 Forces To_Place_Now = new();
                 To_Place_Now.Transfer_From(Faction.Fremen, Reserves, 10);
 
-                //custom for fremen, change later
                 int forces_distributed = 0;
                 while (forces_distributed != 10)
                 {
-                     /*System.Console.WriteLine("Choose city for fremen and number of troops (ex WallSouth 10)");
-                     String line = Console.ReadLine();*/
+                     System.Console.WriteLine("Choose city for fremen and number of troops (ex WallSouth 10)");
+                     String line = Console.ReadLine();
 
                     // CELE 2 LINII DE MAI SUS ERAU DINAINTE SA MODIFIC EU, ERAU PT A VEDEA DACA MERGE JOCUL DIN CONSOLA
-                    while (ValidaterServerApi.canGet == false) //#
-                    {
-
-                    }
-                    ValidaterServerApi.canGet = false; //#
-                    string line = ValidaterServerApi.command; //#
-                    Console.WriteLine(line); //#
+                    //while (ValidaterServerApi.canGet == false) //#
+                    //{
+                    //
+                    //}
+                    //ValidaterServerApi.canGet = false; //#
+                    //string line = ValidaterServerApi.command; //#
+                    //Console.WriteLine(line); //#
 
                     //UNDE AM ADAUGAT //#, e cod scris de mine
                     string[] arg = line.Split(" ");
