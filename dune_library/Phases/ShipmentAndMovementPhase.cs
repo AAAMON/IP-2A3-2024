@@ -51,19 +51,22 @@ namespace dune_library.Phases
                 var command = Console.ReadLine();
                 if (command.StartsWith("insert troops"))
                 {
-                    Console.WriteLine("ex: number_of_troops territory_name");
+                    Console.WriteLine("ex: 6 Meridian");
+                    command = Console.ReadLine();
                     var parts = command.Split(' ');
-                    var troops = int.Parse(parts[2]);
-                    var territoryName = parts[4];
+                    var troops = int.Parse(parts[0]);
+                    var territoryName = parts[1];
 
                     InsertTroops(faction, troops, territoryName);
                 }
                 else if (command.StartsWith("move troops"))
                 {
+                    Console.WriteLine("ex: number_of_troops from_territory_name to_territory_name");
+                    command = Console.ReadLine();
                     var parts = command.Split(' ');
-                    var troops = int.Parse(parts[2]);
-                    var fromTerritoryName = parts[4];
-                    var toTerritoryName = parts[6];
+                    var troops = int.Parse(parts[0]);
+                    var fromTerritoryName = parts[1];
+                    var toTerritoryName = parts[2];
 
                     MoveTroops(faction, troops, fromTerritoryName, toTerritoryName);
                 }
@@ -92,8 +95,14 @@ namespace dune_library.Phases
             var totalCost = costPerTroop * (uint)troops;
             if (Spice_Manager.Remove_Spice_From(faction, totalCost))
             {
-                territory.Sections[0].Forces.Transfer_From(faction, Reserves, (uint)troops);
-                Console.WriteLine($"{troops} troops inserted into {territoryName}.");
+                if (territory.Sections[0].Forces.Number_Of_Factions_Present == 2)
+                    Console.WriteLine("Number of factions present is " + territory.Sections[0].Forces.Number_Of_Factions_Present + " you cant add anymore => skip");
+                else
+                {
+                    territory.Sections[0].Forces.Transfer_From(faction, Reserves, (uint)troops);
+                    Console.WriteLine($"{troops} troops inserted into {territoryName}.");
+
+                }
             }
             else
             {

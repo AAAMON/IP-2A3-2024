@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using dune_library.Utils;
 
 namespace dune_library.Phases
 {
@@ -38,6 +39,23 @@ namespace dune_library.Phases
             else
             {
                 Console.WriteLine("waiting for players to confirm");
+                _game.Factions_Distribution.Factions_In_Play.ForEach(faction =>
+                {
+                    while (true)
+                    {
+                        Console.WriteLine($"You are {faction}, are you ready? (y/n)");
+                        string line = Console.ReadLine();
+                        if (line.Equals("y"))
+                        {
+                            Console.WriteLine("Waiting for next player");
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("We give more time");
+                        }
+                    }
+                });
                 /*while (!_game.AreAllPlayersReady())
                 {
                     Console.WriteLine("Waiting for all players to be ready...");
