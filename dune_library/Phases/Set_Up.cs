@@ -143,21 +143,23 @@ namespace dune_library.Phases
                     {
                         Console.WriteLine(traitors_dict[faction][i].Name);
                     }
-                    Console.WriteLine("Choose one");
-                    while (true)
+                    Console.WriteLine("Choose one (/player1/Setup/traitor_name)");
+                    bool end = true;
+                    while (end)
                     {
                         string[] line = Console.ReadLine().Split("/");
                         if (line[1] == Init.Factions_Distribution.Player_Of(faction).Id && line[2] == "Setup")
                         {
-                            var index = Convert.ToInt32(line[3]);
-                            if(index >= 0 && index < 4)
+                            for(int i = 0; i < traitors_dict[faction].ToList().Length(); i++)
                             {
-                                Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json");
-
-                                General traitor = traitors_dict[faction][index];
-                                traitors_dict[faction].RemoveAt(index);
-                                Traitors_Initializer.Init_Traitors(faction, [traitor], traitors_dict[faction].ToList());
-                                break;
+                                if (traitors_dict[faction][i].Name == line[3])
+                                {
+                                    General traitor = traitors_dict[faction][i];
+                                    traitors_dict[faction].RemoveAt(i);
+                                    Traitors_Initializer.Init_Traitors(faction, [traitor], traitors_dict[faction].ToList());
+                                    end = false;
+                                    break;
+                                }
                             }
                         }
                     }
