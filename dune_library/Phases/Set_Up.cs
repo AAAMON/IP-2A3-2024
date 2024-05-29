@@ -15,6 +15,7 @@ using static dune_library.Utils.Exceptions;
 using dune_library.Player_Resources.Knowledge_Manager_Interfaces;
 using LanguageExt;
 using LanguageExt.UnsafeValueAccess;
+using static System.Collections.Specialized.BitVector32;
 //using clientApi;
 
 namespace dune_library.Phases
@@ -104,21 +105,26 @@ namespace dune_library.Phases
                     // keep the player marker selection ongoing
                 }
             }
-
+            Factions_In_Play.ForEach(faction => Console.WriteLine(Init.Factions_Distribution.Player_Of(faction).Id + " " + faction));
             moment = "Bene Gesserit prediction";
-            Console.WriteLine("Bene Gesserit make a prediction: ");
+            Console.WriteLine("Bene Gesserit make a prediction: (/player2/Setup/3)");
             while (true)
             {
-                string line = Console.ReadLine();
-                int response = Int32.Parse(line);
-                if(response < 10 && response > 0)
+
+                string[] line = Console.ReadLine().Split("/"); //player1/Setup/3
+                if (line[1] == Init.Factions_Distribution.Player_Of(Faction.Bene_Gesserit).Id && line[2] == "Setup")
                 {
-                    Bene_Prediction = (uint)response;
-                    break;
+                    int response = Int32.Parse(line[3]);
+                    if(response < 10 && response > 0)
+                    {
+                        Bene_Prediction = (uint)response;
+                        break;
+                    }
                 }
             }
 
             moment = "traitor selection";
+            
             IReadOnlyDictionary<Faction, IList<General>> traitors_dict = Generals_Manager.Random_Traitors(Factions_In_Play);
             Factions_In_Play.ForEach(faction => {
                 if (faction == Faction.Harkonnen)
@@ -140,16 +146,19 @@ namespace dune_library.Phases
                     Console.WriteLine("Choose one");
                     while (true)
                     {
-                        string line = Console.ReadLine();
-                        var index = Convert.ToInt32(line);
-                        if(index >= 0 && index < 4)
+                        string[] line = Console.ReadLine().Split("/");
+                        if (line[1] == Init.Factions_Distribution.Player_Of(faction).Id && line[2] == "Setup")
                         {
-                            Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json");
+                            var index = Convert.ToInt32(line[3]);
+                            if(index >= 0 && index < 4)
+                            {
+                                Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json");
 
-                            General traitor = traitors_dict[faction][index];
-                            traitors_dict[faction].RemoveAt(index);
-                            Traitors_Initializer.Init_Traitors(faction, [traitor], traitors_dict[faction].ToList());
-                            break;
+                                General traitor = traitors_dict[faction][index];
+                                traitors_dict[faction].RemoveAt(index);
+                                Traitors_Initializer.Init_Traitors(faction, [traitor], traitors_dict[faction].ToList());
+                                break;
+                            }
                         }
                     }
 
@@ -196,8 +205,23 @@ namespace dune_library.Phases
                 int forces_distributed = 0;
                 while (forces_distributed != 10)
                 {
-                     System.Console.WriteLine("Choose city for fremen and number of troops (ex WallSouth 10)");
-                     String line = Console.ReadLine();
+                     System.Console.WriteLine("Choose city for fremen and number of troops (/player4/Setup/14/10)");
+                    string[] line = Console.ReadLine().Split("/");
+                    if (line[1] == Init.Factions_Distribution.Player_Of(Faction.Fremen).Id && line[2] == "Setup")
+                    {
+                        Console.WriteLine("player is correct");
+                        int sectionid = Int32.Parse(line[3]);
+                        int troop_number = Int32.Parse(line[4]);
+                        if (sectionid >= 0 && sectionid <= 84 && troop_number <= 10 - forces_distributed && troop_number > 0)
+                        {
+                            Console.WriteLine("section id and troop number is correct");
+                            if (sectionid == 14 || sectionid == 15 || sectionid == 67 || (sectionid >= 73 && sectionid <= 75))
+                            {
+                                Map.Sections[sectionid].Forces.Transfer_From(Faction.Fremen, To_Place_Now, (uint)troop_number);
+                                forces_distributed += troop_number;
+                            }
+                        }
+                    }
 
                     // CELE 2 LINII DE MAI SUS ERAU DINAINTE SA MODIFIC EU, ERAU PT A VEDEA DACA MERGE JOCUL DIN CONSOLA
                     //while (ValidaterServerApi.canGet == false) //#
@@ -209,46 +233,7 @@ namespace dune_library.Phases
                     //Console.WriteLine(line); //#
 
                     //UNDE AM ADAUGAT //#, e cod scris de mine
-                    string[] arg = line.Split(" ");
-                    if (arg[0].Equals("SietchTabr"))
-                    {
-                        if (arg[1].ToString().Length() == 2)
-                        {
-                            Map.Sietch_Tabr.Sections[0].Forces.Transfer_From(Faction.Fremen, To_Place_Now, 10);
-                            forces_distributed = 10;
-                        }
-                        else
-                        {
-                            forces_distributed += Convert.ToInt32(arg[1].ToString());
-                            Map.Sietch_Tabr.Sections[0].Forces.Transfer_From(Faction.Fremen, To_Place_Now, 10);
-                        }
-                    }
-                    else if (arg[0].Equals("WallSouth"))
-                    {
-                        if (arg[1].ToString().Length() == 2)
-                        {
-                            Map.False_Wall_South.Sections[0].Forces.Transfer_From(Faction.Fremen, To_Place_Now, 10);
-                            forces_distributed = 10;
-                        }
-                        else
-                        {
-                            forces_distributed += Convert.ToInt32(arg[1].ToString());
-                            Map.False_Wall_South.Sections[0].Forces.Transfer_From(Faction.Fremen, To_Place_Now, 10);
-                        }
-                    }
-                    else if (arg[0].Equals("FalseWallWest"))
-                    {
-                        if (arg[1].ToString().Length() == 2)
-                        {
-                            Map.False_Wall_West.Sections[0].Forces.Transfer_From(Faction.Fremen, To_Place_Now, 10);
-                            forces_distributed = 10;
-                        }
-                        else
-                        {
-                            forces_distributed += Convert.ToInt32(arg[1].ToString());
-                            Map.False_Wall_West.Sections[0].Forces.Transfer_From(Faction.Fremen, To_Place_Now, 10);
-                        }
-                    }
+                    
                 }
             }
             moment = "treachery card distribution";
