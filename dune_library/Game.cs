@@ -48,7 +48,7 @@ namespace dune_library {
 
 
         //commentati de aici in jos daca vreti sa testati mai rapid
-        Phase = new Set_Up(this, this, Players, factions_distribution, player_markers, Map);
+        Phase = new Set_Up(this, this, Players, factions_distribution, player_markers, Map, Bene_Prediction);
         Phase.ValueUnsafe().Play_Out();
 
         for (Round = 1; Round <= 10; Round += 1) {
@@ -189,7 +189,7 @@ namespace dune_library {
     #endregion
 
     #region Private Game Data
-
+    internal uint Bene_Prediction = 0;
     internal Treachery_Deck Treachery_Deck { get; } = new();
 
     internal Spice_Deck Spice_Deck { get; }

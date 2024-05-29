@@ -27,7 +27,8 @@ namespace dune_library.Phases
           IReadOnlySet<Player> players,
           Either<Factions_Distribution_Manager, Final_Factions_Distribution> factions_distribution_raw,
           Option<Either<Player_Markers_Manager, Final_Player_Markers>> player_markers_raw,
-          Map_Resources.Map map
+          Map_Resources.Map map,
+          uint Bene_Prediction
         )
         {
             Perspective_Generator = perspective_generator;
@@ -36,6 +37,7 @@ namespace dune_library.Phases
             Factions_Distribution_Raw = factions_distribution_raw;
             Player_Markers_Raw = player_markers_raw;
             Map = map;
+            this.Bene_Prediction = Bene_Prediction;
         }
 
         public override string name => "Set-up";
@@ -63,6 +65,8 @@ namespace dune_library.Phases
         private Either<Factions_Distribution_Manager, Final_Factions_Distribution> Factions_Distribution_Raw { get; }
 
         private Map_Resources.Map Map { get; }
+
+        private uint Bene_Prediction { get; set; }
 
         public override void Play_Out()
         {
@@ -101,6 +105,19 @@ namespace dune_library.Phases
                 }
             }
 
+            moment = "Bene Gesserit prediction";
+            Console.WriteLine("Bene Gesserit make a prediction: ");
+            while (true)
+            {
+                string line = Console.ReadLine();
+                int response = Int32.Parse(line);
+                if(response < 10 && response > 0)
+                {
+                    Bene_Prediction = (uint)response;
+                    break;
+                }
+            }
+
             moment = "traitor selection";
             IReadOnlyDictionary<Faction, IList<General>> traitors_dict = Generals_Manager.Random_Traitors(Factions_In_Play);
             Factions_In_Play.ForEach(faction => {
@@ -112,8 +129,7 @@ namespace dune_library.Phases
                 else
                 {
                     Traitors_Initializer.Init_Traitors(faction, traitors_dict[faction].ToList(), []);
-                    // this should take an imput from the user, an int from 0 to 4 exclusive
-                    // for now, it takes the first traitor
+
                     Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json");
 
                     Console.WriteLine(faction.ToString() + " You have the traitors: ");
@@ -122,15 +138,21 @@ namespace dune_library.Phases
                         Console.WriteLine(traitors_dict[faction][i].Name);
                     }
                     Console.WriteLine("Choose one");
+                    while (true)
+                    {
+                        string line = Console.ReadLine();
+                        var index = Convert.ToInt32(line);
+                        if(index >= 0 && index < 4)
+                        {
+                            Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json");
 
-                    string line = Console.ReadLine();
-                    var index = Convert.ToInt32(line);
-                    Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json");
+                            General traitor = traitors_dict[faction][index];
+                            traitors_dict[faction].RemoveAt(index);
+                            Traitors_Initializer.Init_Traitors(faction, [traitor], traitors_dict[faction].ToList());
+                            break;
+                        }
+                    }
 
-                    General traitor = traitors_dict[faction][index];
-                    traitors_dict[faction].RemoveAt(index);
-
-                    Traitors_Initializer.Init_Traitors(faction, [traitor], traitors_dict[faction].ToList());
                 }
             });
             
