@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ClientAI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c5ef9b310b3541e650c8b60675c270bafc8b05f4")]
 [assembly: System.Reflection.AssemblyProductAttribute("ClientAI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ClientAI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,0 +1,5 @@
+D:\IP\Work\IP-2A3-2024\retea\Reimplemented Server + Mock Client\ClientAI\ClientAI\obj\Debug\net7.0\ClientAI.GeneratedMSBuildEditorConfig.editorconfig
+D:\IP\Work\IP-2A3-2024\retea\Reimplemented Server + Mock Client\ClientAI\ClientAI\obj\Debug\net7.0\ClientAI.AssemblyInfoInputs.cache
+D:\IP\Work\IP-2A3-2024\retea\Reimplemented Server + Mock Client\ClientAI\ClientAI\obj\Debug\net7.0\ClientAI.AssemblyInfo.cs
+D:\IP\Work\IP-2A3-2024\retea\Reimplemented Server + Mock Client\ClientAI\ClientAI\obj\Debug\net7.0\ClientAI.csproj.CoreCompileInputs.cache
+D:\IP\Work\IP-2A3-2024\retea\Reimplemented Server + Mock Client\ClientAI\ClientAI\obj\Debug\net7.0\ClientAI.sourcelink.json

@@ -8,4 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ClientAI
-build_property.ProjectDir = C:\Users\Ovidiu\Desktop\Facultate\IP_Ciorna\IP-2A3-2024\retea\Reimplemented Server + Mock Client\ClientAI\ClientAI\
+build_property.ProjectDir = D:\IP\Work\IP-2A3-2024\retea\Reimplemented Server + Mock Client\ClientAI\ClientAI\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
