@@ -1,0 +1,36 @@
+INFO--->HTTPS
+
+pentru a va instala certificatul si a putea face comunicarea trebuie sa faceti urmatorii pasi
+1.scrieti in cmd comanda dotnet dev-certs https --trust
+2.probabil se va instala pe curent user deci intrati pe mmc
+3.Adaugă Snap-in pentru Certificates
+4.În MMC, mergi la File -> Add/Remove Snap-in.
+5.Selectează Certificates din lista de snap-ins disponibile și apasă pe butonul Add.
+6.Îți va apărea o fereastră de dialog care te întreabă pentru cine vrei să administrezi certificatele. Alege Computer account și apasă Next.
+7.Selectează Local computer și apasă Finish.
+8.De asemenea, poți adăuga și snap-in-ul pentru My user account în același mod pentru a accesa store-ul "Personal" al utilizatorului curent în aceeași sesiune MMC.
+9.Apasă OK pentru a închide fereastra Add or Remove Snap-ins.
+Pasul urmator:
+Generează Certificatul
+1.În fereastra MMC, sub Console Root, vei avea acum două foldere de certificates: una pentru userul curent și una pentru computerul local.
+2.Navighează la Certificates - Current User -> Personal -> Certificates.
+3.Găsește certificatul pe care vrei să-l muți/copiezi, click dreapta pe el și alege All Tasks -> Export.
+4.Urmează instrucțiunile din Wizard-ul de Export pentru a exporta certificatul. Asigură-te că alegi să incluzi cheia privată și setează o parolă pentru fișierul exportat pentru a menține securitatea cheii private.
+5.Odată ce ai exportat certificatul într-un fișier (de obicei în format .pfx), navighează la Certificates (Local Computer) -> Personal -> Certificates.
+6.Click dreapta în spațiul gol din folder și selectează All Tasks -> Import.
+7.Urmează instrucțiunile din Wizard-ul de Import pentru a importa fișierul .pfx pe care l-ai exportat. Va trebui să furnizezi parola pe care ai setat-o în timpul exportului.
+----->pe scurt incerci sa exporti certificatul de pe user-curent pe local computer
+
+IMPORTAAANT!!!!!
+->trebuie neaparat sa ii dai export cu tot cu parola,adica sa fie un .pfx
+->trebuie sa fii sigur ca a fost exportat
+
+apoi !!!! pentru fiecare port pe care vrei sa il faci secure trebuie sa rulezi in cmd cu drepturi de utilizator aceasta comanda
+netsh http add sslcert ipport=0.0.0.0:1234 certhash=<CertThumbprint> appid={<GUID>}
+
+
+->tumbprint in gasesti la certificat info
+->GUID poate fi orice,de exemplu: 
+GUID:02c68c60-8307-4970-b287-e03ad2874b68
+
+-->la final in cod trebuie doar schimbate toate url-urile in https si atat:)
