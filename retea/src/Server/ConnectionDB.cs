@@ -5,6 +5,8 @@ namespace Server
 {
     public sealed class ConnectionDB : IDisposable
     {
+    // AICI VA PUTETI PUNE DATELE VOASTRE, SAU DACA NU PREFERATI MYSQL, VA PUTETI SCHIMBA PE ALT SERVICIU DE BAZA DE DATE
+    // IMPORTANT E SA SE PASTREZE NUMELE METODELOR!!
         static readonly string server = "localhost";
         static readonly string username = "alex";
         static readonly string password = "alex123K!!";
