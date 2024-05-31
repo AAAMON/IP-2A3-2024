@@ -1,5 +1,0 @@
-D:\GITHUB-IP\IP-2A3-2024\retea\Reimplemented Server + Mock Client\ServerV2\obj\Release\net8.0\Server.GeneratedMSBuildEditorConfig.editorconfig
-D:\GITHUB-IP\IP-2A3-2024\retea\Reimplemented Server + Mock Client\ServerV2\obj\Release\net8.0\Server.AssemblyInfoInputs.cache
-D:\GITHUB-IP\IP-2A3-2024\retea\Reimplemented Server + Mock Client\ServerV2\obj\Release\net8.0\Server.AssemblyInfo.cs
-D:\GITHUB-IP\IP-2A3-2024\retea\Reimplemented Server + Mock Client\ServerV2\obj\Release\net8.0\Server.csproj.CoreCompileInputs.cache
-D:\GITHUB-IP\IP-2A3-2024\retea\Reimplemented Server + Mock Client\ServerV2\obj\Release\net8.0\Server.sourcelink.json
