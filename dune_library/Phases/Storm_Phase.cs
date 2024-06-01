@@ -112,14 +112,19 @@ namespace dune_library.Phases {
         moment = "before storm was calculated";
         string Get_Card = Wait_Until_Something.AwaitInput(3000).Result;
         Console.WriteLine(Get_Card);
+
+
         int sectors_to_move = Calculate_Storm();
         Console.WriteLine("Storm ul s a mutat " + sectors_to_move);
 
         moment = "storm was calculated";
 
-        Move_Storm((uint)sectors_to_move);
+        Get_Card = Wait_Until_Something.AwaitInput(3000).Result;
+        Console.WriteLine(Get_Card);
 
+        Move_Storm((uint)sectors_to_move);
         moment = "storm was moved";
+
         Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
         /*Move_Storm(sectors_to_move);*/
     }

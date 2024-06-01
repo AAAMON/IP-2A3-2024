@@ -17,12 +17,13 @@ using dune_library.Decks.Spice;
 
 namespace dune_library {
   public class Game : I_Setup_Initializers_And_Getters, I_Perspective_Generator {
-    public static void Start(IReadOnlySet<Player> players) {
-      Game game = new(players);
+    public static void Start(IReadOnlySet<Player> players, I_Input_Provider input_Provider) {
+      Game game = new(players, input_Provider);
       game.Play();
     }
 
-    private Game(IReadOnlySet<Player> players) {
+    private Game(IReadOnlySet<Player> players, I_Input_Provider input_Provider) {
+      this.Input_Provider = input_Provider;
       Players = players;
       // init players
       factions_distribution = new Factions_Distribution_Manager(Players);
@@ -48,7 +49,7 @@ namespace dune_library {
 
 
         //commentati de aici in jos daca vreti sa testati mai rapid
-        Phase = new Set_Up(this, this, Players, factions_distribution, player_markers, Map, Bene_Prediction, Battle_Wheels);
+        Phase = new Set_Up(this, this, Players, factions_distribution, player_markers, Map, Bene_Prediction, Battle_Wheels, Input_Provider);
         Phase.ValueUnsafe().Play_Out();
 
         for (Round = 1; Round <= 10; Round += 1) {
@@ -97,6 +98,8 @@ namespace dune_library {
         Phase.ValueUnsafe().Play_Out();
       }
     }
+
+    public I_Input_Provider Input_Provider;
 
     public IReadOnlySet<Player> Players { get; set; }
 

@@ -30,7 +30,8 @@ namespace dune_library.Phases
           Option<Either<Player_Markers_Manager, Final_Player_Markers>> player_markers_raw,
           Map_Resources.Map map,
           uint Bene_Prediction,
-          (Battle_Wheel A, Battle_Wheel B) Battle_Wheels
+          (Battle_Wheel A, Battle_Wheel B) Battle_Wheels,
+          I_Input_Provider input_Provider
         )
         {
             Perspective_Generator = perspective_generator;
@@ -41,8 +42,10 @@ namespace dune_library.Phases
             Map = map;
             this.Bene_Prediction = Bene_Prediction;
             this.Battle_Wheels = Battle_Wheels;
-        }
+            this.Input_Provider = input_Provider;
 
+        }
+        private I_Input_Provider Input_Provider;
         public override string name => "Set-up";
 
         public override string moment { get; protected set; } = "";
@@ -118,7 +121,7 @@ namespace dune_library.Phases
             while (true)
             {
 
-                string[] line = Console.ReadLine().Split("/"); //player1/Setup/3
+                string[] line = Input_Provider.GetInputAsync().Result.Split("/");
                 if (line[1] == Init.Factions_Distribution.Player_Of(Faction.Bene_Gesserit).Id && line[2] == "setup")
                 {
                     int response = Int32.Parse(line[3]);
@@ -164,7 +167,7 @@ namespace dune_library.Phases
                     bool end = true;
                     while (end)
                     {
-                        string[] line = Console.ReadLine().Split("/");
+                        string[] line = Input_Provider.GetInputAsync().Result.Split("/");
                         if (line[1] == Init.Factions_Distribution.Player_Of(faction).Id && line[2] == "setup")
                         {
                             for(int i = 0; i < traitors_dict[faction].ToList().Length(); i++)
@@ -231,7 +234,7 @@ namespace dune_library.Phases
                 while (forces_distributed != 10)
                 {
                     System.Console.WriteLine("Choose city for fremen and number of troops (/player4/setup/14/10)");
-                    string[] line = Console.ReadLine().Split("/");
+                    string[] line = Input_Provider.GetInputAsync().Result.Split("/");
                     if (line[1] == Init.Factions_Distribution.Player_Of(Faction.Fremen).Id && line[2] == "setup")
                     {
                         Console.WriteLine("player is correct");
