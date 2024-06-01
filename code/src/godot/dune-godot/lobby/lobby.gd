@@ -1,7 +1,10 @@
 extends Control
 
 func _on_return_button_pressed():
-	get_tree().change_scene_to_file("res://mainMenu/menu.tscn")
+	var root = get_parent()
+	var menuScene = load("res://mainMenu/menu.tscn").instantiate()
+	root.add_child(menuScene)
+	queue_free()
 
 # A LOBBY SCENE MUST BE ADDED, WHERE YOU PICK YOUR FACTION
 # NORMALLY, WHEN THE ADMIN CLICKS STARTS YOU RECEIVE YOUR GAME SPECIFIC INFO

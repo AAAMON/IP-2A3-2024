@@ -1,5 +1,5 @@
 extends Node
-var api_url = "http://localhost:1237/"
+var api_url = "http://localhost:1236/"
 var connected = false
 var requestCompleted: bool = true
 

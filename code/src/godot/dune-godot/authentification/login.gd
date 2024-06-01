@@ -35,4 +35,4 @@ func _on_login_completed(_result, _response_code, _headers, body):
 		print("Successfully logged in as " + json["username"] + "!")
 		PlayerData.loggedIn = true
 		PlayerData.username = json["username"]
-		get_tree().change_scene_to_file("res://mainMenu/menu.tscn")
+		queue_free()

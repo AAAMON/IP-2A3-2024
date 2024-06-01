@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://d384mi86r46x3"]
+[gd_scene load_steps=9 format=3 uid="uid://d384mi86r46x3"]
 
 [ext_resource type="Script" path="res://mainMenu/menu.gd" id="1_1meg3"]
 [ext_resource type="Texture2D" uid="uid://dxgmy13s2g4un" path="res://assets/Asset 53.png" id="2_vp4q5"]
 [ext_resource type="FontFile" uid="uid://bp3x2663204n" path="res://fonts/Dune_Rise.ttf" id="3_07l2q"]
 [ext_resource type="FontFile" uid="uid://duu07hfiwa68t" path="res://fonts/Neuropol.otf" id="4_vof7t"]
 [ext_resource type="Script" path="res://mainMenu/vButtonContainer.gd" id="4_xyx23"]
-[ext_resource type="Script" path="res://mainMenu/joinLobby.gd" id="5_3xgdi"]
 [ext_resource type="Script" path="res://playerData.gd" id="7_5lkyu"]
 [ext_resource type="Script" path="res://mainMenu/userPanel.gd" id="7_qiwd3"]
 [ext_resource type="Script" path="res://mainMenu/apiConnection.gd" id="9_v6jjx"]
@@ -95,7 +94,6 @@ custom_minimum_size = Vector2(120, 32)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_vof7t")
 text = "JOIN LOBBY"
-script = ExtResource("5_3xgdi")
 
 [node name="settings" type="Button" parent="margin/hButtonContainer/vButtonContainer"]
 custom_minimum_size = Vector2(120, 30)
@@ -143,7 +141,7 @@ script = ExtResource("9_v6jjx")
 script = ExtResource("7_5lkyu")
 
 [connection signal="pressed" from="margin/hButtonContainer/vButtonContainer/login" to="." method="_on_login_pressed"]
-[connection signal="pressed" from="margin/hButtonContainer/vButtonContainer/joinLobby" to="margin/hButtonContainer/vButtonContainer/joinLobby" method="_on_pressed"]
+[connection signal="pressed" from="margin/hButtonContainer/vButtonContainer/joinLobby" to="." method="_on_join_lobby_pressed"]
 [connection signal="pressed" from="margin/hButtonContainer/vButtonContainer/guide" to="." method="_on_guide_pressed"]
 [connection signal="pressed" from="margin/hButtonContainer/vButtonContainer/quit" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="margin/userPanel/logout" to="margin/userPanel" method="_on_logout_pressed"]
