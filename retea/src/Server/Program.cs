@@ -1,4 +1,4 @@
-﻿
+
 using MySql.Data.MySqlClient;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using System.Xml;
 using System.Diagnostics;
 using Server;
+using System.Security.Policy;
 
 namespace HttpServer
 {
@@ -106,9 +107,16 @@ namespace HttpServer
             Console.WriteLine(username + " :" + password);
             bool isAuthenticated = db.PlayerExists(username, password);
 
-            var playerData = new
+/*            var playerData = new
             {
                 username = isAuthenticated ? username : "error"
+            };*/
+           
+            // BAZA DE DATE MERGE !!
+            // CE AM COMENTAT E PENTRU CEI CARE NU AU FACUT INCA BAZA DE DATE SI SA SARA DIRECT DE PROCESUL DE LOGIN
+            var playerData = new
+            {
+                username = username,
             };
 
             string jsonResponse = Newtonsoft.Json.JsonConvert.SerializeObject(playerData);
@@ -118,15 +126,22 @@ namespace HttpServer
 
         private static async void HandleGUIInputRequest(HttpListenerContext pathRequest)
         {
-            Console.WriteLine("Request for " + pathRequest);
             using (var httpClient = new HttpClient())
             {
                 try
                 {
+                    string url = $"http://localhost:1235{pathRequest.Request.Url.AbsolutePath}";
                     var requestContent = new StringContent(pathRequest.ToString(), Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = await httpClient.PostAsync($"http://localhost:1235/{pathRequest}", requestContent);
+                    HttpResponseMessage response = await httpClient.PostAsync(url, requestContent);
 
-                    response.EnsureSuccessStatusCode();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        Console.WriteLine("Request successful.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Request failed with status code: {response.StatusCode}");
+                    }
                 }
                 catch (HttpRequestException e)
                 {
