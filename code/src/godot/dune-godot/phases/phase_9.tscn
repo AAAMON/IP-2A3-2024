@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnpst8s8wik08"]
+[gd_scene load_steps=3 format=3 uid="uid://dnpst8s8wik08"]
 
+[ext_resource type="Script" path="res://phases/phase_9.gd" id="1_v8quf"]
 [ext_resource type="Texture2D" uid="uid://dxgmy13s2g4un" path="res://assets/Asset 53.png" id="1_xrd2b"]
 
 [node name="Phase9" type="Control"]
@@ -13,6 +14,7 @@ offset_right = -399.0
 offset_bottom = -319.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_v8quf")
 metadata/_edit_group_ = true
 
 [node name="MessageBox" type="TextureRect" parent="."]
@@ -29,3 +31,5 @@ offset_top = 19.0
 offset_right = 280.0
 offset_bottom = 42.0
 text = "Noone completed winning conditions..."
+
+[node name="Timer" type="Timer" parent="."]

@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwsxy10ywkwfx"]
+[gd_scene load_steps=3 format=3 uid="uid://bwsxy10ywkwfx"]
 
+[ext_resource type="Script" path="res://phases/phase_6.gd" id="1_6f0nl"]
 [ext_resource type="Texture2D" uid="uid://dxgmy13s2g4un" path="res://assets/Asset 53.png" id="1_6rg3p"]
 
 [node name="Phase5" type="Control"]
@@ -7,22 +8,23 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 408.0
-offset_top = 212.0
-offset_right = -444.0
-offset_bottom = -286.0
+offset_left = 10.0
+offset_top = 216.0
+offset_right = -842.0
+offset_bottom = -282.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_6f0nl")
 metadata/_edit_group_ = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="MessageBox" type="TextureRect" parent="."]
 layout_mode = 0
 offset_right = 300.0
 offset_bottom = 150.0
 texture = ExtResource("1_6rg3p")
 expand_mode = 1
 
-[node name="Title" type="Label" parent="TextureRect"]
+[node name="Title" type="Label" parent="MessageBox"]
 layout_mode = 0
 offset_left = 27.0
 offset_top = 19.0
@@ -31,7 +33,7 @@ offset_bottom = 42.0
 text = "Shipment"
 horizontal_alignment = 1
 
-[node name="Skip" type="Button" parent="TextureRect"]
+[node name="Skip" type="Button" parent="MessageBox"]
 layout_mode = 0
 offset_left = 31.0
 offset_top = 107.0
@@ -39,7 +41,7 @@ offset_right = 85.0
 offset_bottom = 138.0
 text = "Skip..."
 
-[node name="Description" type="Label" parent="TextureRect"]
+[node name="Description" type="Label" parent="MessageBox"]
 layout_mode = 0
 offset_left = 35.0
 offset_top = 50.0
@@ -47,3 +49,5 @@ offset_right = 242.0
 offset_bottom = 99.0
 text = "Pick an area on the map to
 ship forces to."
+
+[connection signal="pressed" from="MessageBox/Skip" to="." method="_on_skip_pressed"]

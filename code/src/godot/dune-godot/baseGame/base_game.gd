@@ -37,9 +37,10 @@ func _ready():
 	timer.start()
 
 func _on_timer_timeout():
-	var error = phaseInfoRequest.request(PlayerData.api_url + "get_phase_info")
-	if error != OK:
-		push_error("ERROR: HTTP: GET_PHASE_INFO")
+	if (PlayerData.requestCompleted):
+		var error = phaseInfoRequest.request(PlayerData.api_url + "get_phase_info")
+		if error != OK:
+			push_error("ERROR: HTTP: GET_PHASE_INFO")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

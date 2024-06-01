@@ -27,6 +27,8 @@ func _on_player_info_request_completed(_result, _response_code, _headers, body):
 		PlayerData.forcesReserve = json["forcesReserve"]
 		PlayerData.forcesDeployed = json["forcesDeployed"]
 		PlayerData.forcesDead = json["forcesDead"]
+		PlayerData.treatcheryCards = json["treacheryCards"]
+		PlayerData.traitors = json["traitors"]
 	# if we switch the scene sooner, the request won't be able to finish
 	get_tree().change_scene_to_file("res://baseGame/base_game.tscn")
 

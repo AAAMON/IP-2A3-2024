@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://qb45g731sgmk"]
+[gd_scene load_steps=40 format=3 uid="uid://qb45g731sgmk"]
 
 [ext_resource type="Script" path="res://baseGame/base_game_hud.gd" id="1_1jdqd"]
 [ext_resource type="Script" path="res://baseGame/popup.gd" id="1_xtbao"]
@@ -32,7 +32,11 @@
 [ext_resource type="Texture2D" uid="uid://ddftscc3g2sgp" path="res://assets/Asset 52.png" id="29_jitfh"]
 [ext_resource type="Texture2D" uid="uid://blabedll75bav" path="res://assets/Asset 33.png" id="30_m248h"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_fic1j"]
+[sub_resource type="Gradient" id="Gradient_s6gki"]
+colors = PackedColorArray(0.27, 0.196875, 0.0945, 1, 0.23, 0.132825, 0.0805, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wmlrw"]
+gradient = SubResource("Gradient_s6gki")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xepbg"]
 texture = ExtResource("2_1wd2q")
@@ -69,9 +73,17 @@ script = ExtResource("1_1jdqd")
 offset_top = 610.0
 offset_right = 307.0
 offset_bottom = 915.0
-texture = SubResource("PlaceholderTexture2D_fic1j")
+texture = SubResource("GradientTexture1D_wmlrw")
 script = ExtResource("1_xtbao")
 metadata/_edit_group_ = true
+
+[node name="Leaders" type="Label" parent="popup"]
+layout_mode = 0
+offset_left = 53.5714
+offset_top = 47.6191
+offset_right = 93.5714
+offset_bottom = 70.6191
+text = "LEADERS GO HERE"
 
 [node name="playerHUD" type="Panel" parent="."]
 offset_left = -7.14286
@@ -314,14 +326,14 @@ offset_bottom = 204.0
 theme = SubResource("Theme_lopji")
 texture_normal = ExtResource("18_uebe1")
 
-[node name="Label" type="Label" parent="playerHUD/buttonExit13"]
+[node name="TreacheryCards" type="Label" parent="playerHUD/buttonExit13"]
 layout_mode = 0
 offset_left = 61.0
 offset_top = 22.6667
 offset_right = 232.0
 offset_bottom = 45.6667
 theme = SubResource("Theme_skht1")
-text = "TREATCHERY CARDS"
+text = "TREACHERY CARDS"
 label_settings = SubResource("LabelSettings_goyfp")
 
 [node name="buttonExit14" type="TextureButton" parent="playerHUD"]
@@ -333,7 +345,7 @@ offset_bottom = 118.0
 theme = SubResource("Theme_lopji")
 texture_normal = ExtResource("19_djhge")
 
-[node name="Label3" type="Label" parent="playerHUD/buttonExit14"]
+[node name="TraitorCards" type="Label" parent="playerHUD/buttonExit14"]
 layout_mode = 0
 offset_left = 80.8572
 offset_top = 18.7619

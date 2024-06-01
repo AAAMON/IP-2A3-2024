@@ -2,6 +2,7 @@ extends Control
 var phase3InfoRequest
 @onready var timer: Timer = $Timer
 var firstCheck = true
+var requestCompleted: bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,14 +19,16 @@ func _ready():
 	timer.start()
 
 func _on_timer_timeout():
-	var error = phase3InfoRequest.request(PlayerData.api_url + "get_phase_3_info")
-	if error != OK:
-		push_error("ERROR: HTTP: GET_PHASE_3_INFO")
+	if (PlayerData.requestCompleted):
+		var error = phase3InfoRequest.request(PlayerData.api_url + "get_phase_3_info")
+		if error != OK:
+			push_error("ERROR: HTTP: GET_PHASE_3_INFO")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
 func _on_phase_3_info_request_completed(_result, _response_code, _headers, body):
+	requestCompleted = false
 	var response_string = body.get_string_from_utf8()
 	var json = JSON.parse_string(response_string)
 	if (json == null):
@@ -35,12 +38,17 @@ func _on_phase_3_info_request_completed(_result, _response_code, _headers, body)
 		# on first request, see if player needs to input anything
 		if (firstCheck):
 			var phase3Message = get_node("MessageBox/Description")
-			phase3Message.text = "You didn't receive spice as charity..."
+			var meToo = false;
 			for i in range(json["howMany"]):
 				var playerId = json["whichPlayers"][i]["turnId"]
+				print(playerId)
 				if (playerId == PlayerData.turnId):
 					var addedSpice = json["whichPlayers"][i]["addedSpice"]
 					phase3Message.text = "You received " + str(addedSpice) + " spice as charity!"
 					PlayerData.spice += addedSpice
+					meToo = true;
+				if (meToo == false):
+					phase3Message.text = "You didn't receive spice as charity..."
 				# update other
 			firstCheck = false
+	requestCompleted = true

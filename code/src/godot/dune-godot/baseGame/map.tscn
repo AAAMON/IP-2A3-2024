@@ -239,6 +239,7 @@ text = "THE GREAT FLAT"
 horizontal_alignment = 1
 
 [node name="the-great-flat-spice" type="Label" parent="Nice/MapLabels/the-great-flat"]
+layout_mode = 0
 offset_left = 18.0
 offset_top = 12.0
 offset_right = 49.0
@@ -250,6 +251,7 @@ horizontal_alignment = 1
 
 [node name="the-great-flat-forces" type="Label" parent="Nice/MapLabels/the-great-flat"]
 visible = false
+layout_mode = 0
 offset_left = 104.0
 offset_top = -11.0
 offset_right = 169.0
@@ -271,6 +273,7 @@ text = "FUNERAL PLAIN"
 horizontal_alignment = 1
 
 [node name="funeral-plain-spice" type="Label" parent="Nice/MapLabels/funeral-plain"]
+layout_mode = 0
 offset_left = 11.0
 offset_top = 11.0
 offset_right = 42.0
@@ -282,6 +285,7 @@ horizontal_alignment = 1
 
 [node name="funeral-plain-forces" type="Label" parent="Nice/MapLabels/funeral-plain"]
 visible = false
+layout_mode = 0
 offset_left = 88.7398
 offset_top = -18.6076
 offset_right = 119.74

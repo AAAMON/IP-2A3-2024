@@ -1,7 +1,7 @@
 extends Node
-var api_url = "http://localhost:1235/"
+var api_url = "http://localhost:1237/"
 var connected = false
-
+var requestCompleted: bool = true
 
 # AUTH DATA ####################################################################
 var username : String = "Not Logged In..."
@@ -16,9 +16,17 @@ var forcesDead : int = -1
 var leaders = []
 var territories = []
 var traitors = []
-# holds the id's for each card
 var treatcheryCards = []
 
+
+# hope this will get deleted ###################################################
+var leadersAtreides = [
+	{"idForApi": -1, "name": "Thufir Hawat", "strength": 5},
+	{"idForApi": -1, "name": "Lady Jessica", "strength": 5},
+	{"idForApi": -1, "name": "Gurney Halleck", "strength": 4},
+	{"idForApi": -1, "name": "Duncan Idaho", "strength": 2},
+	{"idForApi": -1, "name": "Dr. Wellington Yueh", "strength": 1}
+]
 
 func logout():
 	username = "Not Logged In..."

@@ -20,16 +20,17 @@ func _ready():
 	add_child(phase1InfoRequest)
 	var error = phase1InfoRequest.request(PlayerData.api_url + "get_phase_1_info")
 	if error != OK:
-		push_error("ERROR: HTTP: GET_PLAYER_DATA")
+		push_error("ERROR: HTTP: GET_PHASE_1")
 	 # Configure and start the timer#############################################
 	timer.wait_time = 0.3  # 100 milliseconds
 	timer.connect("timeout", _on_timer_timeout)
 	timer.start()
 
 func _on_timer_timeout():
-	var error = phase1InfoRequest.request(PlayerData.api_url + "get_phase_1_info")
-	if error != OK:
-		push_error("ERROR: HTTP: GET_PLAYER_DATA")
+	if (PlayerData.requestCompleted):
+		var error = phase1InfoRequest.request(PlayerData.api_url + "get_phase_1_info")
+		if error != OK:
+			push_error("ERROR: HTTP: GET_PHASE_1_INFO")
 
 func _on_phase_1_info_request_completed(_result, _response_code, _headers, body):
 	var response_string = body.get_string_from_utf8()
@@ -68,7 +69,7 @@ func _on_submit_pressed():
 	var playerInput = get_node("InputBox/Input")
 	var error = phase1InputRequest.request(PlayerData.api_url + "phase_1_input/" + playerInput.text)
 	if error != OK:
-		push_error("ERROR: HTTP: GET_PLAYER_DATA")
+		push_error("ERROR: HTTP: GET_PHASE_1_INFO")
 
 func _on_phase_1_input_request_completed(_result, _response_code, _headers, body):
 	var response_string = body.get_string_from_utf8()

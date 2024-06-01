@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bt062g8xbodaf"]
+[gd_scene load_steps=3 format=3 uid="uid://bt062g8xbodaf"]
 
+[ext_resource type="Script" path="res://phases/phase_8.gd" id="1_7ujud"]
 [ext_resource type="Texture2D" uid="uid://dxgmy13s2g4un" path="res://assets/Asset 53.png" id="1_r4ql8"]
 
 [node name="Phase8" type="Control"]
@@ -13,6 +14,7 @@ offset_right = -804.0
 offset_bottom = -420.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_7ujud")
 metadata/_edit_group_ = true
 
 [node name="MessageBox" type="TextureRect" parent="."]
@@ -29,3 +31,5 @@ offset_top = 19.0
 offset_right = 280.0
 offset_bottom = 42.0
 text = "You received 3 spice from area X!"
+
+[node name="Timer" type="Timer" parent="."]

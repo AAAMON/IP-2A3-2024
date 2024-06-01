@@ -2,6 +2,7 @@ extends Control
 var phase2InfoRequest
 @onready var timer: Timer = $Timer
 var firstCheck = true
+var requestCompleted: bool = true
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# GET PHASE INFO REQUEST ###################################################
@@ -17,9 +18,10 @@ func _ready():
 	timer.start()
 
 func _on_timer_timeout():
-	var error = phase2InfoRequest.request(PlayerData.api_url + "get_phase_2_info")
-	if error != OK:
-		push_error("ERROR: HTTP: GET_PHASE_2_INFO")
+	if (PlayerData.requestCompleted):
+		var error = phase2InfoRequest.request(PlayerData.api_url + "get_phase_2_info")
+		if error != OK:
+			push_error("ERROR: HTTP: GET_PHASE_2_INFO")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -42,4 +44,5 @@ func _on_phase_2_info_request_completed(_result, _response_code, _headers, body)
 				phase2Message.text = "Territory " + territory_name + " got " + str(addedSpice) + " spice!"
 				#print("New spice " + str(MapData.territories[territory_name]["spice"]))
 			firstCheck = false
+	requestCompleted = true
 

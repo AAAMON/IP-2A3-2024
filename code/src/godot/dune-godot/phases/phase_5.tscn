@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://j5kxiqtw6qub"]
+[gd_scene load_steps=4 format=3 uid="uid://j5kxiqtw6qub"]
 
+[ext_resource type="Script" path="res://phases/phase_5.gd" id="1_0lhrq"]
 [ext_resource type="Texture2D" uid="uid://dxgmy13s2g4un" path="res://assets/Asset 53.png" id="1_4a43s"]
 [ext_resource type="Script" path="res://phases/InputRevive.gd" id="2_25k8t"]
 
@@ -14,7 +15,7 @@ offset_right = -414.0
 offset_bottom = -227.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_group_ = true
+script = ExtResource("1_0lhrq")
 
 [node name="MessageBox" type="TextureRect" parent="."]
 layout_mode = 0
@@ -32,15 +33,7 @@ offset_bottom = 42.0
 text = "Revival"
 horizontal_alignment = 1
 
-[node name="Submit" type="Button" parent="MessageBox"]
-layout_mode = 0
-offset_left = 189.0
-offset_top = 79.0
-offset_right = 227.0
-offset_bottom = 110.0
-text = "Revive!"
-
-[node name="InputRevive" type="LineEdit" parent="MessageBox"]
+[node name="InputReviveForces" type="LineEdit" parent="MessageBox"]
 layout_mode = 0
 offset_left = 25.0
 offset_top = 81.0
@@ -50,12 +43,42 @@ theme_override_font_sizes/font_size = 12
 placeholder_text = "Enter amount of forces"
 script = ExtResource("2_25k8t")
 
+[node name="InputReviveLeader" type="LineEdit" parent="MessageBox"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 122.0
+offset_right = 172.0
+offset_bottom = 149.0
+theme_override_font_sizes/font_size = 12
+placeholder_text = "Enter leader name"
+
+[node name="SubmitForces" type="Button" parent="MessageBox"]
+layout_mode = 0
+offset_left = 189.0
+offset_top = 79.0
+offset_right = 252.0
+offset_bottom = 110.0
+disabled = true
+text = "Revive!"
+
+[node name="SubmitLeader" type="Button" parent="MessageBox"]
+layout_mode = 0
+offset_left = 189.0
+offset_top = 119.0
+offset_right = 252.0
+offset_bottom = 150.0
+disabled = true
+text = "Revive!"
+
 [node name="Description" type="Label" parent="MessageBox"]
 layout_mode = 0
-offset_left = 37.0
-offset_top = 136.0
-offset_right = 239.0
-offset_bottom = 159.0
+offset_left = 40.0
+offset_top = 160.0
+offset_right = 242.0
+offset_bottom = 183.0
 text = "No dead leaders to revive!"
 
-[connection signal="text_changed" from="MessageBox/InputRevive" to="MessageBox/InputRevive" method="_on_text_changed"]
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="text_changed" from="MessageBox/InputReviveForces" to="MessageBox/InputReviveForces" method="_on_text_changed"]
+[connection signal="text_changed" from="MessageBox/InputReviveLeader" to="MessageBox/InputReviveLeader" method="_on_text_changed"]
