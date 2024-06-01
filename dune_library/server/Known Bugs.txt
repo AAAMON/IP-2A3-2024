@@ -1,0 +1,5 @@
+Aici avem bugurile cunoscute:
+Cand dai start si iti alegi traitor-ul daca nu pui input corect da crash -Cosmin
+
+Aici sunt lucrurile care nu sunt implementate inca:
+Trebuie sa adaugam Bene prediction -Cosmin

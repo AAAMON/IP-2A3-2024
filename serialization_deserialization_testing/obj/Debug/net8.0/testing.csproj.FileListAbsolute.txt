@@ -72,3 +72,28 @@ C:\Users\Cosmin\Desktop\Poriect IP\Dune\serialization_deserialization_testing\ob
 C:\Users\Cosmin\Desktop\Poriect IP\Dune\serialization_deserialization_testing\obj\Debug\net8.0\testing.pdb
 C:\Users\Cosmin\Desktop\Poriect IP\Dune\serialization_deserialization_testing\obj\Debug\net8.0\testing.genruntimeconfig.cache
 C:\Users\Cosmin\Desktop\Poriect IP\Dune\serialization_deserialization_testing\obj\Debug\net8.0\ref\testing.dll
+D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\obj\Debug\net8.0\testing.csproj.AssemblyReference.cache
+D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\obj\Debug\net8.0\testing.GeneratedMSBuildEditorConfig.editorconfig
+D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\obj\Debug\net8.0\testing.AssemblyInfoInputs.cache
+D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\obj\Debug\net8.0\testing.AssemblyInfo.cs
+D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\obj\Debug\net8.0\testing.csproj.CoreCompileInputs.cache
+D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\obj\Debug\net8.0\testing.sourcelink.json
+D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\obj\Debug\net8.0\testing.dll
+D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\obj\Debug\net8.0\refint\testing.dll
+D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\obj\Debug\net8.0\testing.pdb
+D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\bin\Debug\net8.0\testing.exe
+D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\bin\Debug\net8.0\testing.deps.json
+D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\bin\Debug\net8.0\testing.runtimeconfig.json
+D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\bin\Debug\net8.0\testing.dll
+D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\bin\Debug\net8.0\testing.pdb
+D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\bin\Debug\net8.0\Enums.NET.dll
+D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\bin\Debug\net8.0\LanguageExt.Core.dll
+D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\bin\Debug\net8.0\LanguageExt.Rx.dll
+D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\bin\Debug\net8.0\LanguageExt.UnitTesting.dll
+D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\bin\Debug\net8.0\System.Reactive.dll
+D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\bin\Debug\net8.0\dune_library.dll
+D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\bin\Debug\net8.0\dune_library.pdb
+D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\obj\Debug\net8.0\testing.csproj.Up2Date
+D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\obj\Debug\net8.0\testing.genruntimeconfig.cache
+D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\obj\Debug\net8.0\ref\testing.dll

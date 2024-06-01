@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Cosmin\\source\\repos\\IP-2A3-2024\\serialization_deserialization_testing\\testing.csproj": {}
+    "D:\\Uni\\Anul 2\\sem 2\\IP\\project_repo\\API\\serialization_deserialization_testing\\testing.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Cosmin\\source\\repos\\IP-2A3-2024\\dune_library\\dune_library.csproj": {
+    "D:\\Uni\\Anul 2\\sem 2\\IP\\project_repo\\API\\dune_library\\dune_library.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Cosmin\\source\\repos\\IP-2A3-2024\\dune_library\\dune_library.csproj",
+        "projectUniqueName": "D:\\Uni\\Anul 2\\sem 2\\IP\\project_repo\\API\\dune_library\\dune_library.csproj",
         "projectName": "dune_library",
-        "projectPath": "C:\\Users\\Cosmin\\source\\repos\\IP-2A3-2024\\dune_library\\dune_library.csproj",
-        "packagesPath": "C:\\Users\\Cosmin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Cosmin\\source\\repos\\IP-2A3-2024\\dune_library\\obj\\",
+        "projectPath": "D:\\Uni\\Anul 2\\sem 2\\IP\\project_repo\\API\\dune_library\\dune_library.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "D:\\Uni\\Anul 2\\sem 2\\IP\\project_repo\\API\\dune_library\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Cosmin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -38,6 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -77,25 +78,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Cosmin\\source\\repos\\IP-2A3-2024\\serialization_deserialization_testing\\testing.csproj": {
+    "D:\\Uni\\Anul 2\\sem 2\\IP\\project_repo\\API\\serialization_deserialization_testing\\testing.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Cosmin\\source\\repos\\IP-2A3-2024\\serialization_deserialization_testing\\testing.csproj",
+        "projectUniqueName": "D:\\Uni\\Anul 2\\sem 2\\IP\\project_repo\\API\\serialization_deserialization_testing\\testing.csproj",
         "projectName": "testing",
-        "projectPath": "C:\\Users\\Cosmin\\source\\repos\\IP-2A3-2024\\serialization_deserialization_testing\\testing.csproj",
-        "packagesPath": "C:\\Users\\Cosmin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Cosmin\\source\\repos\\IP-2A3-2024\\serialization_deserialization_testing\\obj\\",
+        "projectPath": "D:\\Uni\\Anul 2\\sem 2\\IP\\project_repo\\API\\serialization_deserialization_testing\\testing.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "D:\\Uni\\Anul 2\\sem 2\\IP\\project_repo\\API\\serialization_deserialization_testing\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Cosmin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -109,8 +106,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Cosmin\\source\\repos\\IP-2A3-2024\\dune_library\\dune_library.csproj": {
-                "projectPath": "C:\\Users\\Cosmin\\source\\repos\\IP-2A3-2024\\dune_library\\dune_library.csproj"
+              "D:\\Uni\\Anul 2\\sem 2\\IP\\project_repo\\API\\dune_library\\dune_library.csproj": {
+                "projectPath": "D:\\Uni\\Anul 2\\sem 2\\IP\\project_repo\\API\\dune_library\\dune_library.csproj"
               }
             }
           }
@@ -119,6 +116,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -140,7 +142,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

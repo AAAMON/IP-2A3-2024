@@ -1,17 +1,13 @@
-﻿using System;
+﻿using dune_library.Player_Resources;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using dune_library;
-using dune_library.Player_Resources;
-using dune_library.Utils;
-using dune_library.server;
-//using clientApi;
 
-namespace serialization_deserialization_testing
+namespace dune_library.server
 {
-    internal class GameState
+    internal class Runner
     {
         public static async Task Main(string[] args)
         {
