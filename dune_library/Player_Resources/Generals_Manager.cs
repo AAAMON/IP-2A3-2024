@@ -47,7 +47,7 @@ namespace dune_library.Player_Resources {
 
     #region Atreides
 
-    public static General Dr_Wellington_Yueh { get; } = new(Faction.Atreides, "Dr. Wellington Yueh", 1);
+    public static General Dr_Wellington_Yueh { get; } = new(Faction.Atreides, "Dr Wellington Yueh", 1);
     public static General Duncan_Idaho { get; } = new(Faction.Atreides, "Duncan Idaho", 2);
     public static General Gurney_Halleck { get; } = new(Faction.Atreides, "Gurney Halleck", 4);
     public static General Lady_Jessica { get; } = new(Faction.Atreides, "Lady Jessica", 5);
@@ -87,7 +87,7 @@ namespace dune_library.Player_Resources {
 
     #region Spacing_Guild
 
-    public static General Guild_Rep { get; } = new (Faction.Spacing_Guild, "Guild Rep.", 1);
+    public static General Guild_Rep { get; } = new (Faction.Spacing_Guild, "Guild Rep", 1);
     public static General Soo_Soo_Sook { get; } = new(Faction.Spacing_Guild, "Soo-Soo Sook", 2);
     public static General Esmar_Tuek { get; } = new (Faction.Spacing_Guild, "Esmar Tuek", 3);
     public static General Master_Bewt { get; } = new (Faction.Spacing_Guild, "Master Bewt", 3);
@@ -101,7 +101,7 @@ namespace dune_library.Player_Resources {
     public static General Captain_Iakin_Nefud { get; } = new(Faction.Harkonnen, "Captain Iakin Nefud", 2);
     public static General Piter_de_Vries { get; } = new(Faction.Harkonnen, "Piter de Vries", 3);
     public static General Beast_Rabban { get; } = new (Faction.Harkonnen, "Beast Rabban", 4);
-    public static General Feyd_Rautha { get; } = new (Faction.Harkonnen, "Feyd-Rautha", 6);
+    public static General Feyd_Rautha { get; } = new (Faction.Harkonnen, "Feyd Rautha", 6);
 
     #endregion
 

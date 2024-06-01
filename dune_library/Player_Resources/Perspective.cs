@@ -43,6 +43,7 @@ namespace dune_library.Player_Resources {
 
     public Option<Tleilaxu_Tanks> Tleilaxu_Tanks { get; }
 
+    public (Faction? faction, uint Highest_Bid) HighestBid = new(null, 0);
     public Option<I_Faction_Knowledge_Read_Only> Faction_Knowledge { get; } // can be destructured into individual properties
 
     
@@ -58,8 +59,9 @@ namespace dune_library.Player_Resources {
       Option<Forces> reserves,
       Option<Tleilaxu_Tanks> tleilaxu_tanks,
       Option<Knowledge_Manager> knowledge_manager,
-      Option<Spice_Card> last_spice_card
-    ) {
+      Option<Spice_Card> last_spice_card,
+      (Faction? faction, uint Highest_Bid) HighestBid
+       ) {
       if (factions_distribution.IsLeft) {
         Free_Factions = factions_distribution.Left().Free_Factions;
         Taken_Factions = factions_distribution.Left().Taken_Factions;
@@ -78,6 +80,7 @@ namespace dune_library.Player_Resources {
       Reserves = reserves;
       Last_Spice_Card = last_spice_card;
       Tleilaxu_Tanks = tleilaxu_tanks;
+      this.HighestBid = HighestBid;
       Faction_Knowledge = knowledge_manager.Map(km => km.Of(Faction.Value())); //if 'knowledge_manager' is some, then factions are initialized, and 'Faction' is some
     }
 

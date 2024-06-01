@@ -15,13 +15,14 @@ namespace dune_library.Phases {
   public class Storm_Phase : Phase {
     public Storm_Phase(Game game) {
       Map = game.Map;
-      this.turn = game.Round;
+      this.turn = 3;
       Storm_Sector = game.Map.Storm_Sector;
       Battle_Wheels = game.Battle_Wheels;
       this.Tleilaxu_Tanks = game.Tleilaxu_Tanks;
       Perspective_Generator = game;
       Players = game.Players;
       Init = game;
+      Battle_Wheels = game.Battle_Wheels;
     }
 
     public override string name => "Storm";
@@ -44,6 +45,8 @@ namespace dune_library.Phases {
 
     public (Battle_Wheel first, Battle_Wheel second) Battle_Wheels { get; }
 
+
+
     public int Calculate_Storm() {
       if(turn == 1)
       {
@@ -51,14 +54,47 @@ namespace dune_library.Phases {
       }
       else
       {
-        while(true)
+        bool[] confirm = [false,false];
+        int response = 0;
+        Console.WriteLine(Battle_Wheels.first.Last_Player.Id + " " + Battle_Wheels.second.Last_Player.Id);
+        while(!confirm[0] || !confirm[1])
         {
-            Console.WriteLine("Introduceti nr de sectoare cu care sa fie mutat storm-ul");
-            String response = Console.ReadLine();
-            int number = Convert.ToInt32(response);
-            if(number >= 0 && number <= 6)
-                return Convert.ToInt32(response);
+            Console.WriteLine("Introduceti nr de sectoare cu care sa fie mutat storm-ul (ex /1/phase_1_input/3)");
+            string[] line = Console.ReadLine().Split("/");
+            if(line[1] == Battle_Wheels.first.Last_Player.Id && line[2] == "phase_1_input")
+            {
+                int number = Int32.Parse(line[3]);
+                if(number >= 0 && number <= 3 && !confirm[0])
+                {
+                    response += number;
+                    confirm[0] = true;
+                    Console.WriteLine("Succes");
+                }
+                else
+                {
+                    Console.WriteLine("Failure");
+                }
+            }
+            else if (line[1] == Battle_Wheels.second.Last_Player.Id && line[2] == "phase_1_input")
+            {
+                int number = Int32.Parse(line[3]);
+                if (number >= 0 && number <= 3 && !confirm[1])
+                {
+                    response += number;
+                    confirm[1] = true;
+                    Console.WriteLine("Succes");
+                }
+                else
+                {
+                    Console.WriteLine("Failure");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Failure");
+            }
         }
+        return response;
       }
     }
     public void Move_Storm(uint sectors_to_move)
@@ -71,12 +107,13 @@ namespace dune_library.Phases {
         );
         Map.Move_Storm_Sector_Forward(sectors_to_move);
     }
-        public override void Play_Out() {
+    public override void Play_Out() {
 
         moment = "before storm was calculated";
-
+        string Get_Card = Wait_Until_Something.AwaitInput(3000).Result;
+        Console.WriteLine(Get_Card);
         int sectors_to_move = Calculate_Storm();
-            Console.WriteLine("Storm ul s a mutat " + sectors_to_move);
+        Console.WriteLine("Storm ul s a mutat " + sectors_to_move);
 
         moment = "storm was calculated";
 
@@ -85,6 +122,6 @@ namespace dune_library.Phases {
         moment = "storm was moved";
         Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
         /*Move_Storm(sectors_to_move);*/
-      }
     }
   }
+}

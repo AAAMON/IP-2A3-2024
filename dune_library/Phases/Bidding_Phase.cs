@@ -12,21 +12,6 @@ using dune_library.Player_Resources.Knowledge_Manager_Interfaces;
 
 namespace dune_library.Phases
 {
-    internal class HighestBidder
-    {
-        public Faction Faction { get; set; }
-        public uint bid { get; set; }
-
-        public HighestBidder(Faction faction, uint bid)
-        {
-            this.Faction = faction;
-            this.bid = bid;
-        }
-        public HighestBidder()
-        {
-            this.bid = 0;
-        }
-    }
         internal class Bidding_Phase : Phase
     {
         private const int Max_Cards_Harkonnen = 8;
@@ -37,12 +22,14 @@ namespace dune_library.Phases
             I_Perspective_Generator perspective_generator,
             I_Setup_Initializers_And_Getters init,
             IReadOnlySet<Player> players,
-            Treachery_Deck treachery_Deck)
+            Treachery_Deck treachery_Deck,
+            (Faction? faction, uint Highest_Bid) highestBid)
         {
             Perspective_Generator = perspective_generator;
             Init = init;
             Players = players;
             this.treachery_Deck = treachery_Deck;
+            HighestBid = highestBid;
         }
 
         public override string name => "Bidding";
@@ -64,6 +51,8 @@ namespace dune_library.Phases
         private Knowledge_Manager Faction_Knowledge => Init.Knowledge_Manager;
 
         private I_Spice_Manager Spice_Manager => Init.Knowledge_Manager;
+
+        public (Faction? faction, uint Highest_Bid) HighestBid;
         public override void Play_Out()
         {
             moment = "bidding declaration";
@@ -83,19 +72,18 @@ namespace dune_library.Phases
 
             for(int i = 0; i < biddingOrder.Count && !stop; i++)
             {
-                var highestBidder = new HighestBidder();
 
                 while (biddingOrder.Any())
                 {
                     var currentBidder = biddingOrder.Dequeue();
-                    var bid = GetBidFromPlayer(currentBidder, highestBidder);
+                    uint bid = HighestBid.Highest_Bid;
                     Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
 
 
-                    if (bid > highestBidder.bid)
+                    if (bid > HighestBid.Highest_Bid)
                     {
-                        highestBidder.bid = (uint)bid;
-                        highestBidder.Faction = currentBidder;
+                        HighestBid.Highest_Bid = (uint)bid;
+                        HighestBid.faction = currentBidder;
                         counter = 0;
                     }
                     else
@@ -110,51 +98,27 @@ namespace dune_library.Phases
                     if (Faction_Knowledge.Of(currentBidder).Number_Of_Treachery_Cards_Of(currentBidder) < (currentBidder == Faction.Harkonnen ? Max_Cards_Harkonnen : Max_Cards_Others))
                         biddingOrder.Enqueue(currentBidder);
                 }
-                Console.WriteLine($"The winner is {highestBidder.Faction}");
-                if (highestBidder.bid != 0)
+                Console.WriteLine($"The winner is {HighestBid.faction}");
+                if (HighestBid.Highest_Bid != 0)
                 {
-                    if (highestBidder.Faction == Faction.Harkonnen)
+                    if (HighestBid.faction == Faction.Harkonnen)
                     {
                     
-                        Treachery_Cards_Manager.Give_A_Treachery_Card(highestBidder.Faction);
+                        Treachery_Cards_Manager.Give_A_Treachery_Card(HighestBid.faction.Value);
                     }
                     if (Factions_In_Play.Contains(Faction.Emperor))
                     {
-                        Spice_Manager.Add_Spice_To(Faction.Emperor, highestBidder.bid);
-                        Spice_Manager.Remove_Spice_From(highestBidder.Faction, highestBidder.bid);
+                        Spice_Manager.Add_Spice_To(Faction.Emperor, HighestBid.Highest_Bid);
+                        Spice_Manager.Remove_Spice_From(HighestBid.faction.Value, HighestBid.Highest_Bid);
                     }
                     else
                     {
-                        Spice_Manager.Remove_Spice_From(highestBidder.Faction, highestBidder.bid);
+                        Spice_Manager.Remove_Spice_From(HighestBid.faction.Value, HighestBid.Highest_Bid);
                     }
                 }
             }
             moment = "end of bidding";
             Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
-        }
-
-        private int GetBidFromPlayer(Faction faction, HighestBidder currentHighestBid)
-        {
-            Console.WriteLine($"{faction}, place your bid (current highest: {currentHighestBid.bid}) or pass:");
-            while (true)
-            {
-                string input = Console.ReadLine();
-                if (int.TryParse(input, out int bid))
-                {
-                    if (bid >= 0 && bid <= Spice_Manager.getSpice(faction))
-                    {
-                        return bid;
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Invalid bid. Please enter a valid bid between 0 and {Spice_Manager.getSpice(faction)}:");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Invalid input. Please enter a valid number:");
-                }
-            }
         }
     }
 }

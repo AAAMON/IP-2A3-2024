@@ -29,7 +29,8 @@ namespace dune_library.Phases
           Either<Factions_Distribution_Manager, Final_Factions_Distribution> factions_distribution_raw,
           Option<Either<Player_Markers_Manager, Final_Player_Markers>> player_markers_raw,
           Map_Resources.Map map,
-          uint Bene_Prediction
+          uint Bene_Prediction,
+          (Battle_Wheel A, Battle_Wheel B) Battle_Wheels
         )
         {
             Perspective_Generator = perspective_generator;
@@ -39,6 +40,7 @@ namespace dune_library.Phases
             Player_Markers_Raw = player_markers_raw;
             Map = map;
             this.Bene_Prediction = Bene_Prediction;
+            this.Battle_Wheels = Battle_Wheels;
         }
 
         public override string name => "Set-up";
@@ -69,6 +71,7 @@ namespace dune_library.Phases
 
         private uint Bene_Prediction { get; set; }
 
+        private (Battle_Wheel A, Battle_Wheel B) Battle_Wheels { get; }
         public override void Play_Out()
         {
 
@@ -105,14 +108,18 @@ namespace dune_library.Phases
                     // keep the player marker selection ongoing
                 }
             }
+            Battle_Wheels.A.Last_Player = Players.ToList()[0];
+            Battle_Wheels.B.Last_Player = Players.ToList()[1];
+
             Factions_In_Play.ForEach(faction => Console.WriteLine(Init.Factions_Distribution.Player_Of(faction).Id + " " + faction));
+
             moment = "Bene Gesserit prediction";
-            Console.WriteLine("Bene Gesserit make a prediction: (/player2/Setup/3)");
+            Console.WriteLine("Bene Gesserit make a prediction: (/player2/setup/3)");
             while (true)
             {
 
                 string[] line = Console.ReadLine().Split("/"); //player1/Setup/3
-                if (line[1] == Init.Factions_Distribution.Player_Of(Faction.Bene_Gesserit).Id && line[2] == "Setup")
+                if (line[1] == Init.Factions_Distribution.Player_Of(Faction.Bene_Gesserit).Id && line[2] == "setup")
                 {
                     int response = Int32.Parse(line[3]);
                     if(response < 10 && response > 0)
@@ -120,8 +127,18 @@ namespace dune_library.Phases
                         Bene_Prediction = (uint)response;
                         break;
                     }
+                    else
+                    {
+                        Console.WriteLine("Failure");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Failure");
                 }
             }
+
+            Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
 
             moment = "traitor selection";
             
@@ -143,16 +160,16 @@ namespace dune_library.Phases
                     {
                         Console.WriteLine(traitors_dict[faction][i].Name);
                     }
-                    Console.WriteLine("Choose one (/player1/Setup/traitor_name)");
+                    Console.WriteLine("Choose one (/player1/setup/traitor_name)");
                     bool end = true;
                     while (end)
                     {
                         string[] line = Console.ReadLine().Split("/");
-                        if (line[1] == Init.Factions_Distribution.Player_Of(faction).Id && line[2] == "Setup")
+                        if (line[1] == Init.Factions_Distribution.Player_Of(faction).Id && line[2] == "setup")
                         {
                             for(int i = 0; i < traitors_dict[faction].ToList().Length(); i++)
                             {
-                                if (traitors_dict[faction][i].Name == line[3])
+                                if (traitors_dict[faction][i].Name == line[3].Replace("_"," "))
                                 {
                                     General traitor = traitors_dict[faction][i];
                                     traitors_dict[faction].RemoveAt(i);
@@ -161,6 +178,12 @@ namespace dune_library.Phases
                                     break;
                                 }
                             }
+                            if(end)
+                                Console.WriteLine("Failure");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Failure");
                         }
                     }
 
@@ -207,9 +230,9 @@ namespace dune_library.Phases
                 int forces_distributed = 0;
                 while (forces_distributed != 10)
                 {
-                     System.Console.WriteLine("Choose city for fremen and number of troops (/player4/Setup/14/10)");
+                    System.Console.WriteLine("Choose city for fremen and number of troops (/player4/setup/14/10)");
                     string[] line = Console.ReadLine().Split("/");
-                    if (line[1] == Init.Factions_Distribution.Player_Of(Faction.Fremen).Id && line[2] == "Setup")
+                    if (line[1] == Init.Factions_Distribution.Player_Of(Faction.Fremen).Id && line[2] == "setup")
                     {
                         Console.WriteLine("player is correct");
                         int sectionid = Int32.Parse(line[3]);
@@ -222,22 +245,24 @@ namespace dune_library.Phases
                                 Map.Sections[sectionid].Forces.Transfer_From(Faction.Fremen, To_Place_Now, (uint)troop_number);
                                 forces_distributed += troop_number;
                             }
+                            else
+                            {
+                                Console.WriteLine("Failure");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Failure");
                         }
                     }
+                    else
+                    {
+                        Console.WriteLine("Failure");
+                    }
 
-                    // CELE 2 LINII DE MAI SUS ERAU DINAINTE SA MODIFIC EU, ERAU PT A VEDEA DACA MERGE JOCUL DIN CONSOLA
-                    //while (ValidaterServerApi.canGet == false) //#
-                    //{
-                    //
-                    //}
-                    //ValidaterServerApi.canGet = false; //#
-                    //string line = ValidaterServerApi.command; //#
-                    //Console.WriteLine(line); //#
-
-                    //UNDE AM ADAUGAT //#, e cod scris de mine
-                    
                 }
             }
+            
             moment = "treachery card distribution";
 
             Factions_In_Play.ForEach(faction => {
@@ -254,7 +279,6 @@ namespace dune_library.Phases
                 Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json");
             });
 
-            //round is set to 1 in 'Game' after this
 
         }
     }

@@ -48,7 +48,7 @@ namespace dune_library {
 
 
         //commentati de aici in jos daca vreti sa testati mai rapid
-        Phase = new Set_Up(this, this, Players, factions_distribution, player_markers, Map, Bene_Prediction);
+        Phase = new Set_Up(this, this, Players, factions_distribution, player_markers, Map, Bene_Prediction, Battle_Wheels);
         Phase.ValueUnsafe().Play_Out();
 
         for (Round = 1; Round <= 10; Round += 1) {
@@ -68,7 +68,7 @@ namespace dune_library {
 
         //bidding
         Console.WriteLine("Bidding Phase");
-        Phase = new Bidding_Phase(this,this,Players,Treachery_Deck);
+        Phase = new Bidding_Phase(this,this,Players,Treachery_Deck, HighestBid);
         Phase.ValueUnsafe().Play_Out();
 
         //revival
@@ -107,6 +107,8 @@ namespace dune_library {
       get => factions_distribution.RightOrThrow(new Faction_Selection_Ongoing());
       private set => factions_distribution = value;
     }
+
+    public (Faction? faction, uint Highest_Bid) HighestBid;
 
     public (Battle_Wheel A, Battle_Wheel B) Battle_Wheels { get; } = new(new(), new());
 
@@ -209,7 +211,8 @@ namespace dune_library {
         reserves,
         tleilaxus_tanks,
         knowledge_manager,
-        Last_Spice_Card
+        Last_Spice_Card,
+        HighestBid
       );
   }
 }
