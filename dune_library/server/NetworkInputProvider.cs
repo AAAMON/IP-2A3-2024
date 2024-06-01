@@ -27,9 +27,28 @@ namespace dune_library.server
 
                 Console.WriteLine($"Received a {request.HttpMethod} request! at {request.Url.AbsolutePath}");
 
-                context.Response.OutputStream.Close();
+                string requestData;
 
-                return request.Url.AbsolutePath;
+                if (request.HttpMethod == "GET" && request.Url.AbsolutePath.StartsWith("/gamestate"))   //cerere catre api pentru un gamestate deci o trimit mai departe
+                {
+                    requestData = request.Url.AbsolutePath;
+                }
+                else if (request.HttpMethod == "POST" && request.Url.AbsolutePath == "/gamestate") //aici banuiesc ca se primeste un gamestate care trebuie vallidat(eventual o mutare)
+                {
+                    using (StreamReader reader = new StreamReader(request.InputStream, request.ContentEncoding))
+                    {
+                        requestData = await reader.ReadToEndAsync();
+                    }
+                }
+                else if (request.Url.AbsolutePath.Contains("phase")) //daca primeste input de la gui il trimit mai departe la API
+                {
+                    using (StreamReader reader = new StreamReader(request.InputStream, request.ContentEncoding))
+                    {
+                        requestData = await reader.ReadToEndAsync();
+                    }
+                }
+                context.Response.OutputStream.Close();
+                return requestData;
             }
             catch (HttpListenerException ex)
             {
