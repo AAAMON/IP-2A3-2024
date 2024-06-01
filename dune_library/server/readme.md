@@ -1,4 +1,4 @@
-﻿ca sa trimite input folositi 
+﻿ca sa trimiteti input folositi 
 
 	Invoke-WebRequest -Uri "http://localhost:1235/player2/setup/3" -Method GET
 
