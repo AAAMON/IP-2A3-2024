@@ -16,7 +16,6 @@ func _on_cancel_pressed():
 
 
 func _on_login_pressed():
-	# CHECH IF PASS 1 AND 2 ARE THE SAME DUM DUM
 	var username = get_node("NinePatchRect/VBoxContainer/Username")
 	var password = get_node("NinePatchRect/VBoxContainer/Password1")
 	var loginRequest = HTTPRequest.new()

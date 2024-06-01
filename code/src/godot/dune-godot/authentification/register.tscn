@@ -79,17 +79,17 @@ placeholder_text = "Username"
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="Password1" type="LineEdit" parent="NinePatchRect/VBoxContainer"]
+[node name="Email" type="LineEdit" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_kqcuj")
 theme_override_font_sizes/font_size = 22
-placeholder_text = "Password"
+placeholder_text = "Email"
 
 [node name="MarginContainer3" type="MarginContainer" parent="NinePatchRect/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="Password2" type="LineEdit" parent="NinePatchRect/VBoxContainer"]
+[node name="Password1" type="LineEdit" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_kqcuj")
 theme_override_font_sizes/font_size = 22
@@ -116,3 +116,4 @@ theme_override_fonts/font = ExtResource("3_kqcuj")
 text = "REGISTER"
 
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/HBoxContainer/cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/HBoxContainer/register" to="." method="_on_register_pressed"]
