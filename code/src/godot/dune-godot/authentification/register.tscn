@@ -1,15 +1,35 @@
-[gd_scene format=3 uid="uid://bxiou4kt27q4y"]
+[gd_scene load_steps=5 format=3 uid="uid://c674rohi07xgx"]
 
-[node name="RegisterScreen" type="Control"]
+[ext_resource type="Script" path="res://authentification/register.gd" id="1_6ii0i"]
+[ext_resource type="Texture2D" uid="uid://dxgmy13s2g4un" path="res://assets/Asset 53.png" id="2_2bqnd"]
+[ext_resource type="FontFile" uid="uid://duu07hfiwa68t" path="res://fonts/Neuropol.otf" id="3_kqcuj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cq3l3"]
+font = ExtResource("3_kqcuj")
+
+[node name="registerMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 377.0
+offset_top = 141.0
+offset_right = -375.0
+offset_bottom = -107.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_6ii0i")
+metadata/_edit_group_ = true
+
+[node name="background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 400.0
+texture = ExtResource("2_2bqnd")
+expand_mode = 1
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
-custom_minimum_size = Vector2(400, 500)
+custom_minimum_size = Vector2(400, 400)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -17,9 +37,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -200.0
-offset_top = -250.0
+offset_top = -200.0
 offset_right = 200.0
-offset_bottom = 250.0
+offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -29,9 +49,9 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 60.0
-offset_top = 60.0
+offset_top = 40.0
 offset_right = -60.0
-offset_bottom = -60.0
+offset_bottom = -47.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -41,6 +61,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 34
 text = "REGISTER"
+label_settings = SubResource("LabelSettings_cq3l3")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -50,6 +71,7 @@ layout_mode = 2
 
 [node name="Username" type="LineEdit" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_kqcuj")
 theme_override_font_sizes/font_size = 22
 placeholder_text = "Username"
 
@@ -59,6 +81,7 @@ layout_mode = 2
 
 [node name="Password1" type="LineEdit" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_kqcuj")
 theme_override_font_sizes/font_size = 22
 placeholder_text = "Password"
 
@@ -68,6 +91,7 @@ layout_mode = 2
 
 [node name="Password2" type="LineEdit" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_kqcuj")
 theme_override_font_sizes/font_size = 22
 placeholder_text = "Password"
 
@@ -75,21 +99,20 @@ placeholder_text = "Password"
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
-[node name="LoginButton" type="TextureButton" parent="NinePatchRect/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
+[node name="HBoxContainer" type="HFlowContainer" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
-ignore_texture_size = true
-stretch_mode = 0
+size_flags_vertical = 4
+theme_override_constants/h_separation = 30
+alignment = 1
 
-[node name="Label" type="Label" parent="NinePatchRect/VBoxContainer/LoginButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 26
-text = "SIGN UP"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="cancel" type="Button" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_kqcuj")
+text = "CANCEL"
+
+[node name="register" type="Button" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_kqcuj")
+text = "REGISTER"
+
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/HBoxContainer/cancel" to="." method="_on_cancel_pressed"]

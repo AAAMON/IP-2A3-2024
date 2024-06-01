@@ -132,4 +132,3 @@ public class WebSocketManager
         return Encoding.UTF8.GetString(buffer, 0, result.Count);
     }
 }
-

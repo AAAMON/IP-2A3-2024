@@ -12,18 +12,19 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -797.0
-offset_bottom = -256.0
+offset_left = 365.0
+offset_top = 152.0
+offset_right = -387.0
+offset_bottom = -96.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_o8pxm")
+metadata/_edit_group_ = true
 
 [node name="background" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 398.0
-offset_top = 179.0
-offset_right = 757.0
-offset_bottom = 559.0
+offset_right = 400.0
+offset_bottom = 400.0
 texture = ExtResource("2_fd3uj")
 expand_mode = 1
 
@@ -35,10 +36,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 198.5
-offset_top = -72.0
-offset_right = 598.5
-offset_bottom = 428.0
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 300.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -48,9 +49,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 60.0
-offset_top = 60.0
 offset_right = -60.0
-offset_bottom = -60.0
+offset_bottom = -120.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -86,16 +86,6 @@ placeholder_text = "Password"
 
 [node name="MarginContainer3" type="MarginContainer" parent="NinePatchRect/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-
-[node name="Password2" type="LineEdit" parent="NinePatchRect/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_avtd3")
-theme_override_font_sizes/font_size = 22
-placeholder_text = "Password"
-
-[node name="MarginContainer4" type="MarginContainer" parent="NinePatchRect/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
 [node name="HBoxContainer" type="HFlowContainer" parent="NinePatchRect/VBoxContainer"]

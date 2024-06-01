@@ -22,3 +22,8 @@ func _on_join_lobby_pressed():
 	var lobbyScene = load("res://lobby/lobby.tscn").instantiate()
 	root.add_child(lobbyScene)
 	queue_free()
+
+
+func _on_register_pressed():
+	var registerScene = load("res://authentification/register.tscn").instantiate()
+	add_child(registerScene)

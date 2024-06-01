@@ -12,7 +12,7 @@ func _process(_delta):
 
 
 func _on_cancel_pressed():
-	get_tree().change_scene_to_file("res://mainMenu/menu.tscn")
+	queue_free()
 
 
 func _on_login_pressed():

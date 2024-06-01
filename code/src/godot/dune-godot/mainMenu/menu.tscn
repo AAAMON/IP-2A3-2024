@@ -89,6 +89,12 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("4_vof7t")
 text = "LOGIN"
 
+[node name="register" type="Button" parent="margin/hButtonContainer/vButtonContainer"]
+custom_minimum_size = Vector2(120, 32)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_vof7t")
+text = "REGISTER"
+
 [node name="joinLobby" type="Button" parent="margin/hButtonContainer/vButtonContainer"]
 custom_minimum_size = Vector2(120, 32)
 layout_mode = 2
@@ -141,6 +147,7 @@ script = ExtResource("9_v6jjx")
 script = ExtResource("7_5lkyu")
 
 [connection signal="pressed" from="margin/hButtonContainer/vButtonContainer/login" to="." method="_on_login_pressed"]
+[connection signal="pressed" from="margin/hButtonContainer/vButtonContainer/register" to="." method="_on_register_pressed"]
 [connection signal="pressed" from="margin/hButtonContainer/vButtonContainer/joinLobby" to="." method="_on_join_lobby_pressed"]
 [connection signal="pressed" from="margin/hButtonContainer/vButtonContainer/guide" to="." method="_on_guide_pressed"]
 [connection signal="pressed" from="margin/hButtonContainer/vButtonContainer/quit" to="." method="_on_exit_button_pressed"]

@@ -12,9 +12,12 @@ func _ready():
 func _process(_delta):
 	var joinLobbyButton = get_node("joinLobby")
 	var loginButton = get_node("login")
+	var registerButton = get_node("register")
 	if (PlayerData.loggedIn == false):
 		joinLobbyButton.hide()
 		loginButton.show()
+		registerButton.show()
 	else:
 		joinLobbyButton.show()
 		loginButton.hide()
+		registerButton.hide()
