@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using System.Text;
 using System.Threading.Tasks;
@@ -142,32 +142,48 @@ public class GameClient
         listener.Start();
         Console.WriteLine("Listening on port 1236...");
 
+        // Get Gamestate for a specific player
+        gamestate = await GetGamestate(authToken);
+        Console.WriteLine($"Got gamestate for {authToken}");
+
+        // Deserialize the JSON string into a JObject
+        jsonObject = Newtonsoft.Json.JsonConvert.DeserializeObject(gamestate);
+        WebSocketServerManager wsManager = new WebSocketServerManager("ws://localhost:1237");
+        wsManager.Start();
+
+        _ = Task.Run(async () =>
+        {
+            while (true)
+            {
+                HttpListenerContext context = await listener.GetContextAsync();
+                HttpListenerRequest request = context.Request;
+                HttpListenerResponse response = context.Response;
+
+                string responseString = ProcessRequest(request.RawUrl);
+                byte[] buffer = Encoding.UTF8.GetBytes(responseString);
+
+                if (!request.Url.AbsolutePath.Contains("get_phase_"))
+                    Console.WriteLine("{0} request received for {1}", request.HttpMethod, request.RawUrl);
+
+                response.ContentType = "application/json"; // Set content type to JSON
+                response.ContentLength64 = buffer.Length;
+                await response.OutputStream.WriteAsync(buffer, 0, buffer.Length);
+                response.OutputStream.Close();
+            }
+            wsManager.IsRunning = false;
+        });
         while (true)
         {
+            if (!wsManager.IsRunning)
+            {
+                listener.Stop();
+                Console.WriteLine("Websocket stopped.");
+                break;
+            }
 
-            // Get Gamestate for a specific player
-            gamestate = await GetGamestate(authToken);
-            Console.WriteLine($"Got gamestate for {authToken}");
-
-            // Deserialize the JSON string into a JObject
-            jsonObject = Newtonsoft.Json.JsonConvert.DeserializeObject(gamestate);
-
-
-
-            HttpListenerContext context = listener.GetContext();
-            HttpListenerRequest request = context.Request;
-            HttpListenerResponse response = context.Response;
-
-            string responseString = ProcessRequest(request.RawUrl);
-            byte[] buffer = Encoding.UTF8.GetBytes(responseString);
-            Console.WriteLine("{0} request received for {1}", request.HttpMethod, request.RawUrl);
-
-
-            response.ContentType = "application/json"; // Set content type to JSON
-            response.ContentLength64 = buffer.Length;
-            response.OutputStream.Write(buffer, 0, buffer.Length);
-            response.OutputStream.Close();
+            await Task.Delay(1000);
         }
+        wsManager.Stop();
     }
 
     public GameClient()
