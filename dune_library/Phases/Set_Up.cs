@@ -22,8 +22,7 @@ namespace dune_library.Phases
 {
     internal class Set_Up : Phase
     {
-        public Set_Up(
-          I_Perspective_Generator perspective_generator,
+        public Set_Up(I_Perspective_Generator perspective_generator,
           I_Setup_Initializers_And_Getters init,
           IReadOnlySet<Player> players,
           Either<Factions_Distribution_Manager, Final_Factions_Distribution> factions_distribution_raw,
@@ -31,7 +30,8 @@ namespace dune_library.Phases
           Map_Resources.Map map,
           uint Bene_Prediction,
           (Battle_Wheel A, Battle_Wheel B) Battle_Wheels,
-          I_Input_Provider input_Provider
+          I_Input_Provider input_Provider,
+          bool[] Factions_To_Move
         )
         {
             Perspective_Generator = perspective_generator;
@@ -43,8 +43,10 @@ namespace dune_library.Phases
             this.Bene_Prediction = Bene_Prediction;
             this.Battle_Wheels = Battle_Wheels;
             this.Input_Provider = input_Provider;
-
+            this.Factions_To_Move = Factions_To_Move;
         }
+        private bool[] Factions_To_Move { get; set; } = new bool[6];
+
         private I_Input_Provider Input_Provider;
         public override string name => "Set-up";
 
@@ -117,8 +119,11 @@ namespace dune_library.Phases
             Factions_In_Play.ForEach(faction => Console.WriteLine(Init.Factions_Distribution.Player_Of(faction).Id + " " + faction));
 
             moment = "Bene Gesserit prediction";
+            Factions_To_Move[1] = true;
+            Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+
             Console.WriteLine("Bene Gesserit make a prediction: (/player2/setup/3)");
-            while (true)
+            while (Factions_To_Move[1] == true)
             {
 
                 string[] line = Input_Provider.GetInputAsync().Result.Split("/");
@@ -128,7 +133,7 @@ namespace dune_library.Phases
                     if(response < 10 && response > 0)
                     {
                         Bene_Prediction = (uint)response;
-                        break;
+                        Factions_To_Move[1] = false;
                     }
                     else
                     {
@@ -140,59 +145,89 @@ namespace dune_library.Phases
                     Console.WriteLine("Failure");
                 }
             }
+            moment = "traitor selection";
+
+            for (int i = 0; i <  Factions_To_Move.Length; i ++)
+            {
+                Factions_To_Move[i] = true;
+            }
+            Factions_To_Move[5] = false;
+
+            IReadOnlyDictionary<Faction, IList<General>> traitors_dict = Generals_Manager.Random_Traitors(Factions_In_Play);
+            IList<(bool, Faction)> faction_responses = new List<(bool, Faction)>();
+
+            Factions_In_Play.ForEach(faction => {
+                Traitors_Initializer.Init_Traitors(faction, traitors_dict[faction].ToList(), []);
+                switch (faction)
+                {
+                    case Faction.Atreides:
+                        faction_responses.Add((Factions_To_Move[0], faction));
+                        break;
+                    case Faction.Bene_Gesserit:
+                        faction_responses.Add((Factions_To_Move[1], faction));
+                        break;
+                    case Faction.Emperor:
+                        faction_responses.Add((Factions_To_Move[2], faction));
+                        break;
+                    case Faction.Fremen:
+                        faction_responses.Add((Factions_To_Move[3], faction));
+                        break;
+                    case Faction.Spacing_Guild:
+                        faction_responses.Add((Factions_To_Move[4], faction));
+                        break;
+                }
+            });
 
             Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
-
-            moment = "traitor selection";
             
-            IReadOnlyDictionary<Faction, IList<General>> traitors_dict = Generals_Manager.Random_Traitors(Factions_In_Play);
-            Factions_In_Play.ForEach(faction => {
-                if (faction == Faction.Harkonnen)
-                {
-                    Traitors_Initializer.Init_Traitors(faction, traitors_dict[faction].ToList(), []);
-                    Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json");
-                }
-                else
-                {
-                    Traitors_Initializer.Init_Traitors(faction, traitors_dict[faction].ToList(), []);
-
-                    Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json");
-
-                    Console.WriteLine(faction.ToString() + " You have the traitors: ");
-                    for(int i = 0; i  < 4; i++)
+            while (faction_responses.Length() > 0)
+            {
+                string[] line = Input_Provider.GetInputAsync().Result.Split("/");
+                bool correct = false;
+                Factions_In_Play.ForEach(faction => {
+                    if (line[1] == Init.Factions_Distribution.Player_Of(faction).Id && line[2] == "setup")
                     {
-                        Console.WriteLine(traitors_dict[faction][i].Name);
-                    }
-                    Console.WriteLine("Choose one (/player1/setup/traitor_name)");
-                    bool end = true;
-                    while (end)
-                    {
-                        string[] line = Input_Provider.GetInputAsync().Result.Split("/");
-                        if (line[1] == Init.Factions_Distribution.Player_Of(faction).Id && line[2] == "setup")
+                        if(faction_responses.Contains((true,faction)))
                         {
-                            for(int i = 0; i < traitors_dict[faction].ToList().Length(); i++)
+                            for (int i = 0; i < traitors_dict[faction].ToList().Length(); i++)
                             {
-                                if (traitors_dict[faction][i].Name == line[3].Replace("_"," "))
+                                if (traitors_dict[faction][i].Name == line[3].Replace("_", " "))
                                 {
                                     General traitor = traitors_dict[faction][i];
                                     traitors_dict[faction].RemoveAt(i);
                                     Traitors_Initializer.Init_Traitors(faction, [traitor], traitors_dict[faction].ToList());
-                                    end = false;
+                                    faction_responses.Remove((true,faction));
+                                    switch (faction)
+                                    {
+                                        case Faction.Atreides:
+                                            Factions_To_Move[0] = false;
+                                            break;
+                                        case Faction.Bene_Gesserit:
+                                            Factions_To_Move[1] = false;
+                                            break;
+                                        case Faction.Emperor:
+                                            Factions_To_Move[2] = false;
+                                            break;
+                                        case Faction.Fremen:
+                                            Factions_To_Move[3] = false;
+                                            break;
+                                        case Faction.Spacing_Guild:
+                                            Factions_To_Move[4] = false;
+                                            break;
+                                    }
+                                    Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+                                    correct = true;
                                     break;
                                 }
                             }
-                            if(end)
-                                Console.WriteLine("Failure");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Failure");
                         }
                     }
-
+                });
+                if (!correct)
+                {
+                    Console.WriteLine("Failure");
                 }
-            });
-            
+            }
 
             moment = "spice distribution";
 
@@ -210,7 +245,8 @@ namespace dune_library.Phases
             });
 
             moment = "initial faction forces placement";
-
+            Factions_To_Move[3] = true;
+            Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
 
             Factions_In_Play.ForEach(faction => ((Action)(faction switch
             {
@@ -277,6 +313,7 @@ namespace dune_library.Phases
             });
 
             moment = "end of set-up";
+            Factions_To_Move.ForEach(faction => faction = false);
             Factions_In_Play.ForEach(faction =>
             {
                 Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json");

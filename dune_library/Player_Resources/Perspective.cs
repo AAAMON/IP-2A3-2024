@@ -14,6 +14,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using dune_library.Decks.Spice;
+using dune_library.Player_Resources;
 
 namespace dune_library.Player_Resources {
   public class Perspective {
@@ -24,6 +25,8 @@ namespace dune_library.Player_Resources {
     public IReadOnlySet<Faction>? Taken_Factions { get; }
 
     public Option<Faction> Faction { get; }
+
+    public bool[] Factions_To_Move { get; } = new bool[6];
 
     public (Battle_Wheel A, Battle_Wheel B) Battle_Wheels { get; }
 
@@ -41,12 +44,11 @@ namespace dune_library.Player_Resources {
 
     public Option<Forces> Reserves { get; }
 
-    public Option<Tleilaxu_Tanks> Tleilaxu_Tanks { get; }
+    public Highest_Bid Highest_Bid { get; }
 
-    public (Faction? faction, uint Highest_Bid) HighestBid = new(null, 0);
+    public Option<Tleilaxu_Tanks> Tleilaxu_Tanks { get; }
     public Option<I_Faction_Knowledge_Read_Only> Faction_Knowledge { get; } // can be destructured into individual properties
 
-    
     public Perspective(
       Player player,
       (Battle_Wheel A, Battle_Wheel B) battle_wheels,
@@ -60,7 +62,8 @@ namespace dune_library.Player_Resources {
       Option<Tleilaxu_Tanks> tleilaxu_tanks,
       Option<Knowledge_Manager> knowledge_manager,
       Option<Spice_Card> last_spice_card,
-      (Faction? faction, uint Highest_Bid) HighestBid
+      Highest_Bid HighestBid,
+      bool[] Factions_To_Move
        ) {
       if (factions_distribution.IsLeft) {
         Free_Factions = factions_distribution.Left().Free_Factions;
@@ -80,7 +83,8 @@ namespace dune_library.Player_Resources {
       Reserves = reserves;
       Last_Spice_Card = last_spice_card;
       Tleilaxu_Tanks = tleilaxu_tanks;
-      this.HighestBid = HighestBid;
+      this.Highest_Bid = HighestBid;
+      this.Factions_To_Move = Factions_To_Move;
       Faction_Knowledge = knowledge_manager.Map(km => km.Of(Faction.Value())); //if 'knowledge_manager' is some, then factions are initialized, and 'Faction' is some
     }
 

@@ -5,7 +5,7 @@ namespace dune_library.Utils
 {
     internal class Wait_Until_Something
     {
-        public static async Task<string> AwaitInput(int time)
+        public static async Task<string> AwaitInput(int time, I_Input_Provider Input_Provider)
         {
             var taskCompletionSource = new TaskCompletionSource<string>();
 
@@ -13,7 +13,7 @@ namespace dune_library.Utils
             Console.WriteLine("Waiting for input...");
             _ = Task.Run(() =>
             {
-                string input = Console.ReadLine();
+                string input = Input_Provider.GetInputAsync().Result;
                 taskCompletionSource.TrySetResult(input);
             });
 

@@ -48,7 +48,10 @@ namespace dune_library.server
                     }
                 }
                 context.Response.OutputStream.Close();
-                return requestData;
+                //idk it didnt work
+                //return requestData;
+                //am pus asta doar ca sa dea run
+                return "";
             }
             catch (HttpListenerException ex)
             {

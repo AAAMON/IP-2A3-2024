@@ -9,6 +9,10 @@ using static dune_library.Utils.Exceptions;
 using LanguageExt;
 using static dune_library.Decks.Treachery.Treachery_Cards;
 using dune_library.Player_Resources.Knowledge_Manager_Interfaces;
+using Map = dune_library.Map_Resources.Map;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Numerics;
+using LanguageExt.Pipes;
 
 namespace dune_library.Phases
 {
@@ -16,22 +20,23 @@ namespace dune_library.Phases
     {
         private const int Max_Cards_Harkonnen = 8;
         private const int Max_Cards_Others = 4;
-        private const int Bid_Timeout = 10;
 
-        public Bidding_Phase(
-            I_Perspective_Generator perspective_generator,
-            I_Setup_Initializers_And_Getters init,
-            IReadOnlySet<Player> players,
-            Treachery_Deck treachery_Deck,
-            (Faction? faction, uint Highest_Bid) highestBid)
+        public Bidding_Phase(Game game)
         {
-            Perspective_Generator = perspective_generator;
-            Init = init;
-            Players = players;
-            this.treachery_Deck = treachery_Deck;
-            HighestBid = highestBid;
+            Perspective_Generator = game;
+            Init = game;
+            Players = game.Players;
+            this.treachery_Deck = game.Treachery_Deck;
+            HighestBid = game.HighestBid;
+            Input_Provider = game.Input_Provider;
+            this.Storm_Position = game.Map.Storm_Sector;
+            Factions_To_Move = game.Factions_To_Move;
         }
 
+        public bool[] Factions_To_Move { get; }
+
+        public uint Storm_Position;
+        public I_Input_Provider Input_Provider { get; set; }
         public override string name => "Bidding";
 
         public override string moment { get; protected set; } = "";
@@ -52,69 +57,221 @@ namespace dune_library.Phases
 
         private I_Spice_Manager Spice_Manager => Init.Knowledge_Manager;
 
-        public (Faction? faction, uint Highest_Bid) HighestBid;
+        public Highest_Bid HighestBid;
+
+        public List<Faction> GetFactionOrder()
+        {
+
+            // Convert positions to a list of factions sorted by their positions
+            List<Faction> sortedFactions = new List<Faction>();
+            Factions_In_Play.ForEach(faction => sortedFactions.Add(faction));
+
+            // Find the starting point based on the given number
+            int startIndex = 0;
+            for (int i = 0; i < sortedFactions.Count; i++)
+            {
+                if (Init.Player_Markers.Marker_Of(sortedFactions[i]) > Storm_Position)
+                {
+                    startIndex = i;
+                    break;
+                }
+            }
+
+            // Generate the ordered list starting from the determined position
+            List<Faction> result = new List<Faction>();
+            for (int i = startIndex; i < sortedFactions.Count; i++)
+            {
+                result.Add(sortedFactions[i]);
+            }
+            for (int i = 0; i < startIndex; i++)
+            {
+                result.Add(sortedFactions[i]);
+            }
+
+            return result;
+        }
+
+
         public override void Play_Out()
         {
+            string Get_Card = Wait_Until_Something.AwaitInput(3000, Input_Provider).Result;
+            Console.WriteLine(Get_Card);
+
             moment = "bidding declaration";
 
-            var biddingQueue = new Queue<Faction>();
-            Factions_In_Play.ForEach(faction => {
+            List<Faction> faction_order = GetFactionOrder();
+
+            Console.WriteLine(faction_order);
+
+            int max_number_of_cards = 0;
+
+            faction_order.ForEach(faction => {
                 if (Faction_Knowledge.Of(faction).Number_Of_Treachery_Cards_Of(faction) < (faction == Faction.Harkonnen ? Max_Cards_Harkonnen : Max_Cards_Others))
-                    biddingQueue.Enqueue(faction);
+                    max_number_of_cards++;
                 });
-            var topCard = treachery_Deck.Next_Card_Peek;
 
-            var biddingOrder = new Queue<Faction>(biddingQueue);
-
-            uint counter = 0;
-
-            bool stop = false;
-
-            for(int i = 0; i < biddingOrder.Count && !stop; i++)
+            switch (faction_order.First())
             {
+                case Faction.Atreides:
+                    Factions_To_Move[0] = true;
+                    break;
+                case Faction.Bene_Gesserit:
+                    Factions_To_Move[1] = true;
+                    break;
+                case Faction.Emperor:
+                    Factions_To_Move[2] = true;
+                    break;
+                case Faction.Fremen:
+                    Factions_To_Move[3] = true;
+                    break;
+                case Faction.Spacing_Guild:
+                    Factions_To_Move[4] = true;
+                    break;
+                case Faction.Harkonnen:
+                    Factions_To_Move[5] = true;
+                    break;
+            }
+
+            bool[] who_passed = new bool[6]; //Atreides Bene Gesserit Emperor Fremen Guild Harkonnen
+
+            moment = "bidding started";
+
+            Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+
+            while (max_number_of_cards > 0 && who_passed.Contains(false)) {
+                var biddingOrder = new Queue<Faction>();
+                faction_order.ForEach(faction => {
+                    if (Faction_Knowledge.Of(faction).Number_Of_Treachery_Cards_Of(faction) < (faction == Faction.Harkonnen ? Max_Cards_Harkonnen : Max_Cards_Others))
+                        biddingOrder.Enqueue(faction);
+                });
+
+                var topCard = treachery_Deck.Next_Card_Peek;
 
                 while (biddingOrder.Any())
                 {
                     var currentBidder = biddingOrder.Dequeue();
-                    uint bid = HighestBid.Highest_Bid;
-                    Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+                    uint bid = 0;
 
+                    Console.WriteLine("Introduceti bid-ul (ex /player1/phase_4_input/3)");
+                    string[] line = Input_Provider.GetInputAsync().Result.Split("/");
+                    bool correct = false;
+                    if (line[1] == Init.Factions_Distribution.Player_Of(currentBidder).Id && line[2] == "phase_4_input")
+                    {
+                        if (line[3] == "pass")
+                        {
+                            switch (currentBidder)
+                            {
+                                case Faction.Atreides:
+                                    who_passed[0] = true;
+                                    break;
+                                case Faction.Bene_Gesserit:
+                                    who_passed[1] = true;
+                                    break;
+                                case Faction.Emperor:
+                                    who_passed[2] = true;
+                                    break;
+                                case Faction.Fremen:
+                                    who_passed[3] = true;
+                                    break;
+                                case Faction.Spacing_Guild:
+                                    who_passed[4] = true;
+                                    break;
+                                case Faction.Harkonnen:
+                                    who_passed[5] = true;
+                                    break;
+                            }
+                            biddingOrder.Enqueue(currentBidder);
 
-                    if (bid > HighestBid.Highest_Bid)
-                    {
-                        HighestBid.Highest_Bid = (uint)bid;
-                        HighestBid.faction = currentBidder;
-                        counter = 0;
+                            switch (currentBidder)
+                            {
+                                case Faction.Atreides:
+                                    Factions_To_Move[1] = true;
+                                    break;
+                                case Faction.Bene_Gesserit:
+                                    Factions_To_Move[2] = true;
+                                    break;
+                                case Faction.Emperor:
+                                    Factions_To_Move[3] = true;
+                                    break;
+                                case Faction.Fremen:
+                                    Factions_To_Move[4] = true;
+                                    break;
+                                case Faction.Spacing_Guild:
+                                    Factions_To_Move[5] = true;
+                                    break;
+                                case Faction.Harkonnen:
+                                    Factions_To_Move[0] = true;
+                                    break;
+                            }
+                            correct = true;
+                            Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+
+                        }
+                        else if(!HighestBid.faction.IsNone)
+                        {
+                            if(HighestBid.faction == currentBidder) {
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            int number = Int32.Parse(line[3]);
+                            if (bid > HighestBid.bid)
+                            {
+                                HighestBid.bid = (uint)bid;
+                                HighestBid.faction = currentBidder;
+                                switch (currentBidder)
+                                {
+                                    case Faction.Atreides:
+                                        Factions_To_Move[1] = true;
+                                        break;
+                                    case Faction.Bene_Gesserit:
+                                        Factions_To_Move[2] = true;
+                                        break;
+                                    case Faction.Emperor:
+                                        Factions_To_Move[3] = true;
+                                        break;
+                                    case Faction.Fremen:
+                                        Factions_To_Move[4] = true;
+                                        break;
+                                    case Faction.Spacing_Guild:
+                                        Factions_To_Move[5] = true;
+                                        break;
+                                    case Faction.Harkonnen:
+                                        Factions_To_Move[0] = true;
+                                        break;
+                                }
+                                Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+                                correct = true;
+                                who_passed = new bool[6];
+                            }
+                        }
                     }
-                    else
+                    if(!correct)
                     {
-                        counter++;
+                        Console.WriteLine("Failure");
                     }
-                    if(counter >= biddingOrder.Count)
-                    {
-                        stop = true;
-                        break;
-                    }
-                    if (Faction_Knowledge.Of(currentBidder).Number_Of_Treachery_Cards_Of(currentBidder) < (currentBidder == Faction.Harkonnen ? Max_Cards_Harkonnen : Max_Cards_Others))
-                        biddingOrder.Enqueue(currentBidder);
                 }
+
                 Console.WriteLine($"The winner is {HighestBid.faction}");
-                if (HighestBid.Highest_Bid != 0)
+                if (who_passed.Contains(false) && HighestBid.bid != 0)
                 {
                     if (HighestBid.faction == Faction.Harkonnen)
                     {
-                    
-                        Treachery_Cards_Manager.Give_A_Treachery_Card(HighestBid.faction.Value);
+                        Treachery_Cards_Manager.Give_A_Treachery_Card((Faction)HighestBid.faction);
                     }
-                    if (Factions_In_Play.Contains(Faction.Emperor))
+
+                    if (Factions_In_Play.Contains(Faction.Emperor) && HighestBid.faction != Faction.Emperor)
                     {
-                        Spice_Manager.Add_Spice_To(Faction.Emperor, HighestBid.Highest_Bid);
-                        Spice_Manager.Remove_Spice_From(HighestBid.faction.Value, HighestBid.Highest_Bid);
+                        Spice_Manager.Add_Spice_To(Faction.Emperor, HighestBid.bid);
                     }
-                    else
-                    {
-                        Spice_Manager.Remove_Spice_From(HighestBid.faction.Value, HighestBid.Highest_Bid);
-                    }
+
+                    Treachery_Cards_Manager.Give_A_Treachery_Card((Faction)HighestBid.faction);
+                    Spice_Manager.Remove_Spice_From((Faction)HighestBid.faction, HighestBid.bid);
+
+                    HighestBid.bid = 0;
+
+                    Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
                 }
             }
             moment = "end of bidding";

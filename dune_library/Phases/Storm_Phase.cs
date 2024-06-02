@@ -18,12 +18,16 @@ namespace dune_library.Phases {
       this.turn = 3;
       Storm_Sector = game.Map.Storm_Sector;
       Battle_Wheels = game.Battle_Wheels;
-      this.Tleilaxu_Tanks = game.Tleilaxu_Tanks;
+      Tleilaxu_Tanks = game.Tleilaxu_Tanks;
       Perspective_Generator = game;
       Players = game.Players;
       Init = game;
       Battle_Wheels = game.Battle_Wheels;
+      Input_Provider = game.Input_Provider;
+      Factions_To_Move = game.Factions_To_Move;
     }
+
+    public I_Input_Provider Input_Provider { get; set; }
 
     public override string name => "Storm";
 
@@ -45,7 +49,59 @@ namespace dune_library.Phases {
 
     public (Battle_Wheel first, Battle_Wheel second) Battle_Wheels { get; }
 
+    public bool[] Factions_To_Move { get; }
 
+    public IList<(bool, Faction)> factions_to_move()
+    {
+        IList<(bool, Faction)> faction_responses = new List<(bool, Faction)>();
+        switch (Init.Factions_Distribution.Faction_Of(Battle_Wheels.first.Last_Player))
+        {
+            case Faction.Atreides:
+                Factions_To_Move[0] = true;
+                faction_responses.Add((true, Init.Factions_Distribution.Faction_Of(Battle_Wheels.first.Last_Player)));
+                break;
+            case Faction.Bene_Gesserit:
+                Factions_To_Move[1] = true;
+                faction_responses.Add((true, Init.Factions_Distribution.Faction_Of(Battle_Wheels.first.Last_Player)));
+                break;
+            case Faction.Emperor:
+                Factions_To_Move[2] = true;
+                faction_responses.Add((true, Init.Factions_Distribution.Faction_Of(Battle_Wheels.first.Last_Player)));
+                break;
+            case Faction.Fremen:
+                Factions_To_Move[3] = true;
+                faction_responses.Add((true, Init.Factions_Distribution.Faction_Of(Battle_Wheels.first.Last_Player)));
+                break;
+            case Faction.Spacing_Guild:
+                Factions_To_Move[4] = true;
+                faction_responses.Add((true, Init.Factions_Distribution.Faction_Of(Battle_Wheels.first.Last_Player)));
+                break;
+        }
+        switch (Init.Factions_Distribution.Faction_Of(Battle_Wheels.second.Last_Player))
+        {
+            case Faction.Atreides:
+                Factions_To_Move[0] = true;
+                faction_responses.Add((true, Init.Factions_Distribution.Faction_Of(Battle_Wheels.second.Last_Player)));
+                break;
+            case Faction.Bene_Gesserit:
+                Factions_To_Move[1] = true;
+                faction_responses.Add((true, Init.Factions_Distribution.Faction_Of(Battle_Wheels.second.Last_Player)));
+                break;
+            case Faction.Emperor:
+                Factions_To_Move[2] = true;
+                faction_responses.Add((true, Init.Factions_Distribution.Faction_Of(Battle_Wheels.second.Last_Player)));
+                break;
+            case Faction.Fremen:
+                Factions_To_Move[3] = true;
+                faction_responses.Add((true, Init.Factions_Distribution.Faction_Of(Battle_Wheels.second.Last_Player)));
+                break;
+            case Faction.Spacing_Guild:
+                Factions_To_Move[4] = true;
+                faction_responses.Add((true, Init.Factions_Distribution.Faction_Of(Battle_Wheels.second.Last_Player)));
+                break;
+        }
+        return faction_responses;
+    }
 
     public int Calculate_Storm() {
       if(turn == 1)
@@ -54,42 +110,52 @@ namespace dune_library.Phases {
       }
       else
       {
-        bool[] confirm = [false,false];
         int response = 0;
+        moment = "Calculating Storm";
         Console.WriteLine(Battle_Wheels.first.Last_Player.Id + " " + Battle_Wheels.second.Last_Player.Id);
-        while(!confirm[0] || !confirm[1])
+        IList<(bool, Faction)> faction_responses = new List<(bool, Faction)>();
+        faction_responses = factions_to_move();
+
+        Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+        
+        while(faction_responses.Length() > 0)
         {
             Console.WriteLine("Introduceti nr de sectoare cu care sa fie mutat storm-ul (ex /1/phase_1_input/3)");
-            string[] line = Console.ReadLine().Split("/");
-            if(line[1] == Battle_Wheels.first.Last_Player.Id && line[2] == "phase_1_input")
-            {
-                int number = Int32.Parse(line[3]);
-                if(number >= 0 && number <= 3 && !confirm[0])
+            string[] line = Input_Provider.GetInputAsync().Result.Split("/");
+            bool correct = false;
+            Init.Factions_Distribution.Factions_In_Play.ForEach((faction) => { 
+                if(line[1] == Init.Factions_Distribution.Player_Of(faction).Id && line[2] == "phase_1_input" && faction_responses.Contains((true, faction)))
                 {
-                    response += number;
-                    confirm[0] = true;
-                    Console.WriteLine("Succes");
+                    int number = Int32.Parse(line[3]);
+                    if(number >= 0 && number <= 3)
+                    {
+                        response += number;
+                        faction_responses.Remove((true, faction));
+                        switch (faction)
+                        {
+                            case Faction.Atreides:
+                                Factions_To_Move[0] = false;
+                                break;
+                            case Faction.Bene_Gesserit:
+                                Factions_To_Move[1] = false;
+                                break;
+                            case Faction.Emperor:
+                                Factions_To_Move[2] = false;
+                                break;
+                            case Faction.Fremen:
+                                Factions_To_Move[3] = false;
+                                break;
+                            case Faction.Spacing_Guild:
+                                Factions_To_Move[4] = false;
+                                break;
+                        }
+                        Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+                        correct = true;
+                    }
                 }
-                else
-                {
-                    Console.WriteLine("Failure");
-                }
-            }
-            else if (line[1] == Battle_Wheels.second.Last_Player.Id && line[2] == "phase_1_input")
-            {
-                int number = Int32.Parse(line[3]);
-                if (number >= 0 && number <= 3 && !confirm[1])
-                {
-                    response += number;
-                    confirm[1] = true;
-                    Console.WriteLine("Succes");
-                }
-                else
-                {
-                    Console.WriteLine("Failure");
-                }
-            }
-            else
+
+            });
+            if(!correct) 
             {
                 Console.WriteLine("Failure");
             }
@@ -110,8 +176,8 @@ namespace dune_library.Phases {
     public override void Play_Out() {
 
         moment = "before storm was calculated";
-        string Get_Card = Wait_Until_Something.AwaitInput(3000).Result;
-        Console.WriteLine(Get_Card);
+        //string Get_Card = Wait_Until_Something.AwaitInput(3000, Input_Provider).Result;
+        //Console.WriteLine(Get_Card);
 
 
         int sectors_to_move = Calculate_Storm();
@@ -119,8 +185,8 @@ namespace dune_library.Phases {
 
         moment = "storm was calculated";
 
-        Get_Card = Wait_Until_Something.AwaitInput(3000).Result;
-        Console.WriteLine(Get_Card);
+        //Get_Card = Wait_Until_Something.AwaitInput(3000, Input_Provider).Result;
+        //Console.WriteLine(Get_Card);
 
         Move_Storm((uint)sectors_to_move);
         moment = "storm was moved";

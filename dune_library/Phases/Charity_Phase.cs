@@ -28,14 +28,19 @@ namespace dune_library.Phases
             this.Init = init;
             Perspective_Generator = game;
             Players = game.Players;
+            Input_Provider = game.Input_Provider;
         }
-
+        public I_Input_Provider Input_Provider { get; set; }
         public override string name => "Charity Phase";
 
         public override string moment { get; protected set; } = "charity";
 
         public override void Play_Out()
         {
+            moment = "before sending spice";
+            //string Get_Card = Wait_Until_Something.AwaitInput(3000, Input_Provider).Result;
+            //Console.WriteLine(Get_Card);
+
             Factions_In_Play.ForEach(faction =>
             {
                 if(faction == Faction.Bene_Gesserit)
@@ -48,6 +53,11 @@ namespace dune_library.Phases
                     Spice_Manager.Add_Spice_To(faction, 2 - Spice_Manager.getSpice(faction));
                 }
             });
+
+            moment = "spice was sent";
+            //Get_Card = Wait_Until_Something.AwaitInput(3000, Input_Provider).Result;
+            //Console.WriteLine(Get_Card);
+
             Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
 
         }

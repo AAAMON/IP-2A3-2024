@@ -1,9 +1,6 @@
 ﻿using dune_library.Player_Resources;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using dune_library.Utils;
+
 
 namespace dune_library.server
 {
@@ -14,9 +11,9 @@ namespace dune_library.server
             HashSet<Player> players = [new("player1"), new("player2"), new("player3"), new("player4"), new("player5"), new("player6")];
             //await ValidaterServerApi.InitializeGame();
             //_ = new ValidaterServerApi().Run();
-            //Console_Input_Provider provider = new Console_Input_Provider();
+            Console_Input_Provider provider = new Console_Input_Provider();
 
-            NetworkInputProvider provider = new(1235);
+            //NetworkInputProvider provider = new(1235);
             Game.Start(players, provider);
         }
     }
