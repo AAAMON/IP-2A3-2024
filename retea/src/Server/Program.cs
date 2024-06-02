@@ -64,6 +64,10 @@ namespace HttpServer
                 {
                     await HandleAuthRequest(request, response);
                 }
+                else if (request.HttpMethod == "GET" && request.Url.AbsolutePath.Contains("/register"))
+                {
+                    await HandleRegisterRequest(request, response);
+                }
                 else if (request.HttpMethod == "GET" && request.Url.AbsolutePath.StartsWith("/gamestate"))
                 {
                     await HandleGameStateGetRequest(request, response);
@@ -114,6 +118,7 @@ namespace HttpServer
            
             // BAZA DE DATE MERGE !!
             // CE AM COMENTAT E PENTRU CEI CARE NU AU FACUT INCA BAZA DE DATE SI SA SARA DIRECT DE PROCESUL DE LOGIN
+
             var playerData = new
             {
                 username = username,
@@ -123,6 +128,49 @@ namespace HttpServer
 
             return jsonResponse;
         }
+        static async Task HandleRegisterRequest(
+    HttpListenerRequest request,
+    HttpListenerResponse response
+)
+        {
+            // Read the request body containing the username, email, and password
+            string requestBody = await ReadRequestBody(request.InputStream);
+            string[] parts = requestBody.Split('/');
+            string username = parts[0];
+            string email = parts[1];
+            string password = parts[2];
+
+            bool isRegistered = await HandleRegisterUser(username, email, password);      //IMPORTANTTT !!!!!!!!!!!!!!!!!!!!!!!!!!!
+            if (isRegistered)
+            {
+                await SendResponse(response, HttpStatusCode.OK, "Registration successful");
+            }
+            else
+            {
+                await SendResponse(response, HttpStatusCode.BadRequest, "Registration failed, user might already exist");
+            }
+        }
+
+        public static async Task<bool> HandleRegisterUser(string username, string email, string password)
+        {
+            /*            using (ConnectionDB db = new ConnectionDB())
+                        {
+                            if (db.PlayerExistDB(username,email))
+                            {
+                                Console.WriteLine($"User '{username}' already exists.");
+                                return false;
+                            }
+                            else
+                            {
+                                db.AddPlayer(username, email, password);
+                                Console.WriteLine($"User '{username}' registered successfully.");
+                                return true;
+                            }
+                        }*/
+            return true;
+            // pt cei ce n-au legatura la baza de date
+        }
+
 
         private static async void HandleGUIInputRequest(HttpListenerContext pathRequest)
         {
@@ -346,22 +394,6 @@ namespace HttpServer
 
             HttpResponseMessage forwardResponse = await httpClient.PostAsync("http://localhost:1236/gameprediction", new StringContent(gamestate, Encoding.UTF8, "application/json"));
             await SendResponse(response, forwardResponse.StatusCode, gamestate);
-        }
-
-        static async Task BroadcastToAllClients(string content)
-        {
-            foreach (var kvp in room)
-            {
-                try
-                {
-                    var response = kvp.Value;
-                    await SendResponse(response, HttpStatusCode.OK, content);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error sending to {kvp.Key}: {ex.Message}");
-                }
-            }
         }
         static async Task<string> ReadRequestBody(Stream inputStream)
         {
