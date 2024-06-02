@@ -64,7 +64,7 @@ public class Program
 {
     public static async Task Main(string[] args)
     {
-        await new GameClient("girlboss", "password1").Run(args);
+        await new GameClient().Run(args);
     }
 }
 
@@ -84,55 +84,56 @@ public class GameClient
     public async Task Run(string[] args)
     {
         // Authentication
-        authToken = await AuthenticateUser(username, password);
-        //Console.WriteLine($"Auth Token: {authToken}");
-
-        playerID = GetPlayerID();
-
-        // Get Gamestate for a specific player
-        string gamestate = await GetGamestate(authToken);
-        //Console.WriteLine($"Gamestate for {authToken}: {gamestate}");
-        string game = await InitializeGamestate(authToken, gamestate);
-        //Console.WriteLine(game);
-
-        // Deserialize the JSON string into a JObject
-        dynamic jsonObject = Newtonsoft.Json.JsonConvert.DeserializeObject(gamestate);
 
 
 
 
-        //////////////////////////////////////////////////////////////////////////////////////////
-        // COMMUNICATION WITH GUI ////////////////////////////////////////////////////////////////////
-        playerData1.faction = jsonObject.Faction[0];
-        //Console.WriteLine($"Faction: {jsonObject.Faction[0]}");
-        playerData1.spice = jsonObject.Faction_Knowledge[0].Spice;
-        // playerData1.forcesReserve = jsonObject.Reserves[0]["Atreides"];
-        // if (jsonObject.Tleilaxu_Tanks[0]["Forces"] != null)
-        //     playerData1.forcesDead = jsonObject.Tleilaxu_Tanks[0]["Forces"];
-        playerData1.newStormPosition = -1;
-        playerData1.cursedTimer = -1;
-        playerData1.round = 1;
-        playerData1.playerId = playerID;
-        // treatchery cards /////////////////////////////////////////////////////////////////////////
-        var treacheryCards = jsonObject.Faction_Knowledge[0].Treachery_Cards;
-        int index = 0;
-        // Initialize the PlayerData object
-        playerData1.treacheryCards = new TreacheryCardGUI[5]; // Initialize the array with the correct size
-        foreach (var card in treacheryCards)
-        {
-            Console.WriteLine($"Card: {card.Name}, Quantity: {card.Value}");
-            playerData1.treacheryCards[index++] = new TreacheryCardGUI { Name = card.Name, Count = card.Value };
-        }
-        // traitors ////////////////////////////////////////////////////////////////////////////////////
-        var trtrs = jsonObject.Faction_Knowledge[0].Traitors;
-        index = 0;
-        // Initialize the PlayerData object
-        playerData1.traitorCards = new TraitorCardGUI[5]; // Initialize the array with the correct size
-        foreach (var card in trtrs)
-        {
-            Console.WriteLine($"Traitor id: {card.Id}, name: {card.Name}");
-            playerData1.traitorCards[index++] = new TraitorCardGUI { Id = card.Id, Name = card.Name, Faction = card.Faction, Strength = card.Strength };
-        }
+
+        // // Get Gamestate for a specific player
+        // string gamestate = await GetGamestate(authToken);
+        // //Console.WriteLine($"Gamestate for {authToken}: {gamestate}");
+        // string game = await InitializeGamestate(authToken, gamestate);
+        // //Console.WriteLine(game);
+
+        // // Deserialize the JSON string into a JObject
+        // Console.WriteLine($"json: {gamestate}");
+        // dynamic jsonObject = Newtonsoft.Json.JsonConvert.DeserializeObject(gamestate);
+
+
+
+
+        // //////////////////////////////////////////////////////////////////////////////////////////
+        // // COMMUNICATION WITH GUI ////////////////////////////////////////////////////////////////////
+        // playerData1.faction = jsonObject.Faction[0];
+        // //Console.WriteLine($"Faction: {jsonObject.Faction[0]}");
+        // playerData1.spice = jsonObject.Faction_Knowledge[0].Spice;
+        // // playerData1.forcesReserve = jsonObject.Reserves[0]["Atreides"];
+        // // if (jsonObject.Tleilaxu_Tanks[0]["Forces"] != null)
+        // //     playerData1.forcesDead = jsonObject.Tleilaxu_Tanks[0]["Forces"];
+        // playerData1.newStormPosition = -1;
+        // playerData1.cursedTimer = -1;
+        // playerData1.round = 1;
+        // playerData1.playerId = playerID;
+        // // treatchery cards /////////////////////////////////////////////////////////////////////////
+        // var treacheryCards = jsonObject.Faction_Knowledge[0].Treachery_Cards;
+        // int index = 0;
+        // // Initialize the PlayerData object
+        // playerData1.treacheryCards = new TreacheryCardGUI[5]; // Initialize the array with the correct size
+        // foreach (var card in treacheryCards)
+        // {
+        //     Console.WriteLine($"Card: {card.Name}, Quantity: {card.Value}");
+        //     playerData1.treacheryCards[index++] = new TreacheryCardGUI { Name = card.Name, Count = card.Value };
+        // }
+        // // traitors ////////////////////////////////////////////////////////////////////////////////////
+        // var trtrs = jsonObject.Faction_Knowledge[0].Traitors;
+        // index = 0;
+        // // Initialize the PlayerData object
+        // playerData1.traitorCards = new TraitorCardGUI[5]; // Initialize the array with the correct size
+        // foreach (var card in trtrs)
+        // {
+        //     Console.WriteLine($"Traitor id: {card.Id}, name: {card.Name}");
+        //     playerData1.traitorCards[index++] = new TraitorCardGUI { Id = card.Id, Name = card.Name, Faction = card.Faction, Strength = card.Strength };
+        // }
 
 
         ////
@@ -142,64 +143,35 @@ public class GameClient
         listener.Start();
         Console.WriteLine("Listening on port 1236...");
 
-        // Get Gamestate for a specific player
-        gamestate = await GetGamestate(authToken);
-        Console.WriteLine($"Got gamestate for {authToken}");
+        // // Get Gamestate for a specific player
+        // gamestate = await GetGamestate(authToken);
+        // Console.WriteLine($"Got gamestate for {authToken}");
 
-        // Deserialize the JSON string into a JObject
-        jsonObject = Newtonsoft.Json.JsonConvert.DeserializeObject(gamestate);
-        WebSocketServerManager wsManager = new WebSocketServerManager("ws://localhost:1237");
-        wsManager.Start();
+        // // Deserialize the JSON string into a JObject
+        // jsonObject = Newtonsoft.Json.JsonConvert.DeserializeObject(gamestate);
+        WebSocketManager wsManager = new WebSocketManager();
+        // do NOT put await on this, the code won't work, tyy <3
+        wsManager.StartWebSocketServerAsync("http://localhost:2000/");
 
-        _ = Task.Run(async () =>
-        {
-            while (true)
-            {
-                HttpListenerContext context = await listener.GetContextAsync();
-                HttpListenerRequest request = context.Request;
-                HttpListenerResponse response = context.Response;
+        // _ = Task.Run(async () =>
+        // {
 
-                string responseString = ProcessRequest(request.RawUrl);
-                byte[] buffer = Encoding.UTF8.GetBytes(responseString);
-
-                if (!request.Url.AbsolutePath.Contains("get_phase_"))
-                    Console.WriteLine("{0} request received for {1}", request.HttpMethod, request.RawUrl);
-
-                response.ContentType = "application/json"; // Set content type to JSON
-                response.ContentLength64 = buffer.Length;
-                await response.OutputStream.WriteAsync(buffer, 0, buffer.Length);
-                response.OutputStream.Close();
-            }
-            wsManager.IsRunning = false;
-        });
         while (true)
         {
-            if (!wsManager.IsRunning)
-            {
-                listener.Stop();
-                Console.WriteLine("Websocket stopped.");
-                break;
-            }
+            HttpListenerContext context = await listener.GetContextAsync();
+            HttpListenerRequest request = context.Request;
+            HttpListenerResponse response = context.Response;
 
-            await Task.Delay(1000);
+            string responseString = await ProcessRequestAsync(request.RawUrl);
+            byte[] buffer = Encoding.UTF8.GetBytes(responseString);
+            Console.WriteLine("{0} request received for {1}", request.HttpMethod, request.RawUrl);
+
+
+            response.ContentType = "application/json"; // Set content type to JSON
+            response.ContentLength64 = buffer.Length;
+            response.OutputStream.Write(buffer, 0, buffer.Length);
+            response.OutputStream.Close();
         }
-        wsManager.Stop();
-    }
-
-    public GameClient()
-    {
-        InitializeDefaultCredentials();
-    }
-    public GameClient(string theUsername, string thePassword)
-    {
-        this.username = theUsername;
-        this.password = thePassword;
-    }
-
-    private void InitializeDefaultCredentials()
-    {
-        username = "girlboss";
-        password = "password1";
     }
 
     int GetPlayerID()
@@ -254,6 +226,11 @@ public class GameClient
         var response = await client.GetAsync(baseUrl + $"{playerData1.playerId}/phase_1_input/{stormValue}");
         return await response.Content.ReadAsStringAsync();
     }
+    public async Task<string> SendRegister(string usrname, string password, string mail)
+    {
+        var response = await client.GetAsync(baseUrl + $"register/{usrname}/{password}/{mail}");
+        return await response.Content.ReadAsStringAsync();
+    }
     public async Task<string> SendPhase4(int bidValue)
     {
         var response = await client.GetAsync(baseUrl + $"{playerData1.playerId}/phase_4_input/{bidValue}");
@@ -263,7 +240,7 @@ public class GameClient
 
     // STUFF FOR COMMUNICATION WITH API ////////////////////////////////////////
 
-    public string ProcessRequest(string request)
+    public async Task<string> ProcessRequestAsync(string request)
     {
         // Parse request and call appropriate API function
         if (request.StartsWith("/get_player_data"))
@@ -274,7 +251,19 @@ public class GameClient
         {
             string username = request.Split('/')[2];
             string password = request.Split('/')[3];
-            return Login(username, password);
+
+            authToken = await AuthenticateUser(username, password);
+            Console.WriteLine($"Auth Token: {authToken}");
+            playerID = GetPlayerID();
+            return Login(username, password, authToken);
+        }
+        else if (request.StartsWith("/register"))
+        {
+            string username = request.Split('/')[2];
+            string password = request.Split('/')[3];
+            string email = request.Split('/')[4];
+
+            return Register(username, password, email);
         }
         else if (request.StartsWith("/connect"))
         {
@@ -336,21 +325,51 @@ public class GameClient
         // Serialize playerData object to JSON
         return Newtonsoft.Json.JsonConvert.SerializeObject(playerData);
     }
-    static string Login(string username, string password)
+    static string Login(string uusername, string password, string auth)
     {
-        using (HttpClient client = new HttpClient())
+        Console.WriteLine("Trying to log in {0} with pass {1}", uusername, password);
+        // REPLACE THIS WITH WHATEVER IT IS WHEN WRONG LOGIN
+        if (auth != "")
         {
-            string url = $"http://localhost:1234/login/{username}/{password}";
-            HttpResponseMessage response = client.GetAsync(url).Result;
-
-            if (response.IsSuccessStatusCode)
+            var playerData = new
             {
-                return response.Content.ReadAsStringAsync().Result;
-            }
-            else
+                username = uusername
+            };
+            // Serialize playerData object to JSON
+            return Newtonsoft.Json.JsonConvert.SerializeObject(playerData);
+        }
+        else
+        {
+            var playerData = new
             {
-                return "Error: " + response.StatusCode;
-            }
+                username = "error"
+            };
+            // Serialize playerData object to JSON
+            return Newtonsoft.Json.JsonConvert.SerializeObject(playerData);
+        }
+    }
+    public string Register(string uusername, string password, string email)
+    {
+        Console.WriteLine("Trying to register in {0} with pass {1} and {2}", uusername, password, email);
+        SendRegister(uusername, password, email);
+        // REPLACE THIS
+        if (true)
+        {
+            var playerData = new
+            {
+                message = "ok"
+            };
+            // Serialize playerData object to JSON
+            return Newtonsoft.Json.JsonConvert.SerializeObject(playerData);
+        }
+        else
+        {
+            var playerData = new
+            {
+                username = "error"
+            };
+            // Serialize playerData object to JSON
+            return Newtonsoft.Json.JsonConvert.SerializeObject(playerData);
         }
     }
     public string GetPlayerData()
@@ -544,5 +563,3 @@ public class GameClient
         return Newtonsoft.Json.JsonConvert.SerializeObject(validation);
     }
 }
-
-
