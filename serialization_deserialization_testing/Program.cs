@@ -79,6 +79,32 @@ namespace clientApi
                         response.OutputStream.Close();
                     }
                 }
+                else if(request.HttpMethod=='POST' && request.Url.PathAndQuery.Contains("/move?MoveId")) //e input de la ai
+                {
+                    Console.WriteLine("Processing the request from AI");
+                    try
+                    {
+                        string responseJson = "{\"status\": \"success\", \"message\": \"E BINES!\"}";
+
+                        byte[] buffer = Encoding.UTF8.GetBytes(responseJson);
+                        response.ContentType = "application/json";
+
+                        response.ContentLength64 = buffer.Length;
+                        await response.OutputStream.WriteAsync(buffer, 0, buffer.Length);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error processing request: {ex.Message}");
+                        response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                        byte[] buffer = Encoding.UTF8.GetBytes("{\"status\": \"error\", \"message\": \"Internal server error\"}");
+                        response.ContentLength64 = buffer.Length;
+                        await response.OutputStream.WriteAsync(buffer, 0, buffer.Length);
+                    }
+                    finally
+                    {
+                        response.OutputStream.Close();
+                    }
+                } 
             }
         }
         public static string ProcessRequest(string request)

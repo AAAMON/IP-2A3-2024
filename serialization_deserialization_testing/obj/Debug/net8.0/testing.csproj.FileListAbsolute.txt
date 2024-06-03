@@ -97,3 +97,6 @@ D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\bi
 D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\obj\Debug\net8.0\testing.csproj.Up2Date
 D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\obj\Debug\net8.0\testing.genruntimeconfig.cache
 D:\Uni\Anul 2\sem 2\IP\project_repo\API\serialization_deserialization_testing\obj\Debug\net8.0\ref\testing.dll
+D:\facultate\Anul_2\semestrul2\IP\proiect\API\serialization_deserialization_testing\obj\Debug\net8.0\testing.dll
+D:\facultate\Anul_2\semestrul2\IP\proiect\API\serialization_deserialization_testing\obj\Debug\net8.0\refint\testing.dll
+D:\facultate\Anul_2\semestrul2\IP\proiect\API\serialization_deserialization_testing\obj\Debug\net8.0\testing.pdb
