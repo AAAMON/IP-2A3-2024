@@ -1,4 +1,3 @@
-
 using MySql.Data.MySqlClient;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -24,12 +23,6 @@ namespace HttpServer
             public int PlayerID { get; set; }
         }
         private static Dictionary<int, Dictionary<int, int>> phaseMatrix = new Dictionary<int, Dictionary<int, int>>();
-
-
-        private static readonly ConcurrentDictionary<string, HttpListenerResponse> room =
-            new ConcurrentDictionary<string, HttpListenerResponse>();
-
-        private static int connectedUsers = 0;
         private static readonly HttpClient httpClient = new HttpClient();
 
         static async Task Main(string[] args)
@@ -41,8 +34,6 @@ namespace HttpServer
 
             ConnectionDB db = new ConnectionDB();
             var connection = db.GetConnection(); 
-
-            // var runner = ExeRunner.Instance;   -> FACUT PT A RULA INSTANT TOATE CELE 3 COMPONENTE
 
             while (true)
             {
@@ -78,7 +69,6 @@ namespace HttpServer
                 }
                 else if (request.Url.AbsolutePath.Contains("phase"))
                 {
-                    //the updates from GUI
                     HandleGUIInputRequest(context);
                 }
                 else if (request.HttpMethod == "POST" && request.Url.AbsolutePath == "/gamestate")
@@ -87,14 +77,12 @@ namespace HttpServer
                 }
                 else if (request.Url.AbsolutePath.Contains("/login"))
                 {
-                    // Extrage username și password din URL
                     string username = request.Url.Segments[2].TrimEnd('/');
                     string password = request.Url.Segments[3].TrimEnd('/'); 
 
                     string responseContent = HandleLoginRequest(username, password).Result;
                     await SendResponse(response, HttpStatusCode.OK, responseContent);
                 }
-
                 else
                 {
                     await SendResponse(response, HttpStatusCode.NotFound, "Not found");
@@ -105,19 +93,12 @@ namespace HttpServer
                 Console.WriteLine($"Error handling request: {ex.Message}");
             }
         }
+
         public static async Task<string> HandleLoginRequest(string username, string password)
         {
             ConnectionDB db = new ConnectionDB();
             Console.WriteLine(username + " :" + password);
             bool isAuthenticated = db.PlayerExists(username, password);
-
-/*            var playerData = new
-            {
-                username = isAuthenticated ? username : "error"
-            };*/
-           
-            // BAZA DE DATE MERGE !!
-            // CE AM COMENTAT E PENTRU CEI CARE NU AU FACUT INCA BAZA DE DATE SI SA SARA DIRECT DE PROCESUL DE LOGIN
 
             var playerData = new
             {
@@ -128,19 +109,16 @@ namespace HttpServer
 
             return jsonResponse;
         }
-        static async Task HandleRegisterRequest(
-    HttpListenerRequest request,
-    HttpListenerResponse response
-)
+
+        static async Task HandleRegisterRequest(HttpListenerRequest request, HttpListenerResponse response)
         {
-            // Read the request body containing the username, email, and password
             string requestBody = await ReadRequestBody(request.InputStream);
             string[] parts = requestBody.Split('/');
             string username = parts[0];
             string email = parts[1];
             string password = parts[2];
 
-            bool isRegistered = await HandleRegisterUser(username, email, password);      //IMPORTANTTT !!!!!!!!!!!!!!!!!!!!!!!!!!!
+            bool isRegistered = await HandleRegisterUser(username, email, password);
             if (isRegistered)
             {
                 await SendResponse(response, HttpStatusCode.OK, "Registration successful");
@@ -153,24 +131,8 @@ namespace HttpServer
 
         public static async Task<bool> HandleRegisterUser(string username, string email, string password)
         {
-            /*            using (ConnectionDB db = new ConnectionDB())
-                        {
-                            if (db.PlayerExistDB(username,email))
-                            {
-                                Console.WriteLine($"User '{username}' already exists.");
-                                return false;
-                            }
-                            else
-                            {
-                                db.AddPlayer(username, email, password);
-                                Console.WriteLine($"User '{username}' registered successfully.");
-                                return true;
-                            }
-                        }*/
             return true;
-            // pt cei ce n-au legatura la baza de date
         }
-
 
         private static async void HandleGUIInputRequest(HttpListenerContext pathRequest)
         {
@@ -197,13 +159,13 @@ namespace HttpServer
                 }
             }
         }
+
         public static string ConvertPhaseMatrixToJson(Dictionary<int, Dictionary<int, int>> matrix)
         {
             return JsonConvert.SerializeObject(matrix, Newtonsoft.Json.Formatting.Indented);
         }
 
-        static async Task HandleGetForJSONOnlyReqs(HttpListenerRequest request,
-        HttpListenerResponse response)
+        static async Task HandleGetForJSONOnlyReqs(HttpListenerRequest request, HttpListenerResponse response)
         {
             string filePath = Path.Combine(request.Url + "");
             Console.WriteLine(filePath);
@@ -225,45 +187,23 @@ namespace HttpServer
             for (int i = 0; i < 6; i++)
                 playerNames.Add("player" + i.ToString());
 
-            // Check if the auth token is valid
             return !string.IsNullOrEmpty(authToken) && playerNames.Contains(authToken);
         }
 
-
-        static async Task HandleAuthRequest(
-        HttpListenerRequest request,
-        HttpListenerResponse response
-)
+        static async Task HandleAuthRequest(HttpListenerRequest request, HttpListenerResponse response)
         {
-            // Read the request body containing the username and password
             string requestBody = await ReadRequestBody(request.InputStream);
 
-            // Validate the username and password
             bool isAuthenticated = await AuthenticateUser(requestBody);
             string username = requestBody.Split(':')[0];
             string parola = requestBody.Split(":")[1];
 
             if (isAuthenticated)
             {
-                // Increment the count of connected users atomically
-                int userCount = Interlocked.Increment(ref connectedUsers);
-
-                Console.WriteLine("Numarul de utilizatori conectati este:" + userCount);
-                if (userCount > 6)
-                    await SendResponse(
-                        response,
-                        HttpStatusCode.BadRequest,
-                        "Game room is already full"
-                    );
-                await SendResponse(
-                    response,
-                    HttpStatusCode.OK,
-                    "player" + connectedUsers.ToString()
-                );
+                await SendResponse(response, HttpStatusCode.OK, "Authentication successful");
             }
             else
             {
-                // Send an unauthorized response
                 await SendResponse(response, HttpStatusCode.Unauthorized, "Invalid credentials" + username + parola);
             }
         }
@@ -275,13 +215,6 @@ namespace HttpServer
             {
                 await SendResponse(response, HttpStatusCode.Unauthorized, "Invalid auth token");
                 return;
-            }
-
-            if (connectedUsers != 6)
-            {
-                // Uncomment this line after testing
-                // await SendResponse(response, HttpStatusCode.Unauthorized, "Not enough players to start the game");
-                // return;
             }
 
             string playerId = request.Url.Segments[2].TrimEnd('/');
@@ -315,7 +248,6 @@ namespace HttpServer
 
         static async Task<bool> AuthenticateUser(string requestBody)
         {
-            // Parse the request body to get the username and password
             string[] credentials = requestBody.Split(':');
             if (credentials.Length != 2)
             {
@@ -325,19 +257,6 @@ namespace HttpServer
             string password = credentials[1];
 
             Console.WriteLine(username + ":" + password);
-            /*            using (var conn = new MySqlConnection(connectionString))
-                        {
-                            await conn.OpenAsync();
-
-                            using (var cmd = new MySqlCommand("SELECT COUNT(*) FROM users WHERE username = @username AND password = @password", conn))
-                            {
-                                cmd.Parameters.AddWithValue("@username", username);
-                                cmd.Parameters.AddWithValue("@password", password);
-
-                                var result = (long)await cmd.ExecuteScalarAsync();
-                                return result > 0;
-                            }
-                        }*/
             return true;
         }
 
@@ -395,14 +314,13 @@ namespace HttpServer
             HttpResponseMessage forwardResponse = await httpClient.PostAsync("http://localhost:1236/gameprediction", new StringContent(gamestate, Encoding.UTF8, "application/json"));
             await SendResponse(response, forwardResponse.StatusCode, gamestate);
         }
+
         static async Task<string> ReadRequestBody(Stream inputStream)
         {
-            // Read the request body
             using (var reader = new StreamReader(inputStream))
             {
                 return await reader.ReadToEndAsync();
             }
         }
-
     }
 }
