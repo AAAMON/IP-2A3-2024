@@ -26,10 +26,10 @@ namespace dune_library.Phases
             Perspective_Generator = game;
             Init = game;
             Players = game.Players;
-            this.treachery_Deck = game.Treachery_Deck;
+            treachery_Deck = game.Treachery_Deck;
             HighestBid = game.HighestBid;
             Input_Provider = game.Input_Provider;
-            this.Storm_Position = game.Map.Storm_Sector;
+            Storm_Position = game.Map.Storm_Sector;
             Factions_To_Move = game.Factions_To_Move;
         }
 
@@ -94,8 +94,8 @@ namespace dune_library.Phases
 
         public override void Play_Out()
         {
-            string Get_Card = Wait_Until_Something.AwaitInput(3000, Input_Provider).Result;
-            Console.WriteLine(Get_Card);
+            //string Get_Card = Wait_Until_Something.AwaitInput(3000, Input_Provider).Result;
+            //Console.WriteLine(Get_Card);
 
             moment = "bidding declaration";
 
