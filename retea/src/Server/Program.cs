@@ -112,18 +112,18 @@ namespace HttpServer
             Console.WriteLine(username + " :" + password);
             bool isAuthenticated = db.PlayerExists(username, password);
 
-/*            var playerData = new
+            var playerData = new
             {
                 username = isAuthenticated ? username : "error"
-            };*/
-           
+            };
+
             // BAZA DE DATE MERGE !!
             // CE AM COMENTAT E PENTRU CEI CARE NU AU FACUT INCA BAZA DE DATE SI SA SARA DIRECT DE PROCESUL DE LOGIN
-
+/*
             var playerData = new
             {
                 username = username,
-            };
+            };*/
 
             string jsonResponse = Newtonsoft.Json.JsonConvert.SerializeObject(playerData);
 
@@ -135,11 +135,16 @@ namespace HttpServer
 )
         {
             // Read the request body containing the username, email, and password
-            string requestBody = await ReadRequestBody(request.InputStream);
-            string[] parts = requestBody.Split('/');
-            string username = parts[0];
-            string email = parts[1];
-            string password = parts[2];
+            string[] segments = request.Url.Segments;
+            if (segments.Length < 5)
+            {
+                await SendResponse(response, HttpStatusCode.BadRequest, "Invalid URL format");
+                return;
+            }
+
+            string username = segments[2].TrimEnd('/');
+            string email = segments[3].TrimEnd('/');
+            string password = segments[4].TrimEnd('/');
 
             bool isRegistered = await HandleRegisterUser(username, email, password);      //IMPORTANTTT !!!!!!!!!!!!!!!!!!!!!!!!!!!
             if (isRegistered)
@@ -154,20 +159,20 @@ namespace HttpServer
 
         public static async Task<bool> HandleRegisterUser(string username, string email, string password)
         {
-            /*            using (ConnectionDB db = new ConnectionDB())
-                        {
-                            if (db.PlayerExistDB(username,email))
-                            {
-                                Console.WriteLine($"User '{username}' already exists.");
-                                return false;
-                            }
-                            else
-                            {
-                                db.AddPlayer(username, email, password);
-                                Console.WriteLine($"User '{username}' registered successfully.");
-                                return true;
-                            }
-                        }*/
+            using (ConnectionDB db = new ConnectionDB())
+            {
+                if (db.PlayerExistDB(username, email))
+                {
+                    Console.WriteLine($"User '{username}' already exists.");
+                    return false;
+                }
+                else
+                {
+                    db.AddPlayer(username, email, password);
+                    Console.WriteLine($"User '{username}' registered successfully.");
+                    return true;
+                }
+            }
             return true;
             // pt cei ce n-au legatura la baza de date
         }
@@ -274,13 +279,6 @@ namespace HttpServer
                 return;
             }
 
-            if (connectedUsers != 6)
-            {
-                // Uncomment this line after testing
-                // await SendResponse(response, HttpStatusCode.Unauthorized, "Not enough players to start the game");
-                // return;
-            }
-
             string playerId = request.Url.Segments[2].TrimEnd('/');
             string filePath = Path.Combine("gamestate", $"{playerId}.json");
             Console.WriteLine(filePath);
@@ -322,19 +320,19 @@ namespace HttpServer
             string password = credentials[1];
 
             Console.WriteLine(username + ":" + password);
-            /*            using (var conn = new MySqlConnection(connectionString))
-                        {
-                            await conn.OpenAsync();
+/*            using (var conn = new MySqlConnection(connectionString))
+            {
+                await conn.OpenAsync();
 
-                            using (var cmd = new MySqlCommand("SELECT COUNT(*) FROM users WHERE username = @username AND password = @password", conn))
-                            {
-                                cmd.Parameters.AddWithValue("@username", username);
-                                cmd.Parameters.AddWithValue("@password", password);
+                using (var cmd = new MySqlCommand("SELECT COUNT(*) FROM users WHERE username = @username AND password = @password", conn))
+                {
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@password", password);
 
-                                var result = (long)await cmd.ExecuteScalarAsync();
-                                return result > 0;
-                            }
-                        }*/
+                    var result = (long)await cmd.ExecuteScalarAsync();
+                    return result > 0;
+                }
+            }*/
             return true;
         }
 
