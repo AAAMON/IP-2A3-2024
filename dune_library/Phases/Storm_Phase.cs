@@ -120,37 +120,43 @@ namespace dune_library.Phases {
         
         while(faction_responses.Length() > 0)
         {
-            Console.WriteLine("Introduceti nr de sectoare cu care sa fie mutat storm-ul (ex /1/phase_1_input/3)");
+            Console.WriteLine("Introduceti nr de sectoare cu care sa fie mutat storm-ul (ex /player1/phase_1_input/3)");
             string[] line = Input_Provider.GetInputAsync().Result.Split("/");
             bool correct = false;
             Init.Factions_Distribution.Factions_In_Play.ForEach((faction) => { 
                 if(line[1] == Init.Factions_Distribution.Player_Of(faction).Id && line[2] == "phase_1_input" && faction_responses.Contains((true, faction)))
                 {
-                    int number = Int32.Parse(line[3]);
-                    if(number >= 0 && number <= 3)
+                    int number = 0;
+                    if (Int32.TryParse(line[3], out number))
                     {
-                        response += number;
-                        faction_responses.Remove((true, faction));
-                        switch (faction)
+                        if(number >= 0 && number <= 3)
                         {
-                            case Faction.Atreides:
-                                Factions_To_Move[0] = false;
-                                break;
-                            case Faction.Bene_Gesserit:
-                                Factions_To_Move[1] = false;
-                                break;
-                            case Faction.Emperor:
-                                Factions_To_Move[2] = false;
-                                break;
-                            case Faction.Fremen:
-                                Factions_To_Move[3] = false;
-                                break;
-                            case Faction.Spacing_Guild:
-                                Factions_To_Move[4] = false;
-                                break;
+                            response += number;
+                            faction_responses.Remove((true, faction));
+                            switch (faction)
+                            {
+                                case Faction.Atreides:
+                                    Factions_To_Move[0] = false;
+                                    break;
+                                case Faction.Bene_Gesserit:
+                                    Factions_To_Move[1] = false;
+                                    break;
+                                case Faction.Emperor:
+                                    Factions_To_Move[2] = false;
+                                    break;
+                                case Faction.Fremen:
+                                    Factions_To_Move[3] = false;
+                                    break;
+                                case Faction.Spacing_Guild:
+                                    Factions_To_Move[4] = false;
+                                    break;
+                                case Faction.Harkonnen:
+                                    Factions_To_Move[5] = false;
+                                    break;
+                            }
+                            Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+                            correct = true;
                         }
-                        Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
-                        correct = true;
                     }
                 }
 

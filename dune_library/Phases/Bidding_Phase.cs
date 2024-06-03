@@ -150,7 +150,6 @@ namespace dune_library.Phases
                 while (biddingOrder.Any())
                 {
                     var currentBidder = biddingOrder.Dequeue();
-                    uint bid = 0;
 
                     Console.WriteLine("Introduceti bid-ul (ex /player1/phase_4_input/3)");
                     string[] line = Input_Provider.GetInputAsync().Result.Split("/");
@@ -180,8 +179,7 @@ namespace dune_library.Phases
                                     who_passed[5] = true;
                                     break;
                             }
-                            biddingOrder.Enqueue(currentBidder);
-
+                            for (int i = 0; i < Factions_To_Move.Length; i++) { Factions_To_Move[i] = false; }
                             switch (currentBidder)
                             {
                                 case Faction.Atreides:
@@ -203,6 +201,8 @@ namespace dune_library.Phases
                                     Factions_To_Move[0] = true;
                                     break;
                             }
+                            biddingOrder.Enqueue(currentBidder);
+
                             correct = true;
                             Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
 
@@ -215,35 +215,38 @@ namespace dune_library.Phases
                         }
                         else
                         {
-                            int number = Int32.Parse(line[3]);
-                            if (bid > HighestBid.bid)
-                            {
-                                HighestBid.bid = (uint)bid;
-                                HighestBid.faction = currentBidder;
-                                switch (currentBidder)
+                            int bid = 0;
+                            if (Int32.TryParse(line[3], out bid)) {
+                                if (bid > HighestBid.bid && Spice_Manager.getSpice(currentBidder) >= bid)
                                 {
-                                    case Faction.Atreides:
-                                        Factions_To_Move[1] = true;
-                                        break;
-                                    case Faction.Bene_Gesserit:
-                                        Factions_To_Move[2] = true;
-                                        break;
-                                    case Faction.Emperor:
-                                        Factions_To_Move[3] = true;
-                                        break;
-                                    case Faction.Fremen:
-                                        Factions_To_Move[4] = true;
-                                        break;
-                                    case Faction.Spacing_Guild:
-                                        Factions_To_Move[5] = true;
-                                        break;
-                                    case Faction.Harkonnen:
-                                        Factions_To_Move[0] = true;
-                                        break;
+                                    HighestBid.bid = (uint)bid;
+                                    HighestBid.faction = currentBidder;
+                                    for (int i = 0; i < Factions_To_Move.Length; i++) { Factions_To_Move[i] = false; }
+                                    switch (currentBidder)
+                                    {
+                                        case Faction.Atreides:
+                                            Factions_To_Move[1] = true;
+                                            break;
+                                        case Faction.Bene_Gesserit:
+                                            Factions_To_Move[2] = true;
+                                            break;
+                                        case Faction.Emperor:
+                                            Factions_To_Move[3] = true;
+                                            break;
+                                        case Faction.Fremen:
+                                            Factions_To_Move[4] = true;
+                                            break;
+                                        case Faction.Spacing_Guild:
+                                            Factions_To_Move[5] = true;
+                                            break;
+                                        case Faction.Harkonnen:
+                                            Factions_To_Move[0] = true;
+                                            break;
+                                    }
+                                    Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+                                    correct = true;
+                                    who_passed = new bool[6];
                                 }
-                                Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
-                                correct = true;
-                                who_passed = new bool[6];
                             }
                         }
                     }

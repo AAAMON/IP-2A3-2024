@@ -15,14 +15,16 @@ namespace dune_library.Phases
     public class SpiceCollectionPhase : Phase
     {
         public SpiceCollectionPhase(
-      I_Setup_Initializers_And_Getters init,
-      Map_Resources.Map map
+        I_Setup_Initializers_And_Getters init,
+        Map_Resources.Map map,
+        Game game
     )
         {
             Init = init;
             Map = map;
+            Perspective_Generator = game;
         }
-
+        private I_Perspective_Generator Perspective_Generator { get; }
         public override string name => "Spice Collection";
 
         public override string moment { get; protected set; } = "";
@@ -57,6 +59,7 @@ namespace dune_library.Phases
                     }
                 }
             }
+            Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
         }
 
         private bool IsKeyCity(With_Spice section)

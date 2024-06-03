@@ -87,7 +87,7 @@ namespace dune_library {
 
         //spice harvest
         Console.WriteLine("Spice Harvest Phase");
-        Phase = new SpiceCollectionPhase(this, Map);
+        Phase = new SpiceCollectionPhase(this, Map, this);
         Phase.ValueUnsafe().Play_Out();
 
 
@@ -97,6 +97,8 @@ namespace dune_library {
         Phase.ValueUnsafe().Play_Out();
       }
     }
+
+    public Game_Winners Game_Winners { get; private set; }
 
     public I_Input_Provider Input_Provider;
 
@@ -217,7 +219,8 @@ namespace dune_library {
         knowledge_manager,
         Last_Spice_Card,
         HighestBid,
-        Factions_To_Move
+        Factions_To_Move,
+        Game_Winners
       );
   }
 }

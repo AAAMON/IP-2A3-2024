@@ -26,6 +26,8 @@ namespace dune_library.Player_Resources {
 
     public Option<Faction> Faction { get; }
 
+    public Game_Winners Game_Winners { get; }
+
     public bool[] Factions_To_Move { get; } = new bool[6];
 
     public (Battle_Wheel A, Battle_Wheel B) Battle_Wheels { get; }
@@ -63,7 +65,8 @@ namespace dune_library.Player_Resources {
       Option<Knowledge_Manager> knowledge_manager,
       Option<Spice_Card> last_spice_card,
       Highest_Bid HighestBid,
-      bool[] Factions_To_Move
+      bool[] Factions_To_Move,
+      Game_Winners Game_Winners
        ) {
       if (factions_distribution.IsLeft) {
         Free_Factions = factions_distribution.Left().Free_Factions;
@@ -75,6 +78,7 @@ namespace dune_library.Player_Resources {
         Faction = factions_distribution.Right().Faction_Of(player);
       }
       Battle_Wheels = battle_wheels;
+      this.Game_Winners = Game_Winners;
       Map = map;
       Round = round;
       Phase = phase;

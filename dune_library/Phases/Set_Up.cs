@@ -129,11 +129,14 @@ namespace dune_library.Phases
                 string[] line = Input_Provider.GetInputAsync().Result.Split("/");
                 if (line[1] == Init.Factions_Distribution.Player_Of(Faction.Bene_Gesserit).Id && line[2] == "setup")
                 {
-                    int response = Int32.Parse(line[3]);
-                    if(response < 10 && response > 0)
+                    int response = 0;
+                    if (Int32.TryParse([3],out response))
                     {
-                        Bene_Prediction = (uint)response;
-                        Factions_To_Move[1] = false;
+                        if(response < 10 && response > 0)
+                        {
+                            Bene_Prediction = (uint)response;
+                            Factions_To_Move[1] = false;
+                        }
                     }
                     else
                     {
@@ -274,19 +277,22 @@ namespace dune_library.Phases
                     if (line[1] == Init.Factions_Distribution.Player_Of(Faction.Fremen).Id && line[2] == "setup")
                     {
                         Console.WriteLine("player is correct");
-                        int sectionid = Int32.Parse(line[3]);
-                        int troop_number = Int32.Parse(line[4]);
-                        if (sectionid >= 0 && sectionid <= 84 && troop_number <= 10 - forces_distributed && troop_number > 0)
+                        int sectionid = 0;
+                        int troop_number = 0;
+                        if (Int32.TryParse(line[3], out sectionid) && Int32.TryParse(line[4], out troop_number))
                         {
-                            Console.WriteLine("section id and troop number is correct");
-                            if (sectionid == 14 || sectionid == 15 || sectionid == 67 || (sectionid >= 73 && sectionid <= 75))
+                            if (sectionid >= 0 && sectionid <= 84 && troop_number <= 10 - forces_distributed && troop_number > 0)
                             {
-                                Map.Sections[sectionid].Forces.Transfer_From(Faction.Fremen, To_Place_Now, (uint)troop_number);
-                                forces_distributed += troop_number;
-                            }
-                            else
-                            {
-                                Console.WriteLine("Failure");
+                                Console.WriteLine("section id and troop number is correct");
+                                if (sectionid == 14 || sectionid == 15 || sectionid == 67 || (sectionid >= 73 && sectionid <= 75))
+                                {
+                                    Map.Sections[sectionid].Forces.Transfer_From(Faction.Fremen, To_Place_Now, (uint)troop_number);
+                                    forces_distributed += troop_number;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Failure");
+                                }
                             }
                         }
                         else
