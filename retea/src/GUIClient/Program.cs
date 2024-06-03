@@ -4,8 +4,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
-
+using static AIClient.ClientForAI;
 // aici restul de informatii
+
 
 public class TreacheryCardGUI
 {
@@ -306,6 +307,13 @@ public class GameClient
         {
             int bidValue = int.Parse(request.Split('/')[2]);
             return phase4Input(bidValue);
+        }
+        else if (request.Contains("/set-bot"))
+        {
+            int botID = int.Parse(request.Split("/")[2]);
+            var of = new ClientForAI(botID).Run();
+            // [to add] broadcast to all clients with setted bots
+            return "";
         }
         else
         {
