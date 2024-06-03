@@ -1,0 +1,1 @@
+http://localhost:8000/get-move-header?bot_name=fremen-easy&game_state={"Phase": {"name": "Bidding","moment": null},"last_bid":{"value": 1,"player": "Atreides"},"Faction_Knowledge":{"Treachery_Cards": {},"Spice": 10}}
