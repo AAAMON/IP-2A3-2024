@@ -310,7 +310,7 @@ public class GameClient
         }
         else if (request.Contains("/set-bot"))
         {
-            int botID = int.Parse(request.Split("/")[2]);
+            int botID = int.Parse(request.Split("/")[
             var of = new ClientForAI(botID).Run();
             // [to add] broadcast to all clients with setted bots
             return "";
