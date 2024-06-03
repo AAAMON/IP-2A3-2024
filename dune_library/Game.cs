@@ -51,6 +51,7 @@ namespace dune_library {
         //commentati de aici in jos daca vreti sa testati mai rapid
         Phase = new Set_Up(this, this, Players, factions_distribution, player_markers, Map, Bene_Prediction, Battle_Wheels, Input_Provider, Factions_To_Move);
         Phase.ValueUnsafe().Play_Out();
+
         for (Round = 1; Round <= 10; Round += 1) {
         //storm
         Console.WriteLine("Storm Phase");
@@ -78,7 +79,7 @@ namespace dune_library {
 
         //shipment and movement
         Console.WriteLine("Shipment And Movement Phase");
-        Phase = new ShipmentAndMovementPhase(this, Map);
+        Phase = new ShipmentAndMovementPhase(this);
         Phase.ValueUnsafe().Play_Out();
 
         //battle

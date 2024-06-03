@@ -90,7 +90,7 @@ namespace dune_library.Phases
                     Console.WriteLine($"{faction}: You have {Faction_Knowledge.getSpice(faction)} spice.");
                 
                     Console.WriteLine("ex: /player1/phase_6_input/1/Territory_name/section_id/number_of_troops");
-                    Console.WriteLine("ex: /player1/phase_6_input/1/fromTerritory_name/section_id/toTerritory_name/section_id/number_of_troops");
+                    Console.WriteLine("ex: /player1/phase_6_input/2/fromTerritory_name/section_id/toTerritory_name/section_id/number_of_troops");
 
                     string[] line = Input_Provider.GetInputAsync().Result.Split("/");
                     if (line[1] == Init.Factions_Distribution.Player_Of(faction).Id && line[2] == "phase_6_input")
@@ -108,7 +108,7 @@ namespace dune_library.Phases
                                 {
                                     if(Init.Reserves.Of(Faction.Bene_Gesserit) > 0)
                                     {
-                                        Map.Polar_Sink.Sections[0].Forces.Transfer_From(Faction.Bene_Gesserit, Reserves, 1)
+                                        Map.Polar_Sink.Sections[0].Forces.Transfer_From(Faction.Bene_Gesserit, Reserves, 1);
                                     }
                                 }
                             }
