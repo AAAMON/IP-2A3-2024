@@ -72,7 +72,7 @@ namespace HttpServer
                 {
                     await HandleGameStateGetRequest(request, response);
                 }
-                else if (request.HttpMethod == "POST" && request.Url.AbsolutePath == "/initialization")
+                else if (request.HttpMethod == "POST" && request.Url.AbsolutePath.Contains("/initialization"))
                 {
                     await HandleInitializationRequest(request, response);
                 }
@@ -302,7 +302,7 @@ namespace HttpServer
         {
             string requestBody = await ReadRequestBody(request.InputStream);
 
-            string playerName = request.Headers.Get(1);
+            string playerName = request.Url.Segments.Last().Trim('/');
             string filePath = Path.Combine("initialization", $"{playerName}.json");
             Directory.CreateDirectory(Path.GetDirectoryName(filePath));
             File.WriteAllText(filePath, requestBody);
