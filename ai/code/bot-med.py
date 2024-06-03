@@ -241,7 +241,7 @@ def simulate_battle(game_state, territory, my_forces):
                             
                             my_general_alive = True
                             
-                            if other_attack in projectile_weapons and defense not in projectile_defense
+                            if other_attack in projectile_weapons and defense not in projectile_defense:
                                 my_general_alive = False
 
                             if other_attack in poison_weapons and defense not in poison_defense:
@@ -249,7 +249,7 @@ def simulate_battle(game_state, territory, my_forces):
 
                             other_general_alive = True
                             
-                            if attack in projectile_weapons and other_defense not in projectile_defense
+                            if attack in projectile_weapons and other_defense not in projectile_defense:
                                 other_general_alive = False
 
                             if attack in poison_weapons and other_defense not in poison_defense:
