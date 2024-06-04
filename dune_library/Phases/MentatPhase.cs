@@ -28,6 +28,7 @@ namespace dune_library.Phases
             Map = game.Map;
             Alliances = game.Alliances;
             Game_Winners = game.Game_Winners;
+            Bene_Prediction = game.Bene_Prediction;
         }
         public Game_Winners Game_Winners { get; private set; }
         public Map_Resources.Map Map { get; }
@@ -37,6 +38,8 @@ namespace dune_library.Phases
 
         public I_Input_Provider Input_Provider { get; set; }
         private uint Round { get; set; }
+
+        private uint Bene_Prediction { get; }
 
         private Alliances Alliances { get; set; }
         public override string name => "Mentat Pause";
@@ -170,13 +173,27 @@ namespace dune_library.Phases
                     counter += strongholds_distribution[faction].Count;
                     if (counter > 3)
                     {
-                        Game_Winners = new Game_Winners(faction, (Faction)Alliances.Ally_Of(faction));
+                        if(Round == Bene_Prediction && Init.Factions_Distribution.Factions_In_Play.Contains(Faction.Bene_Gesserit))
+                        {
+                            Game_Winners = new Game_Winners(Faction.Bene_Gesserit);
+                        }
+                        else
+                        {
+                            Game_Winners = new Game_Winners(faction, (Faction)Alliances.Ally_Of(faction));
+                        }
                         result = true;
                     }
                 }
                 else if (counter > 2)
                 {
-                    Game_Winners = new Game_Winners(faction);
+                    if (Round == Bene_Prediction && Init.Factions_Distribution.Factions_In_Play.Contains(Faction.Bene_Gesserit))
+                    {
+                        Game_Winners = new Game_Winners(Faction.Bene_Gesserit);
+                    }
+                    else
+                    {
+                        Game_Winners = new Game_Winners(faction);
+                    }
                     result = true;
                 }
             });
