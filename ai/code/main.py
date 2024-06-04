@@ -8,6 +8,7 @@ app = FastAPI()
 bot_manager = BotManager()
 
 class GameStateObject(BaseModel):
+    botname : str
     jsonString: str
     
 
@@ -24,17 +25,18 @@ def root():
     return {'status': 'ok'}
 
 
-@app.get("/get-move-body")
-def get_move(bot_name:str, game_state: GameStateObject):
-    print('got faction ' + bot_name)
-    print('got state ' + game_state)
+@app.post("/get-move-body")
+def get_move(game_state:GameStateObject):
 
-    return bot_manager.get_move(bot_name, json.loads(game_state.jsonString))
+    return bot_manager.get_move(game_state.botname, json.loads(game_state.jsonString))
+
 
 
 @app.get("/get-move-header")
-def get_move(bot_name:str, game_state: str):
+def get_move(bot_name="spacingGuild-med", game_state= "perspective3.json"):
     print('got faction ' + bot_name)
     print('got state ' + game_state)
+    with open("perspective3.json", "r") as file:
+        game_state=json.load(file)
 
-    return bot_manager.get_move(bot_name, json.loads(game_state))
+    return bot_manager.get_move(bot_name, game_state)
