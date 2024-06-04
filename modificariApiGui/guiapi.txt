@@ -4,6 +4,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
+using System;
+using System.Collections.Concurrent;
+using System.Net.WebSockets;
+using System.Threading;
+using System.Threading.Tasks;
 
 // aici restul de informatii
 
@@ -31,18 +36,34 @@ public class otherPlayerGUI
     public int NrTreatcheryCards { get; set; } = 1;
 }
 
+public class lobbyInfo
+{
+    public bool[] factionIsPicked = new bool[7];
+    public lobbyInfo() {
+        for (int i = 1; i < 7; i++)
+            factionIsPicked[i] = false;
+    }
+}
+
 public class playerData
 {
-    public string faction { get; set; }
+    ////////////////// BASIC DATA
+    public int playerID; /* 1 -> 6 */
+    public string authToken; /* playerX */
+
+    public string username;
+
+    ////////////////// GAME DATA
+    public dynamic json;
+    public int faction { get; set; }= -1;
     public int spice { get; set; }
-    public TreacheryCardGUI[] treacheryCards { get; set; }
+    public TreacheryCardGUI[] TreacheryCards { get; set; }
     public TraitorCardGUI[] traitorCards { get; set; }
-    public int forcesReserve { get; set; }
+    public int ForcesReserve { get; set; }
     public int forcesDead { get; set; } = 0;
     public int forcesDeployed { get; set; } = 0;
 
     // OTHER PLAYERS
-
 
     public int round { get; set; }
     public int phase { get; set; } = 1;
@@ -67,162 +88,103 @@ public class Program
         await new GameClient().Run(args);
     }
 }
+// Method to add playerData to the dictionary
 
 public class GameClient
 {
-    //  for testing
-    public playerData playerData1 = new playerData();
-    public int playerID; /* 1 -> 6 */
-    public string authToken; /* playerX */
-
+    // player information
+    private Dictionary<string, playerData> playerDataDictionary = new Dictionary<string, playerData>();
+    private lobbyInfo lobby = new lobbyInfo();
+    private bool gameIsRunning = false;
+    // SERVER COMMUNICATION CLIENT
     static readonly HttpClient client = new HttpClient();
+    // URL FOR SERVER COMM
     static string baseUrl = "http://localhost:1234/";
-    private string username { get; set; }
-    private string password { get; set; }
+
 
 
     public async Task Run(string[] args)
     {
-        // Authentication
-
-
-
-
-
-        // // Get Gamestate for a specific player
-        // string gamestate = await GetGamestate(authToken);
-        // //Console.WriteLine($"Gamestate for {authToken}: {gamestate}");
-        // string game = await InitializeGamestate(authToken, gamestate);
-        // //Console.WriteLine(game);
-
-        // // Deserialize the JSON string into a JObject
-        // Console.WriteLine($"json: {gamestate}");
-        // dynamic jsonObject = Newtonsoft.Json.JsonConvert.DeserializeObject(gamestate);
-
-
-
-
-        // //////////////////////////////////////////////////////////////////////////////////////////
-        // // COMMUNICATION WITH GUI ////////////////////////////////////////////////////////////////////
-        // playerData1.faction = jsonObject.Faction[0];
-        // //Console.WriteLine($"Faction: {jsonObject.Faction[0]}");
-        // playerData1.spice = jsonObject.Faction_Knowledge[0].Spice;
-        // // playerData1.forcesReserve = jsonObject.Reserves[0]["Atreides"];
-        // // if (jsonObject.Tleilaxu_Tanks[0]["Forces"] != null)
-        // //     playerData1.forcesDead = jsonObject.Tleilaxu_Tanks[0]["Forces"];
-        // playerData1.newStormPosition = -1;
-        // playerData1.cursedTimer = -1;
-        // playerData1.round = 1;
-        // playerData1.playerId = playerID;
-        // // treatchery cards /////////////////////////////////////////////////////////////////////////
-        // var treacheryCards = jsonObject.Faction_Knowledge[0].Treachery_Cards;
-        // int index = 0;
-        // // Initialize the PlayerData object
-        // playerData1.treacheryCards = new TreacheryCardGUI[5]; // Initialize the array with the correct size
-        // foreach (var card in treacheryCards)
-        // {
-        //     Console.WriteLine($"Card: {card.Name}, Quantity: {card.Value}");
-        //     playerData1.treacheryCards[index++] = new TreacheryCardGUI { Name = card.Name, Count = card.Value };
-        // }
-        // // traitors ////////////////////////////////////////////////////////////////////////////////////
-        // var trtrs = jsonObject.Faction_Knowledge[0].Traitors;
-        // index = 0;
-        // // Initialize the PlayerData object
-        // playerData1.traitorCards = new TraitorCardGUI[5]; // Initialize the array with the correct size
-        // foreach (var card in trtrs)
-        // {
-        //     Console.WriteLine($"Traitor id: {card.Id}, name: {card.Name}");
-        //     playerData1.traitorCards[index++] = new TraitorCardGUI { Id = card.Id, Name = card.Name, Faction = card.Faction, Strength = card.Strength };
-        // }
-
-
-        ////
-
+        // COMMUNICATION WITH GODOT
         HttpListener listener = new HttpListener();
         listener.Prefixes.Add("http://localhost:1236/");
         listener.Start();
         Console.WriteLine("Listening on port 1236...");
 
-        // // Get Gamestate for a specific player
-        // gamestate = await GetGamestate(authToken);
-        // Console.WriteLine($"Got gamestate for {authToken}");
-
-        // // Deserialize the JSON string into a JObject
-        // jsonObject = Newtonsoft.Json.JsonConvert.DeserializeObject(gamestate);
-        WebSocketManager wsManager = new WebSocketManager();
+        // START WEBSOCKET MANAGER
+        WebSocketManager wsManager = new WebSocketManager(this);
         // do NOT put await on this, the code won't work, tyy <3
         wsManager.StartWebSocketServerAsync("http://localhost:2000/");
 
-        // _ = Task.Run(async () =>
-        // {
-
-            while (true)
+        // COMMUNICATION LOOP
+        while (true)
+        {
+            // get gamestate for everyone
+            if (gameIsRunning)
             {
-                Console.WriteLine("boo");
-                HttpListenerContext context = await listener.GetContextAsync();
-                HttpListenerRequest request = context.Request;
-                HttpListenerResponse response = context.Response;
-
-                string responseString = await ProcessRequestAsync(request.RawUrl);
-                byte[] buffer = Encoding.UTF8.GetBytes(responseString);
-                Console.WriteLine("{0} request received for {1}", request.HttpMethod, request.RawUrl);
-
-
-                response.ContentType = "application/json"; // Set content type to JSON
-                response.ContentLength64 = buffer.Length;
-                response.OutputStream.Write(buffer, 0, buffer.Length);
-                response.OutputStream.Close();
+                foreach (var player in playerDataDictionary.Values)
+                {
+                    string gamestate = await GetGamestate(player.authToken, Convert.ToString(player.faction));
+                    player.json = Newtonsoft.Json.JsonConvert.DeserializeObject(gamestate);
+                }
             }
-            // wsManager.IsRunning = false;
-        // });
 
-        // while (true)
-        // {
-        //     // if (!wsManager.IsRunning)
-        //     // {
-        //     //     listener.Stop();
-        //     //     Console.WriteLine("Websocket stopped.");
-        //     //     break;
-        //     // }
+            HttpListenerContext context = await listener.GetContextAsync();
+            HttpListenerRequest request = context.Request;
+            HttpListenerResponse response = context.Response;
 
-        //     await Task.Delay(1000);
-        // }
-        // wsManager.Stop();
+            string responseString = await ProcessRequestAsync(request.RawUrl);
+            byte[] buffer = Encoding.UTF8.GetBytes(responseString);
+            // Console.WriteLine("{0} request received for {1}", request.HttpMethod, request.RawUrl);
+
+            response.ContentType = "application/json"; // Set content type to JSON
+            response.ContentLength64 = buffer.Length;
+            response.OutputStream.Write(buffer, 0, buffer.Length);
+            response.OutputStream.Close();
+        }
     }
 
     public GameClient()
     {
         // InitializeDefaultCredentials();
     }
-    // public GameClient(string theUsername, string thePassword)
-    // {
-    //     this.username = theUsername;
-    //     this.password = thePassword;
-    // }
 
-    // private void InitializeDefaultCredentials()
-    // {
-    //     username = "girlboss";
-    //     password = "password1";
-    // }
-
-    int GetPlayerID()
+    public void AddPlayerData(string username, playerData data)
     {
-        int playerID = 0;
-        if (int.TryParse(authToken.Substring(6), out playerID))
+        if (playerDataDictionary.Count >= 6)
         {
-            Console.WriteLine("Player ID: " + playerID);
+            Console.WriteLine("Cannot add more players. The dictionary is full.");
+            return;
+        }
+
+        if (!playerDataDictionary.ContainsKey(username))
+        {
+            playerDataDictionary[username] = data;
+            Console.WriteLine($"Player data for {username} added successfully.");
         }
         else
         {
-            Console.WriteLine("Failed to extract player ID.");
+            Console.WriteLine($"Player data for {username} already exists.");
         }
-        return playerID;
+    }
+    public void RemovePlayerData(string username)
+    {
+        if (playerDataDictionary.ContainsKey(username))
+        {
+            lobby.factionIsPicked[playerDataDictionary[username].faction] = false;
+            playerDataDictionary.Remove(username);
+
+            Console.WriteLine($"Player data for {username} removed successfully.");
+        }
+        else
+        {
+            Console.WriteLine($"Player data for {username} does not exist.");
+        }
     }
 
-    public async Task SendPlayerAction(string action, int playerID)
+    public async Task SendPlayerAction(string action, string faction)
     {
-        string endpoint = "/playeraction/" + "player" + playerID.ToString();
+        string endpoint = "/playeraction/" + "player" + faction;
         var content = new StringContent(action);
         HttpResponseMessage response = await client.PostAsync(baseUrl + endpoint, content);
         response.EnsureSuccessStatusCode();
@@ -235,11 +197,11 @@ public class GameClient
         return await response.Content.ReadAsStringAsync();
     }
 
-    static async Task<string> GetGamestate(string theAuthToken)
+    static async Task<string> GetGamestate(string authToken, string faction)
     {
         client.DefaultRequestHeaders.Remove("Authorization");
-        client.DefaultRequestHeaders.Add("Authorization", theAuthToken);
-        var response = await client.GetAsync(baseUrl + $"gamestate/{theAuthToken}");
+        client.DefaultRequestHeaders.Add("Authorization", authToken);
+        var response = await client.GetAsync(baseUrl + $"gamestate/player{faction}");
         return await response.Content.ReadAsStringAsync();
     }
 
@@ -253,9 +215,14 @@ public class GameClient
     }
 
     // Andreea: idk cat de bun e
-    public async Task<string> SendPhase1(int stormValue)
+    public async Task<string> SendPhase1(string username, int stormValue)
     {
-        var response = await client.GetAsync(baseUrl + $"{playerData1.playerId}/phase_1_input/{stormValue}");
+        var response = await client.GetAsync(baseUrl + $"{playerDataDictionary[username].playerId}/phase_1_input/{stormValue}");
+        return await response.Content.ReadAsStringAsync();
+    }
+    public async Task<string> SendBenePredict(string faction)
+    {
+        var response = await client.GetAsync(baseUrl + $"player2/setup/{faction}");
         return await response.Content.ReadAsStringAsync();
     }
     public async Task<string> SendRegister(string usrname, string password, string mail)
@@ -263,9 +230,9 @@ public class GameClient
         var response = await client.GetAsync(baseUrl + $"register/{usrname}/{password}/{mail}");
         return await response.Content.ReadAsStringAsync();
     }
-    public async Task<string> SendPhase4(int bidValue)
+    public async Task<string> SendPhase4(string username, int bidValue)
     {
-        var response = await client.GetAsync(baseUrl + $"{playerData1.playerId}/phase_4_input/{bidValue}");
+        var response = await client.GetAsync(baseUrl + $"{playerDataDictionary[username].playerId}/phase_4_input/{bidValue}");
         return await response.Content.ReadAsStringAsync();
     }
 
@@ -274,20 +241,38 @@ public class GameClient
 
     public async Task<string> ProcessRequestAsync(string request)
     {
+        //Console.WriteLine($"{request}");
+
         // Parse request and call appropriate API function
-        if (request.StartsWith("/get_player_data"))
-        {
-            return GetPlayerData();
-        }
         if (request.StartsWith("/login"))
         {
             string username = request.Split('/')[2];
             string password = request.Split('/')[3];
 
-            authToken = await AuthenticateUser(username, password);
+            string authToken = await AuthenticateUser(username, password);
             Console.WriteLine($"Auth Token: {authToken}");
-            playerID = GetPlayerID();
+            // playerDataDictionary[username].playerID = GetPlayerID(authToken);
+            // string gamestate = await GetGamestate(authToken);
+            // Get Gamestate for a specific player
+            // string game = await InitializeGamestate(authToken, gamestate);
+            // playerDataDictionary[username].json = Newtonsoft.Json.JsonConvert.DeserializeObject(gamestate);
             return Login(username, password, authToken);
+        }
+        else if (request.StartsWith("/pick_faction/"))
+        {
+            string username = request.Split('/')[2];
+            int faction = int.Parse(request.Split('/')[3]);
+
+            return pickFaction(username, faction);
+        }
+        else if (request.StartsWith("/get_lobby_info"))
+        {
+            return GetLobbyInfo();
+        }
+        else if (request.StartsWith("/get_phase_info"))
+        {
+            string username = request.Split('/')[2];
+            return GetPhaseInfo(username);
         }
         else if (request.StartsWith("/register"))
         {
@@ -297,48 +282,27 @@ public class GameClient
 
             return Register(username, password, mail);
         }
-        else if (request.StartsWith("/connect"))
+        else if (request.StartsWith("/get_player_data"))
         {
-            return CheckConnection();
+            string username = request.Split('/')[2];
+            return GetPlayerData(username);
         }
-        else if (request.StartsWith("/get_other_players_data"))
+        else if (request.StartsWith("/bene_predict_input"))
         {
-            return GetOtherPlayersData();
+            string username = request.Split('/')[2];
+            string faction = request.Split('/')[3];
+            return GetBenePredict(username, faction);
         }
-        else if (request.StartsWith("/get_map_spice"))
-        {
-            return GetMapSpice();
-        }
-        else if (request.StartsWith("/get_phase_info"))
-        {
-            return GetPhaseInfo();
-        }
-        else if (request.StartsWith("/get_phase_1_info"))
-        {
-            return GetPhase1Info();
-        }
-        else if (request.StartsWith("/phase_1_input"))
-        {
-            int stormValue = int.Parse(request.Split('/')[2]);
-            return phase1Input(stormValue);
-        }
-        else if (request.StartsWith("/get_phase_2_info"))
-        {
-            return GetPhase2Info();
-        }
-        else if (request.StartsWith("/get_phase_3_info"))
-        {
-            return GetPhase3Info();
-        }
-        else if (request.StartsWith("/get_phase_4_info"))
-        {
-            return GetPhase4Info();
-        }
-        else if (request.StartsWith("/phase_4_input"))
-        {
-            int bidValue = int.Parse(request.Split('/')[2]);
-            return phase4Input(bidValue);
-        }
+        // else if (request.StartsWith("/get_map_spice"))
+        // {
+        //     return GetMapSpice();
+        // }
+        // else if (request.StartsWith("/get_phase_info"))
+        // {
+        //     string username = request.Split('/')[2];
+        //     return GetPhaseInfo(username);
+        // }
+
         else
         {
             return "Invalid request";
@@ -346,23 +310,18 @@ public class GameClient
     }
 
 
-    static string CheckConnection()
-    {
-        // Retrieve player data from the database or another source
-        var playerData = new
-        {
-            message = "ok!"
-        };
-
-        // Serialize playerData object to JSON
-        return Newtonsoft.Json.JsonConvert.SerializeObject(playerData);
-    }
-    static string Login(string uusername, string password, string auth)
+    public string Login(string uusername, string password, string authToken)
     {
         Console.WriteLine("Trying to log in {0} with pass {1}", uusername, password);
         // REPLACE THIS WITH WHATEVER IT IS WHEN WRONG LOGIN
-        if (auth != "")
+        if (authToken != "Game room is already full")
         {
+            // VERIFY IF LOGIN WAS SUCCESSFUL DUM DUM
+            playerData pData = new playerData();
+            AddPlayerData(uusername, pData);
+            // remember important details
+            playerDataDictionary[uusername].authToken = authToken;
+            playerDataDictionary[uusername].username = uusername;
             var playerData = new
             {
                 username = uusername
@@ -372,12 +331,36 @@ public class GameClient
         }
         else
         {
+            Console.WriteLine("Refusing to accept player.");
             var playerData = new
             {
-                username = "error"
+                username = "full"
             };
             // Serialize playerData object to JSON
             return Newtonsoft.Json.JsonConvert.SerializeObject(playerData);
+        }
+    }
+    public string pickFaction(string uusername, int faction)
+    {
+        if (lobby.factionIsPicked[faction] || playerDataDictionary[uusername].faction != -1)
+        {
+            var message = new
+            {
+                message = "taken"
+            };
+            // Serialize playerData object to JSON
+            return Newtonsoft.Json.JsonConvert.SerializeObject(message);
+        }
+        else
+        {
+            lobby.factionIsPicked[faction] = true;
+            playerDataDictionary[uusername].faction = faction;
+            var message = new
+            {
+                message = "ok"
+            };
+            // Serialize playerData object to JSON
+            return Newtonsoft.Json.JsonConvert.SerializeObject(message);
         }
     }
     public string Register(string uusername, string password, string email)
@@ -404,195 +387,229 @@ public class GameClient
             return Newtonsoft.Json.JsonConvert.SerializeObject(playerData);
         }
     }
-    public string GetPlayerData()
+    public string GetLobbyInfo()
     {
-        // Retrieve player data from the database or another source
-
-        var playerDat = new
-        {
-            turnId = playerData1.playerId,
-            faction = playerData1.faction,
-            spice = playerData1.spice,
-            forcesReserve = playerData1.forcesReserve,
-            forcesDeployed = 0,
-            forcesDead = playerData1.forcesDead,
-            // leaders = new[]
-            // {
-            //     new { name = "Leader1", faction = "Atreides", power = 1, @protected = false, status = "alive" },
-            //     new { name = "Leader2", faction = "Atreides", power = 2, @protected = false, status = "alive" },
-            //     new { name = "Leader3", faction = "Atreides", power = 3, @protected = false, status = "alive" },
-            //     new { name = "Leader4", faction = "Atreides", power = 4, @protected = false, status = "alive" },
-            //     new { name = "Leader5", faction = "Atreides", power = 5, @protected = false, status = "alive" }
-            // },
-            territories = new object[0],
-            traitors = playerData1.traitorCards,
-            treacheryCards = playerData1.treacheryCards
-
+        bool everyone = true;
+        for (int i = 1; i < 3; i++)
+            if (lobby.factionIsPicked[i] == false)
+                everyone = false;
+        gameIsRunning = everyone;
+        var lobbyInfo = new {
+            howMany = playerDataDictionary.Count,
+            players = playerDataDictionary.Values.Select(player => new
+            {
+                username = player.username,
+                faction = player.faction
+            }).ToArray(),
+            startGame = gameIsRunning
         };
-        // Serialize playerData object to JSON
-        return Newtonsoft.Json.JsonConvert.SerializeObject(playerDat);
-    }
-    public string GetOtherPlayersData()
-    {
-        // Retrieve player data from the database or another source
-        // MAKE SURE TURN ID'S ARE IN ORDER ASCENDING !!!
-        var otherPlayers = new[]
-        {
-             new { turnId = 2, username = "SomeDude", faction = "harkonnen", bot = "no", spice = "5" },
-             new { turnId = 3, username = "Luffy", faction = "space_guild", bot = "no", spice = "5"  },
-             new { turnId = 4, username = "Bahhhh", faction = "bene_gesserit", bot = "no", spice = "5"  },
-             new { turnId = 5, username = "Noob420", faction = "emperor", bot = "no", spice = "5"  },
-             new { turnId = 6, username = "Bot1", faction = "fremen", bot = "yes", spice = "5"  }
-         };
 
         // Serialize playerData object to JSON
-        return Newtonsoft.Json.JsonConvert.SerializeObject(otherPlayers);
+        return Newtonsoft.Json.JsonConvert.SerializeObject(lobbyInfo);
     }
-    public string GetPhaseInfo()
+    public string GetPhaseInfo(string username)
     {
-        var phaseInfo = new
-        {
-            round = playerData1.round,
-            phase = playerData1.phase
+        var phaseInfo = new {
+            name = playerDataDictionary[username].json["Phase"][0]["name"],
+            moment = playerDataDictionary[username].json["Phase"][0]["moment"]
         };
 
         // Serialize playerData object to JSON
         return Newtonsoft.Json.JsonConvert.SerializeObject(phaseInfo);
     }
-    public string GetMapSpice()
+
+    public string GetPlayerData(string username)
     {
-        var mapSpice = new[]
+        int reserves = -1;
+        switch (playerDataDictionary[username].faction)
         {
-             new { sector = "meridian", spice = "5" },
-             new { sector = "cielago-depression", spice = "3" }
-         };
+            case 1:
+                reserves = playerDataDictionary[username].json.Reserves[0].Atreides;
+                break;
+            case 2:
+                reserves = playerDataDictionary[username].json.Reserves[0].Bene_Gesserit;
+                break;
+            case 3:
+                reserves = playerDataDictionary[username].json.Reserves[0].Emperor;
+                break;
+            case 4:
+                reserves = playerDataDictionary[username].json.Reserves[0].Fremen;
+                break;
+            case 5:
+                reserves = playerDataDictionary[username].json.Reserves[0].Spacing_Guild;
+                break;
+            case 6:
+                reserves = playerDataDictionary[username].json.Reserves[0].Harkonnen;
+                break;
+            default:
+                Console.WriteLine("Spice error.");
+                break;
+        }
+        int index = 0;
+        var properties = playerDataDictionary[username].json["Faction_Knowledge"][0]["Treachery_Cards"].Properties();
+        string[] ttreacheryCards = new string[4];
+        foreach (var property in properties)
+        {
+            ttreacheryCards[index] = property.Name;
+            index++;
+        }
+        // Retrieve player data from the database or another source
+        var playerDat = new
+        {
+            faction = playerDataDictionary[username].faction,
+            spice = playerDataDictionary[username].json.Faction_Knowledge[0].Spice,
+            forcesReserve = reserves,
+            forcesDeployed = 0,
+            forcesDead = 0,
+            territories = new object[0],
+            traitors = new object[0],
+            treacheryCards = ttreacheryCards
+        };
+        // Serialize playerData object to JSON
+        return Newtonsoft.Json.JsonConvert.SerializeObject(playerDat);
+    }
+    public string GetBenePredict(string username, string faction)
+    {
+        SendBenePredict(faction);
+        //SendPlayerAction("player2/setup/4", "2");
+        var message = new {
+            message = "ok"
+        };
 
         // Serialize playerData object to JSON
-        return Newtonsoft.Json.JsonConvert.SerializeObject(mapSpice);
+        return Newtonsoft.Json.JsonConvert.SerializeObject(message);
     }
-    public string GetPhase1Info()
+    public class WebSocketManager
     {
-        var phase1Info = new
+        private GameClient outerInstance;
+
+        public WebSocketManager(GameClient instance)
         {
-            whichPlayers = new[]
+            outerInstance = instance;
+        }
+    private static readonly int maxClients = 6;
+    private static readonly ConcurrentDictionary<string, WebSocket> clients = new ConcurrentDictionary<string, WebSocket>();
+
+    public static int GetNumberOfClients()
+    {
+        int numberOfClients = clients.Count;
+        return numberOfClients;
+    }
+    public async Task StartWebSocketServerAsync(string url)
+    {
+        HttpListener listener = new HttpListener();
+        listener.Prefixes.Add(url);
+        listener.Start();
+        Console.WriteLine("WSMANAGER: WebSocket server started");
+
+        try
+        {
+            while (clients.Count < maxClients)
             {
-                 new { turnId = 2, hasPickedValue = "false" },
-                 new { turnId = 1, hasPickedValue = "false" }
-             },
-            newStormPosition = playerData1.newStormPosition
-        };
+                HttpListenerContext context = await listener.GetContextAsync();
+                if (context.Request.IsWebSocketRequest)
+                {
+                    Console.WriteLine("WSMANAGER: Someone trying to enter");
+                    ProcessWebSocketRequest(context);
 
-        if (playerData1.newStormPosition == -1 && playerData1.cursedTimer < 10)
-        {
-            playerData1.cursedTimer++;
+                }
+                else
+                {
+                    context.Response.StatusCode = 400;
+                    context.Response.Close();
+                }
+            }
         }
-        else if (playerData1.newStormPosition == -1 && playerData1.phase1NeedInput == false)
-        { playerData1.newStormPosition = 4; playerData1.cursedTimer = 0; playerData1.phase = 2; }
-        // Serialize playerData object to JSON
-        return Newtonsoft.Json.JsonConvert.SerializeObject(phase1Info);
-    }
-    public string phase1Input(int stormValue)
-    {
-        // send stormValue to server
-        SendPhase1(stormValue);
-        // response
-        var validation = new
+        catch (Exception ex)
         {
-            response = "ok"
-        };
-        playerData1.phase1NeedInput = false;
-        playerData1.cursedTimer = 0;
-        // Serialize playerData object to JSON
-        return Newtonsoft.Json.JsonConvert.SerializeObject(validation);
-    }
-    public string GetPhase2Info()
-    {
-        var phase2Info = new
+            Console.WriteLine($"WSMANAGER: Error: {ex.Message}");
+        }
+        finally
         {
-            howMany = 2,
-            whichTerritories = new[]
+            listener.Stop();
+            Console.WriteLine("WSMANAGER: WebSocket server stopped");
+        }
+    }
+
+    private async void ProcessWebSocketRequest(HttpListenerContext context)
+    {
+        HttpListenerWebSocketContext webSocketContext = null;
+        try
+        {
+            webSocketContext = await context.AcceptWebSocketAsync(null);
+            WebSocket socket = webSocketContext.WebSocket;
+
+            // Receive username from client
+            string username = await ReceiveStringAsync(socket);
+
+            // Add client to dictionary
+            clients.TryAdd(username, socket);
+
+            Console.WriteLine($"WSMANAGER: Client connected: {username}");
+            int nr = GetNumberOfClients();
+                    Console.WriteLine($"WSMANAGER: Nr of clients: {nr}");
+
+            // Handle messages from the client
+            await HandleClientMessages(socket, username);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"WSMANAGER: Error: {ex.Message}");
+            webSocketContext?.WebSocket.CloseAsync(WebSocketCloseStatus.InternalServerError, "Internal Server Error", CancellationToken.None);
+        }
+    }
+
+    private async Task HandleClientMessages(WebSocket socket, string username)
+    {
+        byte[] buffer = new byte[1024];
+        WebSocketReceiveResult result;
+       try
+        {
+            do
             {
-                 new { name = "funeral-plain", addedSpice = 1 },
-                 new { name = "the-great-flat", addedSpice = 2 }
-             },
-        };
+                result = await socket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
 
-        if (playerData1.cursedTimer < 20)
-        {
-            playerData1.cursedTimer++;
+                if (result.MessageType == WebSocketMessageType.Text)
+                {
+                    string message = Encoding.UTF8.GetString(buffer, 0, result.Count);
+                    Console.WriteLine($"WSMANAGER: Message received from {username}: {message}");
+
+                    // Echo message back to the client (just an example)
+                    await socket.SendAsync(new ArraySegment<byte>(buffer, 0, result.Count), result.MessageType, result.EndOfMessage, CancellationToken.None);
+                }
+                else if (result.MessageType == WebSocketMessageType.Close)
+                {
+                    // Handle WebSocket close frame received
+                    await socket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, CancellationToken.None);
+                }
+            } while (!result.CloseStatus.HasValue);
         }
-        else
+        catch (WebSocketException ex) when (ex.WebSocketErrorCode == WebSocketError.ConnectionClosedPrematurely)
         {
-            playerData1.phase = 3;
-            Console.WriteLine("to phase 3 -----------------------");
-            playerData1.cursedTimer = 0;
+            // Client closed the WebSocket connection abruptly without completing the close handshake
+            Console.WriteLine($"WSMANAGER: WebSocket connection closed abruptly by {username}");
+
+            // Remove client from dictionary
+            WebSocket removedSocket;
+            clients.TryRemove(username, out removedSocket);
+            outerInstance.RemovePlayerData(username);
+            Console.WriteLine($"WSMANAGER: Client disconnected: {username}");
+            int nr = GetNumberOfClients();
+                Console.WriteLine($"WSMANAGER: Nr of clients: {nr}");
         }
-        // Serialize playerData object to JSON
-        return Newtonsoft.Json.JsonConvert.SerializeObject(phase2Info);
+        catch (Exception ex)
+        {
+            Console.WriteLine($"WSMANAGER: Error: {ex.Message}");
+        }
+
     }
-    public string GetPhase3Info()
+
+    private async Task<string> ReceiveStringAsync(WebSocket socket)
     {
-        var phase2Info = new
-        {
-            howMany = 2,
-            whichPlayers = new[]
-            {
-                 new { turnId = 1, addedSpice = 1 },
-                 new { turnId = 3, addedSpice = 2 }
-             },
-        };
-
-        if (playerData1.cursedTimer < 20)
-        {
-            playerData1.cursedTimer++;
-        }
-        else
-        {
-            playerData1.phase = 4;
-            playerData1.cursedTimer = 0;
-            Console.WriteLine("to phase 4 -----------------------");
-        }
-        // Serialize playerData object to JSON
-        return Newtonsoft.Json.JsonConvert.SerializeObject(phase2Info);
+        byte[] buffer = new byte[1024];
+        WebSocketReceiveResult result = await socket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+        return Encoding.UTF8.GetString(buffer, 0, result.Count);
     }
-    public string GetPhase4Info()
-    {
-        var phase4Info = new
-        {
-            firstBidderTurnId = 3,
-            lastBidder = playerData1.lastBidder,
-            lastBid = playerData1.bidValue,
-            biddedCardId = 2,
-            bidStopped = false
-        };
-
-        if (playerData1.bidStopped == true && playerData1.cursedTimer < 10)
-        { playerData1.cursedTimer++; }
-        else if (playerData1.bidStopped == true && playerData1.cursedTimer > 9)
-        {
-            playerData1.cursedTimer = 0;
-            playerData1.phase = 5;
-        }
-
-        // Serialize playerData object to JSON
-        return Newtonsoft.Json.JsonConvert.SerializeObject(phase4Info);
-    }
-    public string phase4Input(int bidValue)
-    {
-        // send stormValue to server
-        SendPhase4(bidValue);
-        // response
-
-        var validation = new
-        {
-            response = "ok"
-        };
-        playerData1.bidStopped = true;
-        playerData1.bidValue = bidValue;
-        playerData1.lastBidder = 1;
-
-        // Serialize playerData object to JSON
-        return Newtonsoft.Json.JsonConvert.SerializeObject(validation);
-    }
+}
 }
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d384mi86r46x3"]
+[gd_scene load_steps=8 format=3 uid="uid://d384mi86r46x3"]
 
 [ext_resource type="Script" path="res://mainMenu/menu.gd" id="1_1meg3"]
 [ext_resource type="Texture2D" uid="uid://dxgmy13s2g4un" path="res://assets/Asset 53.png" id="2_vp4q5"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://mainMenu/vButtonContainer.gd" id="4_xyx23"]
 [ext_resource type="Script" path="res://playerData.gd" id="7_5lkyu"]
 [ext_resource type="Script" path="res://mainMenu/userPanel.gd" id="7_qiwd3"]
-[ext_resource type="Script" path="res://mainMenu/apiConnection.gd" id="9_v6jjx"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -139,9 +138,6 @@ custom_minimum_size = Vector2(120, 32)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_vof7t")
 text = "LOGOUT"
-
-[node name="apiConnection" type="Node" parent="margin/userPanel"]
-script = ExtResource("9_v6jjx")
 
 [node name="playerData" type="Node" parent="margin/userPanel"]
 script = ExtResource("7_5lkyu")

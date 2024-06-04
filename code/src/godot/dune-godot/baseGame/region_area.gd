@@ -17,7 +17,7 @@ func _on_child_entered_tree(node):
 
 
 func _on_mouse_entered():
-	print(region_name)
+	#print(region_name)
 	if (MapData.selectedRegion == null || MapData.selectedRegion.region_name != region_name):
 		for node in get_children():
 			if node.is_class("Polygon2D"):

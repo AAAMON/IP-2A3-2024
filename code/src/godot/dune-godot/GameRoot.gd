@@ -2,7 +2,7 @@ extends Node
 
 
 var socket = WebSocketPeer.new()
-var server_url = "ws://localhost:8080/"
+var server_url = "ws://localhost:2000/"
 var connectedSocket : bool = false
 
 func _ready():

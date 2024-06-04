@@ -1,14 +1,53 @@
 extends CanvasLayer
+var playerInfoRequest = HTTPRequest.new()
+	
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var playerLeaders = get_node("popup/Leaders")
+	playerLeaders.text = ' '
+	if (PlayerData.faction == 1):
+		PlayerData.myLeaders = PlayerData.leadersAtreides.duplicate()
+	elif (PlayerData.faction == 2):
+		PlayerData.myLeaders = PlayerData.leadersBene.duplicate()
+	elif (PlayerData.faction == 3):
+		PlayerData.myLeaders = PlayerData.leadersEmperor.duplicate()
+	elif (PlayerData.faction == 4):
+		PlayerData.myLeaders = PlayerData.leadersFremen.duplicate()
+	elif (PlayerData.faction == 5):
+		PlayerData.myLeaders = PlayerData.leadersGuild.duplicate()
+	elif (PlayerData.faction == 6):
+		PlayerData.myLeaders = PlayerData.leadersHarkonnen.duplicate()
+	for leader in PlayerData.myLeaders:
+		playerLeaders.text = playerLeaders.text + leader.name + ' Strength: ' + str(leader.strength) + '\n'
 	var otherPlayersInfoRequest = HTTPRequest.new()
 	otherPlayersInfoRequest.connect("request_completed", _on_other_players_info_request_completed)
 	add_child(otherPlayersInfoRequest)
-	var error = otherPlayersInfoRequest.request(PlayerData.api_url + "get_other_players_data")
+	playerInfoRequest.connect("request_completed", _on_player_info_request_completed)
+	add_child(playerInfoRequest)
+	var error = playerInfoRequest.request(PlayerData.api_url + "get_player_data/" + PlayerData.username)
 	if error != OK:
 		push_error("ERROR: HTTP: GET_PLAYER_DATA")
 
+	#var error = otherPlayersInfoRequest.request(PlayerData.api_url + "get_other_players_data")
+	#if error != OK:
+		#push_error("ERROR: HTTP: GET_PLAYER_DATA")
+
+func _on_player_info_request_completed(_result, _response_code, _headers, body):
+	var response_string = body.get_string_from_utf8()
+	var json = JSON.parse_string(response_string)
+	if (json == null):
+		push_error("ERROR: NULL RESPONSE FROM SERVER")
+	else:
+		print("Got player data from api")
+		PlayerData.faction = json["faction"]
+		PlayerData.spice = json["spice"]
+		PlayerData.forcesReserve = json["forcesReserve"]
+		PlayerData.forcesDeployed = json["forcesDeployed"]
+		PlayerData.forcesDead = json["forcesDead"]
+		PlayerData.treatcheryCards = json["treacheryCards"]
+		PlayerData.traitors = json["traitors"]
 
 func _on_other_players_info_request_completed(_result, _response_code, _headers, body):
 	var response_string = body.get_string_from_utf8()
@@ -66,10 +105,11 @@ func update_hud_player():
 	
 	# cards
 	# TODO THE GAME LOGIC SHOULD GIVE THIS, BUT FOR NOW, THEY'RE LETTING US EAT CAKE...
-	var playerLeaders = get_node("popup/Leaders")
-	playerLeaders.text = ' '
-	for leader in PlayerData.leadersAtreides:
-		playerLeaders.text = playerLeaders.text + leader.name + ' Strength: ' + str(leader.strength) + '\n'
+	#var playerLeaders = get_node("popup/Leaders")
+	#playerLeaders.text = ' '
+	#if (PlayerData.faction == 1):
+		#for leader in PlayerData.leadersAtreides:
+			#playerLeaders.text = playerLeaders.text + leader.name + ' Strength: ' + str(leader.strength) + '\n'
 	
 	var treacheryLabel = get_node("playerHUD/buttonExit13/TreacheryCards")
 	treacheryLabel.text = ' '
@@ -89,4 +129,4 @@ func update_hud_player():
 		traitorsLabel.text = "None"
 	# TODO THESE NEED TO BE SEPARATED
 	get_node("otherPlayersHUD/Status/phase").text = "Phase " + str(GameData.phase)
-	get_node("otherPlayersHUD/Status/turn").text = "Turn " + str(GameData.turn)
+	get_node("otherPlayersHUD/Status/turn").text = "Phase Moment " + str(GameData.phaseMoment)

@@ -28,8 +28,8 @@ func _on_login_pressed():
 func _on_login_completed(_result, _response_code, _headers, body):
 	var response_string = body.get_string_from_utf8()
 	var json = JSON.parse_string(response_string)
-	if (json["username"] == "error"):
-		print("Wrong login credentials.")
+	if (json["username"] == "full"):
+		print("Lobby is full.")
 	else:
 		print("Successfully logged in as " + json["username"] + "!")
 		PlayerData.loggedIn = true

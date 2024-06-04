@@ -18,9 +18,9 @@ func _ready():
 	phase1InfoRequest = HTTPRequest.new()
 	phase1InfoRequest.connect("request_completed", _on_phase_1_info_request_completed)
 	add_child(phase1InfoRequest)
-	var error = phase1InfoRequest.request(PlayerData.api_url + "get_phase_1_info")
-	if error != OK:
-		push_error("ERROR: HTTP: GET_PHASE_1")
+	#var error = phase1InfoRequest.request(PlayerData.api_url + "get_phase_1_info")
+	#if error != OK:
+		#push_error("ERROR: HTTP: GET_PHASE_1")
 	 # Configure and start the timer#############################################
 	timer.wait_time = 0.3  # 100 milliseconds
 	timer.connect("timeout", _on_timer_timeout)
@@ -28,9 +28,10 @@ func _ready():
 
 func _on_timer_timeout():
 	if (PlayerData.requestCompleted):
-		var error = phase1InfoRequest.request(PlayerData.api_url + "get_phase_1_info")
-		if error != OK:
-			push_error("ERROR: HTTP: GET_PHASE_1_INFO")
+		pass;
+		#var error = phase1InfoRequest.request(PlayerData.api_url + "get_phase_1_info")
+		#if error != OK:
+			#push_error("ERROR: HTTP: GET_PHASE_1_INFO")
 
 func _on_phase_1_info_request_completed(_result, _response_code, _headers, body):
 	var response_string = body.get_string_from_utf8()

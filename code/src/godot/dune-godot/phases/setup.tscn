@@ -1,0 +1,93 @@
+[gd_scene load_steps=4 format=3 uid="uid://dy84nx3kmv773"]
+
+[ext_resource type="Script" path="res://phases/setup.gd" id="1_d71oq"]
+[ext_resource type="Texture2D" uid="uid://dxgmy13s2g4un" path="res://assets/Asset 53.png" id="2_wsvnb"]
+[ext_resource type="Script" path="res://phases/LineEditBene.gd" id="3_5vddw"]
+
+[node name="Setup" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = 173.0
+offset_right = -431.0
+offset_bottom = -274.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d71oq")
+
+[node name="InputBox" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 400.0
+offset_right = 700.0
+offset_bottom = 200.0
+texture = ExtResource("2_wsvnb")
+expand_mode = 1
+
+[node name="Title" type="Label" parent="InputBox"]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 13.0
+offset_right = 188.0
+offset_bottom = 36.0
+text = "Title"
+horizontal_alignment = 1
+
+[node name="Traitors" type="Label" parent="InputBox"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 52.0
+offset_right = 112.0
+offset_bottom = 75.0
+
+[node name="Input" type="LineEdit" parent="InputBox"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 118.0
+offset_right = 223.0
+offset_bottom = 144.0
+theme_override_font_sizes/font_size = 10
+placeholder_text = "Enter a number from 1 to 7"
+virtual_keyboard_type = 2
+script = ExtResource("3_5vddw")
+
+[node name="Submit" type="Button" parent="InputBox"]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 152.0
+offset_right = 178.0
+offset_bottom = 183.0
+text = "Submit"
+
+[node name="MessageBox" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 100.0
+texture = ExtResource("2_wsvnb")
+expand_mode = 1
+
+[node name="Title" type="Label" parent="MessageBox"]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 13.0
+offset_right = 188.0
+offset_bottom = 36.0
+text = "Setup"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="MessageBox"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 56.0
+offset_right = 291.0
+offset_bottom = 79.0
+theme_override_font_sizes/font_size = 13
+text = "here be some description"
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="text_changed" from="InputBox/Input" to="InputBox/Input" method="_on_text_changed"]
+[connection signal="pressed" from="InputBox/Submit" to="." method="_on_submit_pressed"]
