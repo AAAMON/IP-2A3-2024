@@ -160,6 +160,7 @@ namespace dune_library.Phases
             IReadOnlyDictionary<Faction, IList<General>> traitors_dict = Generals_Manager.Random_Traitors(Factions_In_Play);
             IList<(bool, Faction)> faction_responses = new List<(bool, Faction)>();
 
+
             Factions_In_Play.ForEach(faction => {
                 Traitors_Initializer.Init_Traitors(faction, traitors_dict[faction].ToList(), []);
                 switch (faction)
@@ -180,6 +181,10 @@ namespace dune_library.Phases
                         faction_responses.Add((Factions_To_Move[4], faction));
                         break;
                 }
+                Console.WriteLine();
+                Console.WriteLine(faction);
+                Console.WriteLine();
+                traitors_dict[faction].ForEach(t => Console.WriteLine(t.Name));
             });
 
             Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));

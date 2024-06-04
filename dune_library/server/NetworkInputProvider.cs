@@ -47,11 +47,20 @@ namespace dune_library.server
                         requestData = await reader.ReadToEndAsync();
                     }
                 }
+                else
+                {
+                    //idk it didnt work
+                    //am pus asta doar ca sa dea run
+                    requestData = "";
+                }
                 context.Response.OutputStream.Close();
-                //idk it didnt work
-                //return requestData;
-                //am pus asta doar ca sa dea run
-                return "";
+                if(requestData.Length > 10)
+                {
+                    string newRequestData = requestData.Remove(0,10);
+                    Console.WriteLine(newRequestData);
+                    return newRequestData;
+                }
+                return requestData;
             }
             catch (HttpListenerException ex)
             {

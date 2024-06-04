@@ -205,7 +205,9 @@ namespace dune_library.Phases
                 return false;
             }
 
-            if (territoryName.Equals(Map.Habbanya_Sietch.Name) || territoryName.Equals(Map.Carthag.Name) || territoryName.Equals(Map.Arrakeen.Name) || territoryName.Equals(Map.Sietch_Tabr.Name) || territoryName.Equals(Map.Tuek_s_Sietch.Name))
+            if (territoryName.Equals(Map.Habbanya_Sietch.Name) || territoryName.Equals(Map.Carthag.Name) 
+                || territoryName.Equals(Map.Arrakeen.Name) || territoryName.Equals(Map.Sietch_Tabr.Name) 
+                || territoryName.Equals(Map.Tuek_s_Sietch.Name) || faction == Faction.Spacing_Guild || faction == Init.Alliances.Ally_Of(Faction.Spacing_Guild))
             {
                 costPerTroop = 1;
             }

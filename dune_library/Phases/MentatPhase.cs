@@ -142,6 +142,18 @@ namespace dune_library.Phases
             {
                 return ;
             }
+            else if(Round == 10)
+            {
+                if (Alliances.Ally_Of(Faction.Spacing_Guild).IsSome)
+                {
+                    Game_Winners = new Game_Winners(Faction.Spacing_Guild, (Faction)Alliances.Ally_Of(Faction.Spacing_Guild));
+
+                }
+                else
+                {
+                    Game_Winners = new Game_Winners(Faction.Spacing_Guild);
+                }
+            }
           
            
 
