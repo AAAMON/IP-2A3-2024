@@ -24,7 +24,8 @@ class BotManager:
         
     def get_move(self, bot_name, game_state):
 
-        alowed_bots = ["bg-easy", "fremen-easy","atreides-easy","spacingGuild-easy","emperor-easy"]
+        #todo either change the bots name or do something less dumb
+        alowed_bots = ["bg-easy", "fremen-easy","atreides-easy","spacingGuild-easy","emperor-easy","spacingGuild-med"]
 
         if bot_name not in alowed_bots:
             return "bot not found"
