@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using static System.Collections.Specialized.BitVector32;
 
 namespace dune_library.Phases
 {
@@ -104,9 +105,23 @@ namespace dune_library.Phases
                             {
                                 correct = true;
                                 next_faction(faction);
+                                /*
                                 if(Factions_In_Play.Contains(Faction.Bene_Gesserit))
                                 {
                                     if(Init.Reserves.Of(Faction.Bene_Gesserit) > 0)
+                                    {
+                                        Map.Polar_Sink.Sections[0].Forces.Transfer_From(Faction.Bene_Gesserit, Reserves, 1);
+                                    }
+                                }
+                                */
+                            }
+                            else if(Faction.Fremen == faction && Handle_Fremen_Shipment(territoryName,sectionId,number_of_troops))
+                            {
+                                correct = true;
+                                next_faction(faction);
+                                if (Factions_In_Play.Contains(Faction.Bene_Gesserit))
+                                {
+                                    if (Init.Reserves.Of(Faction.Bene_Gesserit) > 0)
                                     {
                                         Map.Polar_Sink.Sections[0].Forces.Transfer_From(Faction.Bene_Gesserit, Reserves, 1);
                                     }
@@ -185,10 +200,16 @@ namespace dune_library.Phases
                 return false;
             }
 
+            if (Map.Sections[(int)section.Id].Origin_Sector == Storm_Position)
+            {
+                return false;
+            }
+
             if (territoryName.Equals(Map.Habbanya_Sietch.Name) || territoryName.Equals(Map.Carthag.Name) || territoryName.Equals(Map.Arrakeen.Name) || territoryName.Equals(Map.Sietch_Tabr.Name) || territoryName.Equals(Map.Tuek_s_Sietch.Name))
             {
                 costPerTroop = 1;
             }
+            
 
             var totalCost = costPerTroop * troops_to_place;
 
@@ -301,6 +322,18 @@ namespace dune_library.Phases
                     return true;
                 }
             }
+            else if (faction == Faction.Fremen)
+            {
+                List<Territory> neighbourTerritories = new List<Territory>();
+                List<Territory> temp = new List<Territory>();
+                fromTerritory.Sections.ForEach(s => neighbourTerritories.Add(s.Origin_Territory));
+                temp = neighbourTerritories.Distinct().ToList();
+                temp.ForEach(t => t.Sections.ForEach(s => neighbourTerritories.Add(s.Origin_Territory)));
+                if (neighbourTerritories.Contains(toTerritory))
+                {
+                    return true;
+                }
+            }
             else
             {
                 List<Territory> neighbourTerritories = new List<Territory>();
@@ -311,6 +344,56 @@ namespace dune_library.Phases
                 }
             }
             return true;
+        }
+        public bool Handle_Fremen_Shipment(string territoryName, string sectionId, string troops)
+        {
+            int troops_to_place = 0;
+            int section_id = 0;
+            if (!Int32.TryParse(troops, out troops_to_place) || !Int32.TryParse(sectionId, out section_id))
+            {
+                return false;
+            }
+
+            var territory = Map.Territories.FirstOrDefault(t => t.Name == territoryName);
+            var section = territory.Sections.FirstOrDefault(s => s.Id == section_id);
+
+            if (territory == null || section == null)
+            {
+                return false;
+            }
+
+            if (Map.Sections[(int)section.Id].Origin_Sector == Storm_Position)
+            {
+                return false;
+            }
+
+
+            List<Territory> neighbourTerritories = new List<Territory>();
+            List<Territory> temp = new List<Territory>();
+            Map.The_Greater_Flat.Sections.ForEach(s => neighbourTerritories.Add(s.Origin_Territory));
+            temp = neighbourTerritories.Distinct().ToList();
+            temp.ForEach(t => t.Sections.ForEach(s => neighbourTerritories.Add(s.Origin_Territory)));
+            temp = neighbourTerritories.Distinct().ToList();
+            temp.ForEach(t => t.Sections.ForEach(s => neighbourTerritories.Add(s.Origin_Territory)));
+            if (neighbourTerritories.Contains(territory))
+            {
+                if (Init.Reserves.Of(Faction.Fremen) >= troops_to_place)
+                {
+                    if (Map.Sections[(int)section.Id].Is_Full_Strongholds)
+                    {
+                        Console.WriteLine("Number of factions present is " + territory.Sections[0].Forces.Number_Of_Factions_Present + " you cant add anymore => skip");
+                        return false;
+                    }
+                    else
+                    {
+                        Map.Sections[section_id].Forces.Transfer_From(Faction.Fremen, Reserves, (uint)troops_to_place);
+                        Console.WriteLine($"{troops} troops inserted into {territoryName}.");
+                        return true;
+                    }
+                }
+                return true;
+            }
+            return false;
         }
     }
 }

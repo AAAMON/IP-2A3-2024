@@ -16,6 +16,7 @@ using dune_library.Player_Resources.Knowledge_Manager_Interfaces;
 using LanguageExt;
 using LanguageExt.UnsafeValueAccess;
 using static System.Collections.Specialized.BitVector32;
+using System.Security.Cryptography;
 //using clientApi;
 
 namespace dune_library.Phases
@@ -130,7 +131,7 @@ namespace dune_library.Phases
                 if (line[1] == Init.Factions_Distribution.Player_Of(Faction.Bene_Gesserit).Id && line[2] == "setup")
                 {
                     int response = 0;
-                    if (Int32.TryParse([3],out response))
+                    if (Int32.TryParse(line[3], out response))
                     {
                         if(response < 10 && response > 0)
                         {

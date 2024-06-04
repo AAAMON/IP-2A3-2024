@@ -1,7 +1,9 @@
 ﻿using dune_library.Decks.Spice;
 using dune_library.Map_Resources;
+using dune_library.Map_Resoures;
 using dune_library.Player_Resources;
 using dune_library.Utils;
+using LanguageExt;
 using LanguageExt.Pipes;
 using LanguageExt.SomeHelp;
 using System;
@@ -82,7 +84,8 @@ namespace dune_library.Phases {
           Territory_Card previous_card = (Territory_Card)Spice_Deck.Top_OF_Discard_Pile;
 
           Map.To_Section_With_Spice(previous_card.Section_Position_In_List).Delete_Spice();
-          Map.To_Section_With_Spice(previous_card.Section_Position_In_List).Forces.Remove_By_Storm(Tleilaxu_Tanks);
+          Map.To_Section_With_Spice(previous_card.Section_Position_In_List).Forces.Remove_By_Shai_Hulud(Tleilaxu_Tanks);
+          //Ask fremen to move
           
           moment = "Waiting for Nexus Phase...";
           IList<(bool, Faction)> faction_responses = new List<(bool, Faction)>();

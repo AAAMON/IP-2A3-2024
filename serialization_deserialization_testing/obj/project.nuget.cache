@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "l8Hu0ZT/RF4IiyfIRYkVJmS1AJFwmHIezIpI5ZmRgKPAGTesFZg59ORH6elhOOzY2uX5rX4Bgk03jDhVWX/LHQ==",
+  "dgSpecHash": "VH2O7Njt7+n4hlJuSOhGZdt/Z0UOGUeP82zPgZN+nrz/mvwoYE3mhcZhcPRErWwUafBrCuJFcr2PkYQdf/l7Fg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Cosmin\\source\\repos\\IP-2A3-2024\\serialization_deserialization_testing\\testing.csproj",
+  "projectFilePath": "C:\\Users\\Cosmin\\Desktop\\Poriect IP\\Dune\\serialization_deserialization_testing\\testing.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Cosmin\\.nuget\\packages\\enums.net\\5.0.0\\enums.net.5.0.0.nupkg.sha512",
     "C:\\Users\\Cosmin\\.nuget\\packages\\languageext.core\\4.4.8\\languageext.core.4.4.8.nupkg.sha512",

@@ -45,7 +45,9 @@ namespace dune_library.Phases
 
         public override void Play_Out()
         {
+            
             CheckWinConditions();
+            
             
             if (Game_Winners.hasWinner())
             {
@@ -132,7 +134,21 @@ namespace dune_library.Phases
 
         public void CheckWinConditions()
         {
+            if(Handle_Normal_WinCon())
+            {
+                return;
+            }
+            else if (Handle_Fremen_WinCon())
+            {
+                return ;
+            }
+          
+           
 
+        }
+        public bool Handle_Normal_WinCon()
+        {
+            bool result = false;
             var strongholds_distribution = CalculateStrongholdOccupations();
 
             Init.Factions_Distribution.Factions_In_Play.ForEach(faction => {
@@ -143,14 +159,44 @@ namespace dune_library.Phases
                     if (counter > 3)
                     {
                         Game_Winners = new Game_Winners(faction, (Faction)Alliances.Ally_Of(faction));
+                        result = true;
                     }
                 }
                 else if (counter > 2)
                 {
                     Game_Winners = new Game_Winners(faction);
+                    result = true;
                 }
             });
 
+            return result;
+        }
+        public bool Handle_Fremen_WinCon()
+        {
+            bool result = false;
+            if (Map.Sietch_Tabr.Sections[0].Forces.Number_Of_Factions_Present  == 1 && Map.Sietch_Tabr.Sections[0].Forces.Of(Faction.Fremen) > 0
+                || Map.Sietch_Tabr.Sections[0].Forces.Number_Of_Factions_Present == 0)
+            {
+                if (Map.Habbanya_Sietch.Sections[0].Forces.Number_Of_Factions_Present == 1 && Map.Habbanya_Sietch.Sections[0].Forces.Of(Faction.Fremen) > 0
+                || Map.Habbanya_Sietch.Sections[0].Forces.Number_Of_Factions_Present == 0)
+                {
+                    if (Map.Tuek_s_Sietch.Sections[0].Forces.Of(Faction.Harkonnen) == 0 && Map.Tuek_s_Sietch.Sections[0].Forces.Of(Faction.Atreides) == 0 
+                        && Map.Tuek_s_Sietch.Sections[0].Forces.Of(Faction.Emperor) == 0)
+                    {
+                        result = true;
+                        if (Alliances.Ally_Of(Faction.Fremen).IsSome)
+                        {
+                            Game_Winners = new Game_Winners(Faction.Fremen, (Faction)Alliances.Ally_Of(Faction.Fremen));
+                            
+                        }
+                        else
+                        {
+                            Game_Winners = new Game_Winners(Faction.Fremen);
+                        }
+                    }
+                }
+            }
+            return result;
         }
     }
 

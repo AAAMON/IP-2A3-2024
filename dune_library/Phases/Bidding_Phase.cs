@@ -259,7 +259,7 @@ namespace dune_library.Phases
                 Console.WriteLine($"The winner is {HighestBid.faction}");
                 if (who_passed.Contains(false) && HighestBid.bid != 0)
                 {
-                    if (HighestBid.faction == Faction.Harkonnen)
+                    if (HighestBid.faction == Faction.Harkonnen && Init.Knowledge_Manager.Of(Faction.Harkonnen).Treachery_Cards.Count < 7)
                     {
                         Treachery_Cards_Manager.Give_A_Treachery_Card((Faction)HighestBid.faction);
                     }

@@ -85,6 +85,15 @@ namespace dune_library.Map_Resoures {
       });
     }
 
+    public void Remove_By_Shai_Hulud(Tleilaxu_Tanks graveyard) {
+      Forces_Dict.Keys.ForEach(faction => {
+          if(faction != Faction.Fremen)
+          {
+            Transfer_To(faction, graveyard.Forces);
+          }
+      });
+    }
+
     public bool Is_Present(Faction faction) => Forces_Dict.ContainsKey(faction);
   }
 }
