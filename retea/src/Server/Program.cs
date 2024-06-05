@@ -77,7 +77,7 @@ namespace HttpServer
                 {
                     await HandleInitializationRequest(request, response);
                 }
-                else if (request.Url.AbsolutePath.Contains("phase"))
+                else if (request.Url.AbsolutePath.Contains("phase") || request.Url.AbsolutePath.Contains("setup"))
                 {
                     //the updates from GUI
                     HandleGUIInputRequest(context);
@@ -180,13 +180,14 @@ namespace HttpServer
 
         private static async void HandleGUIInputRequest(HttpListenerContext pathRequest)
         {
+            //Console.WriteLine($"something something gui{pathRequest.Request.Url.AbsolutePath}");
             using (var httpClient = new HttpClient())
             {
                 try
                 {
-                    string url = $"http://localhost:1235{pathRequest.Request.Url.AbsolutePath}";
+                    string url = $"http://localhost:1235/gamestate{pathRequest.Request.Url.AbsolutePath}";
                     var requestContent = new StringContent(pathRequest.ToString(), Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = await httpClient.PostAsync(url, requestContent);
+                    HttpResponseMessage response = await httpClient.GetAsync(url);
 
                     if (response.IsSuccessStatusCode)
                     {
