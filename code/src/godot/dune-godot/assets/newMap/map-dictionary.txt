@@ -26,7 +26,7 @@
   "#fff33e": "pasty-mesa-6",
   "#d7df23": "minor-erg-6",
   "#bfd730": "false-wall-east-6",
-  "#f04e23": "ked-chasm",
+  "#f04e23": "red-chasm",
   "#f26522": "pasty-mesa-7",
   "#f15a22": "minor-erg-7",
   "#faa61a": "false-wall-east-7",

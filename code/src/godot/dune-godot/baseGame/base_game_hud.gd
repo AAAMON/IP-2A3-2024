@@ -1,7 +1,8 @@
 extends CanvasLayer
 var playerInfoRequest = HTTPRequest.new()
-	
-
+var otherPlayersInfoRequest 
+var requestCompleted : bool = true
+@onready var timer: Timer = $Timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,7 +22,7 @@ func _ready():
 		PlayerData.myLeaders = PlayerData.leadersHarkonnen.duplicate()
 	for leader in PlayerData.myLeaders:
 		playerLeaders.text = playerLeaders.text + leader.name + ' Strength: ' + str(leader.strength) + '\n'
-	var otherPlayersInfoRequest = HTTPRequest.new()
+	otherPlayersInfoRequest = HTTPRequest.new()
 	otherPlayersInfoRequest.connect("request_completed", _on_other_players_info_request_completed)
 	add_child(otherPlayersInfoRequest)
 	playerInfoRequest.connect("request_completed", _on_player_info_request_completed)
@@ -29,10 +30,24 @@ func _ready():
 	var error = playerInfoRequest.request(PlayerData.api_url + "get_player_data/" + PlayerData.username)
 	if error != OK:
 		push_error("ERROR: HTTP: GET_PLAYER_DATA")
+	error = otherPlayersInfoRequest.request(PlayerData.api_url + "get_other_players_data/" + PlayerData.username)
+	if error != OK:
+		push_error("ERROR: HTTP: GET_PLAYER_DATA")
+	 # Configure and start the timer#############################################
+	timer.wait_time = 0.9  # 100 milliseconds
+	timer.connect("timeout", _on_timer_timeout)
+	timer.start()
 
-	#var error = otherPlayersInfoRequest.request(PlayerData.api_url + "get_other_players_data")
-	#if error != OK:
-		#push_error("ERROR: HTTP: GET_PLAYER_DATA")
+func _on_timer_timeout():
+	if (requestCompleted):
+		requestCompleted = false;
+		var error = playerInfoRequest.request(PlayerData.api_url + "get_player_data/" + PlayerData.username)
+		if error != OK:
+			push_error("ERROR: HTTP: GET_PLAYER_DATA")
+		error = otherPlayersInfoRequest.request(PlayerData.api_url + "get_other_players_data/" + PlayerData.username)
+		if error != OK:
+			push_error("ERROR: HTTP: GET_PLAYER_DATA")
+		requestCompleted = true;
 
 func _on_player_info_request_completed(_result, _response_code, _headers, body):
 	var response_string = body.get_string_from_utf8()
@@ -44,10 +59,27 @@ func _on_player_info_request_completed(_result, _response_code, _headers, body):
 		PlayerData.faction = json["faction"]
 		PlayerData.spice = json["spice"]
 		PlayerData.forcesReserve = json["forcesReserve"]
-		PlayerData.forcesDeployed = json["forcesDeployed"]
 		PlayerData.forcesDead = json["forcesDead"]
 		PlayerData.treatcheryCards = json["treacheryCards"]
 		PlayerData.traitors = json["traitors"]
+		PlayerData.myTurn = json["yourTurn"]
+		update_hud_player()
+
+func update_hud_other_players():
+	#print(OtherPlayersData.otherPlayers)
+	var index = 1
+	for otherPlayer in OtherPlayersData.otherPlayers:
+		
+		if (otherPlayer != null && otherPlayer["turnId"] != PlayerData.turnId):
+			#print(otherPlayer)
+			var labelNodeName = "otherPlayersHUD/Player" + str(index) + "/Player" + str(index) + "SpiceBox/Player" + str(index) + "Spice" 
+			get_node(labelNodeName).text = str(otherPlayer["Spice"])
+			labelNodeName = "otherPlayersHUD/Player" + str(index) + "/Player" + str(index) + "NameBox/Player" + str(index) + "Name" 
+			get_node(labelNodeName).text = otherPlayer["Username"]
+			labelNodeName = "otherPlayersHUD/Player" + str(index) + "/Player" + str(index) + "CardsBox/Player" + str(index) + "Cards" 
+			get_node(labelNodeName).text = str(otherPlayer["NrTreatcheryCards"])
+		index = index + 1
+	
 
 func _on_other_players_info_request_completed(_result, _response_code, _headers, body):
 	var response_string = body.get_string_from_utf8()
@@ -56,44 +88,13 @@ func _on_other_players_info_request_completed(_result, _response_code, _headers,
 		push_error("ERROR: NULL RESPONSE FROM SERVER")
 	else:
 		print("Got other players data from api!")
-		var place : int = 0;
-		for i in range(PlayerData.turnId-1, 5):
-			OtherPlayersData.otherPlayers.append(json[i])
-			place = place + 1
-		for i in range(0, PlayerData.turnId-1):
-			OtherPlayersData.otherPlayers.append(json[i])
-			place = place + 1
-		#var player1Label = get_node("otherPlayersHUD/Player1/Player1NameBox/Player1Name")
-		#var player2Label = get_node("otherPlayersHUD/Player2/Player2NameBox/Player2Name")
-		#var player3Label = get_node("otherPlayersHUD/Player3/Player3NameBox/Player3Name")
-		#var player4Label = get_node("otherPlayersHUD/Player4/Player4NameBox/Player4Name")
-		#var player5Label = get_node("otherPlayersHUD/Player5/Player5NameBox/Player5Name")
-		#player1Label.text = OtherPlayersData.otherPlayers[0]["username"]
-		#player1Label.text = player1Label.text + " t:" + str(OtherPlayersData.otherPlayers[0]["turnId"])
-		#player2Label.text = OtherPlayersData.otherPlayers[1]["username"]
-		#player2Label.text = player2Label.text + " t:" + str(OtherPlayersData.otherPlayers[1]["turnId"])
-		#player3Label.text = OtherPlayersData.otherPlayers[2]["username"]
-		#player3Label.text = player3Label.text + " t:" + str(OtherPlayersData.otherPlayers[2]["turnId"])
-		#player4Label.text = OtherPlayersData.otherPlayers[3]["username"]
-		#player4Label.text = player4Label.text + " t:" + str(OtherPlayersData.otherPlayers[3]["turnId"])
-		#player5Label.text = OtherPlayersData.otherPlayers[4]["username"]
-		#player5Label.text = player5Label.text + " t:" + str(OtherPlayersData.otherPlayers[4]["turnId"])
-		## update spice
-		#player1Label = get_node("otherPlayersHUD/Player1/Player1SpiceBox/Player1Spice")
-		#player2Label = get_node("otherPlayersHUD/Player2/Player2SpiceBox/Player2Spice")
-		#player3Label = get_node("otherPlayersHUD/Player3/Player3SpiceBox/Player3Spice")
-		#player4Label = get_node("otherPlayersHUD/Player4/Player4SpiceBox/Player4Spice")
-		#player5Label = get_node("otherPlayersHUD/Player5/Player5SpiceBox/Player5Spice")
-		#player1Label.text = OtherPlayersData.otherPlayers[0]["spice"]
-		#player2Label.text = OtherPlayersData.otherPlayers[1]["spice"]
-		#player3Label.text = OtherPlayersData.otherPlayers[2]["spice"]
-		#player4Label.text = OtherPlayersData.otherPlayers[3]["spice"]
-		#player5Label.text = OtherPlayersData.otherPlayers[4]["spice"]
+		OtherPlayersData.otherPlayers = json["otherPlayers"]
+		update_hud_other_players()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	update_hud_player()
+	pass;
 
 # Updates information from HUD (player section) with information from PlayerData singleton.
 func update_hud_player():
@@ -111,20 +112,20 @@ func update_hud_player():
 		#for leader in PlayerData.leadersAtreides:
 			#playerLeaders.text = playerLeaders.text + leader.name + ' Strength: ' + str(leader.strength) + '\n'
 	
-	var treacheryLabel = get_node("playerHUD/buttonExit13/TreacheryCards")
-	treacheryLabel.text = ' '
-	for card in PlayerData.treatcheryCards:
-		if (card != null):
-			for howMany in range(card["Count"]):
-				treacheryLabel.text = treacheryLabel.text + card["Name"] + "\n"
-	if (treacheryLabel.text == ' '):
-		treacheryLabel.text = "None"
+	#var treacheryLabel = get_node("playerHUD/buttonExit13/TreacheryCards")
+	#treacheryLabel.text = ' '
+	#for card in PlayerData.treatcheryCards:
+		#if (card != null):
+			#for howMany in range(card["Count"]):
+				#treacheryLabel.text = treacheryLabel.text + card["Name"] + "\n"
+	#if (treacheryLabel.text == ' '):
+		#treacheryLabel.text = "None"
 		
 	var traitorsLabel = get_node("playerHUD/buttonExit14/TraitorCards")
 	traitorsLabel.text = ' '
 	for traitor in PlayerData.traitors:
 		if (traitor != null):
-			traitorsLabel.text = traitorsLabel.text + traitor["Name"] + ' ' + str(traitor["Strength"]) + '\n'
+			traitorsLabel.text = traitorsLabel.text + str(traitor) + ' '  #'\n'
 	if (traitorsLabel.text == ' '):
 		traitorsLabel.text = "None"
 	# TODO THESE NEED TO BE SEPARATED

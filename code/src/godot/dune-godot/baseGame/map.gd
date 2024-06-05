@@ -1,6 +1,9 @@
 extends Node2D
 
 var selectedArea
+var mapInfoRequest
+var requestCompleted : bool = true
+@onready var timer: Timer = $Timer
 
 @onready var mapImage = $Sprite2D
 @onready var regionArea = preload("res://baseGame/region_area.tscn")
@@ -52,7 +55,39 @@ func _apply_zoom(mouse_position: Vector2, new_scale: Vector2) -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	load_regions()
-	map_update_labels()
+	# GET PHASE INFO REQUEST ###################################################
+	mapInfoRequest = HTTPRequest.new()
+	mapInfoRequest.connect("request_completed", _on_map_info_request_completed)
+	add_child(mapInfoRequest)
+	var error = mapInfoRequest.request(PlayerData.api_url + PlayerData.username + "/get_map_info")
+	if error != OK:
+		push_error("ERROR: HTTP: GET_MAP_INFO")
+	 # Configure and start the timer#############################################
+	timer.wait_time = 0.9  # 100 milliseconds
+	timer.connect("timeout", _on_timer_timeout)
+	timer.start()
+	
+
+func _on_timer_timeout():
+	if (requestCompleted):
+		requestCompleted = false;
+		var error = mapInfoRequest.request(PlayerData.api_url + "get_map_info/" + PlayerData.username)
+		if error != OK:
+			push_error("ERROR: HTTP: GET_MAP_INFO")
+
+func _on_map_info_request_completed(_result, _response_code, _headers, body):
+	var response_string = body.get_string_from_utf8()
+	var json = JSON.parse_string(response_string)
+	if (json == null):
+		push_error("ERROR: NULL RESPONSE FROM SERVER")
+	else:
+		#print(json)
+		MapData.spice = json["spice"];
+		MapData.stormPosition = json["storm"];
+		MapData.shieldDestroyed = json["shieldDestroyed"]
+		MapData.forces = json["forces"]
+		map_update_labels()
+	requestCompleted = true;
 
 
 func map_update_labels():
@@ -61,8 +96,19 @@ func map_update_labels():
 		node_name = "Nice/MapLabels/" + region_name + "/" + region_name + "-spice"
 		var territoryLabel = get_node(node_name)
 		territoryLabel.text = str(MapData.territories[region_name]["spice"])
+	for force in MapData.forces:
+		if (force != null):
+			var forcesLabelNode = "Nice/MapLabels/" + MapData.territory_dict[MapData.sections_goofy_dict[int(force["GoofySectionId"])]]["origin_sector"] + '/' + MapData.sections_goofy_dict[int(force["GoofySectionId"])] + '/' + str(PlayerData.goofy_faction_dict[force["Faction"]])
+			#print(forcesLabelNode)
+			get_node(forcesLabelNode).text = str(force["Forces"])
 
-
+#var traitorsLabel = get_node("playerHUD/buttonExit14/TraitorCards")
+	#traitorsLabel.text = ' '
+	#for traitor in PlayerData.traitors:
+		#if (traitor != null):
+			#traitorsLabel.text = traitorsLabel.text + str(traitor) + ' '  #'\n'
+	#if (traitorsLabel.text == ' '):
+		#traitorsLabel.text = "None"
 func load_regions():
 	var image = mapImage.get_texture().get_image()
 	var pixel_color_dict = get_pixel_color_dict(image)
@@ -128,3 +174,7 @@ func import_file_map_dict(filepath):
 	
 func _process(_delta):
 	map_update_labels()
+	if (MapData.selectedRegion):
+		get_node("SelectedSection").text = MapData.selectedRegion.region_name + ' ' + str(MapData.sections_dict[MapData.selectedRegion.region_name])
+	else:
+		get_node("SelectedSection").text = "No selected section."

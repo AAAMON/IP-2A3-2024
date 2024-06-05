@@ -12,7 +12,10 @@ func _process(_delta):
 
 
 func _on_text_changed(new_text):
+	
 	var max_value = 3
+	if (GameData.roundd == 0):
+		max_value = 20
 	var number = float(new_text) if new_text != "" else 0  # Convert text to float, default to 0 if empty
 	
 	# Validate number range (0 to 7)

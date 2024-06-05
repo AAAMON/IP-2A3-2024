@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://s5bftn1e0wg3"]
+[gd_scene load_steps=3 format=3 uid="uid://s5bftn1e0wg3"]
 
 [ext_resource type="Texture2D" uid="uid://dxgmy13s2g4un" path="res://assets/Asset 53.png" id="1_j0grl"]
 [ext_resource type="Script" path="res://phases/phase_1_storm.gd" id="1_jy8qy"]
-[ext_resource type="Script" path="res://phases/LineEdit.gd" id="3_ml3dp"]
 
 [node name="Phase1" type="Control"]
 layout_mode = 3
@@ -44,7 +43,6 @@ offset_bottom = 120.0
 theme_override_font_sizes/font_size = 10
 placeholder_text = "Enter a number from 1 to 3"
 virtual_keyboard_type = 2
-script = ExtResource("3_ml3dp")
 
 [node name="Submit" type="Button" parent="InputBox"]
 layout_mode = 0

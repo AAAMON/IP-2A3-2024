@@ -398,6 +398,16 @@ offset_bottom = 77.1428
 texture_normal = ExtResource("29_jitfh")
 flip_h = true
 
+[node name="Player1Cards" type="Label" parent="otherPlayersHUD/Player1/Player1CardsBox"]
+layout_mode = 0
+offset_left = 31.3325
+offset_top = 15.0
+offset_right = 85.3325
+offset_bottom = 33.0
+theme = SubResource("Theme_skht1")
+text = "cards"
+label_settings = SubResource("LabelSettings_goyfp")
+
 [node name="Player1NameBox" type="TextureButton" parent="otherPlayersHUD/Player1"]
 layout_mode = 0
 offset_left = 6.7619
@@ -491,6 +501,15 @@ offset_bottom = 76.8571
 texture_normal = ExtResource("29_jitfh")
 flip_h = true
 
+[node name="Player2Cards" type="Label" parent="otherPlayersHUD/Player2/Player2CardsBox"]
+offset_left = 31.3325
+offset_top = 15.0
+offset_right = 85.3325
+offset_bottom = 33.0
+theme = SubResource("Theme_skht1")
+text = "cards"
+label_settings = SubResource("LabelSettings_goyfp")
+
 [node name="Player3" type="TextureButton" parent="otherPlayersHUD"]
 layout_mode = 0
 offset_left = 550.0
@@ -515,6 +534,15 @@ offset_right = 274.952
 offset_bottom = 77.1905
 texture_normal = ExtResource("23_oeyqg")
 flip_h = true
+
+[node name="Player3Cards" type="Label" parent="otherPlayersHUD/Player3/Player3CardsBox"]
+offset_left = 31.3325
+offset_top = 15.0
+offset_right = 85.3325
+offset_bottom = 33.0
+theme = SubResource("Theme_skht1")
+text = "cards"
+label_settings = SubResource("LabelSettings_goyfp")
 
 [node name="Player3NameBox" type="TextureButton" parent="otherPlayersHUD/Player3"]
 layout_mode = 0
@@ -576,6 +604,15 @@ offset_top = 32.2857
 offset_right = 258.714
 offset_bottom = 77.2857
 texture_normal = ExtResource("28_jbaol")
+
+[node name="Player4Cards" type="Label" parent="otherPlayersHUD/Player4/Player4CardsBox"]
+offset_left = 31.3325
+offset_top = 15.0
+offset_right = 85.3325
+offset_bottom = 33.0
+theme = SubResource("Theme_skht1")
+text = "cards"
+label_settings = SubResource("LabelSettings_goyfp")
 
 [node name="Player4NameBox" type="TextureButton" parent="otherPlayersHUD/Player4"]
 layout_mode = 0
@@ -656,6 +693,15 @@ offset_right = 259.1
 offset_bottom = 76.0476
 texture_normal = ExtResource("28_jbaol")
 
+[node name="Player5Cards" type="Label" parent="otherPlayersHUD/Player5/Player5CardsBox"]
+offset_left = 31.3325
+offset_top = 15.0
+offset_right = 85.3325
+offset_bottom = 33.0
+theme = SubResource("Theme_skht1")
+text = "cards"
+label_settings = SubResource("LabelSettings_goyfp")
+
 [node name="Player5SpiceBox" type="TextureButton" parent="otherPlayersHUD/Player5"]
 layout_mode = 0
 offset_left = 12.29
@@ -718,5 +764,7 @@ offset_top = 10.7143
 offset_right = 1366.05
 offset_bottom = 128.714
 texture = ExtResource("30_m248h")
+
+[node name="Timer" type="Timer" parent="."]
 
 [connection signal="pressed" from="playerHUD/buttonForces" to="popup" method="_on_button_forces_pressed"]

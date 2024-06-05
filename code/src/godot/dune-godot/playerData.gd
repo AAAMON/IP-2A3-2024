@@ -8,6 +8,7 @@ var username : String = "Not Logged In..."
 var loggedIn : bool = false
 # IN-GAME DATA #################################################################
 var turnId : int = -1
+var myTurn : bool = false
 var faction : int = -1
 var spice : int = -1
 var forcesReserve : int = -1
@@ -76,7 +77,51 @@ var faction_dict = {
 		4: "Fremen",
 		5: "SpaceGuild",
 		6: "Harkonnen"
-	}
+}
+
+var goofy_faction_dict = {
+	"Atreides": 1,
+	"Bene_Gesserit": 2,
+	"Emperor": 3,
+	"Fremen": 4,
+	"Spacing_Guild": 5,
+	"Harkonnen": 6
+}
+
+	
+var leaders_dict = {
+	0: "Dr_Wellington_Yueh",
+	1: "Duncan_Idaho",
+	2: "Gurney_Halleck",
+	3: "Lady_Jessica",
+	4: "Thufir_Hawat",
+	5: "Wanna_Yueh",
+	6: "Princess_Irulan",
+	7: "Mother_Ramallo",
+	8: "Margot_Lady_Fenring",
+	9: "Alia",
+	10: "Bashar",
+	11: "Burseg",
+	12: "Caid",
+	13: "Captain_Aramsham",
+	14: "Hasimir_Fenring",
+	15: "Jamis",
+	16: "Shadout_Mapes",
+	17: "Otheym",
+	18: "Chani",
+	19: "Stilgar",
+	20: "Guild_Rep",
+	21: "Soo_Soo_Sook",
+	22: "Esmar_Tuek",
+	23: "Master_Bewt",
+	24: "Staban_Tuek",
+	25: "Umman_Kudu",
+	26: "Captain_Iakin_Nefud",
+	27: "Piter_de_Vries",
+	28: "Beast_Rabban",
+	29: "Feyd_Rautha"
+}
+
 
 func logout():
 	username = "Not Logged In..."

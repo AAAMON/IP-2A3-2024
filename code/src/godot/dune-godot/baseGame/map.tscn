@@ -31,6 +31,134 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "MERIDIAN	"
 
+[node name="meridian-1" type="Node2D" parent="Nice/MapLabels/meridian"]
+position = Vector2(9.88584, -5.68068)
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/meridian/meridian-1"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/meridian/meridian-1"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/meridian/meridian-1"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/meridian/meridian-1"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/meridian/meridian-1"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/meridian/meridian-1"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="meridian-2" type="Node2D" parent="Nice/MapLabels/meridian"]
+position = Vector2(80.1877, 14.2102)
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/meridian/meridian-2"]
+offset_left = -15.4076
+offset_top = -82.7926
+offset_right = -1.40764
+offset_bottom = -64.7926
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/meridian/meridian-2"]
+offset_left = -10.3995
+offset_top = -67.5637
+offset_right = 9.60053
+offset_bottom = -49.5637
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/meridian/meridian-2"]
+offset_left = -7.99892
+offset_top = -46.4867
+offset_right = 12.0011
+offset_bottom = -28.4867
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/meridian/meridian-2"]
+offset_left = 2.68993
+offset_top = -21.372
+offset_right = 22.6899
+offset_bottom = -3.37203
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/meridian/meridian-2"]
+offset_left = -0.0851486
+offset_top = -8.24577
+offset_right = 11.9149
+offset_bottom = 9.75423
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/meridian/meridian-2"]
+offset_left = 5.68068
+offset_top = 9.88585
+offset_right = 25.6807
+offset_bottom = 27.8858
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="cielago-depression" type="Label" parent="Nice/MapLabels"]
 offset_left = 520.0
 offset_top = 592.0
@@ -39,6 +167,201 @@ offset_bottom = 608.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "CIELAGO DEPRESSION"
+
+[node name="cielago-depression-1" type="Node2D" parent="Nice/MapLabels/cielago-depression"]
+position = Vector2(-21, 9.00001)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/cielago-depression/cielago-depression-1"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/cielago-depression/cielago-depression-1"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/cielago-depression/cielago-depression-1"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/cielago-depression/cielago-depression-1"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/cielago-depression/cielago-depression-1"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/cielago-depression/cielago-depression-1"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="cielago-depression-2" type="Node2D" parent="Nice/MapLabels/cielago-depression"]
+position = Vector2(48, 13)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/cielago-depression/cielago-depression-2"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/cielago-depression/cielago-depression-2"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/cielago-depression/cielago-depression-2"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/cielago-depression/cielago-depression-2"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/cielago-depression/cielago-depression-2"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/cielago-depression/cielago-depression-2"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="cielago-depression-3" type="Node2D" parent="Nice/MapLabels/cielago-depression"]
+position = Vector2(123, 23)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/cielago-depression/cielago-depression-3"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/cielago-depression/cielago-depression-3"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/cielago-depression/cielago-depression-3"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/cielago-depression/cielago-depression-3"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/cielago-depression/cielago-depression-3"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/cielago-depression/cielago-depression-3"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
 
 [node name="cielago-south" type="Label" parent="Nice/MapLabels"]
 offset_left = 578.0
@@ -50,6 +373,136 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "CIELAGO SOUTH"
 
+[node name="cielago-south-2" type="Node2D" parent="Nice/MapLabels/cielago-south"]
+position = Vector2(12.5177, -7.16287)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/cielago-south/cielago-south-2"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/cielago-south/cielago-south-2"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/cielago-south/cielago-south-2"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/cielago-south/cielago-south-2"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/cielago-south/cielago-south-2"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/cielago-south/cielago-south-2"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="cielago-south-3" type="Node2D" parent="Nice/MapLabels/cielago-south"]
+position = Vector2(75.7375, -22.8875)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/cielago-south/cielago-south-3"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/cielago-south/cielago-south-3"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/cielago-south/cielago-south-3"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/cielago-south/cielago-south-3"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/cielago-south/cielago-south-3"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/cielago-south/cielago-south-3"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="cielago-north" type="Label" parent="Nice/MapLabels"]
 offset_left = 543.0
 offset_top = 484.0
@@ -58,6 +511,201 @@ offset_bottom = 501.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "CIELAGO NORTH"
+
+[node name="cielago-north-1" type="Node2D" parent="Nice/MapLabels/cielago-north"]
+position = Vector2(-31, 61)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/cielago-north/cielago-north-1"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/cielago-north/cielago-north-1"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/cielago-north/cielago-north-1"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/cielago-north/cielago-north-1"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/cielago-north/cielago-north-1"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/cielago-north/cielago-north-1"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="cielago-north-2" type="Node2D" parent="Nice/MapLabels/cielago-north"]
+position = Vector2(31, 71)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/cielago-north/cielago-north-2"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/cielago-north/cielago-north-2"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/cielago-north/cielago-north-2"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/cielago-north/cielago-north-2"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/cielago-north/cielago-north-2"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/cielago-north/cielago-north-2"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="cielago-north-3" type="Node2D" parent="Nice/MapLabels/cielago-north"]
+position = Vector2(90, 56)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/cielago-north/cielago-north-3"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/cielago-north/cielago-north-3"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/cielago-north/cielago-north-3"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/cielago-north/cielago-north-3"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/cielago-north/cielago-north-3"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/cielago-north/cielago-north-3"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
 
 [node name="cielago-east" type="Label" parent="Nice/MapLabels"]
 offset_left = 711.0
@@ -69,6 +717,136 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "CIELAGO EAST"
 
+[node name="cielago-east-3" type="Node2D" parent="Nice/MapLabels/cielago-east"]
+position = Vector2(9.83871, 4.91936)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/cielago-east/cielago-east-3"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/cielago-east/cielago-east-3"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/cielago-east/cielago-east-3"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/cielago-east/cielago-east-3"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/cielago-east/cielago-east-3"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/cielago-east/cielago-east-3"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="cielago-east-4" type="Node2D" parent="Nice/MapLabels/cielago-east"]
+position = Vector2(73.7903, 26.8329)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/cielago-east/cielago-east-4"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/cielago-east/cielago-east-4"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/cielago-east/cielago-east-4"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/cielago-east/cielago-east-4"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/cielago-east/cielago-east-4"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/cielago-east/cielago-east-4"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="false-wall-south" type="Label" parent="Nice/MapLabels"]
 offset_left = 720.0
 offset_top = 540.0
@@ -78,6 +856,136 @@ rotation = -0.790802
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "FALSE WALL SOUTH"
+
+[node name="false-wall-south-4" type="Node2D" parent="Nice/MapLabels/false-wall-south"]
+position = Vector2(7.34628, 79.944)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/false-wall-south/false-wall-south-4"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/false-wall-south/false-wall-south-4"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/false-wall-south/false-wall-south-4"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/false-wall-south/false-wall-south-4"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/false-wall-south/false-wall-south-4"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/false-wall-south/false-wall-south-4"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="false-wall-south-5" type="Node2D" parent="Nice/MapLabels/false-wall-south"]
+position = Vector2(73.9203, 60.5044)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/false-wall-south/false-wall-south-5"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/false-wall-south/false-wall-south-5"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/false-wall-south/false-wall-south-5"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/false-wall-south/false-wall-south-5"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/false-wall-south/false-wall-south-5"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/false-wall-south/false-wall-south-5"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
 
 [node name="harg-pass" type="Label" parent="Nice/MapLabels"]
 offset_left = 626.0
@@ -90,6 +998,136 @@ theme_override_font_sizes/font_size = 11
 text = "HARG
 PASS"
 
+[node name="harg-pass-4" type="Node2D" parent="Nice/MapLabels/harg-pass"]
+position = Vector2(-37.1803, 44.918)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/harg-pass/harg-pass-4"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/harg-pass/harg-pass-4"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/harg-pass/harg-pass-4"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/harg-pass/harg-pass-4"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/harg-pass/harg-pass-4"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/harg-pass/harg-pass-4"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="harg-pass-5" type="Node2D" parent="Nice/MapLabels/harg-pass"]
+position = Vector2(21.9694, 72.3281)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/harg-pass/harg-pass-5"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/harg-pass/harg-pass-5"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/harg-pass/harg-pass-5"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/harg-pass/harg-pass-5"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/harg-pass/harg-pass-5"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/harg-pass/harg-pass-5"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="minor-erg" type="Label" parent="Nice/MapLabels"]
 offset_left = 694.0
 offset_top = 337.0
@@ -101,6 +1139,266 @@ text = "THE MINOR
 ERG"
 horizontal_alignment = 1
 
+[node name="minor-erg-5" type="Node2D" parent="Nice/MapLabels/minor-erg"]
+position = Vector2(30, 123)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-5"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-5"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-5"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-5"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-5"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-5"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="minor-erg-6" type="Node2D" parent="Nice/MapLabels/minor-erg"]
+position = Vector2(11, 75)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-6"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-6"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-6"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-6"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-6"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-6"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="minor-erg-7" type="Node2D" parent="Nice/MapLabels/minor-erg"]
+position = Vector2(25, 16)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-7"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-7"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-7"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-7"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-7"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-7"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="minor-erg-8" type="Node2D" parent="Nice/MapLabels/minor-erg"]
+position = Vector2(16, -20)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-8"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-8"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-8"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-8"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-8"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-8"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="pasty-mesa" type="Label" parent="Nice/MapLabels"]
 offset_left = 808.0
 offset_top = 350.0
@@ -110,6 +1408,266 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "PASTY MESA"
 horizontal_alignment = 1
+
+[node name="pasty-mesa-5" type="Node2D" parent="Nice/MapLabels/pasty-mesa"]
+position = Vector2(-18, 129)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-5"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-5"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-5"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-5"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-5"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-5"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="pasty-mesa-6" type="Node2D" parent="Nice/MapLabels/pasty-mesa"]
+position = Vector2(34, 80)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-6"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-6"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-6"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-6"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-6"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-6"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="pasty-mesa-7" type="Node2D" parent="Nice/MapLabels/pasty-mesa"]
+position = Vector2(29, -15)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-7"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-7"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-7"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-7"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-7"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-7"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="pasty-mesa-8" type="Node2D" parent="Nice/MapLabels/pasty-mesa"]
+position = Vector2(13, -90)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-8"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-8"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-8"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-8"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-8"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-8"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
 
 [node name="tueks-sietch" type="Label" parent="Nice/MapLabels"]
 offset_left = 838.0
@@ -123,6 +1681,71 @@ text = "TUEK'S
 SIETCH"
 horizontal_alignment = 1
 
+[node name="tueks-sietch" type="Node2D" parent="Nice/MapLabels/tueks-sietch"]
+position = Vector2(-10.2848, 52.7657)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/tueks-sietch/tueks-sietch"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/tueks-sietch/tueks-sietch"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/tueks-sietch/tueks-sietch"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/tueks-sietch/tueks-sietch"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/tueks-sietch/tueks-sietch"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/tueks-sietch/tueks-sietch"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="south-mesa" type="Label" parent="Nice/MapLabels"]
 offset_left = 898.0
 offset_top = 562.0
@@ -135,6 +1758,201 @@ text = "SOUTH-MESA
 "
 horizontal_alignment = 1
 
+[node name="south-mesa-4" type="Node2D" parent="Nice/MapLabels/south-mesa"]
+position = Vector2(-94.3182, 16.8841)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/south-mesa/south-mesa-4"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/south-mesa/south-mesa-4"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/south-mesa/south-mesa-4"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/south-mesa/south-mesa-4"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/south-mesa/south-mesa-4"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/south-mesa/south-mesa-4"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="south-mesa-5" type="Node2D" parent="Nice/MapLabels/south-mesa"]
+position = Vector2(-33.0712, 29.2454)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/south-mesa/south-mesa-5"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/south-mesa/south-mesa-5"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/south-mesa/south-mesa-5"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/south-mesa/south-mesa-5"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/south-mesa/south-mesa-5"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/south-mesa/south-mesa-5"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="south-mesa-6" type="Node2D" parent="Nice/MapLabels/south-mesa"]
+position = Vector2(120.378, 14.4991)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/south-mesa/south-mesa-6"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/south-mesa/south-mesa-6"]
+offset_left = -1.98346
+offset_top = -51.1573
+offset_right = 18.0165
+offset_bottom = -33.1573
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/south-mesa/south-mesa-6"]
+offset_left = 1.93231
+offset_top = -24.2748
+offset_right = 21.9323
+offset_bottom = -6.27484
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/south-mesa/south-mesa-6"]
+offset_left = 18.3359
+offset_top = -56.4606
+offset_right = 38.3359
+offset_bottom = -38.4606
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/south-mesa/south-mesa-6"]
+offset_left = 21.7891
+offset_top = -27.3904
+offset_right = 33.7891
+offset_bottom = -9.39038
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/south-mesa/south-mesa-6"]
+offset_left = 33.4824
+offset_top = -45.9448
+offset_right = 53.4824
+offset_bottom = -27.9448
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="false-wall-east" type="Label" parent="Nice/MapLabels"]
 offset_left = 652.0
 offset_top = 395.0
@@ -146,6 +1964,331 @@ theme_override_font_sizes/font_size = 11
 text = "FALSE WALL EAST
 "
 horizontal_alignment = 1
+
+[node name="false-wall-east-5" type="Node2D" parent="Nice/MapLabels/false-wall-east"]
+position = Vector2(9.9152, 11.0765)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-5"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-5"]
+offset_left = -11.5086
+offset_top = -41.4434
+offset_right = 8.49139
+offset_bottom = -23.4434
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-5"]
+offset_left = -10.4478
+offset_top = -28.3653
+offset_right = 9.55219
+offset_bottom = -10.3653
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-5"]
+offset_left = 0.438278
+offset_top = -37.4956
+offset_right = 20.4383
+offset_bottom = -19.4956
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-5"]
+offset_left = -26.9526
+offset_top = -24.3513
+offset_right = -14.9526
+offset_bottom = -6.35126
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-5"]
+offset_left = -18.2407
+offset_top = -19.1122
+offset_right = 1.75931
+offset_bottom = -1.1122
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="false-wall-east-6" type="Node2D" parent="Nice/MapLabels/false-wall-east"]
+position = Vector2(30.7993, 26.2375)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-6"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-6"]
+offset_left = -11.5086
+offset_top = -41.4434
+offset_right = 8.49139
+offset_bottom = -23.4434
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-6"]
+offset_left = -10.4478
+offset_top = -28.3653
+offset_right = 9.55219
+offset_bottom = -10.3653
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-6"]
+offset_left = 0.438278
+offset_top = -37.4956
+offset_right = 20.4383
+offset_bottom = -19.4956
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-6"]
+offset_left = -26.9526
+offset_top = -24.3513
+offset_right = -14.9526
+offset_bottom = -6.35126
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-6"]
+offset_left = -18.2407
+offset_top = -19.1122
+offset_right = 1.75931
+offset_bottom = -1.1122
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="false-wall-east-7" type="Node2D" parent="Nice/MapLabels/false-wall-east"]
+position = Vector2(57.691, 40.4445)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-7"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-7"]
+offset_left = -11.5086
+offset_top = -41.4434
+offset_right = 8.49139
+offset_bottom = -23.4434
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-7"]
+offset_left = -10.4478
+offset_top = -28.3653
+offset_right = 9.55219
+offset_bottom = -10.3653
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-7"]
+offset_left = 0.438278
+offset_top = -37.4956
+offset_right = 20.4383
+offset_bottom = -19.4956
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-7"]
+offset_left = -26.9526
+offset_top = -24.3513
+offset_right = -14.9526
+offset_bottom = -6.35126
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-7"]
+offset_left = -18.2407
+offset_top = -19.1122
+offset_right = 1.75931
+offset_bottom = -1.1122
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="false-wall-east-8" type="Node2D" parent="Nice/MapLabels/false-wall-east"]
+position = Vector2(90.713, 37.6981)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-8"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-8"]
+offset_left = -11.5086
+offset_top = -41.4434
+offset_right = 8.49139
+offset_bottom = -23.4434
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-8"]
+offset_left = -10.4478
+offset_top = -28.3653
+offset_right = 9.55219
+offset_bottom = -10.3653
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-8"]
+offset_left = 0.438278
+offset_top = -37.4956
+offset_right = 20.4383
+offset_bottom = -19.4956
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-8"]
+offset_left = -26.9526
+offset_top = -24.3513
+offset_right = -14.9526
+offset_bottom = -6.35126
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-8"]
+offset_left = -18.2407
+offset_top = -19.1122
+offset_right = 1.75931
+offset_bottom = -1.1122
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="false-wall-east-9" type="Node2D" parent="Nice/MapLabels/false-wall-east"]
+position = Vector2(105.935, 8.81425)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-9"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-9"]
+offset_left = -11.5086
+offset_top = -41.4434
+offset_right = 8.49139
+offset_bottom = -23.4434
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-9"]
+offset_left = -10.4478
+offset_top = -28.3653
+offset_right = 9.55219
+offset_bottom = -10.3653
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-9"]
+offset_left = 0.438278
+offset_top = -37.4956
+offset_right = 20.4383
+offset_bottom = -19.4956
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-9"]
+offset_left = -26.9526
+offset_top = -24.3513
+offset_right = -14.9526
+offset_bottom = -6.35126
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-9"]
+offset_left = -18.2407
+offset_top = -19.1122
+offset_right = 1.75931
+offset_bottom = -1.1122
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
 
 [node name="wind-pass-north" type="Label" parent="Nice/MapLabels"]
 offset_left = 518.0
@@ -160,6 +2303,278 @@ PASS
 NORTH"
 horizontal_alignment = 1
 
+[node name="wind-pass-north-17" type="Node2D" parent="Nice/MapLabels/wind-pass-north"]
+position = Vector2(-8.48769, 33.3461)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/wind-pass-north/wind-pass-north-17"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/wind-pass-north/wind-pass-north-17"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/wind-pass-north/wind-pass-north-17"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/wind-pass-north/wind-pass-north-17"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/wind-pass-north/wind-pass-north-17"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/wind-pass-north/wind-pass-north-17"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="wind-pass-north-18" type="Node2D" parent="Nice/MapLabels/wind-pass-north"]
+position = Vector2(28.5623, 98.9151)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/wind-pass-north/wind-pass-north-18"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/wind-pass-north/wind-pass-north-18"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/wind-pass-north/wind-pass-north-18"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/wind-pass-north/wind-pass-north-18"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/wind-pass-north/wind-pass-north-18"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/wind-pass-north/wind-pass-north-18"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="cielago-west" type="Label" parent="Nice/MapLabels"]
+offset_left = 456.0
+offset_top = 519.0
+offset_right = 503.0
+offset_bottom = 573.0
+rotation = 0.701306
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "CIELAGO
+WEST"
+horizontal_alignment = 1
+
+[node name="cielago-west-18" type="Node2D" parent="Nice/MapLabels/cielago-west"]
+position = Vector2(-3.24226, 13.2094)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/cielago-west/cielago-west-18"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/cielago-west/cielago-west-18"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/cielago-west/cielago-west-18"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/cielago-west/cielago-west-18"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/cielago-west/cielago-west-18"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/cielago-west/cielago-west-18"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="cielago-west-1" type="Node2D" parent="Nice/MapLabels/cielago-west"]
+position = Vector2(64.7943, 98.421)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/cielago-west/cielago-west-1"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/cielago-west/cielago-west-1"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/cielago-west/cielago-west-1"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/cielago-west/cielago-west-1"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/cielago-west/cielago-west-1"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/cielago-west/cielago-west-1"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="wind-pass" type="Label" parent="Nice/MapLabels"]
 offset_left = 478.0
 offset_top = 343.0
@@ -172,6 +2587,266 @@ text = "WIND
 PASS"
 horizontal_alignment = 1
 
+[node name="wind-pass-17" type="Node2D" parent="Nice/MapLabels/wind-pass"]
+position = Vector2(-8.4164, 109.969)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-17"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-17"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-17"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-17"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-17"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-17"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="wind-pass-16" type="Node2D" parent="Nice/MapLabels/wind-pass"]
+position = Vector2(-0.23094, 60.9996)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-16"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-16"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-16"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-16"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-16"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-16"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="wind-pass-15" type="Node2D" parent="Nice/MapLabels/wind-pass"]
+position = Vector2(24.89, 29.0945)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-15"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-15"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-15"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-15"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-15"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-15"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="wind-pass-14" type="Node2D" parent="Nice/MapLabels/wind-pass"]
+position = Vector2(42.9808, 5.16278)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-14"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-14"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-14"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-14"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-14"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-14"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="habbanya-ridge-flat" type="Label" parent="Nice/MapLabels"]
 offset_left = 293.0
 offset_top = 551.0
@@ -182,6 +2857,136 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "HABBANYA RIDGE FLAT"
 horizontal_alignment = 1
+
+[node name="habbanya-ridge-flat-17" type="Node2D" parent="Nice/MapLabels/habbanya-ridge-flat"]
+position = Vector2(-41.1612, 33.0265)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/habbanya-ridge-flat/habbanya-ridge-flat-17"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/habbanya-ridge-flat/habbanya-ridge-flat-17"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/habbanya-ridge-flat/habbanya-ridge-flat-17"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/habbanya-ridge-flat/habbanya-ridge-flat-17"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/habbanya-ridge-flat/habbanya-ridge-flat-17"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/habbanya-ridge-flat/habbanya-ridge-flat-17"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="habbanya-ridge-flat-18" type="Node2D" parent="Nice/MapLabels/habbanya-ridge-flat"]
+position = Vector2(115.431, -0.808731)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/habbanya-ridge-flat/habbanya-ridge-flat-18"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/habbanya-ridge-flat/habbanya-ridge-flat-18"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/habbanya-ridge-flat/habbanya-ridge-flat-18"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/habbanya-ridge-flat/habbanya-ridge-flat-18"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/habbanya-ridge-flat/habbanya-ridge-flat-18"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/habbanya-ridge-flat/habbanya-ridge-flat-18"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
 
 [node name="habbanya-sietch" type="Label" parent="Nice/MapLabels"]
 offset_left = 322.0
@@ -195,6 +3000,71 @@ text = "HABBANYA
 SIETCH"
 horizontal_alignment = 1
 
+[node name="habbanya-sietch" type="Node2D" parent="Nice/MapLabels/habbanya-sietch"]
+position = Vector2(-0.790237, 50.2133)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/habbanya-sietch/habbanya-sietch"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/habbanya-sietch/habbanya-sietch"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/habbanya-sietch/habbanya-sietch"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/habbanya-sietch/habbanya-sietch"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/habbanya-sietch/habbanya-sietch"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/habbanya-sietch/habbanya-sietch"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="habbanya-erg" type="Label" parent="Nice/MapLabels"]
 offset_left = 265.0
 offset_top = 432.0
@@ -204,6 +3074,136 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "HABBANYA ERG"
 horizontal_alignment = 1
+
+[node name="habbanya-erg-16" type="Node2D" parent="Nice/MapLabels/habbanya-erg"]
+position = Vector2(-34, 48)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/habbanya-erg/habbanya-erg-16"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/habbanya-erg/habbanya-erg-16"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/habbanya-erg/habbanya-erg-16"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/habbanya-erg/habbanya-erg-16"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/habbanya-erg/habbanya-erg-16"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/habbanya-erg/habbanya-erg-16"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="habbanya-erg-17" type="Node2D" parent="Nice/MapLabels/habbanya-erg"]
+position = Vector2(102, 57)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/habbanya-erg/habbanya-erg-17"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/habbanya-erg/habbanya-erg-17"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/habbanya-erg/habbanya-erg-17"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/habbanya-erg/habbanya-erg-17"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/habbanya-erg/habbanya-erg-17"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/habbanya-erg/habbanya-erg-17"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
 
 [node name="false-wall-west" type="Label" parent="Nice/MapLabels"]
 offset_left = 419.0
@@ -218,6 +3218,201 @@ WALL
 WEST"
 horizontal_alignment = 1
 
+[node name="false-wall-west-16" type="Node2D" parent="Nice/MapLabels/false-wall-west"]
+position = Vector2(-3.62833, -18.6235)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/false-wall-west/false-wall-west-16"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/false-wall-west/false-wall-west-16"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/false-wall-west/false-wall-west-16"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/false-wall-west/false-wall-west-16"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/false-wall-west/false-wall-west-16"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/false-wall-west/false-wall-west-16"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="false-wall-west-17" type="Node2D" parent="Nice/MapLabels/false-wall-west"]
+position = Vector2(10.5538, 22.7512)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/false-wall-west/false-wall-west-17"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/false-wall-west/false-wall-west-17"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/false-wall-west/false-wall-west-17"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/false-wall-west/false-wall-west-17"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/false-wall-west/false-wall-west-17"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/false-wall-west/false-wall-west-17"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="false-wall-west-18" type="Node2D" parent="Nice/MapLabels/false-wall-west"]
+position = Vector2(36.6045, 121.738)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/false-wall-west/false-wall-west-18"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/false-wall-west/false-wall-west-18"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/false-wall-west/false-wall-west-18"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/false-wall-west/false-wall-west-18"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/false-wall-west/false-wall-west-18"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/false-wall-west/false-wall-west-18"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="the-greater-flat" type="Label" parent="Nice/MapLabels"]
 offset_left = 231.0
 offset_top = 378.0
@@ -227,6 +3422,71 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "THE GREATER FLAT"
 horizontal_alignment = 1
+
+[node name="the-greater-flat" type="Node2D" parent="Nice/MapLabels/the-greater-flat"]
+position = Vector2(129, 36)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/the-greater-flat/the-greater-flat"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/the-greater-flat/the-greater-flat"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/the-greater-flat/the-greater-flat"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/the-greater-flat/the-greater-flat"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/the-greater-flat/the-greater-flat"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/the-greater-flat/the-greater-flat"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
 
 [node name="the-great-flat" type="Label" parent="Nice/MapLabels"]
 offset_left = 231.0
@@ -249,17 +3509,70 @@ theme_override_font_sizes/font_size = 9
 text = "spice"
 horizontal_alignment = 1
 
-[node name="the-great-flat-forces" type="Label" parent="Nice/MapLabels/the-great-flat"]
-visible = false
-layout_mode = 0
-offset_left = 104.0
-offset_top = -11.0
-offset_right = 169.0
-offset_bottom = 24.0
+[node name="the-great-flat" type="Node2D" parent="Nice/MapLabels/the-great-flat"]
+position = Vector2(133, 37)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/the-great-flat/the-great-flat"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 9
-text = "forces"
-horizontal_alignment = 1
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/the-great-flat/the-great-flat"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/the-great-flat/the-great-flat"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/the-great-flat/the-great-flat"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/the-great-flat/the-great-flat"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/the-great-flat/the-great-flat"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
 
 [node name="funeral-plain" type="Label" parent="Nice/MapLabels"]
 offset_left = 237.0
@@ -283,17 +3596,70 @@ theme_override_font_sizes/font_size = 9
 text = "spice"
 horizontal_alignment = 1
 
-[node name="funeral-plain-forces" type="Label" parent="Nice/MapLabels/funeral-plain"]
-visible = false
-layout_mode = 0
-offset_left = 88.7398
-offset_top = -18.6076
-offset_right = 119.74
-offset_bottom = -5.60757
+[node name="funeral-plain" type="Node2D" parent="Nice/MapLabels/funeral-plain"]
+position = Vector2(108.189, 32.9262)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/funeral-plain/funeral-plain"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 9
-text = "forces"
-horizontal_alignment = 1
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/funeral-plain/funeral-plain"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/funeral-plain/funeral-plain"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/funeral-plain/funeral-plain"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/funeral-plain/funeral-plain"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/funeral-plain/funeral-plain"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
 
 [node name="bight-cliff" type="Label" parent="Nice/MapLabels"]
 offset_left = 220.0
@@ -307,6 +3673,136 @@ text = "BIGHT OF
 THE CLIFF"
 horizontal_alignment = 1
 
+[node name="bight-cliff-15" type="Node2D" parent="Nice/MapLabels/bight-cliff"]
+position = Vector2(28.5623, 98.9151)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/bight-cliff/bight-cliff-15"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/bight-cliff/bight-cliff-15"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/bight-cliff/bight-cliff-15"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/bight-cliff/bight-cliff-15"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/bight-cliff/bight-cliff-15"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/bight-cliff/bight-cliff-15"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="bight-cliff-14" type="Node2D" parent="Nice/MapLabels/bight-cliff"]
+position = Vector2(75.2218, 38.5056)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/bight-cliff/bight-cliff-14"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/bight-cliff/bight-cliff-14"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/bight-cliff/bight-cliff-14"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/bight-cliff/bight-cliff-14"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/bight-cliff/bight-cliff-14"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/bight-cliff/bight-cliff-14"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="sietch-tabr" type="Label" parent="Nice/MapLabels"]
 offset_left = 286.0
 offset_top = 208.0
@@ -319,6 +3815,71 @@ text = "SIETCH
 TABR"
 horizontal_alignment = 1
 
+[node name="sietch-tabr" type="Node2D" parent="Nice/MapLabels/sietch-tabr"]
+position = Vector2(47.1556, 30.1555)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/sietch-tabr/sietch-tabr"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/sietch-tabr/sietch-tabr"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/sietch-tabr/sietch-tabr"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/sietch-tabr/sietch-tabr"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/sietch-tabr/sietch-tabr"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/sietch-tabr/sietch-tabr"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="plastic-basin" type="Label" parent="Nice/MapLabels"]
 offset_left = 359.0
 offset_top = 160.0
@@ -329,6 +3890,201 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "PLASTIC BASIN"
 horizontal_alignment = 1
+
+[node name="plastic-basin-14" type="Node2D" parent="Nice/MapLabels/plastic-basin"]
+position = Vector2(-27.8729, 106.434)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/plastic-basin/plastic-basin-14"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/plastic-basin/plastic-basin-14"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/plastic-basin/plastic-basin-14"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/plastic-basin/plastic-basin-14"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/plastic-basin/plastic-basin-14"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/plastic-basin/plastic-basin-14"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="plastic-basin-13" type="Node2D" parent="Nice/MapLabels/plastic-basin"]
+position = Vector2(58.5768, 5.36211)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/plastic-basin/plastic-basin-13"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/plastic-basin/plastic-basin-13"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/plastic-basin/plastic-basin-13"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/plastic-basin/plastic-basin-13"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/plastic-basin/plastic-basin-13"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/plastic-basin/plastic-basin-13"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="plastic-basin-12" type="Node2D" parent="Nice/MapLabels/plastic-basin"]
+position = Vector2(138.102, 24.6943)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/plastic-basin/plastic-basin-12"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/plastic-basin/plastic-basin-12"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/plastic-basin/plastic-basin-12"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/plastic-basin/plastic-basin-12"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/plastic-basin/plastic-basin-12"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/plastic-basin/plastic-basin-12"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
 
 [node name="rock-outcroppings" type="Label" parent="Nice/MapLabels"]
 offset_left = 281.0
@@ -341,6 +4097,136 @@ theme_override_font_sizes/font_size = 11
 text = "ROCK OUTCROPPINGS"
 horizontal_alignment = 1
 
+[node name="rock-outcroppings-13" type="Node2D" parent="Nice/MapLabels/rock-outcroppings"]
+position = Vector2(47.8185, 61.3465)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/rock-outcroppings/rock-outcroppings-13"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/rock-outcroppings/rock-outcroppings-13"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/rock-outcroppings/rock-outcroppings-13"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/rock-outcroppings/rock-outcroppings-13"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/rock-outcroppings/rock-outcroppings-13"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/rock-outcroppings/rock-outcroppings-13"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="rock-outcroppings-14" type="Node2D" parent="Nice/MapLabels/rock-outcroppings"]
+position = Vector2(-13.9654, 47.6442)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/rock-outcroppings/rock-outcroppings-14"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/rock-outcroppings/rock-outcroppings-14"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/rock-outcroppings/rock-outcroppings-14"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/rock-outcroppings/rock-outcroppings-14"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/rock-outcroppings/rock-outcroppings-14"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/rock-outcroppings/rock-outcroppings-14"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="broken-land" type="Label" parent="Nice/MapLabels"]
 offset_left = 451.0
 offset_top = 2.99999
@@ -351,6 +4237,136 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "BROKEN LAND"
 horizontal_alignment = 1
+
+[node name="broken-land-11" type="Node2D" parent="Nice/MapLabels/broken-land"]
+position = Vector2(132.433, 40.6145)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/broken-land/broken-land-11"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/broken-land/broken-land-11"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/broken-land/broken-land-11"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/broken-land/broken-land-11"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/broken-land/broken-land-11"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/broken-land/broken-land-11"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="broken-land-12" type="Node2D" parent="Nice/MapLabels/broken-land"]
+position = Vector2(-13.1196, 42.1886)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/broken-land/broken-land-12"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/broken-land/broken-land-12"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/broken-land/broken-land-12"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/broken-land/broken-land-12"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/broken-land/broken-land-12"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/broken-land/broken-land-12"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
 
 [node name="tsimpo" type="Label" parent="Nice/MapLabels"]
 offset_left = 511.0
@@ -363,6 +4379,201 @@ theme_override_font_sizes/font_size = 11
 text = "TSIMPO"
 horizontal_alignment = 1
 
+[node name="tsimpo-11" type="Node2D" parent="Nice/MapLabels/tsimpo"]
+position = Vector2(77.3004, 35.1092)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/tsimpo/tsimpo-11"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/tsimpo/tsimpo-11"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/tsimpo/tsimpo-11"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/tsimpo/tsimpo-11"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/tsimpo/tsimpo-11"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/tsimpo/tsimpo-11"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="tsimpo-12" type="Node2D" parent="Nice/MapLabels/tsimpo"]
+position = Vector2(-14.7357, 64.4582)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/tsimpo/tsimpo-12"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/tsimpo/tsimpo-12"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/tsimpo/tsimpo-12"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/tsimpo/tsimpo-12"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/tsimpo/tsimpo-12"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/tsimpo/tsimpo-12"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="tsimpo-13" type="Node2D" parent="Nice/MapLabels/tsimpo"]
+position = Vector2(-79.4697, 106.44)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/tsimpo/tsimpo-13"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/tsimpo/tsimpo-13"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/tsimpo/tsimpo-13"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/tsimpo/tsimpo-13"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/tsimpo/tsimpo-13"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/tsimpo/tsimpo-13"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="hagga-basin" type="Label" parent="Nice/MapLabels"]
 offset_left = 459.0
 offset_top = 197.0
@@ -374,6 +4585,136 @@ theme_override_font_sizes/font_size = 11
 text = "HAGGA BASIN"
 horizontal_alignment = 1
 
+[node name="hagga-basin-12" type="Node2D" parent="Nice/MapLabels/hagga-basin"]
+position = Vector2(76.1766, 2.47685)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/hagga-basin/hagga-basin-12"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/hagga-basin/hagga-basin-12"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/hagga-basin/hagga-basin-12"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/hagga-basin/hagga-basin-12"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/hagga-basin/hagga-basin-12"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/hagga-basin/hagga-basin-12"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="hagga-basin-13" type="Node2D" parent="Nice/MapLabels/hagga-basin"]
+position = Vector2(10.376, 78.9705)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/hagga-basin/hagga-basin-13"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/hagga-basin/hagga-basin-13"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/hagga-basin/hagga-basin-13"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/hagga-basin/hagga-basin-13"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/hagga-basin/hagga-basin-13"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/hagga-basin/hagga-basin-13"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="arsunt" type="Label" parent="Nice/MapLabels"]
 offset_left = 549.0
 offset_top = 224.0
@@ -384,6 +4725,136 @@ theme_override_font_sizes/font_size = 11
 text = "ARSUNT"
 horizontal_alignment = 1
 
+[node name="arsunt-11" type="Node2D" parent="Nice/MapLabels/arsunt"]
+position = Vector2(30, -7.99999)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/arsunt/arsunt-11"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/arsunt/arsunt-11"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/arsunt/arsunt-11"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/arsunt/arsunt-11"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/arsunt/arsunt-11"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/arsunt/arsunt-11"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="arsunt-12" type="Node2D" parent="Nice/MapLabels/arsunt"]
+position = Vector2(12, 84)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/arsunt/arsunt-12"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/arsunt/arsunt-12"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/arsunt/arsunt-12"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/arsunt/arsunt-12"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/arsunt/arsunt-12"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/arsunt/arsunt-12"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="carthag" type="Label" parent="Nice/MapLabels"]
 offset_left = 555.0
 offset_top = 107.0
@@ -393,6 +4864,71 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "CARTHAG"
 horizontal_alignment = 1
+
+[node name="carthag" type="Node2D" parent="Nice/MapLabels/carthag"]
+position = Vector2(24, 14)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/carthag/carthag"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/carthag/carthag"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/carthag/carthag"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/carthag/carthag"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/carthag/carthag"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/carthag/carthag"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
 
 [node name="imperial-basin" type="Label" parent="Nice/MapLabels"]
 offset_left = 633.0
@@ -406,6 +4942,201 @@ text = "IMPERIAL
 BASIN"
 horizontal_alignment = 1
 
+[node name="imperial-basin-9" type="Node2D" parent="Nice/MapLabels/imperial-basin"]
+position = Vector2(63.8965, 60.1102)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/imperial-basin/imperial-basin-9"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/imperial-basin/imperial-basin-9"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/imperial-basin/imperial-basin-9"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/imperial-basin/imperial-basin-9"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/imperial-basin/imperial-basin-9"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/imperial-basin/imperial-basin-9"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="imperial-basin-10" type="Node2D" parent="Nice/MapLabels/imperial-basin"]
+position = Vector2(22.5304, 4.73114)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/imperial-basin/imperial-basin-10"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/imperial-basin/imperial-basin-10"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/imperial-basin/imperial-basin-10"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/imperial-basin/imperial-basin-10"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/imperial-basin/imperial-basin-10"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/imperial-basin/imperial-basin-10"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="imperial-basin-11" type="Node2D" parent="Nice/MapLabels/imperial-basin"]
+position = Vector2(-22.3722, 37.423)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/imperial-basin/imperial-basin-11"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/imperial-basin/imperial-basin-11"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/imperial-basin/imperial-basin-11"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/imperial-basin/imperial-basin-11"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/imperial-basin/imperial-basin-11"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/imperial-basin/imperial-basin-11"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="arrakeen" type="Label" parent="Nice/MapLabels"]
 offset_left = 687.0
 offset_top = 66.0
@@ -418,6 +5149,71 @@ text = "ARRAKEEN
 "
 horizontal_alignment = 1
 
+[node name="arrakeen" type="Node2D" parent="Nice/MapLabels/arrakeen"]
+position = Vector2(21.0659, 6.42093)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/arrakeen/arrakeen"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/arrakeen/arrakeen"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/arrakeen/arrakeen"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/arrakeen/arrakeen"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/arrakeen/arrakeen"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/arrakeen/arrakeen"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="old-gap" type="Label" parent="Nice/MapLabels"]
 offset_left = 689.0
 offset_top = -9.00002
@@ -429,6 +5225,201 @@ theme_override_font_sizes/font_size = 11
 text = "OLD GAP"
 horizontal_alignment = 1
 
+[node name="old-gap-9" type="Node2D" parent="Nice/MapLabels/old-gap"]
+position = Vector2(102.378, 48.1542)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/old-gap/old-gap-9"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/old-gap/old-gap-9"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/old-gap/old-gap-9"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/old-gap/old-gap-9"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/old-gap/old-gap-9"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/old-gap/old-gap-9"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="old-gap-10" type="Node2D" parent="Nice/MapLabels/old-gap"]
+position = Vector2(67.375, 39.5046)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/old-gap/old-gap-10"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/old-gap/old-gap-10"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/old-gap/old-gap-10"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/old-gap/old-gap-10"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/old-gap/old-gap-10"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/old-gap/old-gap-10"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="old-gap-11" type="Node2D" parent="Nice/MapLabels/old-gap"]
+position = Vector2(-50.8754, 41.7098)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/old-gap/old-gap-11"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/old-gap/old-gap-11"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/old-gap/old-gap-11"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/old-gap/old-gap-11"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/old-gap/old-gap-11"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/old-gap/old-gap-11"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="basin" type="Label" parent="Nice/MapLabels"]
 offset_left = 810.0
 offset_top = 48.0
@@ -439,6 +5430,71 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "BASIN"
 horizontal_alignment = 1
+
+[node name="basin" type="Node2D" parent="Nice/MapLabels/basin"]
+position = Vector2(14.0645, 70.62)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/basin/basin"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/basin/basin"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/basin/basin"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/basin/basin"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/basin/basin"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/basin/basin"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
 
 [node name="sihaya-ridge" type="Label" parent="Nice/MapLabels"]
 offset_left = 850.0
@@ -452,6 +5508,71 @@ text = "SIHAYA
 RIDGE"
 horizontal_alignment = 1
 
+[node name="sihaya-ridge" type="Node2D" parent="Nice/MapLabels/sihaya-ridge"]
+position = Vector2(20.1912, 16.502)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/sihaya-ridge/sihaya-ridge"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/sihaya-ridge/sihaya-ridge"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/sihaya-ridge/sihaya-ridge"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/sihaya-ridge/sihaya-ridge"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/sihaya-ridge/sihaya-ridge"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/sihaya-ridge/sihaya-ridge"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="gara-kulon" type="Label" parent="Nice/MapLabels"]
 offset_left = 900.0
 offset_top = 136.0
@@ -464,6 +5585,71 @@ text = "GARA
 KULON"
 horizontal_alignment = 1
 
+[node name="gara-kulon" type="Node2D" parent="Nice/MapLabels/gara-kulon"]
+position = Vector2(10.8418, 84.584)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/gara-kulon/gara-kulon"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/gara-kulon/gara-kulon"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/gara-kulon/gara-kulon"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/gara-kulon/gara-kulon"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/gara-kulon/gara-kulon"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/gara-kulon/gara-kulon"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="rim-wall-west" type="Label" parent="Nice/MapLabels"]
 offset_left = 709.0
 offset_top = 155.0
@@ -475,6 +5661,71 @@ theme_override_font_sizes/font_size = 11
 text = "RIM WALL WEST"
 horizontal_alignment = 1
 
+[node name="rim-wall-west" type="Node2D" parent="Nice/MapLabels/rim-wall-west"]
+position = Vector2(38.5068, 43.4422)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/rim-wall-west/rim-wall-west"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/rim-wall-west/rim-wall-west"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/rim-wall-west/rim-wall-west"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/rim-wall-west/rim-wall-west"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/rim-wall-west/rim-wall-west"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/rim-wall-west/rim-wall-west"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="hole-in-rock" type="Label" parent="Nice/MapLabels"]
 offset_left = 713.0
 offset_top = 179.0
@@ -485,6 +5736,71 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "HOLE IN THE ROCK"
 horizontal_alignment = 1
+
+[node name="hole-in-rock" type="Node2D" parent="Nice/MapLabels/hole-in-rock"]
+position = Vector2(54.4753, 62.0439)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/hole-in-rock/hole-in-rock"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/hole-in-rock/hole-in-rock"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/hole-in-rock/hole-in-rock"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/hole-in-rock/hole-in-rock"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/hole-in-rock/hole-in-rock"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/hole-in-rock/hole-in-rock"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
 
 [node name="shield-wall" type="Label" parent="Nice/MapLabels"]
 offset_left = 747.0
@@ -499,6 +5815,136 @@ WALL
 "
 horizontal_alignment = 1
 
+[node name="shield-wall-8" type="Node2D" parent="Nice/MapLabels/shield-wall"]
+position = Vector2(31.1901, 18.952)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/shield-wall/shield-wall-8"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/shield-wall/shield-wall-8"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/shield-wall/shield-wall-8"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/shield-wall/shield-wall-8"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/shield-wall/shield-wall-8"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/shield-wall/shield-wall-8"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="shield-wall-9" type="Node2D" parent="Nice/MapLabels/shield-wall"]
+position = Vector2(7.99535, 97.9646)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/shield-wall/shield-wall-9"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/shield-wall/shield-wall-9"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/shield-wall/shield-wall-9"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/shield-wall/shield-wall-9"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/shield-wall/shield-wall-9"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/shield-wall/shield-wall-9"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="red-chasm" type="Label" parent="Nice/MapLabels"]
 offset_left = 935.0
 offset_top = 296.0
@@ -511,6 +5957,71 @@ CHASM
 "
 horizontal_alignment = 1
 
+[node name="red-chasm" type="Node2D" parent="Nice/MapLabels/red-chasm"]
+position = Vector2(21, 16)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/red-chasm/red-chasm"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/red-chasm/red-chasm"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/red-chasm/red-chasm"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/red-chasm/red-chasm"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/red-chasm/red-chasm"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/red-chasm/red-chasm"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="polar-sink" type="Label" parent="Nice/MapLabels"]
 offset_left = 548.0
 offset_top = 357.0
@@ -522,4 +6033,78 @@ text = "POLAR SINK
 "
 horizontal_alignment = 1
 
+[node name="polar-sink" type="Node2D" parent="Nice/MapLabels/polar-sink"]
+position = Vector2(42, 69)
+rotation = 0.255302
+scale = Vector2(1, 1)
+
+[node name="1" type="Label" parent="Nice/MapLabels/polar-sink/polar-sink"]
+offset_left = -20.4924
+offset_top = -34.958
+offset_right = -6.49243
+offset_bottom = -16.958
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="2" type="Label" parent="Nice/MapLabels/polar-sink/polar-sink"]
+offset_left = -13.0956
+offset_top = -50.8381
+offset_right = 6.9044
+offset_bottom = -32.8381
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="3" type="Label" parent="Nice/MapLabels/polar-sink/polar-sink"]
+offset_left = -11.3569
+offset_top = -32.4811
+offset_right = 8.64314
+offset_bottom = -14.4811
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="4" type="Label" parent="Nice/MapLabels/polar-sink/polar-sink"]
+offset_left = -2.61799
+offset_top = -48.3441
+offset_right = 17.382
+offset_bottom = -30.3441
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="5" type="Label" parent="Nice/MapLabels/polar-sink/polar-sink"]
+offset_left = 0.514275
+offset_top = -30.2281
+offset_right = 12.5143
+offset_bottom = -12.2281
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
+[node name="6" type="Label" parent="Nice/MapLabels/polar-sink/polar-sink"]
+offset_left = 4.97809
+offset_top = -41.7638
+offset_right = 24.9781
+offset_bottom = -23.7638
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "0"
+
 [node name="Regions" type="Node2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="SelectedSection" type="Label" parent="."]
+offset_left = 789.0
+offset_top = 293.0
+offset_right = 914.0
+offset_bottom = 316.0
+text = "Selected section"

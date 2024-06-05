@@ -31,6 +31,7 @@ func _on_input_event(viewport, event, shape_idx):
 				# deselect previous selected region
 				var prevRegion = MapData.selectedRegion
 				print("Deselected " + str(MapData.selectedRegion.region_name))
+				MapData.selectedRegion = null
 				for node in prevRegion.get_children():
 					if node.is_class("Polygon2D"):
 						node.color =Color(0,0,0,0)

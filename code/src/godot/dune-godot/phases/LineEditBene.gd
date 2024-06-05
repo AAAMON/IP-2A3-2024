@@ -11,16 +11,18 @@ func _process(_delta):
 	pass
 
 
-func _on_text_changed(new_text):
-	var max_value = 6
-	var number = float(new_text) if new_text != "" else 0  # Convert text to float, default to 0 if empty
-	
-	# Validate number range (0 to 7)
-	if number < 0 or number > max_value:
-		# Reset text to last valid value or empty string
-		text = str(prev_value)  # You can also set it to a default value or previous valid value
-		set_caret_column(2)
-	else:
-		prev_value = number
-		text = str(number)  # Set the text to the validated number
-		set_caret_column(2)
+#func _on_text_changed(new_text):
+	#var max_value = 6
+	#if (GameData.phaseMoment == "traitor selection" && PlayerData.faction != 6):
+		#max_value = 30
+	#var number = float(new_text) if new_text != "" else 0  # Convert text to float, default to 0 if empty
+	#
+	## Validate number range (0 to 7)
+	#if number < 0 or number > max_value:
+		## Reset text to last valid value or empty string
+		#text = str(prev_value)  # You can also set it to a default value or previous valid value
+		#set_caret_column(2)
+	#else:
+		#prev_value = number
+		#text = str(number)  # Set the text to the validated number
+		#set_caret_column(2)

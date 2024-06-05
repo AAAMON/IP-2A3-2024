@@ -14,6 +14,7 @@ var phase = "none"
 var instance
 var phaseInfoRequest
 var mapSpiceRequest
+var requestCompleted: bool = true
 @onready var timer: Timer = $Timer
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -53,9 +54,9 @@ func _process(_delta):
 		if (phase == "Set-up"):
 			instance = setup.instantiate()
 			add_child(instance)
-		#if (phase == 1):
-			#instance = phase1.instantiate()
-			#add_child(instance)
+		if (phase == "Storm"):
+			instance = phase1.instantiate()
+			add_child(instance)
 		#if (phase == 2):
 			#instance = phase2.instantiate()
 			#add_child(instance)
@@ -91,6 +92,9 @@ func _on_phase_info_request_completed(_result, _response_code, _headers, body):
 		#GameData.roundd = json["round"]
 		GameData.phase = json["name"]
 		GameData.phaseMoment = json["moment"]
+		GameData.roundd = json["round"]
+		GameData.playersToInput = json["playersToInput"]
+		#print(GameData.playersToInput)
 
 func _on_map_spice_request_completed(_result, _response_code, _headers, body):
 	var response_string = body.get_string_from_utf8()
