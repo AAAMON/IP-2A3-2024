@@ -76,7 +76,7 @@ generals_power = {
 
 def sort_generals(game_state):
     # all generals excluding those who are mine
-    all_generals = {faction: generals_power[faction] for faction in generals_power if faction != "Spacing_Guild"}
+    all_generals = {faction: generals_power[faction] for faction in generals_power if faction != "Emperor"}
     # sort by strength
     sorted_generals = sorted(
     [(name, strength) for faction in all_generals for name, strength in all_generals[faction].items()],
