@@ -178,32 +178,73 @@ namespace HttpServer
         }
 
 
-        private static async void HandleGUIInputRequest(HttpListenerContext pathRequest)
+        private static async void HandleGUIInputRequest(HttpListenerContext context)
         {
-            //Console.WriteLine($"something something gui{pathRequest.Request.Url.AbsolutePath}");
             using (var httpClient = new HttpClient())
             {
                 try
                 {
-                    string url = $"http://localhost:1235/gamestate{pathRequest.Request.Url.AbsolutePath}";
-                    var requestContent = new StringContent(pathRequest.ToString(), Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = await httpClient.GetAsync(url);
+                    var request = context.Request;
+                    var response = context.Response;
 
-                    if (response.IsSuccessStatusCode)
+                    string authToken = request.Headers["Authorization"];
+                    if (!ValidateAuthToken(authToken))
                     {
-                        Console.WriteLine("Request successful.");
+                        await SendResponse(
+                            response,
+                            HttpStatusCode.Unauthorized,
+                            "Invalid auth token"
+                        );
+                        return;
+                    }
+
+                    string playerId = request.Url.Segments[2].TrimEnd('/');
+
+                    string requestBody;
+                    using (
+                        var reader = new StreamReader(request.InputStream, request.ContentEncoding)
+                    )
+                    {
+                        requestBody = await reader.ReadToEndAsync();
+                    }
+
+                    string filePath = Path.Combine("gamestate", $"{playerId}.json");
+                    File.WriteAllText(filePath, requestBody);
+
+                    string url = $"http://localhost:1235{request.Url.AbsolutePath}";
+                    var requestContent = new StringContent(
+                        requestBody,
+                        Encoding.UTF8,
+                        "application/json"
+                    );
+                    HttpResponseMessage forwardResponse = await httpClient.PostAsync(
+                        url,
+                        requestContent
+                    );
+
+                    if (forwardResponse.IsSuccessStatusCode)
+                    {
+                        string responseContent = await forwardResponse.Content.ReadAsStringAsync();
+                        await SendResponse(response, forwardResponse.StatusCode, responseContent);
                     }
                     else
                     {
-                        Console.WriteLine($"Request failed with status code: {response.StatusCode}");
+                        string errorContent = await forwardResponse.Content.ReadAsStringAsync();
+                        await SendResponse(response, forwardResponse.StatusCode, errorContent);
                     }
                 }
                 catch (HttpRequestException e)
                 {
                     Console.WriteLine("Request error: " + e.Message);
+                    await SendResponse(
+                        context.Response,
+                        HttpStatusCode.InternalServerError,
+                        "Request error: " + e.Message
+                    );
                 }
             }
         }
+        
         public static string ConvertPhaseMatrixToJson(Dictionary<int, Dictionary<int, int>> matrix)
         {
             return JsonConvert.SerializeObject(matrix, Newtonsoft.Json.Formatting.Indented);
