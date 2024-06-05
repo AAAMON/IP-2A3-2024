@@ -9,12 +9,12 @@ namespace dune_library.server
     {
         private readonly int port;
         private HttpListener listener;
-
+        static bool firstSend = false; 
         public NetworkInputProvider(int port)
         {
             this.port = port;
         }
-
+        
         public async Task<string> GetInputAsync()
         {
             Console.WriteLine("Game has made a input request, waiting from the network");
@@ -22,6 +22,11 @@ namespace dune_library.server
 
             try
             {
+                if(firstSend)
+                {
+                    await GamestateSend.Sender();
+                }
+                firstSend = true;
                 HttpListenerContext context = await listener.GetContextAsync();
                 HttpListenerRequest request = context.Request;
 
