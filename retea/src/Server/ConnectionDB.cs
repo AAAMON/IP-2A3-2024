@@ -1,12 +1,10 @@
-﻿using System;
+using System;
 using MySql.Data.MySqlClient;
 
 namespace Server
 {
     public sealed class ConnectionDB : IDisposable
     {
-    // AICI VA PUTETI PUNE DATELE VOASTRE, SAU DACA NU PREFERATI MYSQL, VA PUTETI SCHIMBA PE ALT SERVICIU DE BAZA DE DATE
-    // IMPORTANT E SA SE PASTREZE NUMELE METODELOR!!
         static readonly string server = "localhost";
         static readonly string username = "alex";
         static readonly string password = "alex123K!!";
@@ -39,11 +37,12 @@ namespace Server
         private void CreateTableIfNotExists()
         {
             string createTableQuery = @"
-                CREATE TABLE IF NOT EXISTS players (
-                    id INT AUTO_INCREMENT PRIMARY KEY,
-                    username VARCHAR(255) UNIQUE,
-                    password VARCHAR(255)
-                );";
+            CREATE TABLE IF NOT EXISTS players (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                username VARCHAR(255) UNIQUE,
+                email VARCHAR(255),
+                password VARCHAR(255)
+            );";
 
             using (MySqlCommand command = new MySqlCommand(createTableQuery, connection))
             {
@@ -51,14 +50,15 @@ namespace Server
             }
         }
 
-        public void AddPlayer(string username, string password)
+        public void AddPlayer(string username, string email, string password)
         {
-            string addPlayerQuery = "INSERT INTO players (username, password) VALUES (@username, @password);";
+            string addPlayerQuery = "INSERT INTO players (username, email, password) VALUES (@username, @password, @email);";
 
             using (MySqlCommand command = new MySqlCommand(addPlayerQuery, connection))
             {
                 command.Parameters.AddWithValue("@username", username);
                 command.Parameters.AddWithValue("@password", password);
+                command.Parameters.AddWithValue("@email", email);
                 command.ExecuteNonQuery();
             }
 
@@ -68,6 +68,18 @@ namespace Server
         public bool PlayerExists(string username, string password)
         {
             string checkPlayerQuery = "SELECT COUNT(*) FROM players WHERE username = @username AND password = @password;";
+
+            using (MySqlCommand command = new MySqlCommand(checkPlayerQuery, connection))
+            {
+                command.Parameters.AddWithValue("@username", username);
+                command.Parameters.AddWithValue("@password", password);
+                int count = Convert.ToInt32(command.ExecuteScalar());
+                return count > 0;
+            }
+        }
+        public bool PlayerExistDB(string username, string email)
+        {
+                        string checkPlayerQuery = "SELECT COUNT(*) FROM players WHERE username = @username AND password = @password;";
 
             using (MySqlCommand command = new MySqlCommand(checkPlayerQuery, connection))
             {
