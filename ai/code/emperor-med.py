@@ -4,9 +4,10 @@ import json
 projectile_weapons = ["Crysknife", "Maula Pistol", "Slip Tip", "Stunner"]
 poison_weapons = ["Chaumas", "Chaumurky", "Ellaca Drug", "Gom Jabbar"]
 special_weapons = ["Lasgun"]
-
+special_treachery = ["Tleilaxu_Ghola"]
 projectile_defense = ["Shield"]
 poison_defense = ["Snooper"]
+stronghold_territories = ['Arrakeen', 'Carthag', 'Sietch Tabr', 'Habbanya Sietch', 'Tuek\'s Sietch']
 
 weapon_cards = projectile_weapons + poison_weapons + special_weapons + [None]
 defense_cards = projectile_defense + poison_defense + [None]
@@ -73,7 +74,25 @@ generals_power = {
         "Bashar": 2
     }
 }
+def pick_storm(game_state):
 
+ for i in range(3,0,-1):
+        hit = False
+        for territory in game_state['Map']['Territories']:
+            my_forces = get_forces_by_territory(game_state, territory, faction_name)
+            if my_forces > 0 and storm_move(game_state, territory, i+3):
+                hit = True
+        if not hit:
+            return{
+                "action": "Storm",
+                "value": i
+            }
+
+ return{
+            "action": "Storm",
+            "value": 1
+        }
+    
 def sort_generals(game_state):
     # all generals excluding those who are mine
     all_generals = {faction: generals_power[faction] for faction in generals_power if faction != "Emperor"}
@@ -83,51 +102,68 @@ def sort_generals(game_state):
     key=lambda x: x[1],
     reverse=True)
     return sorted_generals
+
+
 def pick_traitor(game_state):
-    #todo
     leaders_desc=sort_generals(game_state)
     possible_traitors=game_state["Faction_Knowledge"][0]["Traitors"]
     for traitor in leaders_desc:
         if any(traitor_name for traitor_name in possible_traitors if traitor_name["Name"] == traitor[0]):
             return {'action': traitor[0]}
+        
+    return {'action':game_state["Faction_Knowledge"][0]["Traitors"][0]["Name"]}
+
 def alliance(game_state):
-    preferred_alliances = ["Harkonnen", "Spacing_Guild", "Atreides"]
-    current_alliances = game_state['Alliances'][0]
-    for faction in preferred_alliances:
-        if not current_alliances[faction_name] and not current_alliances[faction]:
-            return {'action': 'accept', 'faction': faction}
-    return {'action': 'decline'}
+    request_aliance:"Spacing_Guild"
+    strong_alliances = ["Spacing_Guild", "Harkonnen", "Atreides"]
+    if request_aliance in strong_alliances:
+        return {"action":"yes"}
+    return {'action' : 'no'}
+
+
 def pick_storm(game_state):
-   player1=game_state['Battle_Wheels']['Item1']['_last_player'][0]["Id"]
-   player2=game_state['Battle_Wheels']['Item1']['_last_player'][0]["Id"]
-   if player1=="Emperor" or player2=="Emperor":
-        random_number = random.randint(1, 3)
-        return {"action " "storm_movement ": str(random_number)}
-   return {"action" : "none"}
+    for i in range(3,0,-1):
+        hit = False
+        for territory in game_state['Map']['Territories']:
+            my_forces = get_forces_by_territory(game_state, territory, faction_name)
+            if my_forces > 0 and storm_move(game_state, territory, i+3):
+                hit = True
+        if not hit:
+            return{
+                "action": "Storm",
+                "value": i
+            }
+
+    return{
+                "action": "Storm",
+                "value": 1
+            }
+    
     
 
 def bidding(game_state):
 
-    #de vazut ce pune atreides ultima data 
-    #daca emperor este last bid
+    
 
-    last_bid = game_state['last_bid']['value']
-    last_bid_player = game_state['last_bid']['player']
-    my_cards = game_state['Faction_Knowledge']['Treachery_Cards']
-    my_spice = game_state['Faction_Knowledge']['Spice']
+    last_bid = game_state['HighestBid']['Value']
+    last_bid_player = game_state['HighestBid']['Player']
+    my_cards = game_state['Faction_Knowledge'][0]['Treachery_Cards']
+    my_spice = game_state['Faction_Knowledge'][0]['Spice']
 
     haveAtk = any(x in set(weapon_cards) for x in my_cards)
     haveDef = any(x in set(defense_cards) for x in my_cards)
 
-    atreides_aggressive = last_bid_player == "Atreides"
+    atreides_aggressive = last_bid_player == "Atreides" and last_bid > 0
+    harkonnen_aggressive = last_bid_player == "Harkonnen" and last_bid > 0
+
 
     coef = 0.2
 
     if not haveDef:
-        coef += 0.3
+        coef += 0.25
 
     if not haveAtk:
-        coef += 0.3
+        coef += 0.25
 
     if my_spice > 8 and random.random() > 0.5:
         coef += 0.2
@@ -136,13 +172,16 @@ def bidding(game_state):
         coef -= 0.2
     if atreides_aggressive:
         coef += 0.1
+    if harkonnen_aggressive:
+        coef += 0.2
   
-    coef = min(coef, 0.8)
+    coef = min(coef, 0.7)
     maxBid = my_spice * coef
 
     if last_bid >= maxBid:
         return {'action': 'pass'}
-    
+    elif last_bid >= maxBid and len(my_cards)==0:
+                return {'action': 'bid', 'value': last_bid+1}
     else:
         return {'action': 'bid', 'value': last_bid+1}
     
@@ -169,7 +208,7 @@ def revival(game_state):
     total_cost = additional_revives * cost_per_force
     my_spice -= total_cost
 
-    all_my_generals = {faction: generals_power[faction] for faction in generals_power if faction == "Spacing_Guild"}
+    all_my_generals = {faction: generals_power[faction] for faction in generals_power if faction == faction_name}
     sorted_generals = sorted(
     [(name, strength) for faction in all_my_generals for name, strength in all_my_generals[faction].items()],
     key=lambda x: x[1],
@@ -183,7 +222,15 @@ def revival(game_state):
             if my_spice >= general_strength:
                 generals_to_revive.append(general_name)
                 my_spice -= general_strength
-
+    
+    #if "Tleilaxu_Ghola" in special_treachery:
+    #    for general in sorted_generals:
+    #       general_name = general[0]
+    #        general_strength = general[1]
+    #        if general_name in possible_revival_generals and general_strength > 4:
+    #            generals_to_revive.append(general_name)
+    #            break
+    
     return {
         "action": "revive",
         "forces": total_revives,
@@ -205,6 +252,7 @@ def storm_move(game_state, territory):
                 return True
     return False
 
+
 def get_territory_id_by_section_id(game_state, section_id):
     for territory in game_state['Map']['Territories']:
         for section in territory['Sections']:
@@ -216,30 +264,30 @@ def get_forces_by_territory(game_state, territory, faction):
     for section in territory['Sections']:
             if faction in section['Forces'].keys():
                 forces += section['Forces'][faction]
+    return forces
 
 def evaluate_territory(game_state, territory):
-    stronghold_territories = ['Arrakeen', 'Carthag', 'Sietch Tabr', 'Habbanya Sietch', 'Tuek\'s Sietch']
     my_forces = get_forces_by_territory(game_state, territory, faction_name)
-    my_reserves = game_state['Reserves'][faction_name]
-    adjacent_opponents = sum(territory['Forces'][faction] for faction in other_factions)
-    cnt_oponents = sum(1 for faction in other_factions if territory['Forces'][faction]>0)
-    my_spice = game_state['Faction_Knowledge']['Spice']
+    my_reserves = game_state['Reserves'][0][faction_name]
+    adjacent_opponents = sum(section['Forces'].get(faction, 0) for section in territory['Sections'] for faction in other_factions)
+    cnt_oponents = sum(1 for section in territory['Sections'] for faction in other_factions if section['Forces'].get(faction, 0) > 0)
+    my_spice = game_state['Faction_Knowledge'][0]['Spice']
 
     if cnt_oponents == 2:
         return 0
 
-    if territory['name'] in stronghold_territories and cnt_oponents == 0 and my_forces == 0:
+    if territory['Name'] in stronghold_territories and cnt_oponents == 0 and my_forces == 0:
         return 5  #Stronghold, unoccupied, highest priority
     
-    if territory['name'] in stronghold_territories and cnt_oponents == 1 and simulate_battle(game_state, territory, my_forces + min(my_reserves, my_spice) // 2) > 0.8:
+    if territory['Name'] in stronghold_territories and cnt_oponents == 1 and simulate_battle(game_state, territory, my_forces + min(my_reserves, my_spice) // 2)[0] > 0.8:
         return 4 #Stronghold, occupied, but i can win
     
     # Todo: see if other factions are near the territory(dist <=2 so they can move here)
     
-    if territory['name'] in stronghold_territories and my_forces <= 3:
+    if territory['Name'] in stronghold_territories and my_forces <= 3:
         return 3  # Weakly defended, medium priority
     
-    if  game_state['Spice_Dict'][str(territory['Id'])]['Avaliable'] > 0 and not storm_move(game_state,territory) and cnt_oponents == 0 and my_forces == 0: #maybe consider the case of battle
+    if str(territory['Id']) in game_state['Map']['Spice_Dict'] and game_state['Map']['Spice_Dict'][str(territory['Id'])]['Avaliable'] > 0 and cnt_oponents == 0 and my_forces == 0:
         return 2 #i bring them on the map free basically
     
     if cnt_oponents == 0:
@@ -251,39 +299,35 @@ def evaluate_territory(game_state, territory):
                     for neighbor_section_id in strong_section['Neighboring_Sections_Ids']:
                         if get_territory_id_by_section_id(neighbor_section_id) == territory['Id']:
                             near_stronghold = True
-        
-        not_in_storm = True
-        for section in territory['Sections']:
-            if game_state['Storm_Sector'] == section['Origin_Sector']:
-                not_in_storm = False
 
         #possibility of entering stronghold next round
-        if near_stronghold and not_in_storm:
+        if near_stronghold and not storm_move(game_state,territory,0):
             return 1
                     
     # Default: No special consideration
     return 0
 
 def shipment(game_state):
-
+    #todo zic teritoriul, dar nu si zona
     my_spice = game_state['Faction_Knowledge'][0]['Spice']
     my_reserves = game_state['Reserves'][0][faction_name]
     best_score = -1
     best_territory = None
     desired_number_troops = 0
     for territory in game_state['Map']['Territories']:
-        curr_score = evaluate_territory(game_state, territory)
-        if(curr_score > best_score):
-            best_score = curr_score
-            best_territory = territory
+        if not storm_move(game_state,territory,0):
+            curr_score = evaluate_territory(game_state, territory)
+            if(curr_score > best_score):
+                best_score = curr_score
+                best_territory = territory
 
     if best_score == 5:
         desired_number_troops =  min(my_spice // 2, my_reserves // 2)
 
     if best_score == 4:
         #todo to see if my opponent is after me, if so he can bring more forces
-        for number_troops in  range(1, min(my_spice,my_reserves)//2 + 1):
-            if simulate_battle(game_state, territory, number_troops) > 0.8:
+        for number_troops in  range(0, min(my_spice,my_reserves)//2 + 1):
+            if simulate_battle(game_state, territory, number_troops)[0] > 0.8:
                 desired_number_troops =  number_troops
                 break
 
@@ -296,16 +340,61 @@ def shipment(game_state):
     if best_score == 1:
         desired_number_troops = desired_number_troops = min(min(3, my_spice),my_reserves)
 
+    best_section = random.choice(best_territory['Sections'])
+
     return {
-        "action": "shipment",
-        "territory": best_territory['Name'],
-        "number_of_troops": desired_number_troops
-    }
+    "action": "shipment", 
+    "value": desired_number_troops, 
+    "teritorry": best_territory['Id'], 
+    "section": best_section['Id'] #TODO la matei chiriac
+    } 
 
 
 def movement(game_state):
-    #TODO
-    my_spice = game_state['Faction_Knowledge']['Spice']
+    best_score = 0
+    base_territory_id = 0
+    best_territory_id = 0
+    best_section_id = -1
+    best_forces = 0
+    for territory in game_state['Map']['Territories']:
+        if territory['Name'] in stronghold_territories:
+            continue
+        if str(territory['Id']) in game_state['Map']['Spice_Dict'] and game_state['Map']['Spice_Dict'][str(territory['Id'])]['Avaliable'] > 0:
+            continue
+
+        if storm_move(game_state,territory,0):
+            continue
+        my_forces = get_forces_by_territory(game_state, territory, faction_name)
+        if my_forces == 0:
+            continue
+
+        for section in territory['Sections']:
+            for neighbor_section_id in section['Neighboring_Sections_Ids']:
+                adj_id = get_territory_id_by_section_id(game_state, neighbor_section_id)
+                if adj_id == territory['Id']:
+                    continue
+
+                for adj_territoy in game_state['Map']['Territories']:
+                    if storm_move(game_state,adj_territoy,0):
+                        continue
+                    if adj_territoy['Id'] == adj_id:
+                        score = evaluate_territory(game_state, adj_territoy)
+                        if score > best_score:
+                            best_score = score
+                            best_territory_id = adj_territoy['Id']
+                            best_section_id = neighbor_section_id
+                            best_forces = my_forces
+                            base_territory_id = territory['Id']
+
+    return {
+    "action": "movement", 
+    "source_terittory": base_territory_id, 
+    "destination_terittory": best_territory_id,
+    "section": best_section_id,
+    "value": best_forces
+    }
+
+
 
 
 def simulate_battle(game_state, territory, my_forces):
@@ -496,8 +585,6 @@ def get_move(game_state):
     if phase_name == 'Movement':
         return movement(game_state)
     
-    if phase_name == 'Nexus':
-        return aliance(game_state)
     
     if phase_name == 'Battle':
         territory_id=11 #trebuie dat din perspectiva!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
