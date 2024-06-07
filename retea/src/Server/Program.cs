@@ -252,7 +252,7 @@ namespace HttpServer
         static bool ValidateAuthToken(string authToken)
         {
             HashSet<string> playerNames = new HashSet<string>();
-            for (int i = 0; i < 6; i++)
+            for (int i = 1; i <= 6; i++)
                 playerNames.Add("player" + i.ToString());
 
             // Check if the auth token is valid
