@@ -16,6 +16,8 @@ namespace dune_library.Utils
             this.faction = faction;
             this.bid = bid;
         }
-        public Highest_Bid() { }
+        public Highest_Bid() {
+            bid = 0;
+        }
     }
 }

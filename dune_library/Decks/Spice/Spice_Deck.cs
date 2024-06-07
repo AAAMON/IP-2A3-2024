@@ -39,6 +39,7 @@ namespace dune_library.Decks.Spice {
         Discard_Pile.Shuffle();
         Discard_Pile.ForEach(Card_Stack.Push);
       }
+      Add_To_Discard_Pile(Card_Stack.Peek());
       return Card_Stack.Pop();
     }
 

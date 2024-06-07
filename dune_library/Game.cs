@@ -53,46 +53,57 @@ namespace dune_library {
         Phase.ValueUnsafe().Play_Out();
 
         for (Round = 1; Round <= 10; Round += 1) {
+
         //storm
+        Thread.Sleep(5000);
         Console.WriteLine("Storm Phase");
         Phase = new Storm_Phase(this);
         Phase.ValueUnsafe().Play_Out();
+
         //spice blow
+        Thread.Sleep(5000);
         Phase = new Spice_Blow_And_Nexus(this);
         Phase.ValueUnsafe().Play_Out();
         Console.WriteLine("Spice Blow Phase");
 
         //choam charity
+        Thread.Sleep(5000);
         Console.WriteLine("Chom Charity Phase");
         Phase = new CharityPhase(this, this);
         Phase.ValueUnsafe().Play_Out();
-
+        
         //bidding
+        Thread.Sleep(5000);
         Console.WriteLine("Bidding Phase");
         Phase = new Bidding_Phase(this);
         Phase.ValueUnsafe().Play_Out();
 
         //revival
+        Thread.Sleep(5000);
         Console.WriteLine("Revival Phase");
         Phase = new Revival_Phase(this,Tleilaxu_Tanks, this);
         Phase.ValueUnsafe().Play_Out();
 
         //shipment and movement
+        Thread.Sleep(5000);
         Console.WriteLine("Shipment And Movement Phase");
         Phase = new ShipmentAndMovementPhase(this);
         Phase.ValueUnsafe().Play_Out();
 
         //battle
+        Thread.Sleep(5000);
         Console.WriteLine("Battle Phase");
 
 
         //spice harvest
+        Thread.Sleep(5000);
         Console.WriteLine("Spice Harvest Phase");
         Phase = new SpiceCollectionPhase(this, Map, this);
         Phase.ValueUnsafe().Play_Out();
-
+        
 
         //mentat pause
+        Thread.Sleep(5000);
         Console.WriteLine("Mentat Pause Phase");
         Phase = new MentatPausePhase(this);
         Phase.ValueUnsafe().Play_Out();
@@ -115,7 +126,7 @@ namespace dune_library {
 
     public bool[] Factions_To_Move { get; set; } = new bool[6]; 
 
-    public Highest_Bid HighestBid { get; set; }
+    public Highest_Bid HighestBid { get; set; } = new Highest_Bid();
 
     public (Battle_Wheel A, Battle_Wheel B) Battle_Wheels { get; } = new(new(), new());
 
@@ -141,7 +152,7 @@ namespace dune_library {
       private set => alliances = value;
     }
 
-    public Option<Spice_Card> Last_Spice_Card => Spice_Deck.Top_OF_Discard_Pile;
+    public Option<Spice_Card> Last_Spice_Card  => Spice_Deck.Top_OF_Discard_Pile;
 
     private Option<Forces> reserves = None;
     public Forces Reserves {

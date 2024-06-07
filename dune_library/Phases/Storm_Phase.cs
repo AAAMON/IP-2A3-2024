@@ -15,7 +15,7 @@ namespace dune_library.Phases {
   public class Storm_Phase : Phase {
     public Storm_Phase(Game game) {
       Map = game.Map;
-      this.turn = 3;
+      turn = game.Round;
       Storm_Sector = game.Map.Storm_Sector;
       Battle_Wheels = game.Battle_Wheels;
       Tleilaxu_Tanks = game.Tleilaxu_Tanks;

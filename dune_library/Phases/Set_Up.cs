@@ -120,123 +120,11 @@ namespace dune_library.Phases
             Factions_In_Play.ForEach(faction => Console.WriteLine(Init.Factions_Distribution.Player_Of(faction).Id + " " + faction));
 
             moment = "Bene Gesserit prediction";
-            Factions_To_Move[1] = true;
-            Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
-
-            Console.WriteLine("Bene Gesserit make a prediction: (/player2/setup/3)");
-            while (Factions_To_Move[1] == true)
-            {
-
-                string[] line = Input_Provider.GetInputAsync().Result.Split("/");
-                if (line[1] == Init.Factions_Distribution.Player_Of(Faction.Bene_Gesserit).Id && line[2] == "setup")
-                {
-                    int response = 0;
-                    if (Int32.TryParse(line[3], out response))
-                    {
-                        if(response < 10 && response > 0)
-                        {
-                            Bene_Prediction = (uint)response;
-                            Factions_To_Move[1] = false;
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Failure");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Failure");
-                }
-            }
-            moment = "traitor selection";
-
-            for (int i = 0; i <  Factions_To_Move.Length; i ++)
-            {
-                Factions_To_Move[i] = true;
-            }
-            Factions_To_Move[5] = false;
-
-            IReadOnlyDictionary<Faction, IList<General>> traitors_dict = Generals_Manager.Random_Traitors(Factions_In_Play);
-            IList<(bool, Faction)> faction_responses = new List<(bool, Faction)>();
-
-
-            Factions_In_Play.ForEach(faction => {
-                Traitors_Initializer.Init_Traitors(faction, traitors_dict[faction].ToList(), []);
-                switch (faction)
-                {
-                    case Faction.Atreides:
-                        faction_responses.Add((Factions_To_Move[0], faction));
-                        break;
-                    case Faction.Bene_Gesserit:
-                        faction_responses.Add((Factions_To_Move[1], faction));
-                        break;
-                    case Faction.Emperor:
-                        faction_responses.Add((Factions_To_Move[2], faction));
-                        break;
-                    case Faction.Fremen:
-                        faction_responses.Add((Factions_To_Move[3], faction));
-                        break;
-                    case Faction.Spacing_Guild:
-                        faction_responses.Add((Factions_To_Move[4], faction));
-                        break;
-                }
-                Console.WriteLine();
-                Console.WriteLine(faction);
-                Console.WriteLine();
-                traitors_dict[faction].ForEach(t => Console.WriteLine(t.Name));
-            });
-
-            Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+            Handle_Bene();
             
-            while (faction_responses.Length() > 0)
-            {
-                string[] line = Input_Provider.GetInputAsync().Result.Split("/");
-                bool correct = false;
-                Factions_In_Play.ForEach(faction => {
-                    if (line[1] == Init.Factions_Distribution.Player_Of(faction).Id && line[2] == "setup")
-                    {
-                        if(faction_responses.Contains((true,faction)))
-                        {
-                            for (int i = 0; i < traitors_dict[faction].ToList().Length(); i++)
-                            {
-                                if (traitors_dict[faction][i].Name == line[3].Replace("_", " "))
-                                {
-                                    General traitor = traitors_dict[faction][i];
-                                    traitors_dict[faction].RemoveAt(i);
-                                    Traitors_Initializer.Init_Traitors(faction, [traitor], traitors_dict[faction].ToList());
-                                    faction_responses.Remove((true,faction));
-                                    switch (faction)
-                                    {
-                                        case Faction.Atreides:
-                                            Factions_To_Move[0] = false;
-                                            break;
-                                        case Faction.Bene_Gesserit:
-                                            Factions_To_Move[1] = false;
-                                            break;
-                                        case Faction.Emperor:
-                                            Factions_To_Move[2] = false;
-                                            break;
-                                        case Faction.Fremen:
-                                            Factions_To_Move[3] = false;
-                                            break;
-                                        case Faction.Spacing_Guild:
-                                            Factions_To_Move[4] = false;
-                                            break;
-                                    }
-                                    Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
-                                    correct = true;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                });
-                if (!correct)
-                {
-                    Console.WriteLine("Failure");
-                }
-            }
+            moment = "traitor selection";
+            Handle_Traitors();
+
 
             moment = "spice distribution";
 
@@ -332,6 +220,129 @@ namespace dune_library.Phases
             });
 
 
+        }
+
+        private void Handle_Traitors()
+        {
+            for (int i = 0; i < Factions_To_Move.Length; i++)
+            {
+                Factions_To_Move[i] = true;
+            }
+            Factions_To_Move[5] = false;
+
+            IReadOnlyDictionary<Faction, IList<General>> traitors_dict = Generals_Manager.Random_Traitors(Factions_In_Play);
+            IList<(bool, Faction)> faction_responses = new List<(bool, Faction)>();
+
+
+            Factions_In_Play.ForEach(faction => {
+                Traitors_Initializer.Init_Traitors(faction, traitors_dict[faction].ToList(), []);
+                switch (faction)
+                {
+                    case Faction.Atreides:
+                        faction_responses.Add((Factions_To_Move[0], faction));
+                        break;
+                    case Faction.Bene_Gesserit:
+                        faction_responses.Add((Factions_To_Move[1], faction));
+                        break;
+                    case Faction.Emperor:
+                        faction_responses.Add((Factions_To_Move[2], faction));
+                        break;
+                    case Faction.Fremen:
+                        faction_responses.Add((Factions_To_Move[3], faction));
+                        break;
+                    case Faction.Spacing_Guild:
+                        faction_responses.Add((Factions_To_Move[4], faction));
+                        break;
+                }
+                Console.WriteLine();
+                Console.WriteLine(faction);
+                Console.WriteLine();
+                traitors_dict[faction].ForEach(t => Console.WriteLine(t.Name));
+            });
+
+            Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+
+            while (faction_responses.Length() > 0)
+            {
+                string[] line = Input_Provider.GetInputAsync().Result.Split("/");
+                bool correct = false;
+                Factions_In_Play.ForEach(faction => {
+                    if (line[1] == Init.Factions_Distribution.Player_Of(faction).Id && line[2] == "setup")
+                    {
+                        if (faction_responses.Contains((true, faction)))
+                        {
+                            for (int i = 0; i < traitors_dict[faction].ToList().Length(); i++)
+                            {
+                                if (traitors_dict[faction][i].Name == line[3].Replace("_", " "))
+                                {
+                                    General traitor = traitors_dict[faction][i];
+                                    traitors_dict[faction].RemoveAt(i);
+                                    Traitors_Initializer.Init_Traitors(faction, [traitor], traitors_dict[faction].ToList());
+                                    faction_responses.Remove((true, faction));
+                                    switch (faction)
+                                    {
+                                        case Faction.Atreides:
+                                            Factions_To_Move[0] = false;
+                                            break;
+                                        case Faction.Bene_Gesserit:
+                                            Factions_To_Move[1] = false;
+                                            break;
+                                        case Faction.Emperor:
+                                            Factions_To_Move[2] = false;
+                                            break;
+                                        case Faction.Fremen:
+                                            Factions_To_Move[3] = false;
+                                            break;
+                                        case Faction.Spacing_Guild:
+                                            Factions_To_Move[4] = false;
+                                            break;
+                                    }
+                                    Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+                                    correct = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                });
+                if (!correct)
+                {
+                    Console.WriteLine("Failure");
+                }
+            }
+        }
+
+        private void Handle_Bene()
+        {
+            Factions_To_Move[1] = true;
+            Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+
+            Console.WriteLine("Bene Gesserit make a prediction: (/player2/setup/3)");
+            while (Factions_To_Move[1] == true)
+            {
+
+                string[] line = Input_Provider.GetInputAsync().Result.Split("/");
+                if (line[1] == Init.Factions_Distribution.Player_Of(Faction.Bene_Gesserit).Id && line[2] == "setup")
+                {
+                    int response = 0;
+                    if (Int32.TryParse(line[3], out response))
+                    {
+                        if (response < 10 && response > 0)
+                        {
+                            Bene_Prediction = (uint)response;
+                            Factions_To_Move[1] = false;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Failure");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Failure");
+                }
+            }
         }
     }
 }

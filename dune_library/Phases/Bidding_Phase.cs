@@ -13,6 +13,7 @@ using Map = dune_library.Map_Resources.Map;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Numerics;
 using LanguageExt.Pipes;
+using LanguageExt.SomeHelp;
 
 namespace dune_library.Phases
 {
@@ -91,7 +92,36 @@ namespace dune_library.Phases
             return result;
         }
 
-
+        public void Next_Faction(Faction faction)
+        {
+            switch (faction)
+            {
+                case Faction.Atreides:
+                    Factions_To_Move[0] = false;
+                    Factions_To_Move[1] = true;
+                    break;
+                case Faction.Bene_Gesserit:
+                    Factions_To_Move[1] = false;
+                    Factions_To_Move[2] = true;
+                    break;
+                case Faction.Emperor:
+                    Factions_To_Move[2] = false;
+                    Factions_To_Move[3] = true;
+                    break;
+                case Faction.Fremen:
+                    Factions_To_Move[3] = false;
+                    Factions_To_Move[4] = true;
+                    break;
+                case Faction.Spacing_Guild:
+                    Factions_To_Move[4] = false;
+                    Factions_To_Move[5] = true;
+                    break;
+                case Faction.Harkonnen:
+                    Factions_To_Move[5] = false;
+                    Factions_To_Move[0] = true;
+                    break;
+            }
+        }
         public override void Play_Out()
         {
             //string Get_Card = Wait_Until_Something.AwaitInput(3000, Input_Provider).Result;
@@ -100,8 +130,6 @@ namespace dune_library.Phases
             moment = "bidding declaration";
 
             List<Faction> faction_order = GetFactionOrder();
-
-            Console.WriteLine(faction_order);
 
             int max_number_of_cards = 0;
 
@@ -144,14 +172,15 @@ namespace dune_library.Phases
                     if (Faction_Knowledge.Of(faction).Number_Of_Treachery_Cards_Of(faction) < (faction == Faction.Harkonnen ? Max_Cards_Harkonnen : Max_Cards_Others))
                         biddingOrder.Enqueue(faction);
                 });
-
+                who_passed = new bool[6];
                 var topCard = treachery_Deck.Next_Card_Peek;
 
-                while (biddingOrder.Any())
+                var currentBidder = biddingOrder.Dequeue();
+                while (biddingOrder.Any() && who_passed.Contains(false))
                 {
-                    var currentBidder = biddingOrder.Dequeue();
 
-                    Console.WriteLine("Introduceti bid-ul (ex /player1/phase_4_input/3)");
+                    Console.WriteLine($"Introduceti bid-ul (ex /player1/phase_4_input/3)");
+                    Console.WriteLine( currentBidder );
                     string[] line = Input_Provider.GetInputAsync().Result.Split("/");
                     bool correct = false;
                     if (line[1] == Init.Factions_Distribution.Player_Of(currentBidder).Id && line[2] == "phase_4_input")
@@ -179,39 +208,8 @@ namespace dune_library.Phases
                                     who_passed[5] = true;
                                     break;
                             }
-                            for (int i = 0; i < Factions_To_Move.Length; i++) { Factions_To_Move[i] = false; }
-                            switch (currentBidder)
-                            {
-                                case Faction.Atreides:
-                                    Factions_To_Move[1] = true;
-                                    break;
-                                case Faction.Bene_Gesserit:
-                                    Factions_To_Move[2] = true;
-                                    break;
-                                case Faction.Emperor:
-                                    Factions_To_Move[3] = true;
-                                    break;
-                                case Faction.Fremen:
-                                    Factions_To_Move[4] = true;
-                                    break;
-                                case Faction.Spacing_Guild:
-                                    Factions_To_Move[5] = true;
-                                    break;
-                                case Faction.Harkonnen:
-                                    Factions_To_Move[0] = true;
-                                    break;
-                            }
-                            biddingOrder.Enqueue(currentBidder);
-
+                            
                             correct = true;
-                            Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
-
-                        }
-                        else if(!HighestBid.faction.IsNone)
-                        {
-                            if(HighestBid.faction == currentBidder) {
-                                break;
-                            }
                         }
                         else
                         {
@@ -221,44 +219,35 @@ namespace dune_library.Phases
                                 {
                                     HighestBid.bid = (uint)bid;
                                     HighestBid.faction = currentBidder;
-                                    for (int i = 0; i < Factions_To_Move.Length; i++) { Factions_To_Move[i] = false; }
-                                    switch (currentBidder)
-                                    {
-                                        case Faction.Atreides:
-                                            Factions_To_Move[1] = true;
-                                            break;
-                                        case Faction.Bene_Gesserit:
-                                            Factions_To_Move[2] = true;
-                                            break;
-                                        case Faction.Emperor:
-                                            Factions_To_Move[3] = true;
-                                            break;
-                                        case Faction.Fremen:
-                                            Factions_To_Move[4] = true;
-                                            break;
-                                        case Faction.Spacing_Guild:
-                                            Factions_To_Move[5] = true;
-                                            break;
-                                        case Faction.Harkonnen:
-                                            Factions_To_Move[0] = true;
-                                            break;
-                                    }
-                                    Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
                                     correct = true;
                                     who_passed = new bool[6];
                                 }
                             }
                         }
                     }
-                    if(!correct)
+                    if (!correct)
                     {
                         Console.WriteLine("Failure");
                     }
+                    else
+                    {
+                        Next_Faction(currentBidder);
+                        biddingOrder.Enqueue(currentBidder);
+                        currentBidder = biddingOrder.Dequeue();
+                        if (!HighestBid.faction.IsNone)
+                        {
+                            if (HighestBid.faction == currentBidder)
+                            {
+                                break;
+                            }
+                        }
+                        Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+                    }
                 }
 
-                Console.WriteLine($"The winner is {HighestBid.faction}");
                 if (who_passed.Contains(false) && HighestBid.bid != 0)
                 {
+                    Console.WriteLine($"The winner is {HighestBid.faction}");
                     if (HighestBid.faction == Faction.Harkonnen && Init.Knowledge_Manager.Of(Faction.Harkonnen).Treachery_Cards.Count < 7)
                     {
                         Treachery_Cards_Manager.Give_A_Treachery_Card((Faction)HighestBid.faction);
@@ -276,6 +265,7 @@ namespace dune_library.Phases
 
                     Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
                 }
+
             }
             moment = "end of bidding";
             Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));

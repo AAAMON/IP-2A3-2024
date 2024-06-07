@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using dune_library.Decks.Spice;
 using dune_library.Player_Resources;
 
+
 namespace dune_library.Player_Resources {
   public class Perspective {
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -47,6 +48,7 @@ namespace dune_library.Player_Resources {
     public Option<Forces> Reserves { get; }
 
     public Highest_Bid Highest_Bid { get; }
+
 
     public Option<Tleilaxu_Tanks> Tleilaxu_Tanks { get; }
     public Option<I_Faction_Knowledge_Read_Only> Faction_Knowledge { get; } // can be destructured into individual properties
@@ -96,6 +98,8 @@ namespace dune_library.Player_Resources {
       try {
           var options = new JsonSerializerOptions { WriteIndented = true, IncludeFields = true };
           options.Converters.Add(new JsonStringEnumConverter());
+          options.Converters.Add(new SpiceCardConverter());
+
           string json = JsonSerializer.Serialize(this, options);
           File.WriteAllText(filePath, json);
           Console.WriteLine("Serialization successful.");
