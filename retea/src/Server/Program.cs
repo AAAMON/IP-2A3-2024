@@ -1,20 +1,14 @@
-
 using MySql.Data.MySqlClient;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Runtime.CompilerServices;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using System.Xml;
-using System.Diagnostics;
-using Server;
-using System.Security.Policy;
 using System;
+using Server;
 
 namespace HttpServer
 {
@@ -25,10 +19,6 @@ namespace HttpServer
             public int PlayerID { get; set; }
         }
         private static Dictionary<int, Dictionary<int, int>> phaseMatrix = new Dictionary<int, Dictionary<int, int>>();
-
-
-        private static readonly ConcurrentDictionary<string, HttpListenerResponse> room =
-            new ConcurrentDictionary<string, HttpListenerResponse>();
 
         private static int connectedUsers = 0;
         private static readonly HttpClient httpClient = new HttpClient();
@@ -43,12 +33,11 @@ namespace HttpServer
             ConnectionDB db = new ConnectionDB();
             var connection = db.GetConnection();
 
-            // var runner = ExeRunner.Instance;   -> FACUT PT A RULA INSTANT TOATE CELE 3 COMPONENTE
-
             while (true)
             {
                 var context = await listener.GetContextAsync();
-                _ = Task.Run(() => HandleRequest(context));
+                await HandleRequest(context);
+                //_ = Task.Run(() => HandleRequest(context));
             }
         }
 
@@ -59,7 +48,7 @@ namespace HttpServer
                 var request = context.Request;
                 var response = context.Response;
                 if(!request.Url.AbsolutePath.StartsWith("/gamestate"))
-                  Console.WriteLine($"Received {request.HttpMethod} request for {request.Url.AbsolutePath}");
+                    Console.WriteLine($"Received {request.HttpMethod} request for {request.Url.AbsolutePath}");
 
                 if (request.HttpMethod == "POST" && request.Url.AbsolutePath == "/auth")
                 {
@@ -83,7 +72,6 @@ namespace HttpServer
                 }
                 else if (request.Url.AbsolutePath.Contains("phase") || request.Url.AbsolutePath.Contains("setup"))
                 {
-                    //the updates from GUI
                     HandleGUIInputRequest(context);
                 }
                 else if (request.HttpMethod == "POST" && request.Url.AbsolutePath == "/gamestate")
@@ -92,14 +80,12 @@ namespace HttpServer
                 }
                 else if (request.Url.AbsolutePath.Contains("/login"))
                 {
-                    // Extrage username și password din URL
                     string username = request.Url.Segments[2].TrimEnd('/');
                     string password = request.Url.Segments[3].TrimEnd('/');
 
                     string responseContent = HandleLoginRequest(username, password).Result;
                     await SendResponse(response, HttpStatusCode.OK, responseContent);
                 }
-
                 else
                 {
                     await SendResponse(response, HttpStatusCode.NotFound, "Not found");
@@ -110,6 +96,7 @@ namespace HttpServer
                 Console.WriteLine($"Error handling request: {ex.Message}");
             }
         }
+
         static async Task ModifyGamestate(HttpListenerRequest request, HttpListenerResponse response)
         {
             string requestBody = await ReadRequestBody(request.InputStream);
@@ -140,24 +127,13 @@ namespace HttpServer
                 username = isAuthenticated ? username : "error"
             };
 
-            // BAZA DE DATE MERGE !!
-            // CE AM COMENTAT E PENTRU CEI CARE NU AU FACUT INCA BAZA DE DATE SI SA SARA DIRECT DE PROCESUL DE LOGIN
-            /*
-                        var playerData = new
-                        {
-                            username = username,
-                        };*/
-
             string jsonResponse = Newtonsoft.Json.JsonConvert.SerializeObject(playerData);
 
             return jsonResponse;
         }
-        static async Task HandleRegisterRequest(
-    HttpListenerRequest request,
-    HttpListenerResponse response
-)
+
+        static async Task HandleRegisterRequest(HttpListenerRequest request, HttpListenerResponse response)
         {
-            // Read the request body containing the username, email, and password
             string[] segments = request.Url.Segments;
             if (segments.Length < 5)
             {
@@ -169,7 +145,7 @@ namespace HttpServer
             string email = segments[3].TrimEnd('/');
             string password = segments[4].TrimEnd('/');
 
-            bool isRegistered = await HandleRegisterUser(username, email, password);      //IMPORTANTTT !!!!!!!!!!!!!!!!!!!!!!!!!!!
+            bool isRegistered = await HandleRegisterUser(username, email, password);
             if (isRegistered)
             {
                 await SendResponse(response, HttpStatusCode.OK, "Registration successful");
@@ -197,13 +173,10 @@ namespace HttpServer
                 }
             }
             return true;
-            // pt cei ce n-au legatura la baza de date
         }
-
 
         private static async void HandleGUIInputRequest(HttpListenerContext pathRequest)
         {
-            //Console.WriteLine($"something something gui{pathRequest.Request.Url.AbsolutePath}");
             using (var httpClient = new HttpClient())
             {
                 try
@@ -227,13 +200,13 @@ namespace HttpServer
                 }
             }
         }
+
         public static string ConvertPhaseMatrixToJson(Dictionary<int, Dictionary<int, int>> matrix)
         {
             return JsonConvert.SerializeObject(matrix, Newtonsoft.Json.Formatting.Indented);
         }
 
-        static async Task HandleGetForJSONOnlyReqs(HttpListenerRequest request,
-        HttpListenerResponse response)
+        static async Task HandleGetForJSONOnlyReqs(HttpListenerRequest request, HttpListenerResponse response)
         {
             string filePath = Path.Combine(request.Url + "");
             Console.WriteLine(filePath);
@@ -255,38 +228,24 @@ namespace HttpServer
             for (int i = 1; i <= 6; i++)
                 playerNames.Add("player" + i.ToString());
 
-            // Check if the auth token is valid
             return !string.IsNullOrEmpty(authToken) && playerNames.Contains(authToken);
         }
 
-
-        static async Task HandleAuthRequest(
-        HttpListenerRequest request,
-        HttpListenerResponse response
-)
+        static async Task HandleAuthRequest(HttpListenerRequest request, HttpListenerResponse response)
         {
-            // Read the request body containing the username and password
             string requestBody = await ReadRequestBody(request.InputStream);
 
-            // Validate the username and password
             bool isAuthenticated = await AuthenticateUser(requestBody);
             string username = requestBody.Split(':')[0];
             string parola = requestBody.Split(":")[1];
 
             if (isAuthenticated)
             {
-                // Increment the count of connected users atomically
                 int userCount = Interlocked.Increment(ref connectedUsers);
-
-                await SendResponse(
-                    response,
-                    HttpStatusCode.OK,
-                    "player" + connectedUsers.ToString()
-                );
+                await SendResponse(response, HttpStatusCode.OK, "player" + connectedUsers.ToString());
             }
             else
             {
-                // Send an unauthorized response
                 await SendResponse(response, HttpStatusCode.Unauthorized, "Invalid credentials" + username + parola);
             }
         }
@@ -331,7 +290,6 @@ namespace HttpServer
 
         static async Task<bool> AuthenticateUser(string requestBody)
         {
-            // Parse the request body to get the username and password
             string[] credentials = requestBody.Split(':');
             if (credentials.Length != 2)
             {
@@ -341,7 +299,7 @@ namespace HttpServer
             string password = credentials[1];
 
             Console.WriteLine(username + ":" + password);
-            /*            using (var conn = new MySqlConnection(connectionString))
+                        /*            using (var conn = new MySqlConnection(connectionString))
                         {
                             await conn.OpenAsync();
 
@@ -411,14 +369,13 @@ namespace HttpServer
             HttpResponseMessage forwardResponse = await httpClient.PostAsync("http://localhost:1236/gameprediction", new StringContent(gamestate, Encoding.UTF8, "application/json"));
             await SendResponse(response, forwardResponse.StatusCode, gamestate);
         }
+
         static async Task<string> ReadRequestBody(Stream inputStream)
         {
-            // Read the request body
             using (var reader = new StreamReader(inputStream))
             {
                 return await reader.ReadToEndAsync();
             }
         }
-
     }
 }
