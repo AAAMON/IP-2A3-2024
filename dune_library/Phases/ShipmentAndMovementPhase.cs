@@ -51,7 +51,7 @@ namespace dune_library.Phases
         public override void Play_Out()
         {
             Console.WriteLine("Shipment and Movement Phase started.");
-
+            moment = "Shipment and Movement started...";
             List<Faction> faction_order = GetFactionOrder();
 
             Console.WriteLine(faction_order);
@@ -83,6 +83,9 @@ namespace dune_library.Phases
                     break;
             }
 
+            
+
+            Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
             faction_order.ForEach(faction =>
             {
                 bool correct = false;
@@ -102,6 +105,10 @@ namespace dune_library.Phases
                             string number_of_troops = line[5];
                             if(InsertTroops(faction, number_of_troops, sectionId))
                             {
+                                if (Factions_In_Play.Contains(Faction.Bene_Gesserit))
+                                {
+                                    Handle_Bene();
+                                }
                                 correct = true;
                                 next_faction(faction);
                             }
@@ -134,10 +141,7 @@ namespace dune_library.Phases
                             next_faction(faction);
                         }
                     }
-                    if(correct && Factions_In_Play.Contains(Faction.Bene_Gesserit))
-                    {
-                        Handle_Bene();
-                    }
+                    
                 }
                 Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
             });
@@ -146,6 +150,11 @@ namespace dune_library.Phases
 
         private void Handle_Bene()
         {
+            bool[] previous_order = new bool[6];
+            for(int i = 0; i < Factions_To_Move.Length; i++) { previous_order[i] = Factions_To_Move[i]; Factions_To_Move[i] = false;}
+            Factions_To_Move[1] = true;
+            moment = "waiting for bene input...";
+            Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
             bool correct = false;
             while (!correct)
             {
@@ -168,7 +177,8 @@ namespace dune_library.Phases
                     }
                 }
             }
-            
+            moment = "continue with Shipment and Movement Phase";
+            for (int i = 0; i < Factions_To_Move.Length; i++) { Factions_To_Move[i] = previous_order[i]; }
         }
         private void next_faction(Faction faction)
         {
@@ -230,8 +240,7 @@ namespace dune_library.Phases
             }
 
             var totalCost = costPerTroop * troops_to_place;
-
-            if (Spice_Manager.Remove_Spice_From(faction, (uint)totalCost) && Init.Reserves.Of(faction) >= troops_to_place)
+            if(Spice_Manager.getSpice(faction) >= totalCost && Init.Reserves.Of(faction) >= troops_to_place)
             {
                 if (section.Is_Full_Strongholds)
                 {
@@ -241,6 +250,7 @@ namespace dune_library.Phases
                 else
                 {
                     section.Forces.Transfer_From(faction, Reserves, (uint)troops_to_place);
+                    Spice_Manager.Remove_Spice_From(faction, (uint)totalCost);
                     Console.WriteLine($"{troops} troops inserted into {section.Origin_Territory.Name}.");
                     if (Factions_In_Play.Contains(Faction.Spacing_Guild))
                     {

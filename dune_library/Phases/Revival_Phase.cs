@@ -37,7 +37,7 @@ namespace dune_library.Phases
 
         private I_Spice_Manager Spice_Manager => Init.Knowledge_Manager;
 
-        private Forces Reserves;
+        private Forces Reserves => Init.Reserves;
 
         private I_Perspective_Generator Perspective_Generator { get; }
 
@@ -46,7 +46,7 @@ namespace dune_library.Phases
         private Final_Factions_Distribution Factions_Distribution { get; }
         public override string name => "Revival";
 
-        public override string moment { get; protected set; }
+        public override string moment { get; protected set; } = "";
 
         public bool[] Factions_To_Move { get; }
 
