@@ -1,0 +1,1441 @@
+{
+    "Faction": [
+      "Atreides"
+    ],
+    "Battle_Wheels": {
+      "Item1": {
+        "_last_player": []
+      },
+      "Item2": {
+        "_last_player": []
+      }
+    },
+    "Map": {
+      "Territories": [
+        {
+          "Id": 0,
+          "Name": "Cielago North",
+          "Sections": [
+            {
+              "Id": 0,
+              "Origin_Sector": 0,
+              "Neighboring_Sections_Ids": [
+                85,
+                1,
+                3,
+                84
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 1,
+              "Origin_Sector": 1,
+              "Neighboring_Sections_Ids": [
+                0,
+                85,
+                4
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 2,
+              "Origin_Sector": 2,
+              "Neighboring_Sections_Ids": [
+                85,
+                12,
+                14,
+                10,
+                5,
+                1
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 1,
+          "Name": "Cielago Depression",
+          "Sections": [
+            {
+              "Id": 3,
+              "Origin_Sector": 0,
+              "Neighboring_Sections_Ids": [
+                0,
+                84,
+                4,
+                6
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 4,
+              "Origin_Sector": 1,
+              "Neighboring_Sections_Ids": [
+                3,
+                1,
+                8,
+                7
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 5,
+              "Origin_Sector": 2,
+              "Neighboring_Sections_Ids": [
+                2,
+                10,
+                9,
+                4
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 2,
+          "Name": "Meridian",
+          "Sections": [
+            {
+              "Id": 6,
+              "Origin_Sector": 0,
+              "Neighboring_Sections_Ids": [
+                84,
+                3,
+                7
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 7,
+              "Origin_Sector": 1,
+              "Neighboring_Sections_Ids": [
+                6,
+                4,
+                8
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 3,
+          "Name": "Cielago South",
+          "Sections": [
+            {
+              "Id": 8,
+              "Origin_Sector": 1,
+              "Neighboring_Sections_Ids": [
+                4,
+                7
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 9,
+              "Origin_Sector": 2,
+              "Neighboring_Sections_Ids": [
+                10,
+                5,
+                8
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 4,
+          "Name": "Cielago East",
+          "Sections": [
+            {
+              "Id": 10,
+              "Origin_Sector": 2,
+              "Neighboring_Sections_Ids": [
+                2,
+                11,
+                9,
+                5
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 11,
+              "Origin_Sector": 3,
+              "Neighboring_Sections_Ids": [
+                10,
+                14,
+                16
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 5,
+          "Name": "Harg Pass",
+          "Sections": [
+            {
+              "Id": 12,
+              "Origin_Sector": 3,
+              "Neighboring_Sections_Ids": [
+                2,
+                85,
+                19,
+                13,
+                14
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 13,
+              "Origin_Sector": 4,
+              "Neighboring_Sections_Ids": [
+                12,
+                19,
+                24,
+                15
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 6,
+          "Name": "False Wall South",
+          "Sections": [
+            {
+              "Id": 14,
+              "Origin_Sector": 3,
+              "Neighboring_Sections_Ids": [
+                2,
+                12,
+                15,
+                16,
+                11
+              ],
+              "Forces": {
+                "Fremen": 10
+              }
+            },
+            {
+              "Id": 15,
+              "Origin_Sector": 4,
+              "Neighboring_Sections_Ids": [
+                14,
+                13,
+                24,
+                28,
+                32,
+                17
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 7,
+          "Name": "South Mesa",
+          "Sections": [
+            {
+              "Id": 16,
+              "Origin_Sector": 3,
+              "Neighboring_Sections_Ids": [
+                14,
+                11,
+                17
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 17,
+              "Origin_Sector": 4,
+              "Neighboring_Sections_Ids": [
+                16,
+                15,
+                28,
+                32,
+                18
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 18,
+              "Origin_Sector": 5,
+              "Neighboring_Sections_Ids": [
+                17,
+                29,
+                33
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 8,
+          "Name": "False_Wall_East",
+          "Sections": [
+            {
+              "Id": 19,
+              "Origin_Sector": 4,
+              "Neighboring_Sections_Ids": [
+                12,
+                85,
+                20,
+                24,
+                13
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 20,
+              "Origin_Sector": 5,
+              "Neighboring_Sections_Ids": [
+                19,
+                85,
+                21,
+                25
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 21,
+              "Origin_Sector": 6,
+              "Neighboring_Sections_Ids": [
+                20,
+                85,
+                22,
+                26
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 22,
+              "Origin_Sector": 7,
+              "Neighboring_Sections_Ids": [
+                21,
+                85,
+                23,
+                34,
+                27
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 23,
+              "Origin_Sector": 8,
+              "Neighboring_Sections_Ids": [
+                22,
+                37,
+                85,
+                35
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 9,
+          "Name": "The Minor Erg",
+          "Sections": [
+            {
+              "Id": 24,
+              "Origin_Sector": 4,
+              "Neighboring_Sections_Ids": [
+                19,
+                13,
+                25,
+                28,
+                15
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 25,
+              "Origin_Sector": 5,
+              "Neighboring_Sections_Ids": [
+                24,
+                20,
+                26,
+                29
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 26,
+              "Origin_Sector": 6,
+              "Neighboring_Sections_Ids": [
+                25,
+                21,
+                27,
+                30
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 27,
+              "Origin_Sector": 7,
+              "Neighboring_Sections_Ids": [
+                26,
+                22,
+                34,
+                31
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 10,
+          "Name": "Pasty_Mesa",
+          "Sections": [
+            {
+              "Id": 28,
+              "Origin_Sector": 4,
+              "Neighboring_Sections_Ids": [
+                24,
+                15,
+                29,
+                17,
+                32
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 29,
+              "Origin_Sector": 5,
+              "Neighboring_Sections_Ids": [
+                28,
+                25,
+                30,
+                18
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 30,
+              "Origin_Sector": 6,
+              "Neighboring_Sections_Ids": [
+                29,
+                26,
+                31,
+                33
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 31,
+              "Origin_Sector": 7,
+              "Neighboring_Sections_Ids": [
+                30,
+                34,
+                27,
+                36
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 11,
+          "Name": "Tuek\u0027s Sietch",
+          "Sections": [
+            {
+              "Id": 32,
+              "Origin_Sector": 4,
+              "Neighboring_Sections_Ids": [
+                15,
+                28,
+                17
+              ],
+              "Forces": {
+                "Spacing_Guild": 5
+              }
+            }
+          ]
+        },
+        {
+          "Id": 12,
+          "Name": "Red Chasm",
+          "Sections": [
+            {
+              "Id": 33,
+              "Origin_Sector": 6,
+              "Neighboring_Sections_Ids": [
+                18,
+                30
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 13,
+          "Name": "Shield_Wall",
+          "Sections": [
+            {
+              "Id": 34,
+              "Origin_Sector": 7,
+              "Neighboring_Sections_Ids": [
+                22,
+                35,
+                36,
+                31,
+                27
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 35,
+              "Origin_Sector": 8,
+              "Neighboring_Sections_Ids": [
+                34,
+                37,
+                23,
+                40,
+                43
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 14,
+          "Name": "Gara Kulon",
+          "Sections": [
+            {
+              "Id": 36,
+              "Origin_Sector": 7,
+              "Neighboring_Sections_Ids": [
+                34,
+                31,
+                43
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 15,
+          "Name": "Imperial Basin",
+          "Sections": [
+            {
+              "Id": 37,
+              "Origin_Sector": 8,
+              "Neighboring_Sections_Ids": [
+                85,
+                38,
+                41,
+                40,
+                35,
+                23
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 38,
+              "Origin_Sector": 9,
+              "Neighboring_Sections_Ids": [
+                37,
+                41,
+                85,
+                39,
+                45,
+                47
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 39,
+              "Origin_Sector": 10,
+              "Neighboring_Sections_Ids": [
+                38,
+                48,
+                50,
+                51
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 16,
+          "Name": "Hole In The Rock",
+          "Sections": [
+            {
+              "Id": 40,
+              "Origin_Sector": 8,
+              "Neighboring_Sections_Ids": [
+                37,
+                35,
+                41,
+                42,
+                43
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 17,
+          "Name": "Rim Wall West",
+          "Sections": [
+            {
+              "Id": 41,
+              "Origin_Sector": 8,
+              "Neighboring_Sections_Ids": [
+                37,
+                40,
+                38,
+                47,
+                44,
+                42
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 18,
+          "Name": "Basin",
+          "Sections": [
+            {
+              "Id": 42,
+              "Origin_Sector": 8,
+              "Neighboring_Sections_Ids": [
+                40,
+                41,
+                44,
+                43
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 19,
+          "Name": "Sihaya Ridge",
+          "Sections": [
+            {
+              "Id": 43,
+              "Origin_Sector": 8,
+              "Neighboring_Sections_Ids": [
+                36,
+                35,
+                40,
+                42
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 20,
+          "Name": "Old Gap",
+          "Sections": [
+            {
+              "Id": 44,
+              "Origin_Sector": 8,
+              "Neighboring_Sections_Ids": [
+                41,
+                42,
+                45
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 45,
+              "Origin_Sector": 9,
+              "Neighboring_Sections_Ids": [
+                44,
+                38,
+                47,
+                46
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 46,
+              "Origin_Sector": 10,
+              "Neighboring_Sections_Ids": [
+                45,
+                51
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 21,
+          "Name": "Arrakeen",
+          "Sections": [
+            {
+              "Id": 47,
+              "Origin_Sector": 9,
+              "Neighboring_Sections_Ids": [
+                41,
+                38,
+                45
+              ],
+              "Forces": {
+                "Atreides": 10
+              }
+            }
+          ]
+        },
+        {
+          "Id": 22,
+          "Name": "Arsunt",
+          "Sections": [
+            {
+              "Id": 48,
+              "Origin_Sector": 10,
+              "Neighboring_Sections_Ids": [
+                85,
+                49,
+                56,
+                50,
+                39
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 49,
+              "Origin_Sector": 11,
+              "Neighboring_Sections_Ids": [
+                48,
+                85,
+                57,
+                56
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 23,
+          "Name": "Carthag",
+          "Sections": [
+            {
+              "Id": 50,
+              "Origin_Sector": 10,
+              "Neighboring_Sections_Ids": [
+                48,
+                39,
+                56,
+                52,
+                51
+              ],
+              "Forces": {
+                "Harkonnen": 10
+              }
+            }
+          ]
+        },
+        {
+          "Id": 24,
+          "Name": "Tsimpo",
+          "Sections": [
+            {
+              "Id": 51,
+              "Origin_Sector": 10,
+              "Neighboring_Sections_Ids": [
+                39,
+                50,
+                52,
+                54,
+                46
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 52,
+              "Origin_Sector": 11,
+              "Neighboring_Sections_Ids": [
+                50,
+                51,
+                56,
+                53,
+                58,
+                55
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 53,
+              "Origin_Sector": 12,
+              "Neighboring_Sections_Ids": [
+                52,
+                57,
+                59
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 25,
+          "Name": "Broken Land",
+          "Sections": [
+            {
+              "Id": 54,
+              "Origin_Sector": 10,
+              "Neighboring_Sections_Ids": [
+                51,
+                55
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 55,
+              "Origin_Sector": 11,
+              "Neighboring_Sections_Ids": [
+                54,
+                52,
+                58,
+                61
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 26,
+          "Name": "Hagga_Basin",
+          "Sections": [
+            {
+              "Id": 56,
+              "Origin_Sector": 11,
+              "Neighboring_Sections_Ids": [
+                48,
+                50,
+                49,
+                57,
+                52
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 57,
+              "Origin_Sector": 12,
+              "Neighboring_Sections_Ids": [
+                49,
+                56,
+                85,
+                63,
+                60,
+                59,
+                53
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 27,
+          "Name": "Plastic Basin",
+          "Sections": [
+            {
+              "Id": 58,
+              "Origin_Sector": 11,
+              "Neighboring_Sections_Ids": [
+                52,
+                59,
+                55
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 59,
+              "Origin_Sector": 12,
+              "Neighboring_Sections_Ids": [
+                58,
+                57,
+                60,
+                61,
+                53
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 60,
+              "Origin_Sector": 13,
+              "Neighboring_Sections_Ids": [
+                57,
+                59,
+                63,
+                70,
+                71,
+                68,
+                67,
+                62
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 28,
+          "Name": "Rock Outcroppings",
+          "Sections": [
+            {
+              "Id": 61,
+              "Origin_Sector": 12,
+              "Neighboring_Sections_Ids": [
+                55,
+                59,
+                62
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 62,
+              "Origin_Sector": 13,
+              "Neighboring_Sections_Ids": [
+                61,
+                60,
+                68,
+                67
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 29,
+          "Name": "Wind Pass",
+          "Sections": [
+            {
+              "Id": 63,
+              "Origin_Sector": 13,
+              "Neighboring_Sections_Ids": [
+                57,
+                85,
+                64,
+                60
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 64,
+              "Origin_Sector": 14,
+              "Neighboring_Sections_Ids": [
+                63,
+                85,
+                65,
+                70
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 65,
+              "Origin_Sector": 15,
+              "Neighboring_Sections_Ids": [
+                64,
+                85,
+                78,
+                66,
+                73,
+                72
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 66,
+              "Origin_Sector": 16,
+              "Neighboring_Sections_Ids": [
+                65,
+                78,
+                83,
+                74
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 30,
+          "Name": "Sietch Tabr",
+          "Sections": [
+            {
+              "Id": 67,
+              "Origin_Sector": 13,
+              "Neighboring_Sections_Ids": [
+                60,
+                68,
+                62
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 31,
+          "Name": "Bight Presence_Of The Cliff",
+          "Sections": [
+            {
+              "Id": 68,
+              "Origin_Sector": 13,
+              "Neighboring_Sections_Ids": [
+                60,
+                69,
+                62,
+                67
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 69,
+              "Origin_Sector": 14,
+              "Neighboring_Sections_Ids": [
+                68,
+                71
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 32,
+          "Name": "The Great Flat",
+          "Sections": [
+            {
+              "Id": 70,
+              "Origin_Sector": 14,
+              "Neighboring_Sections_Ids": [
+                60,
+                64,
+                72,
+                71
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 33,
+          "Name": "Funeral Plain",
+          "Sections": [
+            {
+              "Id": 71,
+              "Origin_Sector": 14,
+              "Neighboring_Sections_Ids": [
+                60,
+                70,
+                69
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 34,
+          "Name": "The Greater Flat",
+          "Sections": [
+            {
+              "Id": 72,
+              "Origin_Sector": 15,
+              "Neighboring_Sections_Ids": [
+                70,
+                65,
+                73,
+                76
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 35,
+          "Name": "False Wall West",
+          "Sections": [
+            {
+              "Id": 73,
+              "Origin_Sector": 15,
+              "Neighboring_Sections_Ids": [
+                65,
+                72,
+                74
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 74,
+              "Origin_Sector": 16,
+              "Neighboring_Sections_Ids": [
+                73,
+                66,
+                75,
+                80,
+                77
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 75,
+              "Origin_Sector": 17,
+              "Neighboring_Sections_Ids": [
+                74,
+                83,
+                81
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 36,
+          "Name": "Habbanya Erg",
+          "Sections": [
+            {
+              "Id": 76,
+              "Origin_Sector": 15,
+              "Neighboring_Sections_Ids": [
+                72,
+                77,
+                80
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 77,
+              "Origin_Sector": 16,
+              "Neighboring_Sections_Ids": [
+                76,
+                74,
+                80
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 37,
+          "Name": "Wind Pass North",
+          "Sections": [
+            {
+              "Id": 78,
+              "Origin_Sector": 16,
+              "Neighboring_Sections_Ids": [
+                65,
+                85,
+                79,
+                66
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 79,
+              "Origin_Sector": 17,
+              "Neighboring_Sections_Ids": [
+                78,
+                85,
+                0,
+                83
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 38,
+          "Name": "Habbanya Ridge Flat",
+          "Sections": [
+            {
+              "Id": 80,
+              "Origin_Sector": 16,
+              "Neighboring_Sections_Ids": [
+                76,
+                74,
+                77,
+                81,
+                82
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 81,
+              "Origin_Sector": 17,
+              "Neighboring_Sections_Ids": [
+                80,
+                82,
+                83,
+                75,
+                6
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 39,
+          "Name": "Habbanya Sietch",
+          "Sections": [
+            {
+              "Id": 82,
+              "Origin_Sector": 16,
+              "Neighboring_Sections_Ids": [
+                80,
+                81
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 40,
+          "Name": "Cielago West",
+          "Sections": [
+            {
+              "Id": 83,
+              "Origin_Sector": 17,
+              "Neighboring_Sections_Ids": [
+                66,
+                79,
+                0,
+                84,
+                81,
+                75
+              ],
+              "Forces": {}
+            },
+            {
+              "Id": 84,
+              "Origin_Sector": 0,
+              "Neighboring_Sections_Ids": [
+                0,
+                3,
+                6
+              ],
+              "Forces": {}
+            }
+          ]
+        },
+        {
+          "Id": 41,
+          "Name": "Polar Sink",
+          "Sections": [
+            {
+              "Id": 85,
+              "Origin_Sector": 18,
+              "Neighboring_Sections_Ids": [
+                0,
+                1,
+                2,
+                12,
+                19,
+                20,
+                21,
+                22,
+                37,
+                23,
+                38,
+                48,
+                49,
+                57,
+                63,
+                64,
+                65,
+                78,
+                79
+              ],
+              "Forces": {
+                "Bene_Gesserit": 1
+              }
+            }
+          ]
+        }
+      ],
+      "Spice_Dict": {
+        "2": {
+          "Capacity": 8,
+          "Avaliable": 0
+        },
+        "8": {
+          "Capacity": 12,
+          "Avaliable": 0
+        },
+        "17": {
+          "Capacity": 10,
+          "Avaliable": 0
+        },
+        "27": {
+          "Capacity": 8,
+          "Avaliable": 0
+        },
+        "33": {
+          "Capacity": 8,
+          "Avaliable": 0
+        },
+        "43": {
+          "Capacity": 6,
+          "Avaliable": 0
+        },
+        "45": {
+          "Capacity": 6,
+          "Avaliable": 0
+        },
+        "55": {
+          "Capacity": 8,
+          "Avaliable": 0
+        },
+        "57": {
+          "Capacity": 6,
+          "Avaliable": 0
+        },
+        "62": {
+          "Capacity": 6,
+          "Avaliable": 0
+        },
+        "70": {
+          "Capacity": 10,
+          "Avaliable": 0
+        },
+        "71": {
+          "Capacity": 6,
+          "Avaliable": 0
+        },
+        "76": {
+          "Capacity": 8,
+          "Avaliable": 0
+        },
+        "78": {
+          "Capacity": 6,
+          "Avaliable": 0
+        },
+        "81": {
+          "Capacity": 10,
+          "Avaliable": 0
+        }
+      },
+      "Storm_Sector": 0,
+      "Shield_Wall_Was_Destroyed": false
+    },
+    "Round": 0,
+    "Phase": [
+      {
+        "name": "Revive",
+        "moment": null
+      }
+    ],
+    "Player_Markers": [
+      [
+        {
+          "State": "IsRight",
+          "Right": {
+            "Faction_To_Marker": {
+              "Atreides": 1,
+              "Bene_Gesserit": 4,
+              "Emperor": 7,
+              "Fremen": 10,
+              "Spacing_Guild": 13,
+              "Harkonnen": 16
+            },
+            "Marker_To_Faction": {
+              "1": "Atreides",
+              "4": "Bene_Gesserit",
+              "7": "Emperor",
+              "10": "Fremen",
+              "13": "Spacing_Guild",
+              "16": "Harkonnen"
+            },
+            "Player_Marker_Positions": [
+              1,
+              4,
+              7,
+              10,
+              13,
+              16
+            ]
+          },
+          "Left": null
+        }
+      ]
+    ],
+    "Alliances": [
+      {
+        "Atreides": [],
+        "Bene_Gesserit": [],
+        "Emperor": [],
+        "Fremen": [],
+        "Spacing_Guild": [],
+        "Harkonnen": []
+      }
+    ],
+    "Last_Spice_Card": [],
+    "Reserves": [
+      {
+        "Atreides": 10,
+        "Bene_Gesserit": 19,
+        "Emperor": 20,
+        "Fremen": 10,
+        "Spacing_Guild": 15,
+        "Harkonnen": 10
+      }
+    ],
+    "Tleilaxu_Tanks": [
+      {
+        "Forces": {
+          "Spacing_Guild": 5
+        },
+        "Non_Revivable_Generals": {
+          "Atreides": [],
+          "Bene_Gesserit": [],
+          "Emperor": [],
+          "Fremen": [],
+          "Spacing_Guild": [],
+          "Harkonnen": []
+        },
+        "Revivable_Generals": {
+          "Atreides": [],
+          "Bene_Gesserit": [],
+          "Emperor": [],
+          "Fremen": [],
+          "Spacing_Guild": [],
+          "Harkonnen": []
+        }
+      }
+    ],
+    "Faction_Knowledge": [
+      {
+        "Spice": 10,
+        "Treachery_Cards": {
+          "Ellaca_Drug": 1
+        },
+        "Traitors": [
+          {
+            "Id": 11,
+            "Faction": "Emperor",
+            "Name": "Burseg",
+            "Strength": 3
+          }
+        ],
+        "Discarded_Traitors": [
+          {
+            "Id": 5,
+            "Faction": "Bene_Gesserit",
+            "Name": "Wanna Yueh",
+            "Strength": 5
+          },
+          {
+            "Id": 26,
+            "Faction": "Harkonnen",
+            "Name": "Captain Iakin Nefud",
+            "Strength": 2
+          },
+          {
+            "Id": 24,
+            "Faction": "Spacing_Guild",
+            "Name": "Staban Tuek",
+            "Strength": 5
+          }
+        ],
+        "Number_Of_Treachery_Cards_Of_Other_Factions": {
+          "Atreides": 1,
+          "Bene_Gesserit": 1,
+          "Emperor": 1,
+          "Fremen": 1,
+          "Spacing_Guild": 1,
+          "Harkonnen": 2
+        }
+      }
+    ]
+  }

@@ -551,6 +551,9 @@ def get_move(game_state):
     phase_name = game_state['Phase'][0]['name']
     phase_moment = game_state['Phase'][0]['moment']
 
+    if phase_name == "Revive":
+        return revival(game_state)
+
     if phase_name == "Pick Traitor":
         return pick_traitor(game_state)
     
