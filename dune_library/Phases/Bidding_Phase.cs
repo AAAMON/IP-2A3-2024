@@ -122,6 +122,33 @@ namespace dune_library.Phases
                     break;
             }
         }
+
+        private bool[] Has_Passed(bool[] who_passed, Faction faction)
+        {
+            switch (faction)
+            {
+                case Faction.Atreides:
+                    who_passed[0] = true;
+                    break;
+                case Faction.Bene_Gesserit:
+                    who_passed[1] = true;
+                    break;
+                case Faction.Emperor:
+                    who_passed[2] = true;
+                    break;
+                case Faction.Fremen:
+                    who_passed[3] = true;
+                    break;
+                case Faction.Spacing_Guild:
+                    who_passed[4] = true;
+                    break;
+                case Faction.Harkonnen:
+                    who_passed[5] = true;
+                    break;
+            }
+            return who_passed;
+        }
+
         public override void Play_Out()
         {
             //string Get_Card = Wait_Until_Something.AwaitInput(3000, Input_Provider).Result;
@@ -132,10 +159,15 @@ namespace dune_library.Phases
             List<Faction> faction_order = GetFactionOrder();
 
             int max_number_of_cards = 0;
+            bool[] who_passed = new bool[6]; //Atreides Bene Gesserit Emperor Fremen Guild Harkonnen
 
             faction_order.ForEach(faction => {
                 if (Faction_Knowledge.Of(faction).Number_Of_Treachery_Cards_Of(faction) < (faction == Faction.Harkonnen ? Max_Cards_Harkonnen : Max_Cards_Others))
                     max_number_of_cards++;
+                else
+                {
+                    Has_Passed(who_passed, faction);
+                }
                 });
 
             switch (faction_order.First())
@@ -160,7 +192,6 @@ namespace dune_library.Phases
                     break;
             }
 
-            bool[] who_passed = new bool[6]; //Atreides Bene Gesserit Emperor Fremen Guild Harkonnen
 
             moment = "bidding started";
 
@@ -168,12 +199,60 @@ namespace dune_library.Phases
 
             while (max_number_of_cards > 0 && who_passed.Contains(false)) {
                 var biddingOrder = new Queue<Faction>();
+                who_passed = new bool[6];
                 faction_order.ForEach(faction => {
                     if (Faction_Knowledge.Of(faction).Number_Of_Treachery_Cards_Of(faction) < (faction == Faction.Harkonnen ? Max_Cards_Harkonnen : Max_Cards_Others))
                         biddingOrder.Enqueue(faction);
+                    else
+                    {
+                        switch (faction)
+                        {
+                            case Faction.Atreides:
+                                who_passed[0] = true;
+                                break;
+                            case Faction.Bene_Gesserit:
+                                who_passed[1] = true;
+                                break;
+                            case Faction.Emperor:
+                                who_passed[2] = true;
+                                break;
+                            case Faction.Fremen:
+                                who_passed[3] = true;
+                                break;
+                            case Faction.Spacing_Guild:
+                                who_passed[4] = true;
+                                break;
+                            case Faction.Harkonnen:
+                                who_passed[5] = true;
+                                break;
+                        }
+                    }
                 });
-                who_passed = new bool[6];
+                
                 var topCard = treachery_Deck.Next_Card_Peek;
+
+                for (int i = 0; i < faction_order.Count; i++) { Factions_To_Move[i] = false; }  
+                switch (faction_order.First())
+                {
+                    case Faction.Atreides:
+                        Factions_To_Move[0] = true;
+                        break;
+                    case Faction.Bene_Gesserit:
+                        Factions_To_Move[1] = true;
+                        break;
+                    case Faction.Emperor:
+                        Factions_To_Move[2] = true;
+                        break;
+                    case Faction.Fremen:
+                        Factions_To_Move[3] = true;
+                        break;
+                    case Faction.Spacing_Guild:
+                        Factions_To_Move[4] = true;
+                        break;
+                    case Faction.Harkonnen:
+                        Factions_To_Move[5] = true;
+                        break;
+                }
 
                 var currentBidder = biddingOrder.Dequeue();
                 while (biddingOrder.Any() && who_passed.Contains(false))

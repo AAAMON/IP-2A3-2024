@@ -33,22 +33,22 @@ namespace dune_library.Map_Resoures {
 
     [JsonInclude]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    private uint? Atreides => Forces_Dict.ContainsKey(Faction.Atreides) ? Forces_Dict[Faction.Atreides] : null;
+    private uint? Atreides => Forces_Dict.ContainsKey(Faction.Atreides) ? Forces_Dict[Faction.Atreides] : 0;
     [JsonInclude]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    private uint? Bene_Gesserit => Forces_Dict.ContainsKey(Faction.Bene_Gesserit) ? Forces_Dict[Faction.Bene_Gesserit] : null;
+    private uint? Bene_Gesserit => Forces_Dict.ContainsKey(Faction.Bene_Gesserit) ? Forces_Dict[Faction.Bene_Gesserit] : 0;
     [JsonInclude]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    private uint? Emperor => Forces_Dict.ContainsKey(Faction.Emperor) ? Forces_Dict[Faction.Emperor] : null;
+    private uint? Emperor => Forces_Dict.ContainsKey(Faction.Emperor) ? Forces_Dict[Faction.Emperor] : 0;
     [JsonInclude]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    private uint? Fremen => Forces_Dict.ContainsKey(Faction.Fremen) ? Forces_Dict[Faction.Fremen] : null;
+    private uint? Fremen => Forces_Dict.ContainsKey(Faction.Fremen) ? Forces_Dict[Faction.Fremen] : 0;
     [JsonInclude]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    private uint? Spacing_Guild => Forces_Dict.ContainsKey(Faction.Spacing_Guild) ? Forces_Dict[Faction.Spacing_Guild] : null;
+    private uint? Spacing_Guild => Forces_Dict.ContainsKey(Faction.Spacing_Guild) ? Forces_Dict[Faction.Spacing_Guild] : 0;
     [JsonInclude]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    private uint? Harkonnen => Forces_Dict.ContainsKey(Faction.Harkonnen) ? Forces_Dict[Faction.Harkonnen] : null;
+    private uint? Harkonnen => Forces_Dict.ContainsKey(Faction.Harkonnen) ? Forces_Dict[Faction.Harkonnen] : 0;
     // I don't know a better way of writing this (I tried implementing ISerializable through Forces_Dict
 
     #endregion
