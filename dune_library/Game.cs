@@ -99,7 +99,8 @@ namespace dune_library
                 //battle
                 Thread.Sleep(5000);
                 Console.WriteLine("Battle Phase");
-
+                Phase = new Battle_Phase(this);
+                Phase.ValueUnsafe().Play_Out();
 
                 //spice harvest
                 Thread.Sleep(5000);

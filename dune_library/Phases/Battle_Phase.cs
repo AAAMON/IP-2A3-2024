@@ -49,6 +49,8 @@ namespace dune_library.Phases
 
         public Faction_Battles Faction_Battles { get; }
 
+        private bool Las_Gun_Explosion = false;
+
         public Battle_Phase(Game game)
         {
             Input_Provider = game.Input_Provider;
@@ -127,41 +129,40 @@ namespace dune_library.Phases
         {
             moment = "battle initialization";
 
-            for (int i = 0;i < Factions_To_Move.Length;i++) { Factions_To_Move[i] = false; }
-
             IList<Faction> faction_order = new List<Faction>(GetFactionOrder());
 
             Battle_Wheels = (new Battle_Wheel(), new Battle_Wheel());
 
-            switch (faction_order.First())
-            {
-                case Faction.Atreides:
-                    Factions_To_Move[0] = true;
-                    break;
-                case Faction.Bene_Gesserit:
-                    Factions_To_Move[1] = true;
-                    break;
-                case Faction.Emperor:
-                    Factions_To_Move[2] = true;
-                    break;
-                case Faction.Fremen:
-                    Factions_To_Move[3] = true;
-                    break;
-                case Faction.Spacing_Guild:
-                    Factions_To_Move[4] = true;
-                    break;
-                case Faction.Harkonnen:
-                    Factions_To_Move[5] = true;
-                    break;
-            }
-
             ///player1/phase_7_input/section_id/player_id/number/general_name/treachery_card/treachery_card
-            Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
             moment = "choosing battle";
            
             faction_order.ForEach(faction => {
 
+                for (int i = 0; i < Factions_To_Move.Length; i++) { Factions_To_Move[i] = false; }
+                switch (faction)
+                {
+                    case Faction.Atreides:
+                        Factions_To_Move[0] = true;
+                        break;
+                    case Faction.Bene_Gesserit:
+                        Factions_To_Move[1] = true;
+                        break;
+                    case Faction.Emperor:
+                        Factions_To_Move[2] = true;
+                        break;
+                    case Faction.Fremen:
+                        Factions_To_Move[3] = true;
+                        break;
+                    case Faction.Spacing_Guild:
+                        Factions_To_Move[4] = true;
+                        break;
+                    case Faction.Harkonnen:
+                        Factions_To_Move[5] = true;
+                        break;
+                }
+
                 Faction_Battles.faction = faction;
+
                 Map.Sections.ForEach(section => {
                     if (section.Forces.Number_Of_Factions_Present > 1 && section.Forces.Of(faction) > 0 && section.Id != 85)
                     {
@@ -181,18 +182,22 @@ namespace dune_library.Phases
                         && Is_Valid_Player(line[4]) && Is_Valid_Section(line[3]))
                     {
                         int section_id = Int32.Parse(line[3]);
+                        Faction enemy = Faction.Atreides;
                         Factions_In_Play.ForEach(faction =>
                         {
                             if (Init.Factions_Distribution.Player_Of(faction).Id == line[4])
                             {
-                                Faction_Battles.enemy = faction;
+                                 enemy = faction;
                             }
                         });
-                        if (Map.Sections[section_id].Forces.Of((Faction)Faction_Battles.enemy) > 0
+
+                        if (Map.Sections[section_id].Forces.Of(enemy) > 0
                             && Faction_Battles.Battle_Sections.Contains(Map.Sections[section_id].Id)
-                            && (Faction)Faction_Battles.enemy != (Faction)Faction_Battles.faction)
+                            && enemy != (Faction)Faction_Battles.faction)
                         {
+                            Faction_Battles.enemy = enemy;
                             Faction_Battles.Chosen_Battle_Section = Map.Sections[section_id].Id;
+
                             Handle_Battle_Wheel();
                         }
                     }
@@ -201,26 +206,55 @@ namespace dune_library.Phases
                         Console.WriteLine("Failure");
                     }
                 }
-                
             });
+            moment = "End of battle";
+            Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+
         }
         public void Handle_Battle_Wheel()
         {
             moment = "Battle Wheel";
             
             IList<Faction> Factions_In_Battle = [(Faction)Faction_Battles.faction,(Faction)Faction_Battles.enemy];
+
             Battle_Wheels.first.Last_Player = Init.Factions_Distribution.Player_Of((Faction)Faction_Battles.faction);
             Battle_Wheels.second.Last_Player = Init.Factions_Distribution.Player_Of((Faction)Faction_Battles.enemy);
-            
+
+            Factions_In_Battle.ForEach(f => {
+                switch (f)
+                {
+                    case Faction.Atreides:
+                        Factions_To_Move[0] = true;
+                        break;
+                    case Faction.Bene_Gesserit:
+                        Factions_To_Move[1] = true;
+                        break;
+                    case Faction.Emperor:
+                        Factions_To_Move[2] = true;
+                        break;
+                    case Faction.Fremen:
+                        Factions_To_Move[3] = true;
+                        break;
+                    case Faction.Spacing_Guild:
+                        Factions_To_Move[4] = true;
+                        break;
+                    case Faction.Harkonnen:
+                        Factions_To_Move[5] = true;
+                        break;
+                }
+            });
+
             Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
             
             while (Factions_In_Battle.Count > 0)
             {
+               
                 Console.WriteLine("ex: /player_id/phase_7_input/number/general_name/treachery_card/treachery_card");
                 string[] line = Input_Provider.GetInputAsync().Result.Split("/");
                 if (Is_Valid_Player(line[1]) && line[2] == "phase_7_input" && line.Length <= 7 && line.Length >= 5) {
                     Factions_In_Play.ForEach(faction =>
                     {
+                        bool correct = false;
                         if (Init.Factions_Distribution.Player_Of(faction).Id == line[1] && Factions_In_Battle.Contains(faction))
                         {
                             Factions_In_Battle.Remove(faction);
@@ -233,33 +267,56 @@ namespace dune_library.Phases
                             {
                                 if(line.Length == 5)
                                 {
-                                    Handle_Battle_Result();
+                                    correct = true;
                                 }
-                                else if(line.Length == 7)
+                                else if(line.Length == 6)
                                 {
-                                    if (line[7] == "off" || line[7] == "def")
+                                    if(Handle_One_Card(faction, line[5],aggresor))
                                     {
-                                        if(Handle_One_Card(faction, line[5],aggresor))
-                                        {
-                                            Handle_Battle_Result();
-                                        }
+                                        correct = true;
                                     }
-                                    else
+                                }
+                                else if (line.Length == 7)
+                                {
+                                    if (Handle_Two_Cards(faction, line[5], line[6], aggresor))
                                     {
-                                        if(Handle_Two_Cards(faction, line[5], line[6],aggresor))
-                                        {
-                                            Handle_Battle_Result();
-                                        }
+                                        correct = true;
                                     }
                                 }
                             }
                         }
-                            
+                        if (correct)
+                        {
+                            switch (faction)
+                            {
+                                case Faction.Atreides:
+                                    Factions_To_Move[0] = false;
+                                    break;
+                                case Faction.Bene_Gesserit:
+                                    Factions_To_Move[1] = false;
+                                    break;
+                                case Faction.Emperor:
+                                    Factions_To_Move[2] = false;
+                                    break;
+                                case Faction.Fremen:
+                                    Factions_To_Move[3] = false;
+                                    break;
+                                case Faction.Spacing_Guild:
+                                    Factions_To_Move[4] = false;
+                                    break;
+                                case Faction.Harkonnen:
+                                    Factions_To_Move[5] = false;
+                                    break;
+                            }
+                            Handle_Battle_Result();
+                            Factions_In_Battle.Remove(faction);
+                        }
+
                     });
                 }
-
+                
             }
-
+            
         }
 
         public bool Is_Valid_Player(string input)
@@ -291,8 +348,124 @@ namespace dune_library.Phases
             Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
 
             Handle_Treachery_Cards_Battle();
+            Faction aggresor = Init.Factions_Distribution.Faction_Of(Battle_Wheels.first.Last_Player);
+            Faction victim = Init.Factions_Distribution.Faction_Of(Battle_Wheels.second.Last_Player);
+            uint number_aggresor = Battle_Wheels.first.number;
+            uint number_victim = Battle_Wheels.second.number;
+            if (Las_Gun_Explosion)
+            {
+                Console.WriteLine("No one survived");
+            }
+            else
+            {
+                if (!Battle_Wheels.first.General.IsNull())
+                {
+                    if(!Tleilaxu_Tanks.Non_Revivable_Generals_Of(aggresor).Contains(Battle_Wheels.first.General) 
+                        && !Tleilaxu_Tanks.Revivable_Generals_Of(aggresor).Contains(Battle_Wheels.first.General))
+                    {
+                        number_aggresor += (uint)Battle_Wheels.first.General.Strength;
+                    }
+                }
+                if (!Battle_Wheels.second.General.IsNull())
+                {
+                    if (!Tleilaxu_Tanks.Non_Revivable_Generals_Of(aggresor).Contains(Battle_Wheels.second.General) 
+                        && !Tleilaxu_Tanks.Revivable_Generals_Of(aggresor).Contains(Battle_Wheels.second.General))
+                    {
+                        number_victim += (uint)Battle_Wheels.second.General.Strength;
+                    }
+                }
+                if(number_aggresor >= number_victim)
+                {
+                    uint all_forces = Map.Sections[(int)Faction_Battles.Chosen_Battle_Section].Forces.Of(victim);
+                    Tleilaxu_Tanks.Forces.Transfer_From(aggresor, Map.Sections[(int)Faction_Battles.Chosen_Battle_Section].Forces, Battle_Wheels.first.number);
+                    Tleilaxu_Tanks.Forces.Transfer_From(victim, Map.Sections[(int)Faction_Battles.Chosen_Battle_Section].Forces, all_forces);
+                    if (Battle_Wheels.second.Defensive_Treachery_Card.IsSome)
+                    {
+                        Treachery_Cards_Manager.Remove_Treachery_Card(aggresor, (Treachery_Cards.Treachery_Card)Battle_Wheels.second.Defensive_Treachery_Card);
+                    }
+                    if (Battle_Wheels.second.Offensive_Treachery_Card.IsSome)
+                    {
+                        Treachery_Cards_Manager.Remove_Treachery_Card(aggresor, (Treachery_Cards.Treachery_Card)Battle_Wheels.second.Offensive_Treachery_Card);
+                    }
+                    Handle_Treachery_Cards_Discard(aggresor);
+                }
+                else
+                {
+                    uint all_forces = Map.Sections[(int)Faction_Battles.Chosen_Battle_Section].Forces.Of(aggresor);
+                    Tleilaxu_Tanks.Forces.Transfer_From(victim, Map.Sections[(int)Faction_Battles.Chosen_Battle_Section].Forces, Battle_Wheels.second.number);
+                    Tleilaxu_Tanks.Forces.Transfer_From(aggresor, Map.Sections[(int)Faction_Battles.Chosen_Battle_Section].Forces, all_forces);
+                    if (Battle_Wheels.first.Defensive_Treachery_Card.IsSome)
+                    {
+                        Treachery_Cards_Manager.Remove_Treachery_Card(aggresor, (Treachery_Cards.Treachery_Card)Battle_Wheels.first.Defensive_Treachery_Card);
+                    }
+                    if (Battle_Wheels.first.Offensive_Treachery_Card.IsSome)
+                    {
+                        Treachery_Cards_Manager.Remove_Treachery_Card(aggresor, (Treachery_Cards.Treachery_Card)Battle_Wheels.first.Offensive_Treachery_Card);
+                    }
+                    Handle_Treachery_Cards_Discard(victim);
+                }
+            }
+        }
+        public void Handle_Treachery_Cards_Discard(Faction faction)
+        {
+            moment = "discard treachery cards";
+            Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
 
+            List<Treachery_Cards.Treachery_Card> cards_to_discard = new List<Treachery_Cards.Treachery_Card> ();
+            if(Faction_Battles.faction == faction)
+            {
+                if (Battle_Wheels.first.Offensive_Treachery_Card.IsSome)
+                {
 
+                    cards_to_discard.Add((Treachery_Cards.Treachery_Card)Battle_Wheels.first.Offensive_Treachery_Card);
+                }
+                if (Battle_Wheels.first.Defensive_Treachery_Card.IsSome)
+                {
+                    cards_to_discard.Add((Treachery_Cards.Treachery_Card)Battle_Wheels.first.Defensive_Treachery_Card);
+                }
+            }
+            else
+            {
+                if (Battle_Wheels.second.Offensive_Treachery_Card.IsSome)
+                {
+                    cards_to_discard.Add((Treachery_Cards.Treachery_Card)Battle_Wheels.second.Offensive_Treachery_Card);
+                }
+                if (Battle_Wheels.second.Defensive_Treachery_Card.IsSome)
+                {
+                    cards_to_discard.Add((Treachery_Cards.Treachery_Card)Battle_Wheels.second.Defensive_Treachery_Card);
+                }
+            }
+            while(cards_to_discard.Any())
+            {
+
+                Console.WriteLine("ex: /player_id/phase_7_input/treachery_card");
+                Console.WriteLine("ex: /player_id/phase_7_input/pass");
+                string[] line = Input_Provider.GetInputAsync().Result.Split("/");
+                if (line[1] == Init.Factions_Distribution.Player_Of(faction).Id && line[2] == "phase_7_input")
+                {
+                    if (line[3] == "pass")
+                    {
+                        break;
+                    }
+                    else
+                    {
+
+                        if (line[3] == cards_to_discard[0].GetName())
+                        {
+                            cards_to_discard.Remove(cards_to_discard[0]);
+                            Treachery_Cards_Manager.Remove_Treachery_Card(faction, cards_to_discard[0]);
+
+                        }
+                        else if (line[3] == cards_to_discard[1].GetName())
+                        {
+                            cards_to_discard.Remove(cards_to_discard[1]);
+                            Treachery_Cards_Manager.Remove_Treachery_Card(faction, cards_to_discard[1]);
+                        }
+
+                    }
+                }
+            }
+            moment = "Going to the next battle";
         }
         public void Handle_Treachery_Cards_Battle()
         {
@@ -315,7 +488,7 @@ namespace dune_library.Phases
                     Treachery_Cards.Treachery_Card victim_card = (Treachery_Cards.Treachery_Card)Battle_Wheels.second.Defensive_Treachery_Card;
 
                     if((aggresor_card.Is_Poison_Weapon() && victim_card.Is_Projectile_Defense() 
-                        || aggresor_card.Is_Projectile_Weapon() && victim_card.Is_Poison_Defense()) && !Battle_Wheels.second.Special_Treachery_Card.IsSome)
+                        || aggresor_card.Is_Projectile_Weapon() && victim_card.Is_Poison_Defense() || victim_card.Is_Worthless()) && !Battle_Wheels.second.Special_Treachery_Card.IsSome)
                     {
                         Tleilaxu_Tanks.Kill(Battle_Wheels.second.General.Id);
                     }
@@ -324,9 +497,8 @@ namespace dune_library.Phases
                         Handle_Lasgun();
                     }
                 }
-                else if(!Battle_Wheels.second.Special_Treachery_Card.IsSome)
+                else
                 {
-
                     Tleilaxu_Tanks.Kill(Battle_Wheels.second.General.Id);
                 }
             }
@@ -347,7 +519,7 @@ namespace dune_library.Phases
                     Treachery_Cards.Treachery_Card victim_card = (Treachery_Cards.Treachery_Card)Battle_Wheels.first.Defensive_Treachery_Card;
 
                     if ((aggresor_card.Is_Poison_Weapon() && victim_card.Is_Projectile_Defense()
-                        || aggresor_card.Is_Projectile_Weapon() && victim_card.Is_Poison_Defense()) && !Battle_Wheels.first.Special_Treachery_Card.IsSome)
+                        || aggresor_card.Is_Projectile_Weapon() && victim_card.Is_Poison_Defense() || victim_card.Is_Worthless()) && !Battle_Wheels.first.Special_Treachery_Card.IsSome)
                     {
                         Tleilaxu_Tanks.Kill(Battle_Wheels.first.General.Id);
                     }
@@ -356,9 +528,8 @@ namespace dune_library.Phases
                         Handle_Lasgun();
                     }
                 }
-                else if (!Battle_Wheels.first.Special_Treachery_Card.IsSome)
+                else
                 {
-
                     Tleilaxu_Tanks.Kill(Battle_Wheels.second.General.Id);
                 }
             }
@@ -397,6 +568,7 @@ namespace dune_library.Phases
             {
                 Tleilaxu_Tanks.Kill(Battle_Wheels.second.General.Id);
             }
+            Las_Gun_Explosion = true;
         }
         public bool Handle_One_Card(Faction faction, string input, bool aggresor)
         {
@@ -429,6 +601,32 @@ namespace dune_library.Phases
                         }
                         result = true;
                     }
+                    else if (card.Key.Is_Worthless())
+                    {
+                        if (aggresor)
+                        {
+                            if (Battle_Wheels.first.Defensive_Treachery_Card.IsNone)
+                            {
+                                Battle_Wheels.first.Defensive_Treachery_Card = card.Key;
+                            }
+                            else if (Battle_Wheels.first.Offensive_Treachery_Card.IsNone)
+                            {
+                                Battle_Wheels.first.Offensive_Treachery_Card = card.Key;
+                            }
+                        }
+                        else
+                        {
+                            if (Battle_Wheels.second.Defensive_Treachery_Card.IsNone)
+                            {
+                                Battle_Wheels.second.Defensive_Treachery_Card = card.Key;
+                            }
+                            else if (Battle_Wheels.second.Offensive_Treachery_Card.IsNone)
+                            {
+                                Battle_Wheels.second.Offensive_Treachery_Card = card.Key;
+                            }
+                        }
+                        result = true;
+                    }
                 }
             });
 
@@ -454,7 +652,9 @@ namespace dune_library.Phases
                 }
             });
 
-            if(!result.Contains(false) && (first_card.Is_Defense() && second_card.Is_Weapon() || second_card.Is_Defense() && first_card.Is_Weapon()))
+            if(!result.Contains(false) && 
+                (first_card.Is_Defense() && second_card.Is_Weapon() || second_card.Is_Defense() && first_card.Is_Weapon()
+                 || first_card.Is_Worthless() || second_card.Is_Worthless()))
             {
                 if(Handle_One_Card(faction,input1,aggresor) && Handle_One_Card(faction, input2, aggresor))
                 {
