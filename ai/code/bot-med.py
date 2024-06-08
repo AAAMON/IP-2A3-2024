@@ -74,6 +74,74 @@ generals_power = {
     }
 }
 
+def get_territory_id_by_section_id(game_state, section_id):
+    for territory in game_state['Map']['Territories']:
+        for section in territory['Sections']:
+            if section['Id'] == section_id:
+                return territory['Id']
+
+def get_forces_by_territory(game_state, territory, faction):
+    forces = 0
+    for section in territory['Sections']:
+            if faction in section['Forces'].keys():
+                forces += section['Forces'][faction]
+    return forces
+
+def get_territory_name_by_id(game_state, id):
+
+    for t in game_state['Map']['Territories']:
+        if t['Id'] == id:
+            return t['Name']
+        
+    return None
+
+
+#primeste un teritoriu (dat prin nume) si returneaza toate teritoriile la distanta 1(tot prin nume) 
+def get_adj(game_state, terittory_name):
+    
+    terittory = None
+    for t in game_state['Map']['Territories']:
+        if t['Name'] == terittory_name:
+            terittory = t
+            break
+
+    ans = set()
+
+    for section in terittory['Sections']:
+        for adj_sectiond_id in section['Neighboring_Sections_Ids']:
+            adj_territory_id = get_territory_id_by_section_id(game_state, adj_sectiond_id)
+
+            if adj_territory_id == terittory['Id']:
+                continue
+
+            ans.add(get_territory_name_by_id(game_state, adj_territory_id))
+
+    return list(ans)
+
+
+def dfs(game_state, cur_position, ans, maxDist):
+
+    if maxDist < 0:
+        return
+    
+    if cur_position in ans:
+        return
+    
+    ans.add(cur_position)
+    adjList = get_adj(game_state, cur_position)
+
+    for adjTer in adjList:
+        dfs(game_state, adjTer, ans, maxDist-1)
+
+
+
+def get_teritories_closer_than_dist(game_state, origin_name, maxDist):
+
+    ans = set()
+    dfs(game_state, origin_name, ans, maxDist)
+    return ans
+
+
 def pick_storm(game_state):
     for i in range(3,0,-1):
         hit = False
@@ -192,19 +260,6 @@ def storm_move(game_state, territory, nr):
         if storm_place == 19:
             storm_place = 1
     return False
-
-def get_territory_id_by_section_id(game_state, section_id):
-    for territory in game_state['Map']['Territories']:
-        for section in territory['Sections']:
-            if section['Id'] == section_id:
-                return territory['Id']
-
-def get_forces_by_territory(game_state, territory, faction):
-    forces = 0
-    for section in territory['Sections']:
-            if faction in section['Forces'].keys():
-                forces += section['Forces'][faction]
-    return forces
 
 def evaluate_territory(game_state, territory):
     my_forces = get_forces_by_territory(game_state, territory, faction_name)
@@ -534,6 +589,8 @@ def battle(game_state, territory):
 
 def get_move(game_state):
     
+    #debug
+    return get_teritories_closer_than_dist(game_state, 'Polar Sink', 2)
     if 'Phase' not in game_state.keys():
         return {'status': 'bad format'}
     
