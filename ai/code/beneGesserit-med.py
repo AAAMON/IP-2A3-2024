@@ -579,7 +579,7 @@ def get_move(game_state):
     phase_name = game_state['Phase'][0]['name']
     phase_moment = game_state['Phase'][0]['moment']
 
-    if phase_name == 'Prediction':  
+    if phase_name == 'Set-up' and phase_moment == 'Bene Gesserit prediction':  
         return {
             'action': 'predict',
             'faction': 'Spacing_Guild',
