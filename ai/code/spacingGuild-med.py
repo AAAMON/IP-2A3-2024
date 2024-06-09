@@ -251,7 +251,7 @@ def evaluate_territory(game_state, territory):
     if territory['Name'] in stronghold_territories and cnt_oponents == 0 and my_forces == 0:
         return 5  #Stronghold, unoccupied, highest priority
     
-    if territory['Name'] in stronghold_territories and cnt_oponents == 1 and simulate_battle(game_state, territory, my_forces + min(my_reserves, my_spice) // 2) > 0.8:
+    if territory['Name'] in stronghold_territories and cnt_oponents == 1 and simulate_battle(game_state, territory, my_forces + min(my_reserves, my_spice) // 2)[0] > 0.8:
         return 4 #Stronghold, occupied, but i can win
     
     #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -287,40 +287,98 @@ def shipment(game_state):
     best_territory = None
     desired_number_troops = 0
 
-    for territory in game_state['Map']['Territories']:
-        if not storm_move(game_state,territory,0):
-            curr_score = evaluate_territory(game_state, territory)
-            if(curr_score > best_score):
-                best_score = curr_score
-                best_territory = territory
+    if my_reserves>0:
+        for territory in game_state['Map']['Territories']:
+            if not storm_move(game_state,territory,0):
+                curr_score = evaluate_territory(game_state, territory)
+                if(curr_score > best_score):
+                    best_score = curr_score
+                    best_territory = territory
 
-    if best_score == 5:
-        desired_number_troops =  min(my_spice // 2, my_reserves // 2)
+        if best_score == 5:
+            desired_number_troops =  min(my_spice , my_reserves)
 
-    elif best_score == 4:
-        #todo to see if my opponent is after me, if so he can bring more forces
-        for number_troops in  range(1, min(my_spice,my_reserves)//2 + 1):
-            if simulate_battle(game_state, territory, number_troops) > 0.8:
-                desired_number_troops =  number_troops
-                break
+        elif best_score == 4:
+            #todo to see if my opponent is after me, if so he can bring more forces
+            for number_troops in  range(1, min(my_spice,my_reserves) + 1):
+                if simulate_battle(game_state, territory, number_troops)[0] > 0.8:
+                    desired_number_troops =  number_troops
+                    break
 
-    elif best_score == 3:
-        desired_number_troops =  min(my_spice // 4, my_reserves // 4)
+        elif best_score == 3:
+            desired_number_troops =  min(my_spice , my_reserves // 2)
 
-    elif best_score == 2:
-        desired_number_troops = min(2, my_spice,my_reserves)
-        
-    elif best_score == 1:
-        desired_number_troops = desired_number_troops = min(3, my_spice,my_reserves)
+        elif best_score == 2:
+            desired_number_troops = min(2, my_spice,my_reserves)
+            
+        elif best_score == 1:
+            desired_number_troops = desired_number_troops = min(3, my_spice,my_reserves)
 
-    best_section = random.choice(best_territory['Sections'])
+        best_section = random.choice(best_territory['Sections'])
 
+    territory_from=None
+    if best_score !=5 or my_reserves<5:
+        #shipement special
+        for territory1 in game_state['Map']['Territories']:
+            if territory1['Name'] in stronghold_territories:
+                continue
+            if str(territory1['Id']) in game_state['Map']['Spice_Dict'] and game_state['Map']['Spice_Dict'][str(territory1['Id'])]['Avaliable'] > 0:
+                continue
+
+            if storm_move(game_state,territory1,0):
+                continue
+            my_forces1 = get_forces_by_territory(game_state, territory1, faction_name)
+            if my_forces1 == 0:
+                continue
+            #am gasit teritoriul de unde ma mut territory1
+
+
+            #aici voi face mutarea
+            for territory2 in game_state['Map']['Territories']:
+                if not storm_move(game_state,territory2,0):
+                    curr_score2 = evaluate_territory(game_state, territory2)
+                    if(curr_score2 > best_score):
+                        best_score = curr_score2
+                        best_territory = territory2
+                        territory_from=territory1
+
+            if best_score == 5:
+                desired_number_troops =  min(my_spice , my_forces1)
+
+            elif best_score == 4:
+                #todo to see if my opponent is after me, if so he can bring more forces
+                for number_troops2 in  range(1, min(my_spice,my_forces1) + 1):
+                    if simulate_battle(game_state, territory2, number_troops2)[0] > 0.8:
+                        desired_number_troops =  number_troops2
+                        break
+
+            elif best_score == 3:
+                desired_number_troops =  min(my_spice , my_forces1 // 2)
+
+            elif best_score == 2:
+                desired_number_troops = min(2, my_spice,my_forces1)
+                
+            elif best_score == 1:
+                desired_number_troops = desired_number_troops = min(3, my_spice,my_forces1)
+            best_section = random.choice(best_territory['Sections'])
+
+
+
+    if territory_from !=  None:
+        return {
+            "action": "shipment", 
+            "value": desired_number_troops, 
+            "teritorry": best_territory['Id'], 
+            "section": best_section['Id'], #TODO la matei chiriac,
+            "territory_from" :  territory_from['Name']
+        }
     return {
-        "action": "shipment", 
-        "value": desired_number_troops, 
-        "teritorry": best_territory['Id'], 
-        "section": best_section['Id'] #TODO la matei chiriac
-    }
+            "action": "shipment", 
+            "value": desired_number_troops, 
+            "teritorry": best_territory['Id'], 
+            "section": best_section['Id']
+        }
+    
 
 def movement(game_state):
     best_score = 0
@@ -566,7 +624,7 @@ def get_move(game_state):
     if phase_name == 'Bidding':
         return bidding(game_state)
     
-    if phase_name == 'Revival':
+    if phase_name == 'Revive':
         return revival(game_state)
     
     if phase_name == 'Shipment And Movement' and phase_moment == 'Shipment':
