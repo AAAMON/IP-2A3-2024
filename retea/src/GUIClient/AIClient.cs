@@ -39,7 +39,7 @@ namespace AIClient
         private static string serverUrl = "http://localhost:1234/";
         private static int moveID = 1;
         private string player;
-        private int playerID = 1;
+        private int playerID ;
         private string botString;
         private string faction;
         public ClientForAI(string player, string botName)
@@ -140,70 +140,75 @@ namespace AIClient
         }
         private string AIMoveFormatToGUIFormat(string AIjson)
         {
-            try
+
+            JObject json = JObject.Parse(AIjson);
+            string action = json["action"].ToString();
+            string playerId = string.parse(playerId);
+
+            switch (action)
             {
-                // Parse the JSON input
-                JObject jsonObject = JObject.Parse(AIjson);
-                // Check for bad format or unknown phase
-                if (jsonObject["status"] != null)
-                {
-                    string status = jsonObject["status"].ToString();
-                    if (status == "bad format")
-                    {
-                        return "Error: Bad format.";
-                    }
-                    else if (status == "phase unknown")
-                    {
-                        return "Error: Phase unknown.";
-                    }
-                }
+                case "predict":
+                    string faction = json["faction"].ToString();
+                    int round = int.Parse(json["round"].ToString());
+                    return $"/{playerId}/setup/number/{faction}";
 
-                // Identify the action
-                string action = jsonObject["action"]?.ToString();
+                case "pick_traitor":
+                    string traitorName = json["name"].ToString();
+                    return $"/{playerId}/setup/traitor_name/{traitorName}";
 
-                switch (action)
-                {
-                    case "bid":
-                        int bidValue = (int)jsonObject["value"];
-                        return $"/{playerID}/phase_4_input/{bidValue}";
+                case "spawn":
+                    int sectionId = int.Parse(json["section_id"].ToString());
+                    int troopNumber = int.Parse(json["troop_number"].ToString());
+                    return $"/{playerId}/setup/{sectionId}/{troopNumber}";
 
-                    case "pass":
-                        return $"/{playerID}/phase_4_input/pass";
+                case "Storm":
+                    int stormValue = int.Parse(json["value"].ToString());
+                    return $"/{playerId}/phase_1_input/{stormValue}";
 
-                    case "revive":
-                        int reviveValue = (int)jsonObject["value"];
-                        return $"/{playerID}/phase_5_input/{reviveValue}";
+                case "bid":
+                    int bidValue = int.Parse(json["value"].ToString());
+                    return $"/{playerId}/phase_4_input/{bidValue}";
 
-                    case "shipment":
-                        int shipmentValue = (int)jsonObject["value"];
-                        int territory = (int)jsonObject["teritorry"];
-                        int section = (int)jsonObject["section"];
-                        return $"/{playerID}/phase_6_input/1/territory_{territory}/section_{section}/{shipmentValue}";
+                case "pass":
+                    string phase = json["phase"].ToString();
+                    return $"/{playerId}/phase_{phase}_input/pass";
 
-                    case "movement":
-                        int sourceTerritory = (int)jsonObject["source_terittory"];
-                        int destinationTerritory = (int)jsonObject["destination_terittory"];
-                        int troopsMoved = (int)jsonObject["value"];
-                        return $"/{playerID}/phase_6_input/2/from_territory_{sourceTerritory}/from_section_{sourceTerritory}/to_territory_{destinationTerritory}/to_section_{destinationTerritory}/{troopsMoved}";
+                case "revive":
+                    int reviveTroopNumber = int.Parse(json["value"].ToString());
+                    string generalName = json["general_name"].ToString();
+                    return $"/{playerId}/phase_5_input/{reviveTroopNumber}/{generalName}";
 
-                    case "battle":
-                        string generalName = jsonObject["used_general"].ToString();
-                        string attackCard = jsonObject["attack_card"].ToString();
-                        string defenseCard = jsonObject["defense_card"].ToString();
-                        int troops = (int)jsonObject["troops"];
-                        return $"/{playerID}/phase_7_input/section_id/{troops}/{generalName}/{attackCard}/{defenseCard}";
+                case "shipment":
+                    int shipmentSectionId = int.Parse(json["section"].ToString());
+                    int shipmentTroopNumber = int.Parse(json["value"].ToString());
+                    return $"/{playerId}/phase_6_input/1/{shipmentSectionId}/{shipmentTroopNumber}";
 
-                    default:
-                        return "Error: Unknown action.";
-                }
+                case "movement":
+                    int fromSectionId = int.Parse(json["source_section"].ToString());
+                    int toSectionId = int.Parse(json["destination_terittory"].ToString());
+                    int movementTroopNumber = int.Parse(json["value"].ToString());
+                    return $"/{playerId}/phase_6_input/2/{fromSectionId}/{toSectionId}/{movementTroopNumber}";
+
+                case "bene_shipment":
+                    string answer = json["answer"].ToString();
+                    return $"/bene_player_id/phase_6_input/{answer}";
+
+                case "choose_battle":
+                    int territoryId = int.Parse(json["teritory_id"].ToString());
+                    string opponentFaction = json["opponent_faction"].ToString();
+                    return $"/{playerId}/phase_7_input/{territoryId}/{opponentFaction}";
+
+                case "battle":
+                    int forces = int.Parse(json["troops"].ToString());
+                    string usedGeneral = json["used_general"].ToString();
+                    string attackCard = json["attack_card"].ToString();
+                    string defenseCard = json["defense_card"].ToString();
+                    return $"/{playerId}/phase_7_input/{forces}/{usedGeneral}/{attackCard}/{defenseCard}";
+
+                default:
+                    return $"/{playerId}/unknown"; // Handle unknown actions appropriately
             }
-            catch (Exception e)
-            {
-                return "Error:bad format, response is not a JSON object";
-            }
-
         }
-
         private static async Task<string> GetGamestate(string authToken)
         {
             client.DefaultRequestHeaders.Remove("Authorization");
