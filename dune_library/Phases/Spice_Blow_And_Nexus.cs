@@ -85,7 +85,14 @@ namespace dune_library.Phases
             Territory_Card previous_card = (Territory_Card)Spice_Deck.Top_OF_Discard_Pile;
 
             Map.To_Section_With_Spice(previous_card.Section_Position_In_List).Delete_Spice();
-            Map.To_Section_With_Spice(previous_card.Section_Position_In_List).Forces.Remove_By_Shai_Hulud(Tleilaxu_Tanks);
+            if (!Init.Alliances.Ally_Of(Faction.Fremen).IsNone)
+            {
+                Map.To_Section_With_Spice(previous_card.Section_Position_In_List).Forces.Remove_By_Shai_Hulud_With_Exception(Tleilaxu_Tanks, (Faction)Init.Alliances.Ally_Of(Faction.Fremen));
+            }
+            else
+            {
+                Map.To_Section_With_Spice(previous_card.Section_Position_In_List).Forces.Remove_By_Shai_Hulud(Tleilaxu_Tanks);
+            }
             //Ask fremen to move
 
             moment = "Waiting for Nexus Phase...";

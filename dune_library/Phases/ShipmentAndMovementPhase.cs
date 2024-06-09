@@ -1,4 +1,5 @@
-﻿using dune_library.Map_Resources;
+﻿using dune_library.Decks.Spice;
+using dune_library.Map_Resources;
 using dune_library.Map_Resoures;
 using dune_library.Player_Resources;
 using dune_library.Player_Resources.Knowledge_Manager_Interfaces;
@@ -8,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using static System.Collections.Specialized.BitVector32;
 
 namespace dune_library.Phases
 {
@@ -23,8 +23,14 @@ namespace dune_library.Phases
             Storm_Position = game.Map.Storm_Sector;
             Factions_To_Move = game.Factions_To_Move;
             Perspective_Generator = game;
+            this.game = game;
+            Spice_Deck = game.Spice_Deck;
         }
 
+        internal Spice_Deck Spice_Deck { get; }
+
+
+        private Game game;
         public override string name => "Shipment And Movement";
 
         public override string moment { get; protected set; } = "";
@@ -83,9 +89,17 @@ namespace dune_library.Phases
                     break;
             }
 
-            
-
-            Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+            Init.Factions_Distribution.Factions_In_Play.ForEach(faction => { 
+                if(faction == Faction.Atreides)
+                {
+                    game.Next_Spice_Card = Spice_Deck.Top_Of_Card_Stack();
+                }
+                else
+                {
+                    game.Next_Spice_Card = new Option<Spice_Card>();
+                }
+                Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json");
+            });
             faction_order.ForEach(faction =>
             {
                 bool correct = false;
@@ -282,10 +296,12 @@ namespace dune_library.Phases
                 Console.WriteLine("Invalid territory name.");
                 return false;
             }
-            if(!Can_Move(fromSection.Origin_Territory,toSection.Origin_Territory,faction))
+
+            if(!Can_Move(fromSection,toSection,faction))
             {
                 return false;
             }
+
             if (fromSection.Forces.Of(faction) < troops)
             {
                 Console.WriteLine("Not enough troops.");
@@ -330,46 +346,290 @@ namespace dune_library.Phases
 
             return result;
         }
-    
-        public bool Can_Move(Territory fromTerritory, Territory toTerritory, Faction faction)
+        
+        public bool Can_Move(Section fromSection, Section toSection, Faction faction)
         {
+            Territory fromTerritory = fromSection.Origin_Territory;
+            Territory toTerritory = toSection.Origin_Territory;
+
+            List<Section> neighbourSections0 = new List<Section>();
+            List<Section> neighbourSections1 = new List<Section>();
+            List<Section> neighbourSections2 = new List<Section>();
+            List<Section> neighbourSections3 = new List<Section>();
+
+            neighbourSections0.Add(fromSection);
+            bool adding = true;
+
+            while (adding)
+            {
+                adding = false;
+                List<Section> new_Neighbour = new List<Section>();
+                new_Neighbour = neighbourSections0.Distinct().ToList();
+
+                neighbourSections0.ForEach(s => {
+                    List<Section> temp = [s];
+                    temp = Get_Neighbour_Sections(s);
+
+                    temp.ForEach(section => {
+                        if (section.Origin_Territory == s.Origin_Territory && !neighbourSections0.Contains(section))
+                        {
+                            adding = true;
+                            new_Neighbour.Add(section);
+                        }
+                        else
+                        {
+                            neighbourSections1.Add(section);
+                        }
+                    });
+                });
+                neighbourSections0 = new_Neighbour.Distinct().ToList();
+            }
+
+            adding = true;
+            neighbourSections1 = neighbourSections1.Distinct().ToList();
+
+            while (adding)
+            {
+                adding = false;
+                List<Section> new_Neighbour = new List<Section>();
+                new_Neighbour = neighbourSections1.Distinct().ToList();
+
+                neighbourSections1.ForEach(s => {
+                    List<Section> temp = [s];
+                    temp = Get_Neighbour_Sections(s);
+
+                    temp.ForEach(section => {
+                        if (section.Origin_Territory == s.Origin_Territory && !neighbourSections1.Contains(section) && !neighbourSections0.Contains(section))
+                        {
+                            adding = true;
+                            new_Neighbour.Add(section);
+                        }
+                        else
+                        {
+                            neighbourSections2.Add(section);
+                        }
+                    });
+                });
+                neighbourSections1 = new_Neighbour.Distinct().ToList();
+            }
+
+            adding = true;
+            neighbourSections2 = neighbourSections2.Distinct().ToList();
+
+            while (adding)
+            {
+                adding = false;
+                List<Section> new_Neighbour = new List<Section>();
+                new_Neighbour = neighbourSections2.Distinct().ToList();
+
+                neighbourSections2.ForEach(s => {
+                    List<Section> temp = [s];
+                    temp = Get_Neighbour_Sections(s);
+
+                    temp.ForEach(section => {
+                        if (section.Origin_Territory == s.Origin_Territory && !neighbourSections0.Contains(section)
+                        && !neighbourSections1.Contains(section) && !neighbourSections2.Contains(section))
+                        {
+                            adding = true;
+                            new_Neighbour.Add(section);
+                        }
+                        else
+                        {
+                            neighbourSections3.Add(section);
+                        }
+                    });
+                });
+                neighbourSections2 = new_Neighbour.Distinct().ToList();
+            }
+
+            neighbourSections3 = neighbourSections3.Distinct().ToList();
+            adding = true;
+
+            while (adding)
+            {
+                adding = false;
+                List<Section> new_Neighbour = new List<Section>();
+                new_Neighbour = neighbourSections3.Distinct().ToList();
+
+                neighbourSections3.ForEach(s => {
+                    List<Section> temp = [s];
+                    temp = Get_Neighbour_Sections(s);
+
+                    temp.ForEach(section => {
+                        if (section.Origin_Territory == s.Origin_Territory && !neighbourSections0.Contains(section)
+                        && !neighbourSections1.Contains(section) && !neighbourSections2.Contains(section) && !neighbourSections3.Contains(section))
+                        {
+                            adding = true;
+                            new_Neighbour.Add(section);
+                        }
+                    });
+                });
+                neighbourSections3 = new_Neighbour.Distinct().ToList();
+            }
+
             bool hasOrnithopters = Map.Sections.FirstOrDefault(s => s.Forces.Of(faction) > 0 && (s.Origin_Territory.Name == "Arrakeen" || s.Origin_Territory.Name == "Carthag")) != null;
             if (hasOrnithopters)
             {
-                List<Territory> neighbourTerritories = new List<Territory>();
-                List<Territory> temp = new List<Territory>();
-                fromTerritory.Sections.ForEach(s => neighbourTerritories.Add(s.Origin_Territory));
-                temp = neighbourTerritories.Distinct().ToList();
-                temp.ForEach(t => t.Sections.ForEach(s => neighbourTerritories.Add(s.Origin_Territory)));
-                temp = neighbourTerritories.Distinct().ToList();
-                temp.ForEach(t => t.Sections.ForEach(s => neighbourTerritories.Add(s.Origin_Territory)));
-                if (neighbourTerritories.Contains(toTerritory))
+                if (neighbourSections0.Contains(toSection) || neighbourSections1.Contains(toSection) 
+                    || neighbourSections2.Contains(toSection) || neighbourSections3.Contains(toSection))
                 {
                     return true;
                 }
             }
             else if (faction == Faction.Fremen)
             {
-                List<Territory> neighbourTerritories = new List<Territory>();
-                List<Territory> temp = new List<Territory>();
-                fromTerritory.Sections.ForEach(s => neighbourTerritories.Add(s.Origin_Territory));
-                temp = neighbourTerritories.Distinct().ToList();
-                temp.ForEach(t => t.Sections.ForEach(s => neighbourTerritories.Add(s.Origin_Territory)));
-                if (neighbourTerritories.Contains(toTerritory))
+                if (neighbourSections0.Contains(toSection) || neighbourSections1.Contains(toSection)
+                    || neighbourSections2.Contains(toSection))
                 {
                     return true;
                 }
             }
-            else
+            else if (neighbourSections0.Contains(toSection) || neighbourSections1.Contains(toSection))
             {
-                List<Territory> neighbourTerritories = new List<Territory>();
-                fromTerritory.Sections.ForEach(s => neighbourTerritories.Add(s.Origin_Territory));
-                if(neighbourTerritories.Distinct().ToList().Contains(toTerritory))
-                {
-                    return true;
-                }
+                return true;
             }
-            return true;
+            return false;
+        }
+
+        public List<Section> Handle_3_Movement(Section fromSection)
+        {
+            List<Section> neighbourSections0 = new List<Section>();
+            List<Section> neighbourSections1 = new List<Section>();
+            List<Section> neighbourSections2 = new List<Section>();
+            List<Section> neighbourSections3 = new List<Section>();
+            List<Section> neighbourSections = new List<Section>();
+
+            neighbourSections0.Add(fromSection);
+            bool adding = true;
+
+            while (adding)
+            {
+                adding = false;
+                List<Section> new_Neighbour = new List<Section>();
+                new_Neighbour = neighbourSections0.Distinct().ToList();
+
+                neighbourSections0.ForEach(s => {
+                    List<Section> temp = [s];
+                    temp = Get_Neighbour_Sections(s);
+
+                    temp.ForEach(section => {
+                        if(section.Origin_Territory == s.Origin_Territory && !neighbourSections0.Contains(section))
+                        {
+                            adding = true;
+                            new_Neighbour.Add(section);
+                        }
+                        else
+                        {
+                            neighbourSections1.Add(section);
+                        }
+                    });
+                });
+                neighbourSections0 = new_Neighbour.Distinct().ToList();
+            }
+
+            adding = true;
+            neighbourSections1 = neighbourSections1.Distinct().ToList();
+
+            while (adding)
+            {
+                adding = false;
+                List<Section> new_Neighbour = new List<Section>();
+                new_Neighbour = neighbourSections1.Distinct().ToList();
+
+                neighbourSections1.ForEach(s => {
+                    List<Section> temp = [s];
+                    temp = Get_Neighbour_Sections(s);
+
+                    temp.ForEach(section => {
+                        if (section.Origin_Territory == s.Origin_Territory && !neighbourSections1.Contains(section) && !neighbourSections0.Contains(section))
+                        {
+                            adding = true;
+                            new_Neighbour.Add(section);
+                        }
+                        else
+                        {
+                            neighbourSections2.Add(section);
+                        }
+                    });
+                });
+                neighbourSections1 = new_Neighbour.Distinct().ToList();
+            }
+
+            adding = true;
+            neighbourSections2 = neighbourSections2.Distinct().ToList();
+
+            while (adding)
+            {
+                adding = false;
+                List<Section> new_Neighbour = new List<Section>();
+                new_Neighbour = neighbourSections2.Distinct().ToList();
+
+                neighbourSections2.ForEach(s => {
+                    List<Section> temp = [s];
+                    temp = Get_Neighbour_Sections(s);
+
+                    temp.ForEach(section => {
+                        if (section.Origin_Territory == s.Origin_Territory && !neighbourSections0.Contains(section)
+                        && !neighbourSections1.Contains(section) && !neighbourSections2.Contains(section))
+                        {
+                            adding = true;
+                            new_Neighbour.Add(section);
+                        }
+                        else
+                        {
+                            neighbourSections3.Add(section);
+                        }
+                    });
+                });
+                neighbourSections2 = new_Neighbour.Distinct().ToList();
+            }
+
+            neighbourSections3 = neighbourSections3.Distinct().ToList();
+            adding = true;
+
+            while (adding)
+            {
+                adding = false;
+                List<Section> new_Neighbour = new List<Section>();
+                new_Neighbour = neighbourSections3.Distinct().ToList();
+
+                neighbourSections3.ForEach(s => {
+                    List<Section> temp = [s];
+                    temp = Get_Neighbour_Sections(s);
+
+                    temp.ForEach(section => {
+                        if (section.Origin_Territory == s.Origin_Territory && !neighbourSections0.Contains(section)
+                        && !neighbourSections1.Contains(section) && !neighbourSections2.Contains(section) && !neighbourSections3.Contains(section))
+                        {
+                            adding = true;
+                            new_Neighbour.Add(section);
+                        }
+                    });
+                });
+                neighbourSections3 = new_Neighbour.Distinct().ToList();
+            }
+
+            neighbourSections3 = neighbourSections3.Distinct().ToList();
+
+            neighbourSections0.ForEach(neighbourSections.Add);
+            neighbourSections1.ForEach(neighbourSections.Add);
+            neighbourSections2.ForEach(neighbourSections.Add);
+            neighbourSections3.ForEach(neighbourSections.Add);
+
+            return neighbourSections;
+        }
+        public List<Section> Get_Neighbour_Sections(Section section)
+        {
+            List<Section> neighSections = new List<Section>();
+            section.Neighboring_Sections.ForEach(s =>
+            {
+                if (s.Origin_Sector != Storm_Position)
+                {
+                    neighSections.Add(s);
+                }
+            });
+
+            return neighSections;
         }
         public bool Handle_Fremen_Shipment(string sectionId, string troops)
         {

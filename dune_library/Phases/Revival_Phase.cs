@@ -152,6 +152,13 @@ namespace dune_library.Phases
                                         Faction.Emperor => 1,
                                         _ => 0
                                     };
+                                    if (!Init.Alliances.Ally_Of(Faction.Fremen).IsNone)
+                                    {
+                                        if(faction == (Faction)Init.Alliances.Ally_Of(Faction.Fremen))
+                                        {
+                                            freeRevival = 3;
+                                        }
+                                    }
                                     if (troops_number > freeRevival && troops_number < 4 && ForceRevival(faction, (uint)(troops_number - freeRevival)))
                                     {
                                         Tleilaxu_Tanks.Forces.Transfer_To(faction, Reserves, freeRevival);

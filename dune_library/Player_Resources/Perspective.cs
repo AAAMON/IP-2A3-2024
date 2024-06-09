@@ -15,6 +15,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using dune_library.Decks.Spice;
 using dune_library.Player_Resources;
+using dune_library.Decks.Treachery;
 
 
 namespace dune_library.Player_Resources
@@ -53,7 +54,11 @@ namespace dune_library.Player_Resources
 
         public Faction_Battles Faction_Battles { get; }
         public Option<Tleilaxu_Tanks> Tleilaxu_Tanks { get; }
+
+        public Option<Treachery_Cards.Treachery_Card> Last_Treachery_Card_Seen { get; }
+        public Option<Spice_Card> Next_Spice_Card { get; } = None;
         public Option<I_Faction_Knowledge_Read_Only> Faction_Knowledge { get; } // can be destructured into individual properties
+
 
         public Perspective(
           Player player,
@@ -71,7 +76,9 @@ namespace dune_library.Player_Resources
           Highest_Bid HighestBid,
           bool[] Factions_To_Move,
           Game_Winners Game_Winners,
-          Faction_Battles Faction_Battles
+          Faction_Battles Faction_Battles,
+          Option<Treachery_Cards.Treachery_Card> Last_Treachery_Card_Seen,
+          Option<Spice_Card> Next_Spice_Card
            )
         {
             if (factions_distribution.IsLeft)
@@ -99,6 +106,8 @@ namespace dune_library.Player_Resources
             this.Highest_Bid = HighestBid;
             this.Factions_To_Move = Factions_To_Move;
             this.Faction_Battles = Faction_Battles;
+            this.Last_Treachery_Card_Seen = Last_Treachery_Card_Seen;
+            this.Next_Spice_Card = Next_Spice_Card;
 
             Faction_Knowledge = knowledge_manager.Map(km => km.Of(Faction.Value())); //if 'knowledge_manager' is some, then factions are initialized, and 'Faction' is some
         }

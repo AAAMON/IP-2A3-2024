@@ -68,9 +68,9 @@ namespace dune_library
 
                 //spice blow
                 Thread.Sleep(5000);
+                Console.WriteLine("Spice Blow Phase");
                 Phase = new Spice_Blow_And_Nexus(this);
                 Phase.ValueUnsafe().Play_Out();
-                Console.WriteLine("Spice Blow Phase");
 
                 //choam charity
                 Thread.Sleep(5000);
@@ -117,7 +117,8 @@ namespace dune_library
             }
         }
 
-
+        public Option<Treachery_Cards.Treachery_Card> Last_Treachery_Card_Seen = None;
+        public Option<Spice_Card> Next_Spice_Card = None;
 
         public I_Input_Provider Input_Provider;
 
@@ -167,7 +168,7 @@ namespace dune_library
             private set => alliances = value;
         }
 
-        public Option<Spice_Card> Last_Spice_Card => Spice_Deck.Top_OF_Discard_Pile;
+        public Option<Spice_Card> Last_Spice_Card  => Spice_Deck.Top_OF_Discard_Pile;
 
         private Option<Forces> reserves = None;
         public Forces Reserves
@@ -234,7 +235,10 @@ namespace dune_library
         #endregion
 
         #region Private Game Data
-        internal uint Bene_Prediction = 0;
+
+        
+
+        internal (string,uint) Bene_Prediction;
         internal Treachery_Deck Treachery_Deck { get; } = new();
 
         internal Spice_Deck Spice_Deck { get; }
@@ -258,7 +262,9 @@ namespace dune_library
             HighestBid,
             Factions_To_Move,
             Game_Winners,
-            Faction_Battles
+            Faction_Battles,
+            Last_Treachery_Card_Seen,
+            Next_Spice_Card
           );
     }
 }

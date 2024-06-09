@@ -26,14 +26,14 @@ namespace dune_library.Phases
         {
             Perspective_Generator = game;
             Init = game;
-            Players = game.Players;
             treachery_Deck = game.Treachery_Deck;
             HighestBid = game.HighestBid;
             Input_Provider = game.Input_Provider;
             Storm_Position = game.Map.Storm_Sector;
             Factions_To_Move = game.Factions_To_Move;
+            this.game = game;
         }
-
+        public Game game;
         public bool[] Factions_To_Move { get; }
 
         public uint Storm_Position;
@@ -45,8 +45,6 @@ namespace dune_library.Phases
         private I_Perspective_Generator Perspective_Generator { get; }
 
         private I_Setup_Initializers_And_Getters Init { get; }
-
-        private IReadOnlySet<Player> Players { get; }
 
         private IReadOnlySet<Faction> Factions_In_Play => Init.Factions_Distribution.Factions_In_Play;
 
@@ -123,32 +121,6 @@ namespace dune_library.Phases
             }
         }
 
-        private bool[] Has_Passed(bool[] who_passed, Faction faction)
-        {
-            switch (faction)
-            {
-                case Faction.Atreides:
-                    who_passed[0] = true;
-                    break;
-                case Faction.Bene_Gesserit:
-                    who_passed[1] = true;
-                    break;
-                case Faction.Emperor:
-                    who_passed[2] = true;
-                    break;
-                case Faction.Fremen:
-                    who_passed[3] = true;
-                    break;
-                case Faction.Spacing_Guild:
-                    who_passed[4] = true;
-                    break;
-                case Faction.Harkonnen:
-                    who_passed[5] = true;
-                    break;
-            }
-            return who_passed;
-        }
-
         private List<Faction> Initialize_Pass()
         {
             List<Faction> who_didnt_pass = new List<Faction>();
@@ -162,10 +134,25 @@ namespace dune_library.Phases
             return who_didnt_pass;
         }
 
+        public void Generate_Perspective(Treachery_Card top_card)
+        {
+            game.Last_Treachery_Card_Seen = top_card;
+
+            Init.Factions_Distribution.Factions_In_Play.ForEach(faction => {
+                if (faction == Faction.Atreides)
+                {
+                    game.Last_Treachery_Card_Seen = top_card;
+                }
+                else
+                {
+                    game.Last_Treachery_Card_Seen = new Option<Treachery_Card>();
+                }
+                Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json");
+            });
+        }
+
         public override void Play_Out()
         {
-            //string Get_Card = Wait_Until_Something.AwaitInput(3000, Input_Provider).Result;
-            //Console.WriteLine(Get_Card);
 
             moment = "bidding declaration";
 
@@ -178,13 +165,14 @@ namespace dune_library.Phases
                     biddingOrder.Enqueue(faction);
                 }
             });
-            
 
             List<Faction> who_didnt_pass = Initialize_Pass();
 
             moment = "bidding started";
 
-            Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+            var top_card = treachery_Deck.Next_Card_Peek;
+
+            Generate_Perspective(top_card);
 
 
             while(biddingOrder.Any() && who_didnt_pass.Any())
@@ -228,9 +216,10 @@ namespace dune_library.Phases
 
                 who_didnt_pass.ForEach(f => Console.WriteLine(f));
 
-                Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+                top_card = treachery_Deck.Next_Card_Peek;
 
-                
+                Generate_Perspective(top_card);
+
 
                 while (who_didnt_pass.Any())
                 {
@@ -287,8 +276,7 @@ namespace dune_library.Phases
                                 break;
                             }
                         }
-
-                        Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+                        Generate_Perspective(top_card);
                     }
                 }
 

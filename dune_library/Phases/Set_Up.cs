@@ -29,7 +29,7 @@ namespace dune_library.Phases
           Either<Factions_Distribution_Manager, Final_Factions_Distribution> factions_distribution_raw,
           Option<Either<Player_Markers_Manager, Final_Player_Markers>> player_markers_raw,
           Map_Resources.Map map,
-          uint Bene_Prediction,
+          (string,uint) Bene_Prediction,
           (Battle_Wheel A, Battle_Wheel B) Battle_Wheels,
           I_Input_Provider input_Provider,
           bool[] Factions_To_Move
@@ -75,7 +75,7 @@ namespace dune_library.Phases
 
         private Map_Resources.Map Map { get; }
 
-        private uint Bene_Prediction { get; set; }
+        private (string, uint) Bene_Prediction;
 
         private (Battle_Wheel A, Battle_Wheel B) Battle_Wheels { get; }
         public override void Play_Out()
@@ -317,19 +317,20 @@ namespace dune_library.Phases
             Factions_To_Move[1] = true;
             Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
 
-            Console.WriteLine("Bene Gesserit make a prediction: (/player2/setup/3)");
+            Console.WriteLine("Bene Gesserit make a prediction: (/player2/setup/player_id/number)");
             while (Factions_To_Move[1] == true)
             {
 
                 string[] line = Input_Provider.GetInputAsync().Result.Split("/");
-                if (line[1] == Init.Factions_Distribution.Player_Of(Faction.Bene_Gesserit).Id && line[2] == "setup")
+                if (line[1] == Init.Factions_Distribution.Player_Of(Faction.Bene_Gesserit).Id && line[2] == "setup" && Is_Valid_Player(line[3]))
                 {
                     int response = 0;
-                    if (Int32.TryParse(line[3], out response))
+                    if (Int32.TryParse(line[4], out response))
                     {
                         if (response < 10 && response > 0)
                         {
-                            Bene_Prediction = (uint)response;
+                            Bene_Prediction.Item1 = line[3];
+                            Bene_Prediction.Item2 = (uint)response;
                             Factions_To_Move[1] = false;
                         }
                     }
@@ -343,6 +344,16 @@ namespace dune_library.Phases
                     Console.WriteLine("Failure");
                 }
             }
+        }
+        public bool Is_Valid_Player(string input)
+        {
+            bool result = false;
+            Factions_In_Play.ForEach(faction =>
+            {
+                if (Init.Factions_Distribution.Player_Of(faction).Id == input)
+                    result = true;
+            });
+            return result;
         }
     }
 }

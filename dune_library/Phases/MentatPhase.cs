@@ -39,7 +39,7 @@ namespace dune_library.Phases
         public I_Input_Provider Input_Provider { get; set; }
         private uint Round { get; set; }
 
-        private uint Bene_Prediction { get; }
+        private (string, uint) Bene_Prediction;
 
         private Alliances Alliances { get; set; }
         public override string name => "Mentat Pause";
@@ -173,7 +173,9 @@ namespace dune_library.Phases
                     counter += strongholds_distribution[faction].Count;
                     if (counter > 3)
                     {
-                        if(Round == Bene_Prediction && Init.Factions_Distribution.Factions_In_Play.Contains(Faction.Bene_Gesserit))
+                        if(Round == Bene_Prediction.Item2 && Init.Factions_Distribution.Factions_In_Play.Contains(Faction.Bene_Gesserit)
+                            && (Bene_Prediction.Item1 == Init.Factions_Distribution.Player_Of(faction).Id 
+                            || Bene_Prediction.Item1 == Init.Factions_Distribution.Player_Of((Faction)Alliances.Ally_Of(faction)).Id))
                         {
                             Game_Winners = new Game_Winners(Faction.Bene_Gesserit);
                         }
@@ -186,7 +188,9 @@ namespace dune_library.Phases
                 }
                 else if (counter > 2)
                 {
-                    if (Round == Bene_Prediction && Init.Factions_Distribution.Factions_In_Play.Contains(Faction.Bene_Gesserit))
+                    if (Round == Bene_Prediction.Item2 && Init.Factions_Distribution.Factions_In_Play.Contains(Faction.Bene_Gesserit)
+                            && (Bene_Prediction.Item1 == Init.Factions_Distribution.Player_Of(faction).Id 
+                            || Bene_Prediction.Item1 == Init.Factions_Distribution.Player_Of((Faction)Alliances.Ally_Of(faction)).Id))
                     {
                         Game_Winners = new Game_Winners(Faction.Bene_Gesserit);
                     }
