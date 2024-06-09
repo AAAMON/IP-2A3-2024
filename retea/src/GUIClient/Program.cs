@@ -308,10 +308,13 @@ public class GameClient
             int bidValue = int.Parse(request.Split('/')[2]);
             return phase4Input(bidValue);
         }
-        else if (request.Contains("/set-bot"))
+        else if (request.Contains("/set-bot")) // aici ar trebui transmis si faction
         {
-            int botID = int.Parse(request.Split("/")[
-            var of = new ClientForAI(botID).Run();
+            int botID = int.Parse(request.Split("/")[2]);
+            string botFaction = string.Parse(request.Split("/")[3]);
+            string botMode = string.Parse(request.Split("/")[4]);
+            string botPlayer = "player" + string.parse(botID);
+            var of = new ClientForAI(botPlayer,botFaction+"-"+botMode).Run();
             // [to add] broadcast to all clients with setted bots
             return "";
         }
