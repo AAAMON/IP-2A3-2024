@@ -38,7 +38,7 @@ namespace AIClient
         private static string baseUrl = "http://localhost:8000/";
         private static string serverUrl = "http://localhost:1234/";
         private static int moveID = 1;
-        private string player = "player1";
+        private string player;
         private int playerID = 1;
         private string botString;
         private string faction;
@@ -71,26 +71,24 @@ namespace AIClient
                 if (indexer > 0)
                     return;
                 string gameStateJson = await GetGamestate(player);
-                using (StreamReader r = new StreamReader("perspectiva.json"))
+                /*(  using (StreamReader r = new StreamReader("perspectiva.json")) [only for testing purpose]
                 {
                     gameStateJson = r.ReadToEnd();
                 }
-                //Console.WriteLine(gameStateJson);
+                /*/
                 try
                 {
                     dynamic gameState = JObject.Parse(gameStateJson);
                     var factionsToMove = gameState.Factions_To_Move;
-                    /// tot ok pana aici
 
                     int factionIndex = 0;
-                    // Console.WriteLine(gameStateJson);
                     Console.WriteLine(factionsToMove);
                     foreach (var factionMoveValue in factionsToMove)
                     {
-                        if (factionMoveValue == true && factionIndex < 7 && matchBotNameToFaction(allFactionsInOrder[factionIndex], botString))//stai oleaca cum stiu ordinea factiunilor sau cum apar in json?
+                        if (factionMoveValue == true && factionIndex < 7 && matchBotNameToFaction(allFactionsInOrder[factionIndex], botString))
                         {
                             indexer++;
-                            Console.WriteLine("yay");
+                            
                             string moveJson = await PostMoveBody(gameStateJson, botString);
                             Console.WriteLine(moveJson);
                             string moveEndpoint = AIMoveFormatToGUIFormat(moveJson);
@@ -137,7 +135,6 @@ namespace AIClient
         {
             string factionAux = factionName.ToLower().Trim().Replace("-", "").Replace("_", "");
             string botAux = botName.ToLower().Trim().Substring(0, botName.IndexOf("-"));
-            // Console.WriteLine("Comparing (F)" + factionAux + "(B)" + botAux);
 
             return (botAux == factionAux);
         }
@@ -239,7 +236,7 @@ namespace AIClient
                 };
 
                 var response = await client.SendAsync(request);
-                //response.EnsureSuccessStatusCode();
+                response.EnsureSuccessStatusCode();
                 return await response.Content.ReadAsStringAsync();
             }
             catch (Exception ex)
