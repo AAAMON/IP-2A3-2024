@@ -624,7 +624,7 @@ def get_move(game_state):
     if phase_name == 'Bidding':
         return bidding(game_state)
     
-    if phase_name == 'Revive':
+    if phase_name == 'Revival':
         return revival(game_state)
     
     if phase_name == 'Shipment And Movement' and phase_moment == 'Shipment':
