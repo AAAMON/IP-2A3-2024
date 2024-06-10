@@ -30,43 +30,43 @@ generals = {
 
 generals_power = {
     "Atreides": {
-        "Thufir Hawat": 5,
-        "Lady Jessica": 5,
-        "Gurney Halleck": 4,
-        "Duncan Idaho": 2,
-        "Dr. Wellington Yueh": 1
+        "Thufir_Hawat": 5,
+        "Lady_Jessica": 5,
+        "Gurney_Halleck": 4,
+        "Duncan_Idaho": 2,
+        "Dr._Wellington_Yueh": 1
     },
     "Harkonnen": {
         "Feyd-Rautha": 6,
-        "Beast Rabban": 4,
-        "Piter De Vries": 3,
-        "Captain Iakin Nefud": 2,
-        "Umman Kudu": 1
+        "Beast_Rabban": 4,
+        "Piter_De_Vries": 3,
+        "Captain_Iakin_Nefud": 2,
+        "Umman_Kudu": 1
     },
     "Bene_Gesserit": {
         "Alia": 5,
-        "Margot Lady Fenring": 5,
-        "Mother Ramallo": 5,
-        "Princess Irulan": 5,
-        "Wanna Yueh": 5
+        "Margot_Lady_Fenring": 5,
+        "Mother_Ramallo": 5,
+        "Princess_Irulan": 5,
+        "Wanna_Yueh": 5
     },
     "Fremen": {
         "Stilgar": 7,
         "Chani": 6,
         "Otheym": 5,
-        "Shadout Mapes": 3,
+        "Shadout_Mapes": 3,
         "Jamis": 2
     },
     "Spacing_Guild": {
-        "Staban Tuek": 5,
-        "Master Bewt": 3,
-        "Esmar Tuek": 3,
-        "Soo-Soo Sook": 2,
-        "Guild Rep.": 1
+        "Staban_Tuek": 5,
+        "Master_Bewt": 3,
+        "Esmar_Tuek": 3,
+        "Soo-Soo_Sook": 2,
+        "Guild_Rep.": 1
     },
     "Emperor": {
-        "Hasimir Fenring": 6,
-        "Captain Aramsham": 5,
+        "Hasimir_Fenring": 6,
+        "Captain_Aramsham": 5,
         "Caid": 3,
         "Burseg": 3,
         "Bashar": 2
