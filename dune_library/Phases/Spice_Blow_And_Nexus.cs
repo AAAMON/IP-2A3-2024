@@ -53,11 +53,13 @@ namespace dune_library.Phases
         public override void Play_Out()
         {
             moment = "before choosing a spice card";
-            Spice_Card topCard = Spice_Deck.Take_Next_Card();
+            Spice_Card topCard = Spice_Deck.Top_Of_Card_Stack();
+
             moment = "spice card was chosen";
             while (topCard is Shai_Hulud_Card && turn == 1)
             {
-                topCard = Spice_Deck.Take_Next_Card();
+                Spice_Deck.Take_Next_Card();
+                topCard = Spice_Deck.Top_Of_Card_Stack();
             }
             if (topCard is Shai_Hulud_Card)
             {
@@ -82,7 +84,9 @@ namespace dune_library.Phases
         private void HandleShaiHuludCard(Spice_Card card)
         {
             moment = "Clearing the section";
+
             Territory_Card previous_card = (Territory_Card)Spice_Deck.Top_OF_Discard_Pile;
+            Spice_Deck.Take_Next_Card();
 
             Map.To_Section_With_Spice(previous_card.Section_Position_In_List).Delete_Spice();
             if (!Init.Alliances.Ally_Of(Faction.Fremen).IsNone)
@@ -99,7 +103,9 @@ namespace dune_library.Phases
             IList<(bool, Faction)> faction_responses = new List<(bool, Faction)>();
             Init.Factions_Distribution.Factions_In_Play.ForEach(faction =>
             {
-                Init.Alliances.Break_Alliance(faction);
+                if (Init.Alliances.Ally_Of(faction).IsSome){
+                    Init.Alliances.Break_Alliance(faction);
+                }
                 switch (faction)
                 {
                     case Faction.Atreides:
@@ -243,7 +249,7 @@ namespace dune_library.Phases
 
         private void HandleTerritoryCard(Territory_Card card)
         {
-
+            
             if (Map.To_Section_With_Spice(card.Section_Position_In_List).Origin_Sector == Map.Storm_Sector)
             {
                 Console.WriteLine("The Spice Blow icon is currently in the storm. No spice is placed this turn.");
@@ -252,7 +258,8 @@ namespace dune_library.Phases
             Map.To_Section_With_Spice(card.Section_Position_In_List).Add_Spice();
             moment = "Puting spice in sectors";
             Console.WriteLine($"Spice Blow in sector {Map.To_Section_With_Spice(card.Section_Position_In_List).Id}. {Map.To_Section_With_Spice(card.Section_Position_In_List).Spice_Capacity} spice added to the territory.");
-
+            
+            Spice_Deck.Take_Next_Card();
             Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
         }
     }

@@ -51,7 +51,7 @@ namespace dune_library.Phases
 
         private bool Las_Gun_Explosion = false;
 
-        private List<(Faction,List<General>)> Used_Generals;
+        private List<(Faction,List<General>)> Used_Generals = new List<(Faction, List<General>)>();
 
         public Battle_Phase(Game game)
         {
@@ -266,6 +266,8 @@ namespace dune_library.Phases
             moment = "Battle Wheel";
 
             IList<Faction> Factions_In_Battle = [(Faction)Faction_Battles.faction, (Faction)Faction_Battles.enemy];
+            Battle_Wheels.first.Empty_Battle_Wheel();
+            Battle_Wheels.second.Empty_Battle_Wheel();
 
             Battle_Wheels.first.Last_Player = Init.Factions_Distribution.Player_Of((Faction)Faction_Battles.faction);
             Battle_Wheels.second.Last_Player = Init.Factions_Distribution.Player_Of((Faction)Faction_Battles.enemy);
@@ -312,13 +314,14 @@ namespace dune_library.Phases
                         bool correct = false;
                         if (Init.Factions_Distribution.Player_Of(faction).Id == line[1] && Factions_In_Battle.Contains(faction))
                         {
-                            
+
                             bool aggresor = false;
                             if (faction == (Faction)Faction_Battles.faction)
                             {
                                 aggresor = true;
                             }
-                            else if (Handle_General(line[4], faction, aggresor) && Handle_Number(line[3], faction, aggresor))
+
+                            if (Handle_General(line[4], faction, aggresor) && Handle_Number(line[3], faction, aggresor))
                             {
                                 if (line.Length == 5 || line[4] == "none")
                                 {
