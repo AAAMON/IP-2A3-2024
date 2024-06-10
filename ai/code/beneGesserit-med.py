@@ -592,7 +592,8 @@ def get_territory_by_id(game_state, territory_id):
 
 def battle(game_state):
     #TODO check with json!!!
-    territory = get_territory_id_by_section_id(game_state, game_state['Faction_Battles']['Chosen_Battle_Section'])
+    territory_id = get_territory_id_by_section_id(game_state, game_state['Faction_Battles']['Chosen_Battle_Section'])
+    territory = get_territory_by_id(game_state, territory_id)
     my_forces = get_forces_by_territory(game_state,territory,faction_name)
     (chance_win, forces, general, defense, attack ) = simulate_battle(game_state, territory, my_forces)
     #voice = voice_use(game_state, defense, attack)
@@ -607,28 +608,12 @@ def battle(game_state):
         }
 
     elif chance_win > 0.5:
-        dead_generals = list(set(game_state['Tleilaxu_Tanks']['Non_Revivable_Generals'][faction_name] | set(game_state['Tleilaxu_Tanks']['Revivable_Generals'][faction_name])))
-        best_general = None
-        for general in generals[faction_name]:
-            if general not in dead_generals:
-                best_general = general
-                break
-
-        attack_card = None
-        available_attack_cards = list(set(weapon_cards) & set(game_state['Faction_Knowledge']['Treachery_Cards']))
-        if len(available_attack_cards) > 0:
-            attack_card = random.choice(available_attack_cards)
-        
-        defense_card = None
-        available_defense_cards = list(set(defense_cards) & set(game_state['Faction_Knowledge']['Treachery_Cards']))
-        if len(available_defense_cards) > 0:
-            defense_card = random.choice(available_defense_cards)
         return {
             "action": "battle", 
-            'used_general': best_general,
-            'attack_card': attack_card,
-            'defense_card': defense_card,
-            'troops': my_forces-1,  
+            'used_general': get_best_general(game_state),
+            'attack_card': get_attack_card(game_state),
+            'defense_card': get_defense_card(game_state),
+            'troops': max(my_forces - 1, 1)
         }
 
     else:
@@ -662,15 +647,14 @@ def get_move(game_state):
     phase_name = game_state['Phase'][0]['name']
     phase_moment = game_state['Phase'][0]['moment']
 
-    #TODO change setup
     if phase_name == 'Set-up' and phase_moment == 'Bene Gesserit prediction':  
         return {
             'action': 'predict',
             'faction': 'Spacing_Guild',
             'round': 6
-        } 
+        }
 
-    if phase_name == 'Pick Traitor':
+    if phase_name == 'Set-up' and phase_moment == 'traitor selection': 
         return pick_traitor(game_state)
     
     if phase_name == "Storm":
@@ -685,13 +669,14 @@ def get_move(game_state):
     if phase_name == 'Revival':
         return revival(game_state)
     
-    if phase_name == 'Movement' and phase_moment == 'Shipment':
+    #TODO nu sunt sigura daca phase se cheama asa
+    if phase_name == 'Shipment And Movement' and phase_moment == 'ship or move troops':
        return shipment(game_state)
     
-    if phase_name == "Movement" and phase_moment == 'bene shipment':
+    if phase_name == "Shipment And Movement" and phase_moment == 'bene shipment':
        return bene_shipment(game_state)
     
-    if phase_name == 'Movement' and phase_moment == 'Movement':
+    if phase_name == 'Shipment And Movement' and phase_moment == 'move troops':
         return movement(game_state)
     
     if phase_name == 'Battle' and phase_moment == 'choosing battle':
