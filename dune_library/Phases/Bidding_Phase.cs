@@ -14,6 +14,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Numerics;
 using LanguageExt.Pipes;
 using LanguageExt.SomeHelp;
+using System.Security.Cryptography;
 
 namespace dune_library.Phases
 {
@@ -188,6 +189,10 @@ namespace dune_library.Phases
                     currentBidder = biddingOrder.Dequeue();
                 }
 
+
+                HighestBid.bid = 0;
+                HighestBid.faction = new Option<Faction>();
+
                 switch (currentBidder)
                 {
                     case Faction.Atreides:
@@ -293,10 +298,9 @@ namespace dune_library.Phases
                         Spice_Manager.Add_Spice_To(Faction.Emperor, HighestBid.bid);
                     }
 
+
                     Treachery_Cards_Manager.Give_A_Treachery_Card((Faction)HighestBid.faction);
                     Spice_Manager.Remove_Spice_From((Faction)HighestBid.faction, HighestBid.bid);
-
-                    HighestBid = new Highest_Bid();
 
                 }
 
