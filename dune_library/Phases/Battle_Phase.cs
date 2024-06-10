@@ -177,7 +177,6 @@ namespace dune_library.Phases
 
                 while (Faction_Battles.Battle_Sections.Count > 0)
                 {
-                    
                     Console.WriteLine("/player1/phase_7_input/section_id/player_id");
 
                     string[] line = Input_Provider.GetInputAsync().Result.Split("/");
@@ -208,6 +207,39 @@ namespace dune_library.Phases
                             Faction_Battles.Chosen_Battle_Section = Map.Sections[section_id].Id;
                             Console.WriteLine("Battle Wheel Time");
                             Handle_Battle_Wheel();
+
+                            Map.Sections[(int)Faction_Battles.Chosen_Battle_Section].Origin_Territory.Sections.ForEach(s => {
+                                    Faction_Battles.Battle_Sections.Remove(s.Id);
+                            });
+                            Faction_Battles.Chosen_Battle_Section = 0;
+
+                            if(Faction_Battles.Battle_Sections.Count > 0)
+                            {
+                                switch (faction)
+                                {
+                                    case Faction.Atreides:
+                                        Factions_To_Move[0] = true;
+                                        break;
+                                    case Faction.Bene_Gesserit:
+                                        Factions_To_Move[1] = true;
+                                        break;
+                                    case Faction.Emperor:
+                                        Factions_To_Move[2] = true;
+                                        break;
+                                    case Faction.Fremen:
+                                        Factions_To_Move[3] = true;
+                                        break;
+                                    case Faction.Spacing_Guild:
+                                        Factions_To_Move[4] = true;
+                                        break;
+                                    case Faction.Harkonnen:
+                                        Factions_To_Move[5] = true;
+                                        break;
+                                }
+                            }
+
+                            Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+
                         }
                         else
                         {
@@ -234,6 +266,8 @@ namespace dune_library.Phases
             Battle_Wheels.first.Last_Player = Init.Factions_Distribution.Player_Of((Faction)Faction_Battles.faction);
             Battle_Wheels.second.Last_Player = Init.Factions_Distribution.Player_Of((Faction)Faction_Battles.enemy);
 
+            Gather_Troops();
+
             Factions_In_Battle.ForEach(f =>
             {
                 switch (f)
@@ -258,7 +292,8 @@ namespace dune_library.Phases
                         break;
                 }
             });
-
+            Console.WriteLine(Map.Sections[(int)Faction_Battles.Chosen_Battle_Section].Forces.Of(Faction.Harkonnen));
+            Console.WriteLine(Map.Sections[(int)Faction_Battles.Chosen_Battle_Section].Forces.Of(Faction.Fremen));
             Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
 
             while (Factions_In_Battle.Count > 0)
@@ -273,7 +308,7 @@ namespace dune_library.Phases
                         bool correct = false;
                         if (Init.Factions_Distribution.Player_Of(faction).Id == line[1] && Factions_In_Battle.Contains(faction))
                         {
-                            Factions_In_Battle.Remove(faction);
+                            
                             bool aggresor = false;
                             if (faction == (Faction)Faction_Battles.faction)
                             {
@@ -324,12 +359,8 @@ namespace dune_library.Phases
                                     Factions_To_Move[5] = false;
                                     break;
                             }
-                            Handle_Battle_Result();
+                            Console.WriteLine("Succes");
                             Factions_In_Battle.Remove(faction);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Failure");
                         }
 
                     });
@@ -340,7 +371,60 @@ namespace dune_library.Phases
                 }
 
             }
+            Handle_Battle_Result();
 
+        }
+
+        public void Gather_Troops()
+        {
+            List<Section> neighbourSections0 = [Map.Sections[(int)Faction_Battles.Chosen_Battle_Section]];
+            bool adding = true;
+            while (adding)
+            {
+                adding = false;
+                List<Section> new_Neighbour = new List<Section>();
+                new_Neighbour = neighbourSections0.Distinct().ToList();
+
+                neighbourSections0.ForEach(s => {
+                    List<Section> temp = [s];
+                    temp = Get_Neighbour_Sections(s);
+
+                    temp.ForEach(section => {
+                        if (section.Origin_Territory == s.Origin_Territory && !neighbourSections0.Contains(section))
+                        {
+                            adding = true;
+                            new_Neighbour.Add(section);
+                        }
+                    });
+                });
+                neighbourSections0 = new_Neighbour.Distinct().ToList();
+            }
+            int section_id = (int)Faction_Battles.Chosen_Battle_Section;
+            neighbourSections0.ForEach(s => Console.WriteLine(s.Id));
+
+            neighbourSections0.ForEach((s) =>
+            {
+                if (Map.Sections[section_id] != s)
+                {
+                    if(s.Forces.Of((Faction)Faction_Battles.faction) > 0)
+                        s.Forces.Transfer_To((Faction)Faction_Battles.faction, Map.Sections[section_id].Forces, s.Forces.Of((Faction)Faction_Battles.faction));
+                    if (s.Forces.Of((Faction)Faction_Battles.enemy) > 0)
+                        s.Forces.Transfer_To((Faction)Faction_Battles.enemy, Map.Sections[section_id].Forces, s.Forces.Of((Faction)Faction_Battles.enemy));
+                }
+            });
+        }
+        public List<Section> Get_Neighbour_Sections(Section section)
+        {
+            List<Section> neighSections = new List<Section>();
+            section.Neighboring_Sections.ForEach(s =>
+            {
+                if (s.Origin_Sector != Storm_Position)
+                {
+                    neighSections.Add(s);
+                }
+            });
+
+            return neighSections;
         }
 
         public bool Is_Valid_Player(string input)
@@ -399,7 +483,6 @@ namespace dune_library.Phases
                 {
                     number_victim = 999;
                 }
-
             }
 
             if (Battle_Wheels.second.General.IsSome)
@@ -432,6 +515,7 @@ namespace dune_library.Phases
             }
             else if (number_aggresor >= number_victim)
             {
+                Console.WriteLine("Aggresor Won");
                 if(number_aggresor != 999)
                 {
                     Tleilaxu_Tanks.Forces.Transfer_From(aggresor, Map.Sections[(int)Faction_Battles.Chosen_Battle_Section].Forces, Battle_Wheels.first.number);
@@ -457,6 +541,7 @@ namespace dune_library.Phases
             }
             else
             {
+                Console.WriteLine("Victim Won");
                 if (number_victim != 999)
                 {
                     Tleilaxu_Tanks.Forces.Transfer_From(victim, Map.Sections[(int)Faction_Battles.Chosen_Battle_Section].Forces, Battle_Wheels.second.number);
@@ -484,6 +569,30 @@ namespace dune_library.Phases
         public void Handle_Treachery_Cards_Discard(Faction faction)
         {
             moment = "discard treachery cards";
+
+            for (int i = 0; i < Factions_To_Move.Length; i++) { Factions_To_Move[i] = false; }
+            switch (faction)
+            {
+                case Faction.Atreides:
+                    Factions_To_Move[0] = true;
+                    break;
+                case Faction.Bene_Gesserit:
+                    Factions_To_Move[1] = true;
+                    break;
+                case Faction.Emperor:
+                    Factions_To_Move[2] = true;
+                    break;
+                case Faction.Fremen:
+                    Factions_To_Move[3] = true;
+                    break;
+                case Faction.Spacing_Guild:
+                    Factions_To_Move[4] = true;
+                    break;
+                case Faction.Harkonnen:
+                    Factions_To_Move[5] = true;
+                    break;
+            }
+
             Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
 
             List<Treachery_Cards.Treachery_Card> cards_to_discard = new List<Treachery_Cards.Treachery_Card>();
@@ -541,6 +650,8 @@ namespace dune_library.Phases
                 }
             }
             moment = "Going to the next battle";
+            for (int i = 0; i < Factions_To_Move.Length; i++) { Factions_To_Move[i] = false; }
+
         }
         public void Handle_Treachery_Cards_Battle()
         {
@@ -605,7 +716,7 @@ namespace dune_library.Phases
                 }
                 else
                 {
-                    Tleilaxu_Tanks.Kill(((General)Battle_Wheels.second.General).Id);
+                    Tleilaxu_Tanks.Kill(((General)Battle_Wheels.first.General).Id);
                 }
             }
         }
@@ -750,11 +861,11 @@ namespace dune_library.Phases
                 {
                     if (aggresor)
                     {
-                        Battle_Wheels.first.number = Map.Sections[(int)Faction_Battles.Chosen_Battle_Section].Forces.Of(faction);
+                        Battle_Wheels.first.number = (uint)troop_number;
                     }
                     else
                     {
-                        Battle_Wheels.second.number = Map.Sections[(int)Faction_Battles.Chosen_Battle_Section].Forces.Of(faction);
+                        Battle_Wheels.second.number = (uint)troop_number;
                     }
                     return true;
                 }

@@ -118,7 +118,7 @@ namespace dune_library.Phases
                     string[] line = Input_Provider.GetInputAsync().Result.Split("/");
                     if (line[1] == Init.Factions_Distribution.Player_Of(faction).Id && line[2] == "phase_6_input")
                     {
-                        if (line[3] == "1" && !inserted)
+                        if (line[3] == "1" && !inserted && line.Length == 6)
                         {
                             string sectionId = line[4];
                             string number_of_troops = line[5];
@@ -146,7 +146,7 @@ namespace dune_library.Phases
                                 }
                             }
                         }
-                        else if (line[3] == "2" && !shipped)
+                        else if (line[3] == "2" && !shipped && line.Length == 7)
                         {
                             string fromSectionId = line[4];
                             string toSectionId = line[5];
@@ -158,7 +158,7 @@ namespace dune_library.Phases
                                 next_faction(faction);
                             }
                         }
-                        else if (line[3] == "3" && line[1] == Init.Factions_Distribution.Player_Of(Faction.Spacing_Guild).Id && !shipped)
+                        else if (line[3] == "3" && line[1] == Init.Factions_Distribution.Player_Of(Faction.Spacing_Guild).Id && !shipped && line.Length == 6)
                         {
                             string sectionId = line[4];
                             string number_of_troops = line[5];
@@ -170,7 +170,7 @@ namespace dune_library.Phases
                                 next_faction(faction);
                             }                                
                         }
-                        else if (line[3] == "4" && line[1] == Init.Factions_Distribution.Player_Of(Faction.Spacing_Guild).Id && !shipped)
+                        else if (line[3] == "4" && line[1] == Init.Factions_Distribution.Player_Of(Faction.Spacing_Guild).Id && !shipped && line.Length == 7)
                         {
                             string fromSectionId = line[4];
                             string toSectionId = line[5];
