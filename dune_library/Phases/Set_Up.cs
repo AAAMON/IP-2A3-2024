@@ -160,46 +160,7 @@ namespace dune_library.Phases
 
             if (Factions_In_Play.Contains(Faction.Fremen))
             {
-                Forces To_Place_Now = new();
-                To_Place_Now.Transfer_From(Faction.Fremen, Reserves, 10);
-
-                int forces_distributed = 0;
-                while (forces_distributed != 10)
-                {
-                    System.Console.WriteLine("Choose city for fremen and number of troops (/player4/setup/14/10)");
-                    string[] line = Input_Provider.GetInputAsync().Result.Split("/");
-                    if (line[1] == Init.Factions_Distribution.Player_Of(Faction.Fremen).Id && line[2] == "setup")
-                    {
-                        Console.WriteLine("player is correct");
-                        int sectionid = 0;
-                        int troop_number = 0;
-                        if (Int32.TryParse(line[3], out sectionid) && Int32.TryParse(line[4], out troop_number))
-                        {
-                            if (sectionid >= 0 && sectionid <= 84 && troop_number <= 10 - forces_distributed && troop_number > 0)
-                            {
-                                Console.WriteLine("section id and troop number is correct");
-                                if (sectionid == 14 || sectionid == 15 || sectionid == 67 || (sectionid >= 73 && sectionid <= 75))
-                                {
-                                    Map.Sections[sectionid].Forces.Transfer_From(Faction.Fremen, To_Place_Now, (uint)troop_number);
-                                    forces_distributed += troop_number;
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Failure");
-                                }
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Failure");
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Failure");
-                    }
-
-                }
+                Handle_Fremen();
             }
             
             moment = "treachery card distribution";
@@ -213,13 +174,61 @@ namespace dune_library.Phases
             });
 
             moment = "end of set-up";
-            Factions_To_Move.ForEach(faction => faction = false);
+            for (int i = 0; i < Factions_To_Move.Length; i++)
+            {
+                Factions_To_Move[i] = false;
+            }
             Factions_In_Play.ForEach(faction =>
             {
                 Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json");
             });
 
 
+        }
+
+        private void Handle_Fremen()
+        {
+
+            Forces To_Place_Now = new();
+            To_Place_Now.Transfer_From(Faction.Fremen, Reserves, 10);
+
+            int forces_distributed = 0;
+            while (forces_distributed != 10)
+            {
+                System.Console.WriteLine("Choose city for fremen and number of troops (/player4/setup/14/10)");
+                string[] line = Input_Provider.GetInputAsync().Result.Split("/");
+                if (line[1] == Init.Factions_Distribution.Player_Of(Faction.Fremen).Id && line[2] == "setup")
+                {
+                    Console.WriteLine("player is correct");
+                    int sectionid = 0;
+                    int troop_number = 0;
+                    if (Int32.TryParse(line[3], out sectionid) && Int32.TryParse(line[4], out troop_number))
+                    {
+                        if (sectionid >= 0 && sectionid <= 84 && troop_number <= 10 - forces_distributed && troop_number > 0)
+                        {
+                            Console.WriteLine("section id and troop number is correct");
+                            if (sectionid == 14 || sectionid == 15 || sectionid == 67 || (sectionid >= 73 && sectionid <= 75))
+                            {
+                                Map.Sections[sectionid].Forces.Transfer_From(Faction.Fremen, To_Place_Now, (uint)troop_number);
+                                forces_distributed += troop_number;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Failure");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Failure");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Failure");
+                }
+
+            }
         }
 
         private void Handle_Traitors()

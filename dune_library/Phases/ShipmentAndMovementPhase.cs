@@ -124,7 +124,7 @@ namespace dune_library.Phases
                             string number_of_troops = line[5];
                             if(InsertTroops(faction, number_of_troops, sectionId))
                             {
-                                if (Factions_In_Play.Contains(Faction.Bene_Gesserit))
+                                if (Factions_In_Play.Contains(Faction.Bene_Gesserit) && faction != Faction.Bene_Gesserit)
                                 {
                                     Handle_Bene();
                                 }
@@ -182,7 +182,7 @@ namespace dune_library.Phases
                                 next_faction(faction);
                             }
                         }
-                        else if (line[3] == "pass" || (shipped && inserted)) {
+                        if (line[3] == "pass" || (shipped && inserted)) {
                             correct = true;
                             pass = true;
                             next_faction(faction);

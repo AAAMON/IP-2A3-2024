@@ -126,9 +126,9 @@ namespace dune_library
 
         #region Information that everyone should know
 
-        public Faction_Battles Faction_Battles { get; private set; }
+        public Faction_Battles Faction_Battles { get; private set; } = new Faction_Battles();
 
-        public Game_Winners Game_Winners { get; private set; }
+        public Game_Winners Game_Winners { get; private set; } = new Game_Winners();
 
         private Either<Factions_Distribution_Manager, Final_Factions_Distribution> factions_distribution;
         public Final_Factions_Distribution Factions_Distribution
@@ -145,7 +145,7 @@ namespace dune_library
 
         public Map_Resources.Map Map { get; } = new();
 
-        public uint Round { get; private set; } = 0;
+        public uint Round { get; set; } = 0;
 
         public Option<Phase> Phase { get; private set; } = None;
 

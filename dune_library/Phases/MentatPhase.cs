@@ -20,7 +20,6 @@ namespace dune_library.Phases
 
         public MentatPausePhase(Game game)
         {
-            Round = game.Round;
             Perspective_Generator = game;
             Init = game;
             Factions_To_Move = game.Factions_To_Move;
@@ -29,7 +28,9 @@ namespace dune_library.Phases
             Alliances = game.Alliances;
             Game_Winners = game.Game_Winners;
             Bene_Prediction = game.Bene_Prediction;
+            this.game = game;
         }
+        private Game game;
         public Game_Winners Game_Winners { get; private set; }
         public Map_Resources.Map Map { get; }
         private I_Perspective_Generator Perspective_Generator { get; }
@@ -37,7 +38,6 @@ namespace dune_library.Phases
         private I_Setup_Initializers_And_Getters Init { get; }
 
         public I_Input_Provider Input_Provider { get; set; }
-        private uint Round { get; set; }
 
         private (string, uint) Bene_Prediction;
 
@@ -50,13 +50,14 @@ namespace dune_library.Phases
         {
             
             CheckWinConditions();
-            
-            
+            Console.WriteLine(Game_Winners.faction1);
+            Console.WriteLine(Game_Winners.faction2);
+
             if (Game_Winners.hasWinner())
             {
                 Console.WriteLine("End Game");
                 moment = "End Game";
-                Round = 11;
+                game.Round = 11;
                 Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
             }
             else
@@ -141,12 +142,12 @@ namespace dune_library.Phases
             {
                 return;
             }
-            else if (Handle_Fremen_WinCon())
+            else if(game.Round == 10)
             {
-                return ;
-            }
-            else if(Round == 10)
-            {
+                if (Handle_Fremen_WinCon())
+                {
+                    return;
+                }
                 if (Alliances.Ally_Of(Faction.Spacing_Guild).IsSome)
                 {
                     Game_Winners = new Game_Winners(Faction.Spacing_Guild, (Faction)Alliances.Ally_Of(Faction.Spacing_Guild));
@@ -173,7 +174,7 @@ namespace dune_library.Phases
                     counter += strongholds_distribution[faction].Count;
                     if (counter > 3)
                     {
-                        if(Round == Bene_Prediction.Item2 && Init.Factions_Distribution.Factions_In_Play.Contains(Faction.Bene_Gesserit)
+                        if(game.Round == Bene_Prediction.Item2 && Init.Factions_Distribution.Factions_In_Play.Contains(Faction.Bene_Gesserit)
                             && (Bene_Prediction.Item1 == Init.Factions_Distribution.Player_Of(faction).Id 
                             || Bene_Prediction.Item1 == Init.Factions_Distribution.Player_Of((Faction)Alliances.Ally_Of(faction)).Id))
                         {
@@ -188,7 +189,7 @@ namespace dune_library.Phases
                 }
                 else if (counter > 2)
                 {
-                    if (Round == Bene_Prediction.Item2 && Init.Factions_Distribution.Factions_In_Play.Contains(Faction.Bene_Gesserit)
+                    if (game.Round == Bene_Prediction.Item2 && Init.Factions_Distribution.Factions_In_Play.Contains(Faction.Bene_Gesserit)
                             && (Bene_Prediction.Item1 == Init.Factions_Distribution.Player_Of(faction).Id 
                             || Bene_Prediction.Item1 == Init.Factions_Distribution.Player_Of((Faction)Alliances.Ally_Of(faction)).Id))
                     {

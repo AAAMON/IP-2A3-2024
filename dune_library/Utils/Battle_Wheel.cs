@@ -40,7 +40,7 @@ namespace dune_library.Utils
             set => _last_player = value;
         }
 
-        public General General;
+        public Option<General> General { get; set; }
 
         public uint number;
 
@@ -49,6 +49,16 @@ namespace dune_library.Utils
         public Option<Treachery_Cards.Treachery_Card> Defensive_Treachery_Card { get; set; }
 
         public Option<Treachery_Cards.Treachery_Card> Special_Treachery_Card { get; set; }
+
+        public void Empty_Battle_Wheel()
+        {
+            _last_player = None;
+            Offensive_Treachery_Card = None;
+            Defensive_Treachery_Card = None;
+            Special_Treachery_Card = None;
+            General = None;
+            number = 0;
+    }
 
     }
 }
