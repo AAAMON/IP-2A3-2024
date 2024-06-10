@@ -100,20 +100,25 @@ namespace dune_library.Phases
                 }
                 Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json");
             });
+
             faction_order.ForEach(faction =>
             {
-                bool correct = false;
-                while (!correct)
+                bool pass = false;
+                bool inserted = false;
+                bool shipped = false;
+                while (!pass)
                 {
                     Console.WriteLine($"{faction}: You have {Faction_Knowledge.getSpice(faction)} spice.");
-                
                     Console.WriteLine("ex: /player1/phase_6_input/1/section_id/number_of_troops");
                     Console.WriteLine("ex: /player1/phase_6_input/2/from_section_id/to_section_id/number_of_troops");
+                    Console.WriteLine("ex: /spacing_guild/phase_6_input/3/section_id/number_of_troops");
+                    Console.WriteLine("ex: /spacing_guild/phase_6_input/4/from_section_id/to_section_id/number_of_troops");
 
+                    bool correct = false;
                     string[] line = Input_Provider.GetInputAsync().Result.Split("/");
                     if (line[1] == Init.Factions_Distribution.Player_Of(faction).Id && line[2] == "phase_6_input")
                     {
-                        if (line[3] == "1")
+                        if (line[3] == "1" && !inserted)
                         {
                             string sectionId = line[4];
                             string number_of_troops = line[5];
@@ -124,12 +129,14 @@ namespace dune_library.Phases
                                     Handle_Bene();
                                 }
                                 correct = true;
+                                inserted = true;
                                 next_faction(faction);
                             }
                             else if(Faction.Fremen == faction && Handle_Fremen_Shipment(sectionId,number_of_troops))
                             {
-                                correct = true;
                                 next_faction(faction);
+                                inserted = true;
+                                correct = true;
                                 if (Factions_In_Play.Contains(Faction.Bene_Gesserit))
                                 {
                                     if (Init.Reserves.Of(Faction.Bene_Gesserit) > 0)
@@ -139,7 +146,7 @@ namespace dune_library.Phases
                                 }
                             }
                         }
-                        else if (line[3] == "2")
+                        else if (line[3] == "2" && !shipped)
                         {
                             string fromSectionId = line[4];
                             string toSectionId = line[5];
@@ -147,13 +154,47 @@ namespace dune_library.Phases
                             if (MoveTroops(faction, number_of_troops, fromSectionId, toSectionId))
                             {
                                 correct = true;
+                                shipped = true;
                                 next_faction(faction);
                             }
                         }
-                        else if (line[3] == "pass") {
+                        else if (line[3] == "3" && line[1] == Init.Factions_Distribution.Player_Of(Faction.Spacing_Guild).Id && !shipped)
+                        {
+                            string sectionId = line[4];
+                            string number_of_troops = line[5];
+
+                            if (RetreatTroops(number_of_troops, sectionId))
+                            {
+                                correct = true;
+                                shipped = true;
+                                next_faction(faction);
+                            }                                
+                        }
+                        else if (line[3] == "4" && line[1] == Init.Factions_Distribution.Player_Of(Faction.Spacing_Guild).Id && !shipped)
+                        {
+                            string fromSectionId = line[4];
+                            string toSectionId = line[5];
+                            string number_of_troops = line[6];
+                            if (ShipTroops(number_of_troops, fromSectionId, toSectionId))
+                            {
+                                correct = true;
+                                shipped = true;
+                                next_faction(faction);
+                            }
+                        }
+                        else if (line[3] == "pass" || (shipped && inserted)) {
                             correct = true;
+                            pass = true;
                             next_faction(faction);
                         }
+                    }
+                    if (correct)
+                    {
+                        Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+                    }
+                    else
+                    {
+                        Console.WriteLine("Failure");
                     }
                     
                 }
@@ -224,6 +265,74 @@ namespace dune_library.Phases
                     break;
             }
         }
+
+        private bool ShipTroops(string troops_to_place, string from_section_id, string to_section_id)
+        {
+            Faction faction = Faction.Spacing_Guild;
+            int toSectionId, fromSectionId, troops;
+            if (!Int32.TryParse(troops_to_place, out troops) || !Int32.TryParse(from_section_id, out fromSectionId) || !Int32.TryParse(to_section_id, out toSectionId))
+            {
+                return false;
+            }
+
+            var fromSection = Map.Sections.FirstOrDefault(s => s.Id == fromSectionId);
+            var toSection = Map.Sections.FirstOrDefault(s => s.Id == toSectionId);
+
+            if (fromSection == null || toSection == null)
+            {
+                Console.WriteLine("Invalid territory name.");
+                return false;
+            }
+
+            if (fromSection.Forces.Of(faction) < troops)
+            {
+                Console.WriteLine("Not enough troops.");
+                return false;
+            }
+
+            fromSection.Forces.Transfer_To(faction, Reserves, (uint)troops);
+            toSection.Forces.Transfer_From(faction, Reserves, (uint)troops);
+
+            Console.WriteLine($"{troops} troops moved from {fromSection.Origin_Territory.Name} to {toSection.Origin_Territory.Name}.");
+            return true;
+        }
+
+        private bool RetreatTroops(string troops, string sectionId)
+        {
+            int troops_to_retreat = 0;
+            int section_id = 0;
+            if (!Int32.TryParse(troops, out troops_to_retreat) || !Int32.TryParse(sectionId, out section_id))
+            {
+                return false;
+            }
+
+            var section = Map.Sections.FirstOrDefault(s => s.Id == section_id);
+
+            if (section == null)
+            {
+                return false;
+            }
+
+            if (section.Origin_Sector == Storm_Position)
+            {
+                return false;
+            }
+
+            var totalCost = troops_to_retreat / 2;
+            if (Spice_Manager.getSpice(Faction.Spacing_Guild) >= totalCost && section.Forces.Of(Faction.Spacing_Guild) >= troops_to_retreat)
+            {
+                Reserves.Transfer_From(Faction.Spacing_Guild, section.Forces, (uint)troops_to_retreat);
+                Spice_Manager.Remove_Spice_From(Faction.Spacing_Guild, (uint)totalCost);
+                Console.WriteLine($"{troops} troops retretead from {section.Origin_Territory.Name}.");
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Not enough spice.");
+                return false;
+            }
+        }
+
         private bool InsertTroops(Faction faction, string troops, string sectionId)
         {
             int troops_to_place = 0;
