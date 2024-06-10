@@ -386,7 +386,6 @@ def shipment(game_state):
     return {
     "action": "shipment", 
     "value": desired_number_troops, 
-    "teritorry": best_territory['Id'], 
     "section": best_section['Id'] 
     } 
 
