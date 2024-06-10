@@ -129,11 +129,34 @@ namespace dune_library.Phases
                                 if (Factions_In_Play.Contains(Faction.Bene_Gesserit) && faction != Faction.Bene_Gesserit)
                                 {
                                     Handle_Bene();
+
+                                    switch (faction)
+                                    {
+                                        case Faction.Atreides:
+                                            Factions_To_Move[0] = true;
+                                            break;
+                                        case Faction.Bene_Gesserit:
+                                            Factions_To_Move[1] = true;
+                                            break;
+                                        case Faction.Emperor:
+                                            Factions_To_Move[2] = true;
+                                            break;
+                                        case Faction.Fremen:
+                                            Factions_To_Move[3] = true;
+                                            break;
+                                        case Faction.Spacing_Guild:
+                                            Factions_To_Move[4] = true;
+                                            break;
+                                        case Faction.Harkonnen:
+                                            Factions_To_Move[5] = true;
+                                            break;
+                                    }
+                                    Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
+
                                 }
                                 moment = "move troops";
                                 correct = true;
                                 shipped = true;
-                                next_faction(faction);
                             }
                             else if(Faction.Fremen == faction && Handle_Fremen_Shipment(sectionId,number_of_troops))
                             {
@@ -212,7 +235,7 @@ namespace dune_library.Phases
         private void Handle_Bene()
         {
             bool[] previous_order = new bool[6];
-            for(int i = 0; i < Factions_To_Move.Length; i++) { previous_order[i] = Factions_To_Move[i]; Factions_To_Move[i] = false;}
+            for(int i = 0; i < Factions_To_Move.Length; i++) { Factions_To_Move[i] = false;}
             Factions_To_Move[1] = true;
             moment = "waiting for bene input...";
             Init.Factions_Distribution.Factions_In_Play.ForEach(faction => Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json"));
@@ -239,7 +262,7 @@ namespace dune_library.Phases
                 }
             }
             moment = "continue with Shipment and Movement Phase";
-            for (int i = 0; i < Factions_To_Move.Length; i++) { Factions_To_Move[i] = previous_order[i]; }
+            for (int i = 0; i < Factions_To_Move.Length; i++) { Factions_To_Move[i] = false; }
         }
         private void next_faction(Faction faction)
         {
