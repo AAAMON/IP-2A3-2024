@@ -542,7 +542,8 @@ def get_territory_by_id(game_state, territory_id):
 
 def battle(game_state):
     #TODO check with json!!!
-    territory = get_territory_id_by_section_id(game_state, game_state['Faction_Battles']['Chosen_Battle_Section'])
+    territory_id = get_territory_id_by_section_id(game_state, game_state['Faction_Battles']['Chosen_Battle_Section'])
+    territory = get_territory_by_id(game_state, territory_id)
     my_forces = get_forces_by_territory(game_state,territory,faction_name)
     (chance_win, forces, general, defense, attack ) = simulate_battle(game_state, territory, my_forces)
 
