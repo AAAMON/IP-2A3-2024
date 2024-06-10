@@ -89,23 +89,25 @@ namespace dune_library.Phases
                     break;
             }
 
-            Init.Factions_Distribution.Factions_In_Play.ForEach(faction => { 
-                if(faction == Faction.Atreides)
-                {
-                    game.Next_Spice_Card = Spice_Deck.Top_Of_Card_Stack();
-                }
-                else
-                {
-                    game.Next_Spice_Card = new Option<Spice_Card>();
-                }
-                Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json");
-            });
-
             faction_order.ForEach(faction =>
             {
+                moment = "ship or move troops";
+
+                Init.Factions_Distribution.Factions_In_Play.ForEach(faction => {
+                    if (faction == Faction.Atreides)
+                    {
+                        game.Next_Spice_Card = Spice_Deck.Top_Of_Card_Stack();
+                    }
+                    else
+                    {
+                        game.Next_Spice_Card = new Option<Spice_Card>();
+                    }
+                    Perspective_Generator.Generate_Perspective(Init.Factions_Distribution.Player_Of(faction)).SerializeToJson($"{Init.Factions_Distribution.Player_Of(faction).Id}.json");
+                });
+
                 bool pass = false;
-                bool inserted = false;
                 bool shipped = false;
+                bool moved = false;
                 while (!pass)
                 {
                     Console.WriteLine($"{faction}: You have {Faction_Knowledge.getSpice(faction)} spice.");
@@ -118,7 +120,7 @@ namespace dune_library.Phases
                     string[] line = Input_Provider.GetInputAsync().Result.Split("/");
                     if (line[1] == Init.Factions_Distribution.Player_Of(faction).Id && line[2] == "phase_6_input")
                     {
-                        if (line[3] == "1" && !inserted && line.Length == 6)
+                        if (line[3] == "1" && !shipped && line.Length == 6)
                         {
                             string sectionId = line[4];
                             string number_of_troops = line[5];
@@ -128,14 +130,16 @@ namespace dune_library.Phases
                                 {
                                     Handle_Bene();
                                 }
+                                moment = "move troops";
                                 correct = true;
-                                inserted = true;
+                                shipped = true;
                                 next_faction(faction);
                             }
                             else if(Faction.Fremen == faction && Handle_Fremen_Shipment(sectionId,number_of_troops))
                             {
+                                moment = "move troops";
                                 next_faction(faction);
-                                inserted = true;
+                                shipped = true;
                                 correct = true;
                                 if (Factions_In_Play.Contains(Faction.Bene_Gesserit))
                                 {
@@ -146,7 +150,7 @@ namespace dune_library.Phases
                                 }
                             }
                         }
-                        else if (line[3] == "2" && !shipped && line.Length == 7)
+                        else if (line[3] == "2" && !moved && line.Length == 7)
                         {
                             string fromSectionId = line[4];
                             string toSectionId = line[5];
@@ -154,7 +158,7 @@ namespace dune_library.Phases
                             if (MoveTroops(faction, number_of_troops, fromSectionId, toSectionId))
                             {
                                 correct = true;
-                                shipped = true;
+                                moved = true;
                                 next_faction(faction);
                             }
                         }
@@ -165,6 +169,7 @@ namespace dune_library.Phases
 
                             if (RetreatTroops(number_of_troops, sectionId))
                             {
+                                moment = "move troops";
                                 correct = true;
                                 shipped = true;
                                 next_faction(faction);
@@ -177,12 +182,13 @@ namespace dune_library.Phases
                             string number_of_troops = line[6];
                             if (ShipTroops(number_of_troops, fromSectionId, toSectionId))
                             {
+                                moment = "move troops";
                                 correct = true;
                                 shipped = true;
                                 next_faction(faction);
                             }
                         }
-                        if (line[3] == "pass" || (shipped && inserted)) {
+                        if (line[3] == "pass" || moved) {
                             correct = true;
                             pass = true;
                             next_faction(faction);

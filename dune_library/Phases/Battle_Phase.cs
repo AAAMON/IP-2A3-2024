@@ -51,6 +51,8 @@ namespace dune_library.Phases
 
         private bool Las_Gun_Explosion = false;
 
+        private List<(Faction,List<General>)> Used_Generals;
+
         public Battle_Phase(Game game)
         {
             Input_Provider = game.Input_Provider;
@@ -136,6 +138,8 @@ namespace dune_library.Phases
 
             ///player1/phase_7_input/section_id/player_id/number/general_name/treachery_card/treachery_card
             moment = "choosing battle";
+
+            faction_order.ForEach(f => Used_Generals.Add((f, new List<General>())));
 
             faction_order.ForEach(faction =>
             {
@@ -314,9 +318,9 @@ namespace dune_library.Phases
                             {
                                 aggresor = true;
                             }
-                            if (Handle_General(line[4], faction, aggresor) && Handle_Number(line[3], faction, aggresor))
+                            else if (Handle_General(line[4], faction, aggresor) && Handle_Number(line[3], faction, aggresor))
                             {
-                                if (line.Length == 5)
+                                if (line.Length == 5 || line[4] == "none")
                                 {
                                     correct = true;
                                 }
@@ -372,7 +376,6 @@ namespace dune_library.Phases
 
             }
             Handle_Battle_Result();
-
         }
 
         public void Gather_Troops()
@@ -537,6 +540,16 @@ namespace dune_library.Phases
                     Treachery_Cards_Manager.Remove_Treachery_Card(aggresor, (Treachery_Cards.Treachery_Card)Battle_Wheels.second.Offensive_Treachery_Card);
                 }
 
+                if (Battle_Wheels.first.General.IsSome)
+                {
+                    Used_Generals.ForEach(pair => {
+                        if (pair.Item1 == Faction_Battles.faction)
+                        {
+                            pair.Item2.Add((General)Battle_Wheels.first.General);
+                        }
+                    });
+                }
+
                 Handle_Treachery_Cards_Discard(aggresor);
             }
             else
@@ -561,6 +574,16 @@ namespace dune_library.Phases
                 if (Battle_Wheels.first.Offensive_Treachery_Card.IsSome)
                 {
                     Treachery_Cards_Manager.Remove_Treachery_Card(aggresor, (Treachery_Cards.Treachery_Card)Battle_Wheels.first.Offensive_Treachery_Card);
+                }
+
+                if (Battle_Wheels.second.General.IsSome)
+                {
+                    Used_Generals.ForEach(pair => {
+                        if(pair.Item1 == Faction_Battles.enemy)
+                        {
+                            pair.Item2.Add((General)Battle_Wheels.second.General);
+                        }
+                    });
                 }
 
                 Handle_Treachery_Cards_Discard(victim);
@@ -894,6 +917,27 @@ namespace dune_library.Phases
                     }
 
                 }
+            }
+            else if(general_name == "none")
+            {
+                List<General> generals = Generals_Manager.Get_Default_Generals_Of(faction).ToList();
+                bool validate = true;
+                generals.ForEach(g => {
+                    if (!Tleilaxu_Tanks.Non_Revivable_Generals_Of(faction).Contains(g) || !Tleilaxu_Tanks.Revivable_Generals_Of(faction).Contains(g))
+                    {
+                        validate = false;
+                    }
+                    Used_Generals.ForEach(pair => {
+                        if(pair.Item1 == faction)
+                        {
+                            if (!pair.Item2.Contains(g))
+                            {
+                                validate = false;
+                            }
+                        }
+                    });
+                });
+                result = validate;
             }
             else
             {
