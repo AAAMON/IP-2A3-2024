@@ -20,12 +20,12 @@ other_factions = ['Bene_Gesserit', 'Atreides', 'Spacing_Guild', 'Fremen', 'Emper
 # my_generals={["Feyd-Rautha",6],["Beast Rabban",4],["Piter De Vries",3],["Captain Iakin Nefud",2],["Umman Kudu",1]}
 
 generals = {
-    "Atreides": ["Thufir Hawat", "Lady Jessica", "Gurney Halleck", "Duncan Idaho", "Dr. Wellington Yueh"],
-    "Harkonnen": ["Feyd-Rautha", "Beast Rabban", "Piter De Vries", "Captain Iakin Nefud", "Umman Kudu"],
-    "Bene_Gesserit": ["Alia", "Margot Lady Fenring", "Mother Ramalo", "Princess Irulan", "Wanna Yueh"],
-    "Fremen": ["Stilgar", "Chani", "Otheym", "Shadout Mapes", "Jamis"],
-    "Spacing_Guild": ["Staban Tuek", "Master Bewt", "Esmar Tuek", "Soo-Soo Sook", "Guild Rep."],
-    "Emperor": ["Hasimir", "Fenring", "Captain Aramsham", "Caid", "Burseg", "Bashar"]
+    "Atreides": ["Thufir_Hawat", "Lady_Jessica", "Gurney_Halleck", "Duncan_Idaho", "Dr._Wellington_Yueh"],
+    "Harkonnen": ["Feyd-Rautha", "Beast_Rabban", "Piter_De_Vries", "Captain_Iakin_Nefud", "Umman_Kudu"],
+    "Bene_Gesserit": ["Alia", "Margot_Lady_Fenring", "Mother_Ramalo", "Princess_Irulan", "Wanna_Yueh"],
+    "Fremen": ["Stilgar", "Chani", "Otheym", "Shadout_Mapes", "Jamis"],
+    "Spacing_Guild": ["Staban_Tuek", "Master_Bewt", "Esmar_Tuek", "Soo-Soo_Sook", "Guild_Rep"],
+    "Emperor": ["Hasimir_Fenring", "Captain_Aramsham", "Caid", "Burseg", "Bashar"]
 }
 
 generals_power = {
