@@ -124,7 +124,21 @@ namespace dune_library.Phases
                         {
                             string sectionId = line[4];
                             string number_of_troops = line[5];
-                            if(InsertTroops(faction, number_of_troops, sectionId))
+                            if(Faction.Fremen == faction && Handle_Fremen_Shipment(sectionId,number_of_troops))
+                            {
+                                moment = "move troops";
+                                next_faction(faction);
+                                shipped = true;
+                                correct = true;
+                                if (Factions_In_Play.Contains(Faction.Bene_Gesserit))
+                                {
+                                    if (Init.Reserves.Of(Faction.Bene_Gesserit) > 0)
+                                    {
+                                        Map.Polar_Sink.Sections[0].Forces.Transfer_From(Faction.Bene_Gesserit, Reserves, 1);
+                                    }
+                                }
+                            }
+                            else if(InsertTroops(faction, number_of_troops, sectionId))
                             {
                                 if (Factions_In_Play.Contains(Faction.Bene_Gesserit) && faction != Faction.Bene_Gesserit)
                                 {
@@ -157,20 +171,6 @@ namespace dune_library.Phases
                                 moment = "move troops";
                                 correct = true;
                                 shipped = true;
-                            }
-                            else if(Faction.Fremen == faction && Handle_Fremen_Shipment(sectionId,number_of_troops))
-                            {
-                                moment = "move troops";
-                                next_faction(faction);
-                                shipped = true;
-                                correct = true;
-                                if (Factions_In_Play.Contains(Faction.Bene_Gesserit))
-                                {
-                                    if (Init.Reserves.Of(Faction.Bene_Gesserit) > 0)
-                                    {
-                                        Map.Polar_Sink.Sections[0].Forces.Transfer_From(Faction.Bene_Gesserit, Reserves, 1);
-                                    }
-                                }
                             }
                         }
                         else if (line[3] == "2" && !moved && line.Length == 7)
