@@ -534,39 +534,45 @@ def battle(game_state, territory):
 
 
 def get_move(game_state):
+
     if 'Phase' not in game_state.keys():
         return {'status': 'bad format'}
-
+    
     phase_name = game_state['Phase'][0]['name']
     phase_moment = game_state['Phase'][0]['moment']
 
-    if phase_name == "Revive":
-        return revival(game_state)
-
-    if phase_name == "Pick Traitor":
-        return pick_traitor(game_state)
-
+    if phase_name == "Set-up" and phase_moment == 'traitor selection':
+        return pick_traitor(game_state)    
     if phase_name == "Storm":
         return pick_storm(game_state)
-
+  
     if phase_name == 'Nexus':
         return aliance(game_state)
-
+        
     if phase_name == 'Bidding':
         return bidding(game_state)
 
     if phase_name == 'Revival':
         return revival(game_state)
-
-    if phase_name == 'Shipment And Movement' and phase_moment == 'Shipment':
-        return shipment(game_state)
-
-    if phase_name == 'Shipment And Movement' and phase_moment == 'Movement':
+    if phase_name == "Revive":
+        return revival(game_state)
+    
+    if phase_name == 'Shipment And Movement' and phase_moment == 'ship or move troops':
+       return shipment(game_state)
+    
+    if phase_name == 'Shipment And Movement' and phase_moment == 'move troops':
         return movement(game_state)
-
-    if phase_name == 'Battle':
-        territory_id = 11  # trebuie dat din perspectiva!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        territory = get_territory_by_id(game_state, territory_id)
-        return battle(game_state, territory)
-
+    
+    if phase_name == 'Battle' and phase_moment == 'choosing battle':
+        return choose_battle(game_state)
+    
+    if phase_name == 'Battle' and phase_moment == 'Battle Wheel':
+        return battle(game_state,game_state['Faction_Battles']['Chosen_Battle_Section'])
+    
+    if phase_name == 'Battle' and phase_moment == 'discard treachery cards':
+        return {
+            'action': 'discard_cards',
+            'value': 'pass'
+        }
+        
     return {'status': 'phase unknown'}
