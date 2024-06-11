@@ -536,11 +536,11 @@ namespace dune_library.Phases
 
                 if (Battle_Wheels.second.Defensive_Treachery_Card.IsSome)
                 {
-                    Treachery_Cards_Manager.Remove_Treachery_Card(aggresor, (Treachery_Cards.Treachery_Card)Battle_Wheels.second.Defensive_Treachery_Card);
+                    Treachery_Cards_Manager.Remove_Treachery_Card(victim, (Treachery_Cards.Treachery_Card)Battle_Wheels.second.Defensive_Treachery_Card);
                 }
                 if (Battle_Wheels.second.Offensive_Treachery_Card.IsSome)
                 {
-                    Treachery_Cards_Manager.Remove_Treachery_Card(aggresor, (Treachery_Cards.Treachery_Card)Battle_Wheels.second.Offensive_Treachery_Card);
+                    Treachery_Cards_Manager.Remove_Treachery_Card(victim, (Treachery_Cards.Treachery_Card)Battle_Wheels.second.Offensive_Treachery_Card);
                 }
 
                 if (Battle_Wheels.first.General.IsSome)
