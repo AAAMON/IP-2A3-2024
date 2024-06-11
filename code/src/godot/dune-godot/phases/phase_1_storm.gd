@@ -11,10 +11,11 @@ func _ready():
 	if (PlayerData.myTurn == true):
 		get_node("InputBox").show()
 		if (GameData.roundd == 0):
-			var titleLabel = get_node("InputBox/Title")
-			titleLabel.text = "First Storm"
-			input.placeholder_text = "Enter a number from 1 to 20"
+			get_node("InputBox").hide()
+			get_node("MessageBox/Description").text = "First storm is calculated randomly..."
 		else:
+			get_node("InputBox").show()
+			get_node("MessageBox/Description").text = "Players are calculated randomly..."
 			input.placeholder_text = "Enter a number from 1 to 3"
 	else:
 		get_node("InputBox").hide()

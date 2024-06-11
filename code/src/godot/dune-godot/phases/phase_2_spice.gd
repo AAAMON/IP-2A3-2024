@@ -9,7 +9,7 @@ func _ready():
 	phase2InfoRequest = HTTPRequest.new()
 	phase2InfoRequest.connect("request_completed", _on_phase_2_info_request_completed)
 	add_child(phase2InfoRequest)
-	var error = phase2InfoRequest.request(PlayerData.api_url + "get_phase_2_info")
+	var error = phase2InfoRequest.request(PlayerData.api_url + "get_phase_2_info/" + PlayerData.username)
 	if error != OK:
 		push_error("ERROR: HTTP: GET_PHASE_2_INFO")
 	 # Configure and start the timer#############################################
@@ -19,7 +19,7 @@ func _ready():
 
 func _on_timer_timeout():
 	if (PlayerData.requestCompleted):
-		var error = phase2InfoRequest.request(PlayerData.api_url + "get_phase_2_info")
+		var error = phase2InfoRequest.request(PlayerData.api_url + "get_phase_2_info/" + PlayerData.username)
 		if error != OK:
 			push_error("ERROR: HTTP: GET_PHASE_2_INFO")
 
@@ -37,12 +37,11 @@ func _on_phase_2_info_request_completed(_result, _response_code, _headers, body)
 		# on first request, see if player needs to input anything
 		if (firstCheck):
 			var phase2Message = get_node("MessageBox/Description")
-			for i in range(json["howMany"]):
-				var territory_name = json["whichTerritories"][i]["name"]
-				var addedSpice = json["whichTerritories"][i]["addedSpice"]
-				MapData.territories[territory_name]["spice"] += addedSpice
-				phase2Message.text = "Territory " + territory_name + " got " + str(addedSpice) + " spice!"
-				#print("New spice " + str(MapData.territories[territory_name]["spice"]))
+			print(json)
+			if (json["lastSpiceCard"][0]["type"] == "Territory_Card"):
+
+				phase2Message.text = "Spice added to " + MapData.territory_dict[MapData.sections_goofy_dict[ MapData.spice_goofy_to_section_dict[int(json["lastSpiceCard"][0]["Section_Position_In_List"])] ]]["origin_sector"] + "!"
+			#mapspice gets update automatically
 			firstCheck = false
 	requestCompleted = true
 

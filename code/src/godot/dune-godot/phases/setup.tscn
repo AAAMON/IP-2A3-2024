@@ -60,6 +60,91 @@ offset_right = 178.0
 offset_bottom = 183.0
 text = "Submit"
 
+[node name="InputBoxBene" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 400.0
+offset_right = 700.0
+offset_bottom = 243.0
+texture = ExtResource("2_wsvnb")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InputBoxBene"]
+layout_mode = 0
+offset_right = 301.0
+offset_bottom = 241.0
+alignment = 1
+
+[node name="Title" type="Label" parent="InputBoxBene/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Bene Gesserit"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="InputBoxBene/VBoxContainer"]
+layout_mode = 2
+
+[node name="PickRound2" type="Label" parent="InputBoxBene/VBoxContainer"]
+layout_mode = 2
+text = "Pick player:"
+horizontal_alignment = 1
+
+[node name="HBoxContainer1" type="HBoxContainer" parent="InputBoxBene/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="user1" type="Button" parent="InputBoxBene/VBoxContainer/HBoxContainer1"]
+layout_mode = 2
+text = "Atreides"
+
+[node name="user2" type="Button" parent="InputBoxBene/VBoxContainer/HBoxContainer1"]
+layout_mode = 2
+text = "Bene Gesserit"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="InputBoxBene/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="user3" type="Button" parent="InputBoxBene/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Emperor"
+
+[node name="user4" type="Button" parent="InputBoxBene/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Fremen"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="InputBoxBene/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="user5" type="Button" parent="InputBoxBene/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Space Guild"
+
+[node name="user6" type="Button" parent="InputBoxBene/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Harkonnen"
+
+[node name="PickRound" type="Label" parent="InputBoxBene/VBoxContainer"]
+layout_mode = 2
+text = "Pick Round:"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InputBoxBene/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+alignment = 1
+
+[node name="InputBene" type="LineEdit" parent="InputBoxBene/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+placeholder_text = "Round"
+max_length = 3
+virtual_keyboard_type = 2
+
+[node name="SubmitBene" type="Button" parent="InputBoxBene/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Submit"
+
 [node name="MessageBox" type="TextureRect" parent="."]
 layout_mode = 0
 offset_right = 300.0
@@ -90,3 +175,10 @@ horizontal_alignment = 1
 
 [connection signal="text_changed" from="InputBox/Input" to="InputBox/Input" method="_on_text_changed"]
 [connection signal="pressed" from="InputBox/Submit" to="." method="_on_submit_pressed"]
+[connection signal="pressed" from="InputBoxBene/VBoxContainer/HBoxContainer1/user1" to="." method="_on_user_1_pressed"]
+[connection signal="pressed" from="InputBoxBene/VBoxContainer/HBoxContainer1/user2" to="." method="_on_user_2_pressed"]
+[connection signal="pressed" from="InputBoxBene/VBoxContainer/HBoxContainer2/user3" to="." method="_on_user_3_pressed"]
+[connection signal="pressed" from="InputBoxBene/VBoxContainer/HBoxContainer2/user4" to="." method="_on_user_4_pressed"]
+[connection signal="pressed" from="InputBoxBene/VBoxContainer/HBoxContainer3/user5" to="." method="_on_user_5_pressed"]
+[connection signal="pressed" from="InputBoxBene/VBoxContainer/HBoxContainer3/user6" to="." method="_on_user_6_pressed"]
+[connection signal="pressed" from="InputBoxBene/VBoxContainer/HBoxContainer/SubmitBene" to="." method="_on_submit_bene_pressed"]

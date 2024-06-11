@@ -81,7 +81,7 @@ func _on_map_info_request_completed(_result, _response_code, _headers, body):
 	if (json == null):
 		push_error("ERROR: NULL RESPONSE FROM SERVER")
 	else:
-		#print(json)
+		#print(json["forces"])
 		MapData.spice = json["spice"];
 		MapData.stormPosition = json["storm"];
 		MapData.shieldDestroyed = json["shieldDestroyed"]
@@ -89,19 +89,33 @@ func _on_map_info_request_completed(_result, _response_code, _headers, body):
 		map_update_labels()
 	requestCompleted = true;
 
+# Function to hide all children and sub-children of type Label
+func hide_labels_recursively(node: Node):
+	for child in node.get_children():
+		if child.is_class("Label"):
+			child.visible = false
+		hide_labels_recursively(child) 
 
 func map_update_labels():
-	var node_name = "Nice/MapLabels/" #+ meridian
-	for region_name in MapData.territories.keys():
-		node_name = "Nice/MapLabels/" + region_name + "/" + region_name + "-spice"
-		var territoryLabel = get_node(node_name)
-		territoryLabel.text = str(MapData.territories[region_name]["spice"])
+	#var node_name = "Nice/MapLabels/" #+ meridian
+	#for region_name in MapData.territories.keys():
+		#node_name = "Nice/MapLabels/" + region_name + "/" + region_name + "-spice"
+		#var territoryLabel = get_node(node_name)
+		#territoryLabel.text = str(MapData.territories[region_name]["spice"])
+	# first hide all of them...
+	for territory in get_node("Nice/MapLabels").get_children():
+		hide_labels_recursively(territory)
 	for force in MapData.forces:
 		if (force != null):
 			var forcesLabelNode = "Nice/MapLabels/" + MapData.territory_dict[MapData.sections_goofy_dict[int(force["GoofySectionId"])]]["origin_sector"] + '/' + MapData.sections_goofy_dict[int(force["GoofySectionId"])] + '/' + str(PlayerData.goofy_faction_dict[force["Faction"]])
 			#print(forcesLabelNode)
-			get_node(forcesLabelNode).text = str(force["Forces"])
-
+			get_node(forcesLabelNode).text = str(force["Forces"]) + 'f' + str(PlayerData.goofy_faction_dict[force["Faction"]])
+			get_node(forcesLabelNode).show()
+	for spice in MapData.spice:
+		if (spice != null && spice["Spice"] != 0):
+			var spiceLabelNode = "Nice/MapLabels/" + MapData.territory_dict[MapData.sections_goofy_dict[int(spice["GoofySectionId"])]]["origin_sector"] + '/' + MapData.territory_dict[MapData.sections_goofy_dict[int(spice["GoofySectionId"])]]["origin_sector"] + "-spice"
+			get_node(spiceLabelNode).text = str(spice["Spice"]) + 's'
+			get_node(spiceLabelNode).show()
 #var traitorsLabel = get_node("playerHUD/buttonExit14/TraitorCards")
 	#traitorsLabel.text = ' '
 	#for traitor in PlayerData.traitors:
@@ -173,7 +187,7 @@ func import_file_map_dict(filepath):
 		return null
 	
 func _process(_delta):
-	map_update_labels()
+	#map_update_labels()
 	if (MapData.selectedRegion):
 		get_node("SelectedSection").text = MapData.selectedRegion.region_name + ' ' + str(MapData.sections_dict[MapData.selectedRegion.region_name])
 	else:

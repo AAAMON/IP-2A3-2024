@@ -12,16 +12,15 @@ anchor_bottom = 1.0
 offset_left = 418.0
 offset_top = 196.0
 offset_right = -434.0
-offset_bottom = -227.0
+offset_bottom = -188.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cqnyk")
-metadata/_edit_group_ = true
 
 [node name="MessageBox" type="TextureRect" parent="."]
 layout_mode = 0
 offset_right = 300.0
-offset_bottom = 225.0
+offset_bottom = 263.0
 texture = ExtResource("1_yvi76")
 expand_mode = 1
 
@@ -43,6 +42,15 @@ offset_bottom = 202.0
 disabled = true
 text = "Bid!"
 
+[node name="SkipBid" type="Button" parent="MessageBox"]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 219.0
+offset_right = 182.0
+offset_bottom = 250.0
+disabled = true
+text = "Skip Bid"
+
 [node name="InputBid" type="LineEdit" parent="MessageBox"]
 layout_mode = 0
 offset_left = 22.0
@@ -53,23 +61,35 @@ theme_override_font_sizes/font_size = 12
 placeholder_text = "Enter amount of spice to bid"
 script = ExtResource("2_dxhjn")
 
-[node name="CardBidded" type="Label" parent="MessageBox"]
+[node name="AtreidesSeeCard" type="Button" parent="MessageBox"]
+visible = false
 layout_mode = 0
-offset_left = 22.0
-offset_top = 58.0
-offset_right = 171.0
-offset_bottom = 81.0
-text = "Card: <put card here>"
+offset_left = 93.0
+offset_top = 90.0
+offset_right = 196.0
+offset_bottom = 121.0
+text = "Card bidded"
 
 [node name="LastBid" type="Label" parent="MessageBox"]
 layout_mode = 0
+offset_left = 24.0
+offset_top = 98.0
+offset_right = 228.0
+offset_bottom = 121.0
+text = "First bid!"
+
+[node name="WhoIsBidding" type="Label" parent="MessageBox"]
+layout_mode = 0
 offset_left = 23.0
-offset_top = 103.0
+offset_top = 63.0
 offset_right = 227.0
-offset_bottom = 126.0
-text = "Last bid: 3 spice by Dude 2"
+offset_bottom = 86.0
+text = "noone"
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="TimerNewCard" type="Timer" parent="."]
+
 [connection signal="pressed" from="MessageBox/Submit" to="." method="_on_submit_pressed"]
+[connection signal="pressed" from="MessageBox/SkipBid" to="." method="_on_skip_bid_pressed"]
 [connection signal="text_changed" from="MessageBox/InputBid" to="MessageBox/InputBid" method="_on_text_changed"]

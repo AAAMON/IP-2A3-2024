@@ -82,3 +82,5 @@ text = "No dead leaders to revive!"
 
 [connection signal="text_changed" from="MessageBox/InputReviveForces" to="MessageBox/InputReviveForces" method="_on_text_changed"]
 [connection signal="text_changed" from="MessageBox/InputReviveLeader" to="MessageBox/InputReviveLeader" method="_on_text_changed"]
+[connection signal="pressed" from="MessageBox/SubmitForces" to="." method="_on_submit_forces_pressed"]
+[connection signal="pressed" from="MessageBox/SubmitLeader" to="." method="_on_submit_leader_pressed"]

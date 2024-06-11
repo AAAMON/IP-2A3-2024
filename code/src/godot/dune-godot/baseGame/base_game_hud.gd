@@ -55,8 +55,9 @@ func _on_player_info_request_completed(_result, _response_code, _headers, body):
 	if (json == null):
 		push_error("ERROR: NULL RESPONSE FROM SERVER")
 	else:
-		print("Got player data from api")
+		#print("Got player data from api")
 		PlayerData.faction = json["faction"]
+		PlayerData.lastSpice = PlayerData.spice
 		PlayerData.spice = json["spice"]
 		PlayerData.forcesReserve = json["forcesReserve"]
 		PlayerData.forcesDead = json["forcesDead"]
@@ -70,15 +71,15 @@ func update_hud_other_players():
 	var index = 1
 	for otherPlayer in OtherPlayersData.otherPlayers:
 		
-		if (otherPlayer != null && otherPlayer["turnId"] != PlayerData.turnId):
+		if (otherPlayer != null && otherPlayer["Faction"] != PlayerData.faction):
 			#print(otherPlayer)
 			var labelNodeName = "otherPlayersHUD/Player" + str(index) + "/Player" + str(index) + "SpiceBox/Player" + str(index) + "Spice" 
 			get_node(labelNodeName).text = str(otherPlayer["Spice"])
 			labelNodeName = "otherPlayersHUD/Player" + str(index) + "/Player" + str(index) + "NameBox/Player" + str(index) + "Name" 
-			get_node(labelNodeName).text = otherPlayer["Username"]
+			get_node(labelNodeName).text = str(otherPlayer["Username"])
 			labelNodeName = "otherPlayersHUD/Player" + str(index) + "/Player" + str(index) + "CardsBox/Player" + str(index) + "Cards" 
 			get_node(labelNodeName).text = str(otherPlayer["NrTreatcheryCards"])
-		index = index + 1
+			index = index + 1
 	
 
 func _on_other_players_info_request_completed(_result, _response_code, _headers, body):
@@ -87,8 +88,9 @@ func _on_other_players_info_request_completed(_result, _response_code, _headers,
 	if (json == null):
 		push_error("ERROR: NULL RESPONSE FROM SERVER")
 	else:
-		print("Got other players data from api!")
+		#print("Got other players data from api!")
 		OtherPlayersData.otherPlayers = json["otherPlayers"]
+		#print(json["otherPlayers"])
 		update_hud_other_players()
 
 
@@ -112,14 +114,13 @@ func update_hud_player():
 		#for leader in PlayerData.leadersAtreides:
 			#playerLeaders.text = playerLeaders.text + leader.name + ' Strength: ' + str(leader.strength) + '\n'
 	
-	#var treacheryLabel = get_node("playerHUD/buttonExit13/TreacheryCards")
-	#treacheryLabel.text = ' '
-	#for card in PlayerData.treatcheryCards:
-		#if (card != null):
-			#for howMany in range(card["Count"]):
-				#treacheryLabel.text = treacheryLabel.text + card["Name"] + "\n"
-	#if (treacheryLabel.text == ' '):
-		#treacheryLabel.text = "None"
+	var treacheryLabel = get_node("playerHUD/buttonExit13/TreacheryCards")
+	treacheryLabel.text = ' '
+	for card in PlayerData.treatcheryCards:
+		if (card != null):
+			treacheryLabel.text = treacheryLabel.text + card + "\n"
+	if (treacheryLabel.text == ' '):
+		treacheryLabel.text = "None"
 		
 	var traitorsLabel = get_node("playerHUD/buttonExit14/TraitorCards")
 	traitorsLabel.text = ' '

@@ -31,9 +31,18 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "MERIDIAN	"
 
+[node name="meridian-spice" type="Label" parent="Nice/MapLabels/meridian"]
+offset_left = 11.5713
+offset_top = 16.6164
+offset_right = 69.5713
+offset_bottom = 32.6164
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="meridian-1" type="Node2D" parent="Nice/MapLabels/meridian"]
 position = Vector2(9.88584, -5.68068)
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/meridian/meridian-1"]
 offset_left = -20.4924
@@ -97,7 +106,6 @@ text = "0"
 
 [node name="meridian-2" type="Node2D" parent="Nice/MapLabels/meridian"]
 position = Vector2(80.1877, 14.2102)
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/meridian/meridian-2"]
 offset_left = -15.4076
@@ -171,7 +179,6 @@ text = "CIELAGO DEPRESSION"
 [node name="cielago-depression-1" type="Node2D" parent="Nice/MapLabels/cielago-depression"]
 position = Vector2(-21, 9.00001)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/cielago-depression/cielago-depression-1"]
 offset_left = -20.4924
@@ -236,7 +243,6 @@ text = "0"
 [node name="cielago-depression-2" type="Node2D" parent="Nice/MapLabels/cielago-depression"]
 position = Vector2(48, 13)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/cielago-depression/cielago-depression-2"]
 offset_left = -20.4924
@@ -301,7 +307,6 @@ text = "0"
 [node name="cielago-depression-3" type="Node2D" parent="Nice/MapLabels/cielago-depression"]
 position = Vector2(123, 23)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/cielago-depression/cielago-depression-3"]
 offset_left = -20.4924
@@ -363,6 +368,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="cielago-spice" type="Label" parent="Nice/MapLabels/cielago-depression"]
+offset_left = 40.0
+offset_top = 17.0
+offset_right = 98.0
+offset_bottom = 33.0
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="cielago-south" type="Label" parent="Nice/MapLabels"]
 offset_left = 578.0
 offset_top = 706.0
@@ -376,7 +391,6 @@ text = "CIELAGO SOUTH"
 [node name="cielago-south-2" type="Node2D" parent="Nice/MapLabels/cielago-south"]
 position = Vector2(12.5177, -7.16287)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/cielago-south/cielago-south-2"]
 offset_left = -20.4924
@@ -441,7 +455,6 @@ text = "0"
 [node name="cielago-south-3" type="Node2D" parent="Nice/MapLabels/cielago-south"]
 position = Vector2(75.7375, -22.8875)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/cielago-south/cielago-south-3"]
 offset_left = -20.4924
@@ -503,6 +516,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="cielago-south-spice" type="Label" parent="Nice/MapLabels/cielago-south"]
+offset_left = 34.8249
+offset_top = 18.4182
+offset_right = 92.8249
+offset_bottom = 34.4182
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="cielago-north" type="Label" parent="Nice/MapLabels"]
 offset_left = 543.0
 offset_top = 484.0
@@ -515,7 +538,6 @@ text = "CIELAGO NORTH"
 [node name="cielago-north-1" type="Node2D" parent="Nice/MapLabels/cielago-north"]
 position = Vector2(-31, 61)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/cielago-north/cielago-north-1"]
 offset_left = -20.4924
@@ -580,7 +602,6 @@ text = "0"
 [node name="cielago-north-2" type="Node2D" parent="Nice/MapLabels/cielago-north"]
 position = Vector2(31, 71)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/cielago-north/cielago-north-2"]
 offset_left = -20.4924
@@ -645,7 +666,6 @@ text = "0"
 [node name="cielago-north-3" type="Node2D" parent="Nice/MapLabels/cielago-north"]
 position = Vector2(90, 56)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/cielago-north/cielago-north-3"]
 offset_left = -20.4924
@@ -707,6 +727,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="cielago-north-spice" type="Label" parent="Nice/MapLabels/cielago-north"]
+offset_left = 32.0
+offset_top = -20.0
+offset_right = 90.0
+offset_bottom = -4.0
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="cielago-east" type="Label" parent="Nice/MapLabels"]
 offset_left = 711.0
 offset_top = 689.0
@@ -720,7 +750,6 @@ text = "CIELAGO EAST"
 [node name="cielago-east-3" type="Node2D" parent="Nice/MapLabels/cielago-east"]
 position = Vector2(9.83871, 4.91936)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/cielago-east/cielago-east-3"]
 offset_left = -20.4924
@@ -785,7 +814,6 @@ text = "0"
 [node name="cielago-east-4" type="Node2D" parent="Nice/MapLabels/cielago-east"]
 position = Vector2(73.7903, 26.8329)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/cielago-east/cielago-east-4"]
 offset_left = -20.4924
@@ -847,6 +875,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="cielago-east-spice" type="Label" parent="Nice/MapLabels/cielago-east"]
+offset_left = 11.5713
+offset_top = 16.6164
+offset_right = 69.5713
+offset_bottom = 32.6164
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="false-wall-south" type="Label" parent="Nice/MapLabels"]
 offset_left = 720.0
 offset_top = 540.0
@@ -860,7 +898,6 @@ text = "FALSE WALL SOUTH"
 [node name="false-wall-south-4" type="Node2D" parent="Nice/MapLabels/false-wall-south"]
 position = Vector2(7.34628, 79.944)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/false-wall-south/false-wall-south-4"]
 offset_left = -20.4924
@@ -925,7 +962,6 @@ text = "0"
 [node name="false-wall-south-5" type="Node2D" parent="Nice/MapLabels/false-wall-south"]
 position = Vector2(73.9203, 60.5044)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/false-wall-south/false-wall-south-5"]
 offset_left = -20.4924
@@ -987,6 +1023,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="false-wall-south-spice" type="Label" parent="Nice/MapLabels/false-wall-south"]
+offset_left = 48.9311
+offset_top = -25.8989
+offset_right = 106.931
+offset_bottom = -9.8989
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="harg-pass" type="Label" parent="Nice/MapLabels"]
 offset_left = 626.0
 offset_top = 424.0
@@ -1001,7 +1047,6 @@ PASS"
 [node name="harg-pass-4" type="Node2D" parent="Nice/MapLabels/harg-pass"]
 position = Vector2(-37.1803, 44.918)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/harg-pass/harg-pass-4"]
 offset_left = -20.4924
@@ -1066,7 +1111,6 @@ text = "0"
 [node name="harg-pass-5" type="Node2D" parent="Nice/MapLabels/harg-pass"]
 position = Vector2(21.9694, 72.3281)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/harg-pass/harg-pass-5"]
 offset_left = -20.4924
@@ -1128,6 +1172,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="harg-pass-spice" type="Label" parent="Nice/MapLabels/harg-pass"]
+offset_left = 11.5713
+offset_top = 16.6164
+offset_right = 69.5713
+offset_bottom = 32.6164
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="minor-erg" type="Label" parent="Nice/MapLabels"]
 offset_left = 694.0
 offset_top = 337.0
@@ -1142,7 +1196,6 @@ horizontal_alignment = 1
 [node name="minor-erg-5" type="Node2D" parent="Nice/MapLabels/minor-erg"]
 position = Vector2(30, 123)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-5"]
 offset_left = -20.4924
@@ -1207,7 +1260,6 @@ text = "0"
 [node name="minor-erg-6" type="Node2D" parent="Nice/MapLabels/minor-erg"]
 position = Vector2(11, 75)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-6"]
 offset_left = -20.4924
@@ -1272,7 +1324,6 @@ text = "0"
 [node name="minor-erg-7" type="Node2D" parent="Nice/MapLabels/minor-erg"]
 position = Vector2(25, 16)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-7"]
 offset_left = -20.4924
@@ -1337,7 +1388,6 @@ text = "0"
 [node name="minor-erg-8" type="Node2D" parent="Nice/MapLabels/minor-erg"]
 position = Vector2(16, -20)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/minor-erg/minor-erg-8"]
 offset_left = -20.4924
@@ -1399,6 +1449,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="minor-erg-spice" type="Label" parent="Nice/MapLabels/minor-erg"]
+offset_left = 2.57133
+offset_top = 17.6164
+offset_right = 60.5713
+offset_bottom = 33.6164
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="pasty-mesa" type="Label" parent="Nice/MapLabels"]
 offset_left = 808.0
 offset_top = 350.0
@@ -1412,7 +1472,6 @@ horizontal_alignment = 1
 [node name="pasty-mesa-5" type="Node2D" parent="Nice/MapLabels/pasty-mesa"]
 position = Vector2(-18, 129)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-5"]
 offset_left = -20.4924
@@ -1477,7 +1536,6 @@ text = "0"
 [node name="pasty-mesa-6" type="Node2D" parent="Nice/MapLabels/pasty-mesa"]
 position = Vector2(34, 80)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-6"]
 offset_left = -20.4924
@@ -1542,7 +1600,6 @@ text = "0"
 [node name="pasty-mesa-7" type="Node2D" parent="Nice/MapLabels/pasty-mesa"]
 position = Vector2(29, -15)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-7"]
 offset_left = -20.4924
@@ -1607,7 +1664,6 @@ text = "0"
 [node name="pasty-mesa-8" type="Node2D" parent="Nice/MapLabels/pasty-mesa"]
 position = Vector2(13, -90)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/pasty-mesa/pasty-mesa-8"]
 offset_left = -20.4924
@@ -1669,6 +1725,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="pasty-mesa-spice" type="Label" parent="Nice/MapLabels/pasty-mesa"]
+offset_left = 11.5713
+offset_top = 16.6164
+offset_right = 69.5713
+offset_bottom = 32.6164
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="tueks-sietch" type="Label" parent="Nice/MapLabels"]
 offset_left = 838.0
 offset_top = 532.0
@@ -1684,7 +1750,6 @@ horizontal_alignment = 1
 [node name="tueks-sietch" type="Node2D" parent="Nice/MapLabels/tueks-sietch"]
 position = Vector2(-10.2848, 52.7657)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/tueks-sietch/tueks-sietch"]
 offset_left = -20.4924
@@ -1746,6 +1811,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="tueks-sietch-spice" type="Label" parent="Nice/MapLabels/tueks-sietch"]
+offset_left = 46.5582
+offset_top = -23.6926
+offset_right = 104.558
+offset_bottom = -7.69255
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="south-mesa" type="Label" parent="Nice/MapLabels"]
 offset_left = 898.0
 offset_top = 562.0
@@ -1761,7 +1836,6 @@ horizontal_alignment = 1
 [node name="south-mesa-4" type="Node2D" parent="Nice/MapLabels/south-mesa"]
 position = Vector2(-94.3182, 16.8841)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/south-mesa/south-mesa-4"]
 offset_left = -20.4924
@@ -1826,7 +1900,6 @@ text = "0"
 [node name="south-mesa-5" type="Node2D" parent="Nice/MapLabels/south-mesa"]
 position = Vector2(-33.0712, 29.2454)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/south-mesa/south-mesa-5"]
 offset_left = -20.4924
@@ -1891,7 +1964,6 @@ text = "0"
 [node name="south-mesa-6" type="Node2D" parent="Nice/MapLabels/south-mesa"]
 position = Vector2(120.378, 14.4991)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/south-mesa/south-mesa-6"]
 offset_left = -20.4924
@@ -1953,6 +2025,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="south-mesa-spice" type="Label" parent="Nice/MapLabels/south-mesa"]
+offset_left = 57.941
+offset_top = -21.0912
+offset_right = 115.941
+offset_bottom = -5.09119
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="false-wall-east" type="Label" parent="Nice/MapLabels"]
 offset_left = 652.0
 offset_top = 395.0
@@ -1968,7 +2050,6 @@ horizontal_alignment = 1
 [node name="false-wall-east-5" type="Node2D" parent="Nice/MapLabels/false-wall-east"]
 position = Vector2(9.9152, 11.0765)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-5"]
 offset_left = -20.4924
@@ -2033,7 +2114,6 @@ text = "0"
 [node name="false-wall-east-6" type="Node2D" parent="Nice/MapLabels/false-wall-east"]
 position = Vector2(30.7993, 26.2375)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-6"]
 offset_left = -20.4924
@@ -2098,7 +2178,6 @@ text = "0"
 [node name="false-wall-east-7" type="Node2D" parent="Nice/MapLabels/false-wall-east"]
 position = Vector2(57.691, 40.4445)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-7"]
 offset_left = -20.4924
@@ -2163,7 +2242,6 @@ text = "0"
 [node name="false-wall-east-8" type="Node2D" parent="Nice/MapLabels/false-wall-east"]
 position = Vector2(90.713, 37.6981)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-8"]
 offset_left = -20.4924
@@ -2228,7 +2306,6 @@ text = "0"
 [node name="false-wall-east-9" type="Node2D" parent="Nice/MapLabels/false-wall-east"]
 position = Vector2(105.935, 8.81425)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/false-wall-east/false-wall-east-9"]
 offset_left = -20.4924
@@ -2290,6 +2367,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="false-wall-east-spice" type="Label" parent="Nice/MapLabels/false-wall-east"]
+offset_left = 16.8689
+offset_top = 17.1301
+offset_right = 74.8689
+offset_bottom = 33.1301
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="wind-pass-north" type="Label" parent="Nice/MapLabels"]
 offset_left = 518.0
 offset_top = 403.0
@@ -2306,7 +2393,6 @@ horizontal_alignment = 1
 [node name="wind-pass-north-17" type="Node2D" parent="Nice/MapLabels/wind-pass-north"]
 position = Vector2(-8.48769, 33.3461)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/wind-pass-north/wind-pass-north-17"]
 offset_left = -20.4924
@@ -2371,7 +2457,6 @@ text = "0"
 [node name="wind-pass-north-18" type="Node2D" parent="Nice/MapLabels/wind-pass-north"]
 position = Vector2(28.5623, 98.9151)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/wind-pass-north/wind-pass-north-18"]
 offset_left = -20.4924
@@ -2433,6 +2518,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="wind-pass-north-spice" type="Label" parent="Nice/MapLabels/wind-pass-north"]
+offset_left = 11.5713
+offset_top = 16.6164
+offset_right = 69.5713
+offset_bottom = 32.6164
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="cielago-west" type="Label" parent="Nice/MapLabels"]
 offset_left = 456.0
 offset_top = 519.0
@@ -2448,7 +2543,6 @@ horizontal_alignment = 1
 [node name="cielago-west-18" type="Node2D" parent="Nice/MapLabels/cielago-west"]
 position = Vector2(-3.24226, 13.2094)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/cielago-west/cielago-west-18"]
 offset_left = -20.4924
@@ -2513,7 +2607,6 @@ text = "0"
 [node name="cielago-west-1" type="Node2D" parent="Nice/MapLabels/cielago-west"]
 position = Vector2(64.7943, 98.421)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/cielago-west/cielago-west-1"]
 offset_left = -20.4924
@@ -2575,6 +2668,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="cielago-west-spice" type="Label" parent="Nice/MapLabels/cielago-west"]
+offset_left = 20.6307
+offset_top = 41.4774
+offset_right = 78.6307
+offset_bottom = 57.4774
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="wind-pass" type="Label" parent="Nice/MapLabels"]
 offset_left = 478.0
 offset_top = 343.0
@@ -2590,7 +2693,6 @@ horizontal_alignment = 1
 [node name="wind-pass-17" type="Node2D" parent="Nice/MapLabels/wind-pass"]
 position = Vector2(-8.4164, 109.969)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-17"]
 offset_left = -20.4924
@@ -2655,7 +2757,6 @@ text = "0"
 [node name="wind-pass-16" type="Node2D" parent="Nice/MapLabels/wind-pass"]
 position = Vector2(-0.23094, 60.9996)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-16"]
 offset_left = -20.4924
@@ -2720,7 +2821,6 @@ text = "0"
 [node name="wind-pass-15" type="Node2D" parent="Nice/MapLabels/wind-pass"]
 position = Vector2(24.89, 29.0945)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-15"]
 offset_left = -20.4924
@@ -2785,7 +2885,6 @@ text = "0"
 [node name="wind-pass-14" type="Node2D" parent="Nice/MapLabels/wind-pass"]
 position = Vector2(42.9808, 5.16278)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/wind-pass/wind-pass-14"]
 offset_left = -20.4924
@@ -2847,6 +2946,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="wind-pass-spice" type="Label" parent="Nice/MapLabels/wind-pass"]
+offset_left = 9.83713
+offset_top = 43.0375
+offset_right = 67.8371
+offset_bottom = 59.0375
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="habbanya-ridge-flat" type="Label" parent="Nice/MapLabels"]
 offset_left = 293.0
 offset_top = 551.0
@@ -2861,7 +2970,6 @@ horizontal_alignment = 1
 [node name="habbanya-ridge-flat-17" type="Node2D" parent="Nice/MapLabels/habbanya-ridge-flat"]
 position = Vector2(-41.1612, 33.0265)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/habbanya-ridge-flat/habbanya-ridge-flat-17"]
 offset_left = -20.4924
@@ -2926,7 +3034,6 @@ text = "0"
 [node name="habbanya-ridge-flat-18" type="Node2D" parent="Nice/MapLabels/habbanya-ridge-flat"]
 position = Vector2(115.431, -0.808731)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/habbanya-ridge-flat/habbanya-ridge-flat-18"]
 offset_left = -20.4924
@@ -2988,6 +3095,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="habbanya-ridge-flat-spice" type="Label" parent="Nice/MapLabels/habbanya-ridge-flat"]
+offset_left = 11.5713
+offset_top = 16.6164
+offset_right = 69.5713
+offset_bottom = 32.6164
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="habbanya-sietch" type="Label" parent="Nice/MapLabels"]
 offset_left = 322.0
 offset_top = 494.0
@@ -3003,7 +3120,6 @@ horizontal_alignment = 1
 [node name="habbanya-sietch" type="Node2D" parent="Nice/MapLabels/habbanya-sietch"]
 position = Vector2(-0.790237, 50.2133)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/habbanya-sietch/habbanya-sietch"]
 offset_left = -20.4924
@@ -3065,6 +3181,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="habbanya-sietch-spice" type="Label" parent="Nice/MapLabels/habbanya-sietch"]
+offset_left = 52.9386
+offset_top = 27.5591
+offset_right = 110.939
+offset_bottom = 43.5591
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="habbanya-erg" type="Label" parent="Nice/MapLabels"]
 offset_left = 265.0
 offset_top = 432.0
@@ -3078,7 +3204,6 @@ horizontal_alignment = 1
 [node name="habbanya-erg-16" type="Node2D" parent="Nice/MapLabels/habbanya-erg"]
 position = Vector2(-34, 48)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/habbanya-erg/habbanya-erg-16"]
 offset_left = -20.4924
@@ -3143,7 +3268,6 @@ text = "0"
 [node name="habbanya-erg-17" type="Node2D" parent="Nice/MapLabels/habbanya-erg"]
 position = Vector2(102, 57)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/habbanya-erg/habbanya-erg-17"]
 offset_left = -20.4924
@@ -3205,6 +3329,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="habbanya-erg-spice" type="Label" parent="Nice/MapLabels/habbanya-erg"]
+offset_left = -3.0
+offset_top = 17.0
+offset_right = 55.0
+offset_bottom = 33.0
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="false-wall-west" type="Label" parent="Nice/MapLabels"]
 offset_left = 419.0
 offset_top = 435.0
@@ -3221,7 +3355,6 @@ horizontal_alignment = 1
 [node name="false-wall-west-16" type="Node2D" parent="Nice/MapLabels/false-wall-west"]
 position = Vector2(-3.62833, -18.6235)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/false-wall-west/false-wall-west-16"]
 offset_left = -20.4924
@@ -3286,7 +3419,6 @@ text = "0"
 [node name="false-wall-west-17" type="Node2D" parent="Nice/MapLabels/false-wall-west"]
 position = Vector2(10.5538, 22.7512)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/false-wall-west/false-wall-west-17"]
 offset_left = -20.4924
@@ -3351,7 +3483,6 @@ text = "0"
 [node name="false-wall-west-18" type="Node2D" parent="Nice/MapLabels/false-wall-west"]
 position = Vector2(36.6045, 121.738)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/false-wall-west/false-wall-west-18"]
 offset_left = -20.4924
@@ -3413,7 +3544,17 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
-[node name="the-greater-flat" type="Label" parent="Nice/MapLabels"]
+[node name="false-wall-west-spice" type="Label" parent="Nice/MapLabels/false-wall-west"]
+offset_left = 11.5713
+offset_top = 16.6164
+offset_right = 69.5713
+offset_bottom = 32.6164
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
+[node name="greater-flat" type="Label" parent="Nice/MapLabels"]
 offset_left = 231.0
 offset_top = 378.0
 offset_right = 331.0
@@ -3423,12 +3564,11 @@ theme_override_font_sizes/font_size = 11
 text = "THE GREATER FLAT"
 horizontal_alignment = 1
 
-[node name="the-greater-flat" type="Node2D" parent="Nice/MapLabels/the-greater-flat"]
+[node name="the-greater-flat" type="Node2D" parent="Nice/MapLabels/greater-flat"]
 position = Vector2(129, 36)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
-[node name="1" type="Label" parent="Nice/MapLabels/the-greater-flat/the-greater-flat"]
+[node name="1" type="Label" parent="Nice/MapLabels/greater-flat/the-greater-flat"]
 offset_left = -20.4924
 offset_top = -34.958
 offset_right = -6.49243
@@ -3438,7 +3578,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
-[node name="2" type="Label" parent="Nice/MapLabels/the-greater-flat/the-greater-flat"]
+[node name="2" type="Label" parent="Nice/MapLabels/greater-flat/the-greater-flat"]
 offset_left = -13.0956
 offset_top = -50.8381
 offset_right = 6.9044
@@ -3448,7 +3588,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
-[node name="3" type="Label" parent="Nice/MapLabels/the-greater-flat/the-greater-flat"]
+[node name="3" type="Label" parent="Nice/MapLabels/greater-flat/the-greater-flat"]
 offset_left = -11.3569
 offset_top = -32.4811
 offset_right = 8.64314
@@ -3458,7 +3598,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
-[node name="4" type="Label" parent="Nice/MapLabels/the-greater-flat/the-greater-flat"]
+[node name="4" type="Label" parent="Nice/MapLabels/greater-flat/the-greater-flat"]
 offset_left = -2.61799
 offset_top = -48.3441
 offset_right = 17.382
@@ -3468,7 +3608,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
-[node name="5" type="Label" parent="Nice/MapLabels/the-greater-flat/the-greater-flat"]
+[node name="5" type="Label" parent="Nice/MapLabels/greater-flat/the-greater-flat"]
 offset_left = 0.514275
 offset_top = -30.2281
 offset_right = 12.5143
@@ -3478,7 +3618,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
-[node name="6" type="Label" parent="Nice/MapLabels/the-greater-flat/the-greater-flat"]
+[node name="6" type="Label" parent="Nice/MapLabels/greater-flat/the-greater-flat"]
 offset_left = 4.97809
 offset_top = -41.7638
 offset_right = 24.9781
@@ -3488,7 +3628,17 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
-[node name="the-great-flat" type="Label" parent="Nice/MapLabels"]
+[node name="greater-flat-spice" type="Label" parent="Nice/MapLabels/greater-flat"]
+offset_left = 11.5713
+offset_top = 16.6164
+offset_right = 69.5713
+offset_bottom = 32.6164
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
+[node name="great-flat" type="Label" parent="Nice/MapLabels"]
 offset_left = 231.0
 offset_top = 326.0
 offset_right = 331.0
@@ -3498,23 +3648,11 @@ theme_override_font_sizes/font_size = 11
 text = "THE GREAT FLAT"
 horizontal_alignment = 1
 
-[node name="the-great-flat-spice" type="Label" parent="Nice/MapLabels/the-great-flat"]
-layout_mode = 0
-offset_left = 18.0
-offset_top = 12.0
-offset_right = 49.0
-offset_bottom = 28.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 9
-text = "spice"
-horizontal_alignment = 1
-
-[node name="the-great-flat" type="Node2D" parent="Nice/MapLabels/the-great-flat"]
+[node name="the-great-flat" type="Node2D" parent="Nice/MapLabels/great-flat"]
 position = Vector2(133, 37)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
-[node name="1" type="Label" parent="Nice/MapLabels/the-great-flat/the-great-flat"]
+[node name="1" type="Label" parent="Nice/MapLabels/great-flat/the-great-flat"]
 offset_left = -20.4924
 offset_top = -34.958
 offset_right = -6.49243
@@ -3524,7 +3662,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
-[node name="2" type="Label" parent="Nice/MapLabels/the-great-flat/the-great-flat"]
+[node name="2" type="Label" parent="Nice/MapLabels/great-flat/the-great-flat"]
 offset_left = -13.0956
 offset_top = -50.8381
 offset_right = 6.9044
@@ -3534,7 +3672,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
-[node name="3" type="Label" parent="Nice/MapLabels/the-great-flat/the-great-flat"]
+[node name="3" type="Label" parent="Nice/MapLabels/great-flat/the-great-flat"]
 offset_left = -11.3569
 offset_top = -32.4811
 offset_right = 8.64314
@@ -3544,7 +3682,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
-[node name="4" type="Label" parent="Nice/MapLabels/the-great-flat/the-great-flat"]
+[node name="4" type="Label" parent="Nice/MapLabels/great-flat/the-great-flat"]
 offset_left = -2.61799
 offset_top = -48.3441
 offset_right = 17.382
@@ -3554,7 +3692,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
-[node name="5" type="Label" parent="Nice/MapLabels/the-great-flat/the-great-flat"]
+[node name="5" type="Label" parent="Nice/MapLabels/great-flat/the-great-flat"]
 offset_left = 0.514275
 offset_top = -30.2281
 offset_right = 12.5143
@@ -3564,7 +3702,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
-[node name="6" type="Label" parent="Nice/MapLabels/the-great-flat/the-great-flat"]
+[node name="6" type="Label" parent="Nice/MapLabels/great-flat/the-great-flat"]
 offset_left = 4.97809
 offset_top = -41.7638
 offset_right = 24.9781
@@ -3573,6 +3711,16 @@ rotation = 0.255302
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
+
+[node name="great-flat-spice" type="Label" parent="Nice/MapLabels/great-flat"]
+offset_left = -4.0
+offset_top = -7.0
+offset_right = 54.0
+offset_bottom = 9.0
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
 
 [node name="funeral-plain" type="Label" parent="Nice/MapLabels"]
 offset_left = 237.0
@@ -3585,21 +3733,9 @@ theme_override_font_sizes/font_size = 11
 text = "FUNERAL PLAIN"
 horizontal_alignment = 1
 
-[node name="funeral-plain-spice" type="Label" parent="Nice/MapLabels/funeral-plain"]
-layout_mode = 0
-offset_left = 11.0
-offset_top = 11.0
-offset_right = 42.0
-offset_bottom = 24.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 9
-text = "spice"
-horizontal_alignment = 1
-
 [node name="funeral-plain" type="Node2D" parent="Nice/MapLabels/funeral-plain"]
 position = Vector2(108.189, 32.9262)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/funeral-plain/funeral-plain"]
 offset_left = -20.4924
@@ -3661,6 +3797,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="funeral-plain-spice" type="Label" parent="Nice/MapLabels/funeral-plain"]
+offset_left = 11.5713
+offset_top = 16.6164
+offset_right = 69.5713
+offset_bottom = 32.6164
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="bight-cliff" type="Label" parent="Nice/MapLabels"]
 offset_left = 220.0
 offset_top = 248.0
@@ -3676,7 +3822,6 @@ horizontal_alignment = 1
 [node name="bight-cliff-15" type="Node2D" parent="Nice/MapLabels/bight-cliff"]
 position = Vector2(28.5623, 98.9151)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/bight-cliff/bight-cliff-15"]
 offset_left = -20.4924
@@ -3741,7 +3886,6 @@ text = "0"
 [node name="bight-cliff-14" type="Node2D" parent="Nice/MapLabels/bight-cliff"]
 position = Vector2(75.2218, 38.5056)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/bight-cliff/bight-cliff-14"]
 offset_left = -20.4924
@@ -3803,6 +3947,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="bight-cliff-spice" type="Label" parent="Nice/MapLabels/bight-cliff"]
+offset_left = 13.2474
+offset_top = 33.4889
+offset_right = 71.2474
+offset_bottom = 49.4889
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="sietch-tabr" type="Label" parent="Nice/MapLabels"]
 offset_left = 286.0
 offset_top = 208.0
@@ -3818,7 +3972,6 @@ horizontal_alignment = 1
 [node name="sietch-tabr" type="Node2D" parent="Nice/MapLabels/sietch-tabr"]
 position = Vector2(47.1556, 30.1555)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/sietch-tabr/sietch-tabr"]
 offset_left = -20.4924
@@ -3880,6 +4033,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="sietch-tabr-spice" type="Label" parent="Nice/MapLabels/sietch-tabr"]
+offset_left = 19.9791
+offset_top = 37.7999
+offset_right = 77.9791
+offset_bottom = 53.7999
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="plastic-basin" type="Label" parent="Nice/MapLabels"]
 offset_left = 359.0
 offset_top = 160.0
@@ -3894,7 +4057,6 @@ horizontal_alignment = 1
 [node name="plastic-basin-14" type="Node2D" parent="Nice/MapLabels/plastic-basin"]
 position = Vector2(-27.8729, 106.434)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/plastic-basin/plastic-basin-14"]
 offset_left = -20.4924
@@ -3959,7 +4121,6 @@ text = "0"
 [node name="plastic-basin-13" type="Node2D" parent="Nice/MapLabels/plastic-basin"]
 position = Vector2(58.5768, 5.36211)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/plastic-basin/plastic-basin-13"]
 offset_left = -20.4924
@@ -4024,7 +4185,6 @@ text = "0"
 [node name="plastic-basin-12" type="Node2D" parent="Nice/MapLabels/plastic-basin"]
 position = Vector2(138.102, 24.6943)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/plastic-basin/plastic-basin-12"]
 offset_left = -20.4924
@@ -4086,6 +4246,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="plastic-basin-spice" type="Label" parent="Nice/MapLabels/plastic-basin"]
+offset_left = 11.5713
+offset_top = 16.6164
+offset_right = 69.5713
+offset_bottom = 32.6164
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="rock-outcroppings" type="Label" parent="Nice/MapLabels"]
 offset_left = 281.0
 offset_top = 128.0
@@ -4100,7 +4270,6 @@ horizontal_alignment = 1
 [node name="rock-outcroppings-13" type="Node2D" parent="Nice/MapLabels/rock-outcroppings"]
 position = Vector2(47.8185, 61.3465)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/rock-outcroppings/rock-outcroppings-13"]
 offset_left = -20.4924
@@ -4165,7 +4334,6 @@ text = "0"
 [node name="rock-outcroppings-14" type="Node2D" parent="Nice/MapLabels/rock-outcroppings"]
 position = Vector2(-13.9654, 47.6442)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/rock-outcroppings/rock-outcroppings-14"]
 offset_left = -20.4924
@@ -4227,6 +4395,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="rock-outcroppings-spice" type="Label" parent="Nice/MapLabels/rock-outcroppings"]
+offset_left = 11.5713
+offset_top = 16.6164
+offset_right = 69.5713
+offset_bottom = 32.6164
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="broken-land" type="Label" parent="Nice/MapLabels"]
 offset_left = 451.0
 offset_top = 2.99999
@@ -4241,7 +4419,6 @@ horizontal_alignment = 1
 [node name="broken-land-11" type="Node2D" parent="Nice/MapLabels/broken-land"]
 position = Vector2(132.433, 40.6145)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/broken-land/broken-land-11"]
 offset_left = -20.4924
@@ -4306,7 +4483,6 @@ text = "0"
 [node name="broken-land-12" type="Node2D" parent="Nice/MapLabels/broken-land"]
 position = Vector2(-13.1196, 42.1886)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/broken-land/broken-land-12"]
 offset_left = -20.4924
@@ -4368,6 +4544,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="broken-land-spice" type="Label" parent="Nice/MapLabels/broken-land"]
+offset_left = 24.3094
+offset_top = 15.429
+offset_right = 82.3094
+offset_bottom = 31.429
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="tsimpo" type="Label" parent="Nice/MapLabels"]
 offset_left = 511.0
 offset_top = 53.0
@@ -4382,7 +4568,6 @@ horizontal_alignment = 1
 [node name="tsimpo-11" type="Node2D" parent="Nice/MapLabels/tsimpo"]
 position = Vector2(77.3004, 35.1092)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/tsimpo/tsimpo-11"]
 offset_left = -20.4924
@@ -4447,7 +4632,6 @@ text = "0"
 [node name="tsimpo-12" type="Node2D" parent="Nice/MapLabels/tsimpo"]
 position = Vector2(-14.7357, 64.4582)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/tsimpo/tsimpo-12"]
 offset_left = -20.4924
@@ -4512,7 +4696,6 @@ text = "0"
 [node name="tsimpo-13" type="Node2D" parent="Nice/MapLabels/tsimpo"]
 position = Vector2(-79.4697, 106.44)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/tsimpo/tsimpo-13"]
 offset_left = -20.4924
@@ -4574,6 +4757,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="tsimpo-spice" type="Label" parent="Nice/MapLabels/tsimpo"]
+offset_left = 11.5713
+offset_top = 16.6164
+offset_right = 69.5713
+offset_bottom = 32.6164
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="hagga-basin" type="Label" parent="Nice/MapLabels"]
 offset_left = 459.0
 offset_top = 197.0
@@ -4588,7 +4781,6 @@ horizontal_alignment = 1
 [node name="hagga-basin-12" type="Node2D" parent="Nice/MapLabels/hagga-basin"]
 position = Vector2(76.1766, 2.47685)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/hagga-basin/hagga-basin-12"]
 offset_left = -20.4924
@@ -4653,7 +4845,6 @@ text = "0"
 [node name="hagga-basin-13" type="Node2D" parent="Nice/MapLabels/hagga-basin"]
 position = Vector2(10.376, 78.9705)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/hagga-basin/hagga-basin-13"]
 offset_left = -20.4924
@@ -4715,6 +4906,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="hagga-basin-spice" type="Label" parent="Nice/MapLabels/hagga-basin"]
+offset_left = 53.4268
+offset_top = 22.6622
+offset_right = 111.427
+offset_bottom = 38.6622
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="arsunt" type="Label" parent="Nice/MapLabels"]
 offset_left = 549.0
 offset_top = 224.0
@@ -4728,7 +4929,6 @@ horizontal_alignment = 1
 [node name="arsunt-11" type="Node2D" parent="Nice/MapLabels/arsunt"]
 position = Vector2(30, -7.99999)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/arsunt/arsunt-11"]
 offset_left = -20.4924
@@ -4793,7 +4993,6 @@ text = "0"
 [node name="arsunt-12" type="Node2D" parent="Nice/MapLabels/arsunt"]
 position = Vector2(12, 84)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/arsunt/arsunt-12"]
 offset_left = -20.4924
@@ -4855,6 +5054,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="arsunt-spice" type="Label" parent="Nice/MapLabels/arsunt"]
+offset_left = 11.5713
+offset_top = 16.6164
+offset_right = 69.5713
+offset_bottom = 32.6164
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="carthag" type="Label" parent="Nice/MapLabels"]
 offset_left = 555.0
 offset_top = 107.0
@@ -4868,7 +5077,6 @@ horizontal_alignment = 1
 [node name="carthag" type="Node2D" parent="Nice/MapLabels/carthag"]
 position = Vector2(24, 14)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/carthag/carthag"]
 offset_left = -20.4924
@@ -4930,6 +5138,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="carthag-spice" type="Label" parent="Nice/MapLabels/carthag"]
+offset_left = 11.5713
+offset_top = 16.6164
+offset_right = 69.5713
+offset_bottom = 32.6164
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="imperial-basin" type="Label" parent="Nice/MapLabels"]
 offset_left = 633.0
 offset_top = 162.0
@@ -4945,7 +5163,6 @@ horizontal_alignment = 1
 [node name="imperial-basin-9" type="Node2D" parent="Nice/MapLabels/imperial-basin"]
 position = Vector2(63.8965, 60.1102)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/imperial-basin/imperial-basin-9"]
 offset_left = -20.4924
@@ -5010,7 +5227,6 @@ text = "0"
 [node name="imperial-basin-10" type="Node2D" parent="Nice/MapLabels/imperial-basin"]
 position = Vector2(22.5304, 4.73114)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/imperial-basin/imperial-basin-10"]
 offset_left = -20.4924
@@ -5075,7 +5291,6 @@ text = "0"
 [node name="imperial-basin-11" type="Node2D" parent="Nice/MapLabels/imperial-basin"]
 position = Vector2(-22.3722, 37.423)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/imperial-basin/imperial-basin-11"]
 offset_left = -20.4924
@@ -5137,6 +5352,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="imperial-basin-spice" type="Label" parent="Nice/MapLabels/imperial-basin"]
+offset_left = 17.2361
+offset_top = 41.5682
+offset_right = 75.2361
+offset_bottom = 57.5682
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="arrakeen" type="Label" parent="Nice/MapLabels"]
 offset_left = 687.0
 offset_top = 66.0
@@ -5152,7 +5377,6 @@ horizontal_alignment = 1
 [node name="arrakeen" type="Node2D" parent="Nice/MapLabels/arrakeen"]
 position = Vector2(21.0659, 6.42093)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/arrakeen/arrakeen"]
 offset_left = -20.4924
@@ -5214,6 +5438,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="arrakeen-spice" type="Label" parent="Nice/MapLabels/arrakeen"]
+offset_left = 11.5713
+offset_top = 16.6164
+offset_right = 69.5713
+offset_bottom = 32.6164
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="old-gap" type="Label" parent="Nice/MapLabels"]
 offset_left = 689.0
 offset_top = -9.00002
@@ -5228,7 +5462,6 @@ horizontal_alignment = 1
 [node name="old-gap-9" type="Node2D" parent="Nice/MapLabels/old-gap"]
 position = Vector2(102.378, 48.1542)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/old-gap/old-gap-9"]
 offset_left = -20.4924
@@ -5293,7 +5526,6 @@ text = "0"
 [node name="old-gap-10" type="Node2D" parent="Nice/MapLabels/old-gap"]
 position = Vector2(67.375, 39.5046)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/old-gap/old-gap-10"]
 offset_left = -20.4924
@@ -5358,7 +5590,6 @@ text = "0"
 [node name="old-gap-11" type="Node2D" parent="Nice/MapLabels/old-gap"]
 position = Vector2(-50.8754, 41.7098)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/old-gap/old-gap-11"]
 offset_left = -20.4924
@@ -5420,6 +5651,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="old-gap-spice" type="Label" parent="Nice/MapLabels/old-gap"]
+offset_left = 11.5713
+offset_top = 16.6164
+offset_right = 69.5713
+offset_bottom = 32.6164
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="basin" type="Label" parent="Nice/MapLabels"]
 offset_left = 810.0
 offset_top = 48.0
@@ -5434,7 +5675,6 @@ horizontal_alignment = 1
 [node name="basin" type="Node2D" parent="Nice/MapLabels/basin"]
 position = Vector2(14.0645, 70.62)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/basin/basin"]
 offset_left = -20.4924
@@ -5496,6 +5736,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="basin-spice" type="Label" parent="Nice/MapLabels/basin"]
+offset_left = 1.1271
+offset_top = -16.2397
+offset_right = 59.1271
+offset_bottom = -0.239746
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="sihaya-ridge" type="Label" parent="Nice/MapLabels"]
 offset_left = 850.0
 offset_top = 78.0
@@ -5511,7 +5761,6 @@ horizontal_alignment = 1
 [node name="sihaya-ridge" type="Node2D" parent="Nice/MapLabels/sihaya-ridge"]
 position = Vector2(20.1912, 16.502)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/sihaya-ridge/sihaya-ridge"]
 offset_left = -20.4924
@@ -5573,6 +5822,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="sihaya-ridge-spice" type="Label" parent="Nice/MapLabels/sihaya-ridge"]
+offset_left = 11.5713
+offset_top = 16.6164
+offset_right = 69.5713
+offset_bottom = 32.6164
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="gara-kulon" type="Label" parent="Nice/MapLabels"]
 offset_left = 900.0
 offset_top = 136.0
@@ -5588,7 +5847,6 @@ horizontal_alignment = 1
 [node name="gara-kulon" type="Node2D" parent="Nice/MapLabels/gara-kulon"]
 position = Vector2(10.8418, 84.584)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/gara-kulon/gara-kulon"]
 offset_left = -20.4924
@@ -5650,6 +5908,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="gara-kulon-spice" type="Label" parent="Nice/MapLabels/gara-kulon"]
+offset_left = 11.5713
+offset_top = 16.6164
+offset_right = 69.5713
+offset_bottom = 32.6164
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="rim-wall-west" type="Label" parent="Nice/MapLabels"]
 offset_left = 709.0
 offset_top = 155.0
@@ -5664,7 +5932,6 @@ horizontal_alignment = 1
 [node name="rim-wall-west" type="Node2D" parent="Nice/MapLabels/rim-wall-west"]
 position = Vector2(38.5068, 43.4422)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/rim-wall-west/rim-wall-west"]
 offset_left = -20.4924
@@ -5726,6 +5993,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="rim-wall-west-spice" type="Label" parent="Nice/MapLabels/rim-wall-west"]
+offset_left = -9.74835
+offset_top = -4.68723
+offset_right = 48.2517
+offset_bottom = 11.3128
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="hole-in-rock" type="Label" parent="Nice/MapLabels"]
 offset_left = 713.0
 offset_top = 179.0
@@ -5740,7 +6017,6 @@ horizontal_alignment = 1
 [node name="hole-in-rock" type="Node2D" parent="Nice/MapLabels/hole-in-rock"]
 position = Vector2(54.4753, 62.0439)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/hole-in-rock/hole-in-rock"]
 offset_left = -20.4924
@@ -5802,6 +6078,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="hole-in-rock-spice" type="Label" parent="Nice/MapLabels/hole-in-rock"]
+offset_left = 18.2954
+offset_top = 9.01543
+offset_right = 76.2954
+offset_bottom = 25.0154
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="shield-wall" type="Label" parent="Nice/MapLabels"]
 offset_left = 747.0
 offset_top = 197.0
@@ -5818,7 +6104,6 @@ horizontal_alignment = 1
 [node name="shield-wall-8" type="Node2D" parent="Nice/MapLabels/shield-wall"]
 position = Vector2(31.1901, 18.952)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/shield-wall/shield-wall-8"]
 offset_left = -20.4924
@@ -5883,7 +6168,6 @@ text = "0"
 [node name="shield-wall-9" type="Node2D" parent="Nice/MapLabels/shield-wall"]
 position = Vector2(7.99535, 97.9646)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/shield-wall/shield-wall-9"]
 offset_left = -20.4924
@@ -5945,6 +6229,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="shield-wall-spice" type="Label" parent="Nice/MapLabels/shield-wall"]
+offset_left = 29.4184
+offset_top = 33.2649
+offset_right = 87.4184
+offset_bottom = 49.2649
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="red-chasm" type="Label" parent="Nice/MapLabels"]
 offset_left = 935.0
 offset_top = 296.0
@@ -5960,7 +6254,6 @@ horizontal_alignment = 1
 [node name="red-chasm" type="Node2D" parent="Nice/MapLabels/red-chasm"]
 position = Vector2(21, 16)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/red-chasm/red-chasm"]
 offset_left = -20.4924
@@ -6022,6 +6315,16 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
 
+[node name="red-chasm-spice" type="Label" parent="Nice/MapLabels/red-chasm"]
+offset_left = 11.5713
+offset_top = 16.6164
+offset_right = 69.5713
+offset_bottom = 32.6164
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
+
 [node name="polar-sink" type="Label" parent="Nice/MapLabels"]
 offset_left = 548.0
 offset_top = 357.0
@@ -6036,7 +6339,6 @@ horizontal_alignment = 1
 [node name="polar-sink" type="Node2D" parent="Nice/MapLabels/polar-sink"]
 position = Vector2(42, 69)
 rotation = 0.255302
-scale = Vector2(1, 1)
 
 [node name="1" type="Label" parent="Nice/MapLabels/polar-sink/polar-sink"]
 offset_left = -20.4924
@@ -6097,6 +6399,16 @@ rotation = 0.255302
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
 text = "0"
+
+[node name="polar-sink-spice" type="Label" parent="Nice/MapLabels/polar-sink"]
+offset_left = 11.5713
+offset_top = 16.6164
+offset_right = 69.5713
+offset_bottom = 32.6164
+rotation = 0.255302
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "s"
 
 [node name="Regions" type="Node2D" parent="."]
 

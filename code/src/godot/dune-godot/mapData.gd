@@ -297,6 +297,23 @@ var territory_dict = {
 	"polar-sink": {"origin_sector": "polar-sink", "neighbours": [1, 3]}
 }
 
+var spice_goofy_to_section_dict = {
+	0: 2,
+	1: 8,
+	2: 17,
+	3: 27,
+	4: 33,
+	5: 43,
+	6: 45,
+	7: 55,
+	8: 57,
+	9: 62,
+	10: 70,
+	11: 71,
+	12: 76,
+	13: 78,
+	14: 81
+} 
 
 var territoryData = [
 	{"name": "meridian-1", "origin_sector": "meridian", "neighbours": [1, 3]},

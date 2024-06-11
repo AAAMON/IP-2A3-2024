@@ -1,9 +1,11 @@
 extends Control
 var factionInputRequest
+var botInputRequest
 var lobbyInfoRequest
 var requestCompleted: bool = true
 var switch = false;
 var pickedFaction : int = -1
+var pickedBot : int = -1
 @onready var timer: Timer = $Timer
 
 func _ready():
@@ -11,6 +13,9 @@ func _ready():
 	factionInputRequest = HTTPRequest.new()
 	factionInputRequest.connect("request_completed", _on_faction_input_request_completed)
 	add_child(factionInputRequest)
+	botInputRequest = HTTPRequest.new()
+	botInputRequest.connect("request_completed", _on_bot_input_request_completed)
+	add_child(botInputRequest)
 	lobbyInfoRequest = HTTPRequest.new()
 	lobbyInfoRequest.connect("request_completed", _on_lobby_info_request_completed)
 	add_child(lobbyInfoRequest)
@@ -40,7 +45,7 @@ func _on_lobby_info_request_completed(_result, _response_code, _headers, body):
 		push_error("ERROR: NULL RESPONSE FROM SERVER")
 	else:
 		#print("Got phase 1 info")
-		var lobbyMessage = get_node("MarginContainer/Players")
+		var lobbyMessage = get_node("MarginContainer/VBoxContainer/Players")
 		if (json["howMany"] < 1):
 			lobbyMessage.text = "Dafuk? No players?"
 		else:
@@ -49,6 +54,10 @@ func _on_lobby_info_request_completed(_result, _response_code, _headers, body):
 				lobbyMessage.text = lobbyMessage.text + "Username: " + json["players"][player]["username"]
 				var factn = json["players"][player]["faction"]
 				lobbyMessage.text = lobbyMessage.text + " Faction: " + PlayerData.faction_dict[int(factn)] + '\n'
+				# disable buttons
+				if (int(factn) != -1):
+					var buttonName = "MarginContainer/VBoxContainer/Buttons/" + PlayerData.faction_dict[int(factn)]
+					get_node(buttonName).disabled = true
 				if (json['startGame'] == true):
 					switch = true
 				#print(json["players"][player])
@@ -63,6 +72,19 @@ func _on_faction_input_request_completed(_result, _response_code, _headers, body
 		print("Got pick faction input confirmation")
 		# on first request, see if player needs to input anything
 		PlayerData.faction = pickedFaction
+		if (json["message"] == "ok"):
+			print("OK!")
+		else:
+			print("Faction already picked!")
+
+func _on_bot_input_request_completed(_result, _response_code, _headers, body):
+	var response_string = body.get_string_from_utf8()
+	var json = JSON.parse_string(response_string)
+	if (json == null):
+		push_error("ERROR: NULL RESPONSE FROM SERVER")
+	else:
+		print("Got pick bot input confirmation")
+		# on first request, see if player needs to input anything
 		if (json["message"] == "ok"):
 			print("OK!")
 		else:
@@ -118,7 +140,6 @@ func _on_emperor_pressed():
 		push_error("ERROR: HTTP: PICK_FACTION")
 func _on_fremen_pressed():
 	pickedFaction = 4
-	
 	var error = factionInputRequest.request(PlayerData.api_url + "pick_faction/" + PlayerData.username + "/" + str(pickedFaction))
 	if error != OK:
 		push_error("ERROR: HTTP: PICK_FACTION")
@@ -130,5 +151,41 @@ func _on_guild_pressed():
 func _on_harkonnen_pressed():
 	pickedFaction = 6
 	var error = factionInputRequest.request(PlayerData.api_url + "pick_faction/" + PlayerData.username + "/" + str(pickedFaction))
+	if error != OK:
+		push_error("ERROR: HTTP: PICK_FACTION")
+
+
+func _on_atreides_bot_pressed():
+	var error = botInputRequest.request(PlayerData.api_url + "set-bot/" + PlayerData.username + "/1/easy")
+	if error != OK:
+		push_error("ERROR: HTTP: PICK_FACTION")
+
+
+func _on_bene_bot_pressed():
+	var error = botInputRequest.request(PlayerData.api_url + "set-bot/" + PlayerData.username + "/2/easy")
+	if error != OK:
+		push_error("ERROR: HTTP: PICK_FACTION")
+
+
+func _on_emperor_bot_pressed():
+	var error = botInputRequest.request(PlayerData.api_url + "set-bot/" + PlayerData.username + "/3/easy")
+	if error != OK:
+		push_error("ERROR: HTTP: PICK_FACTION")
+
+
+func _on_fremen_bot_pressed():
+	var error = botInputRequest.request(PlayerData.api_url + "set-bot/" + PlayerData.username + "/4/easy")
+	if error != OK:
+		push_error("ERROR: HTTP: PICK_FACTION")
+
+
+func _on_guild_bot_pressed():
+	var error = botInputRequest.request(PlayerData.api_url + "set-bot/" + PlayerData.username + "/5/easy")
+	if error != OK:
+		push_error("ERROR: HTTP: PICK_FACTION")
+
+
+func _on_harkonnen_bot_pressed():
+	var error = botInputRequest.request(PlayerData.api_url + "set-bot/" + PlayerData.username + "/6/easy")
 	if error != OK:
 		push_error("ERROR: HTTP: PICK_FACTION")

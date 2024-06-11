@@ -31,10 +31,6 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 80
 theme_override_constants/margin_bottom = 20
 
-[node name="Players" type="Label" parent="MarginContainer"]
-layout_mode = 2
-text = "here be thy players"
-
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
@@ -77,19 +73,19 @@ horizontal_alignment = 1
 [node name="Control2" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 100
-alignment = 1
+text = "Pick faction:"
 
 [node name="Buttons" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="Atreides" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
 layout_mode = 2
 text = "Atreides"
 
-[node name="Bene" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+[node name="BeneGesserit" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
 layout_mode = 2
 text = "BeneGesserit"
 
@@ -101,7 +97,7 @@ text = "Emperor"
 layout_mode = 2
 text = "Fremen"
 
-[node name="Guild" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+[node name="SpaceGuild" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
 layout_mode = 2
 text = "SpaceGuild
 "
@@ -111,13 +107,60 @@ layout_mode = 2
 text = "Harkonnen
 "
 
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Or create bot:"
+
+[node name="ButtonsBots" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AtreidesBot" type="Button" parent="MarginContainer/VBoxContainer/ButtonsBots"]
+layout_mode = 2
+text = "Atreides"
+
+[node name="BeneBot" type="Button" parent="MarginContainer/VBoxContainer/ButtonsBots"]
+layout_mode = 2
+text = "BeneGesserit"
+
+[node name="EmperorBot" type="Button" parent="MarginContainer/VBoxContainer/ButtonsBots"]
+layout_mode = 2
+text = "Emperor"
+
+[node name="FremenBot" type="Button" parent="MarginContainer/VBoxContainer/ButtonsBots"]
+layout_mode = 2
+text = "Fremen"
+
+[node name="GuildBot" type="Button" parent="MarginContainer/VBoxContainer/ButtonsBots"]
+layout_mode = 2
+text = "SpaceGuild
+"
+
+[node name="HarkonnenBot" type="Button" parent="MarginContainer/VBoxContainer/ButtonsBots"]
+layout_mode = 2
+text = "Harkonnen
+"
+
+[node name="Label4" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Players in lobby:"
+
+[node name="Players" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "here be thy players"
+
 [node name="Timer" type="Timer" parent="."]
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/Atreides" to="." method="_on_atreides_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/Bene" to="." method="_on_bene_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/BeneGesserit" to="." method="_on_bene_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/Emperor" to="." method="_on_emperor_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/Fremen" to="." method="_on_fremen_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/Guild" to="." method="_on_guild_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/SpaceGuild" to="." method="_on_guild_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/Harkonnen" to="." method="_on_harkonnen_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsBots/AtreidesBot" to="." method="_on_atreides_bot_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsBots/BeneBot" to="." method="_on_bene_bot_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsBots/EmperorBot" to="." method="_on_emperor_bot_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsBots/FremenBot" to="." method="_on_fremen_bot_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsBots/GuildBot" to="." method="_on_guild_bot_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsBots/HarkonnenBot" to="." method="_on_harkonnen_bot_pressed"]

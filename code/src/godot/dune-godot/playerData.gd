@@ -11,6 +11,7 @@ var turnId : int = -1
 var myTurn : bool = false
 var faction : int = -1
 var spice : int = -1
+var lastSpice : int = -1
 var forcesReserve : int = -1
 var forcesDeployed : int = -1
 var forcesDead : int = -1
@@ -19,6 +20,10 @@ var territories = []
 var traitors = []
 var treatcheryCards = []
 
+# for bid
+var whoLastBidded : int = -1
+# for spice collect
+var oldSpice : int = -1
 
 # hope this will get deleted ###################################################
 var myLeaders = []
