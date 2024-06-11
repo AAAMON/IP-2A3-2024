@@ -363,63 +363,71 @@ def shipment(game_state):
 
         best_section = random.choice(best_territory['Sections'])
 
-    territory_from=None
-    if best_score !=5 or my_reserves<5:
-        #shipement special
-        #territory_from
-        for territory1 in game_state['Map']['Territories']:
-            if territory1['Name'] in stronghold_territories:
-                continue
-            if str(territory1['Id']) in game_state['Map']['Spice_Dict'] and game_state['Map']['Spice_Dict'][str(territory1['Id'])]['Avaliable'] > 0:
-                continue
 
-            if storm_move(game_state,territory1,0):
-                continue
-            my_forces1 = get_forces_by_territory(game_state, territory1, faction_name)
-            if my_forces1 == 0:
-                continue
-            for section_base in territory1['Sections']:
-                my_forces1=section_base['Forces'][faction_name]
+    shipment_special=False
+    if shipment_special==True:
+        territory_from=None
+        if best_score !=5 or my_reserves<5:
+            #shipement special
+            #territory_from
+            for territory1 in game_state['Map']['Territories']:
+                if territory1['Name'] in stronghold_territories:
+                    continue
+                if str(territory1['Id']) in game_state['Map']['Spice_Dict'] and game_state['Map']['Spice_Dict'][str(territory1['Id'])]['Avaliable'] > 0:
+                    continue
+
+                if storm_move(game_state,territory1,0):
+                    continue
+                my_forces1 = get_forces_by_territory(game_state, territory1, faction_name)
                 if my_forces1 == 0:
                     continue
-                #am gasit teritoriul de unde ma mut territory1
+                for section_base in territory1['Sections']:
+                    my_forces1=section_base['Forces'][faction_name]
+                    if my_forces1 == 0:
+                        continue
+                    #am gasit teritoriul de unde ma mut territory1
 
-                #aici voi face mutarea
-                for territory2 in game_state['Map']['Territories']:
-                    if not storm_move(game_state,territory2,0):
-                        curr_score2 = evaluate_territory(game_state, territory2)
-                        if(curr_score2 > best_score or (best_score==curr_score2 and desired_number_troops<my_forces1 and best_score!=0)):
-                            best_score = curr_score2
-                            best_territory = territory2
-                            territory_from=territory1
-                            section_id_base=section_base['Id']
+                    #aici voi face mutarea
+                    for territory2 in game_state['Map']['Territories']:
+                        if not storm_move(game_state,territory2,0):
+                            curr_score2 = evaluate_territory(game_state, territory2)
+                            if(curr_score2 > best_score or (best_score==curr_score2 and desired_number_troops<my_forces1 and best_score!=0)):
+                                best_score = curr_score2
+                                best_territory = territory2
+                                territory_from=territory1
+                                section_id_base=section_base['Id']
 
-                if best_score == 5:
-                    desired_number_troops =  min(my_spice *2, my_forces1)
+                    if best_score == 5:
+                        desired_number_troops =  min(my_spice *2, my_forces1)
 
-                elif best_score == 4:
-                    #todo to see if my opponent is after me, if so he can bring more forces
-                    for number_troops2 in  range(1, min(my_spice*2,my_forces1) + 1):
-                        if simulate_battle(game_state, territory2, number_troops2)[0] > 0.8:
-                            desired_number_troops =  number_troops2
-                            break
+                    elif best_score == 4:
+                        #todo to see if my opponent is after me, if so he can bring more forces
+                        for number_troops2 in  range(1, min(my_spice*2,my_forces1) + 1):
+                            if simulate_battle(game_state, territory2, number_troops2)[0] > 0.8:
+                                desired_number_troops =  number_troops2
+                                break
 
-                elif best_score == 3:
-                    desired_number_troops =  min(my_spice *2, my_forces1 // 2)
+                    elif best_score == 3:
+                        desired_number_troops =  min(my_spice *2, my_forces1 // 2)
 
-                elif best_score == 2:
-                    desired_number_troops = min(2, my_spice,my_forces1)
-                    
-                elif best_score == 1:
-                    desired_number_troops = desired_number_troops = min(3, my_spice,my_forces1)
-                best_section = random.choice(best_territory['Sections'])
-    
+                    elif best_score == 2:
+                        desired_number_troops = min(2, my_spice,my_forces1)
+                        
+                    elif best_score == 1:
+                        desired_number_troops = desired_number_troops = min(3, my_spice,my_forces1)
+                    best_section = random.choice(best_territory['Sections'])
+        
+        return {
+        "action": "shipment_special", 
+        "value": desired_number_troops, 
+        "base_section": section_id_base,
+        "section": best_section['Id']
+        }
     return {
-    "action": "shipment_special", 
+    "action": "shipment", 
     "value": desired_number_troops, 
-    "base_section": section_id_base,
-    "section": best_section['Id']
-   }
+    "section": best_section['Id'] 
+    } 
     
 def movement(game_state):
     best_score = 0
