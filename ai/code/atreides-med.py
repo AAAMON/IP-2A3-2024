@@ -203,11 +203,11 @@ def aliance(game_state):
 
 ###########################################################################################################
 
-
+#tested, good
 def bidding(game_state):
     #done for atreides
-    last_bid = game_state['HighestBid']['Value']
-    last_bid_player = game_state['HighestBid']['Player']
+    last_bid = game_state['Highest_Bid']['bid']
+    last_bid_player = game_state['Highest_Bid']['faction'][0]
     my_cards = game_state['Faction_Knowledge'][0]['Treachery_Cards']
     my_spice = game_state['Faction_Knowledge'][0]['Spice']
     card_name=game_state['Last_Treachery_Card_Seen'][0]
@@ -642,7 +642,7 @@ def get_move(game_state):
     phase_name = game_state['Phase'][0]['name']
     phase_moment = game_state['Phase'][0]['moment']
 
-    if phase_name == 'Pick Traitor':
+    if phase_name == "Set-up" and phase_moment == 'traitor selection':
         return pick_traitor(game_state)
     
     if phase_name == "Storm":
@@ -667,7 +667,7 @@ def get_move(game_state):
         return choose_battle(game_state)
     
     if phase_name == 'Battle' and phase_moment == 'Battle Wheel':
-        return battle(game_state,game_state['Faction_Battles']['Chosen_Battle_Section'])
+        return battle(game_state)
     
     if phase_name == 'Battle' and phase_moment == 'discard treachery cards':
         return {
