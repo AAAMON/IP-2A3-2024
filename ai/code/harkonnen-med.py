@@ -109,9 +109,11 @@ def pick_traitor(game_state):
     possible_traitors = game_state["Faction_Knowledge"][0]["Traitors"]
     for traitor in leaders_desc:
         if any(traitor_name for traitor_name in possible_traitors if traitor_name["Name"] == traitor[0]):
-            return {'action': traitor[0]}
+            return {'action': 'pick_traitor', 'name': traitor[0]}
     # daca am cumva eroare il aleg pe primul
-    return {'action': game_state["Faction_Knowledge"][0]["Traitors"][0]["Name"]}
+     return {'action': "pick_traitor",
+            "name": game_state["Faction_Knowledge"][0]["Traitors"][0]["Name"]}
+
 
 
 def aliance(game_state):
