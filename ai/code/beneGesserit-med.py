@@ -250,12 +250,30 @@ def revival(game_state):
     #TODO bene gesserit are low revival rate, dar are 1 free revival
     my_spice = game_state['Faction_Knowledge'][0]['Spice']
     nr_dead = game_state['Tleilaxu_Tanks'][0]['Forces'][faction_name]
+    possible_revival_generals = game_state['Tleilaxu_Tanks'][0]['Revivable_Generals'][faction_name]
     nr_revive = 0
     if nr_dead > 0:
         nr_revive = 1
-    return {"action": "revive",
-             "value": nr_revive,
-             'general_name': 'None'}
+
+    all_my_generals = {faction: generals_power[faction] for faction in generals_power if faction == faction_name}
+    sorted_generals = sorted(
+    [(name, strength) for faction in all_my_generals for name, strength in all_my_generals[faction].items()],
+    key=lambda x: x[1],
+    reverse=True)
+
+    general_to_revive = None
+    if my_spice >= 10 and len(possible_revival_generals) >= 4:
+        for general in all_my_generals:
+            general_name = general[0]
+            if general_name in possible_revival_generals:
+                general_to_revive = general_name
+                continue
+
+    return {
+        "action": "revive",
+        "value": nr_revive,
+        "general_name": general_to_revive
+    }
  
 def storm_move(game_state, territory, nr): 
     #storm hits over
