@@ -28,7 +28,6 @@ public class forceGUI
 
 public class otherPlayerGUI
 {
-    public int turnId { get; set; }
     public string Username { get; set; } = "Username";
     public int Faction { get; set; }
     public bool Bot { get; set; } = false;
@@ -88,7 +87,7 @@ public class GameClient
     // player information
     private Dictionary<string, playerData> playerDataDictionary = new Dictionary<string, playerData>();
     private lobbyInfo lobby = new lobbyInfo();
-    private bool gameIsRunning = false;
+    public bool gameIsRunning = false;
     // SERVER COMMUNICATION CLIENT
     static readonly HttpClient client = new HttpClient();
     // URL FOR SERVER COMM
@@ -195,6 +194,7 @@ public class GameClient
         client.DefaultRequestHeaders.Remove("Authorization");
         client.DefaultRequestHeaders.Add("Authorization", authToken);
         var response = await client.GetAsync(baseUrl + $"gamestate/player{faction}");
+        // Console.WriteLine($"Asking for: gamestate/player{faction}");
         return await response.Content.ReadAsStringAsync();
     }
 
@@ -213,9 +213,36 @@ public class GameClient
         var response = await client.GetAsync(baseUrl + $"{playerDataDictionary[username].playerId}/phase_1_input/{stormValue}");
         return await response.Content.ReadAsStringAsync();
     }
-    public async Task<string> SendBenePredict(string faction)
+    public async Task<string> SendBot(string username, int faction, string mode)
     {
-        var response = await client.GetAsync(baseUrl + $"player2/setup/{faction}");
+        string fName = "error";
+        switch (faction)
+        {
+            case 1:
+                fName = "Atreides";
+                break;
+            case 2:
+                fName = "Bene_Gesserit";
+                break;
+            case 3:
+                fName = "Emperor";
+                break;
+            case 4:
+                fName = "Fremen";
+                break;
+            case 5:
+                fName = "Spacing_Guild";
+                break;
+            case 6:
+                fName = "Harkonnen";
+                break;
+        }
+        var response = await client.GetAsync(baseUrl + $"set-bot/player{playerDataDictionary[username].playerId}/{fName}/{mode}");
+        return await response.Content.ReadAsStringAsync();
+    }
+    public async Task<string> SendBenePredict(string faction, string round)
+    {
+        var response = await client.GetAsync(baseUrl + $"player2/setup/player{faction}/{round}");
         return await response.Content.ReadAsStringAsync();
     }
     public async Task<string> SendFremenSetup(string sectionId, string forces)
@@ -238,12 +265,52 @@ public class GameClient
         var response = await client.GetAsync(baseUrl + $"register/{usrname}/{password}/{mail}");
         return await response.Content.ReadAsStringAsync();
     }
-    public async Task<string> SendPhase4(string username, int bidValue)
+    public async Task<string> SendPhase4(string faction, string bidValue)
     {
-        var response = await client.GetAsync(baseUrl + $"{playerDataDictionary[username].playerId}/phase_4_input/{bidValue}");
+        Console.WriteLine("sending phase 4");
+        var response = await client.GetAsync(baseUrl + $"player{faction}/phase_4_input/{bidValue}");
         return await response.Content.ReadAsStringAsync();
     }
-
+    public async Task<string> SendPhase5(string faction, string forcesOrLeder)
+    {
+        var response = await client.GetAsync(baseUrl + $"player{faction}/phase_5_input/{forcesOrLeder}");
+        return await response.Content.ReadAsStringAsync();
+    }
+    public async Task<string> SendPhase61(string faction, string sectionId, string forces)
+    {
+        var response = await client.GetAsync(baseUrl + $"player{faction}/phase_6_input/1/{sectionId}/{forces}");
+        return await response.Content.ReadAsStringAsync();
+    }
+    public async Task<string> SendPhase62(string faction, string sectionId, string sectionIdDest, string forces)
+    {
+        var response = await client.GetAsync(baseUrl + $"player{faction}/phase_6_input/2/{sectionId}/{sectionIdDest}/{forces}");
+        return await response.Content.ReadAsStringAsync();
+    }
+    public async Task<string> SendPhase6Bene(string faction, string answer)
+    {
+        var response = await client.GetAsync(baseUrl + $"player{faction}/phase_6_input/{answer}");
+        return await response.Content.ReadAsStringAsync();
+    }
+    public async Task<string> SendPickEnemy(string faction, string sectionId, string playerId)
+    {
+        var response = await client.GetAsync(baseUrl + $"player{faction}/phase_7_input/{sectionId}/player{playerId}");
+        return await response.Content.ReadAsStringAsync();
+    }
+    public async Task<string> SendPhase71(string faction, string forces, string leader)
+    {
+        var response = await client.GetAsync(baseUrl + $"player{faction}/phase_7_input/{forces}/{leader}");
+        return await response.Content.ReadAsStringAsync();
+    }
+    public async Task<string> SendPhase72(string faction, string forces, string leader, string card1)
+    {
+        var response = await client.GetAsync(baseUrl + $"player{faction}/phase_7_input/{forces}/{leader}/{card1}");
+        return await response.Content.ReadAsStringAsync();
+    }
+    public async Task<string> SendPhase73(string faction, string forces, string leader, string card1, string card2)
+    {
+        var response = await client.GetAsync(baseUrl + $"player{faction}/phase_7_input/{forces}/{leader}/{card1}/{card2}");
+        return await response.Content.ReadAsStringAsync();
+    }
 
     // STUFF FOR COMMUNICATION WITH API ////////////////////////////////////////
 
@@ -273,9 +340,17 @@ public class GameClient
 
             return pickFaction(username, faction);
         }
+        else if (request.StartsWith("/set-bot/"))
+        {
+            string username = request.Split('/')[2];
+            int faction = int.Parse(request.Split('/')[3]);
+            string mode = request.Split('/')[4];
+
+            return pickBot(username, faction, mode);
+        }
         else if (request.StartsWith("/get_lobby_info"))
         {
-            Console.WriteLine($"{request}");
+            //Console.WriteLine($"{request}");
             return GetLobbyInfo();
         }
         else if (request.StartsWith("/get_phase_info"))
@@ -303,7 +378,6 @@ public class GameClient
         }
         else if (request.StartsWith("/get_map_info"))
         {
-            Console.WriteLine($"{request}");
             string username = request.Split('/')[2];
             return GetMapInfo(username);
         }
@@ -311,7 +385,8 @@ public class GameClient
         {
             string username = request.Split('/')[2];
             string faction = request.Split('/')[3];
-            return GetBenePredict(username, faction);
+            string round = request.Split('/')[4];
+            return GetBenePredict(username, faction, round);
         }
         else if (request.StartsWith("/fremen_setup_input"))
         {
@@ -330,6 +405,98 @@ public class GameClient
             string username = request.Split('/')[2];
             string stormValue = request.Split('/')[3];
             return GetPhase1Input(username, stormValue);
+        }
+        else if (request.StartsWith("/get_phase_2_info"))
+        {
+            string username = request.Split('/')[2];
+            return GetPhase2Info(username);
+        }
+        else if (request.StartsWith("/get_phase_4_info"))
+        {
+            string username = request.Split('/')[2];
+            return GetPhase4Info(username);
+        }
+        else if (request.StartsWith("/phase_4_input"))
+        {
+            string username = request.Split('/')[2];
+            string bidValue = request.Split('/')[3];
+            return GetPhase4Input(username, bidValue);
+        }
+        else if (request.StartsWith("/get_phase_5_info"))
+        {
+            string username = request.Split('/')[2];
+            return GetPhase5Info(username);
+        }
+        else if (request.StartsWith("/phase_5_input"))
+        {
+            Console.WriteLine($"{request}");
+            string username = request.Split('/')[2];
+            string forcesOrLeder = request.Split('/')[3];
+            return GetPhase5Input(username, forcesOrLeder);
+        }
+        else if (request.StartsWith("/phase_6_input/1/"))
+        {
+            Console.WriteLine($"{request}");
+            string username = request.Split('/')[3];
+            string sectionId = request.Split('/')[4];
+            string forces = request.Split('/')[5];
+            return GetPhase61Input(username, sectionId, forces);
+        }
+        else if (request.StartsWith("/phase_6_input/2/"))
+        {
+            Console.WriteLine($"{request}");
+            string username = request.Split('/')[3];
+            string sectionId = request.Split('/')[4];
+            string sectionIdDest = request.Split('/')[5];
+            string forces = request.Split('/')[6];
+            return GetPhase62Input(username, sectionId, sectionIdDest, forces);
+        }
+        else if (request.StartsWith("/phase_6_input/"))
+        {
+            Console.WriteLine($"{request}");
+            string username = request.Split('/')[2];
+            string answer = request.Split('/')[3];
+            return GetPhase6BeneInput(username, answer);
+        }
+        else if (request.StartsWith("/get_phase_7_info"))
+        {
+            string username = request.Split('/')[2];
+            return GetPhase7Info(username);
+        }
+        else if (request.StartsWith("/pick_enemy/"))
+        {
+            Console.WriteLine($"{request}");
+            string username = request.Split('/')[2];
+            string sectionId = request.Split('/')[3];
+            string playerId = request.Split('/')[4];
+            return GetPickEnemyInput(username, sectionId, playerId);
+        }
+        else if (request.StartsWith("/phase_7_input/1/"))
+        {
+            Console.WriteLine($"{request}");
+            string username = request.Split('/')[3];
+            string forces = request.Split('/')[4];
+            string leader = request.Split('/')[5];
+            return GetPhase71Input(username, forces, leader);
+        }
+        else if (request.StartsWith("/phase_7_input2/"))
+        {
+            Console.WriteLine($"{request}");
+            string username = request.Split('/')[2];
+            string forces = request.Split('/')[3];
+            string leader = request.Split('/')[4];
+            string card1 = request.Split('/')[5];
+            return GetPhase72Input(username, forces, leader, card1);
+        }
+        else if (request.StartsWith("/phase_7_input/3/"))
+        {
+            Console.WriteLine($"{request}");
+            string username = request.Split('/')[3];
+            string forces = request.Split('/')[4];
+            string leader = request.Split('/')[5];
+            string card1 = request.Split('/')[6];
+            string card2 = request.Split('/')[7];
+            return GetPhase73Input(username, forces, leader, card1, card2);
         }
         else
         {
@@ -391,6 +558,31 @@ public class GameClient
             return Newtonsoft.Json.JsonConvert.SerializeObject(message);
         }
     }
+    public string pickBot(string uusername, int faction, string mode)
+    {
+        if (lobby.factionIsPicked[faction] || playerDataDictionary[uusername].faction != -1)
+        {
+            var message = new
+            {
+                message = "taken"
+            };
+            // Serialize playerData object to JSON
+            return Newtonsoft.Json.JsonConvert.SerializeObject(message);
+        }
+        else
+        {
+            SendBot(uusername, faction, mode);
+            lobby.factionIsPicked[faction] = true;
+            playerDataDictionary[uusername].faction = faction;
+            playerDataDictionary[uusername].isBot = true;
+            var message = new
+            {
+                message = "ok"
+            };
+            // Serialize playerData object to JSON
+            return Newtonsoft.Json.JsonConvert.SerializeObject(message);
+        }
+    }
     public string Register(string uusername, string password, string email)
     {
         Console.WriteLine("Trying to register in {0} with pass {1}", uusername, password, email);
@@ -418,7 +610,7 @@ public class GameClient
     public string GetLobbyInfo()
     {
         bool everyone = true;
-        for (int i = 1; i < 3; i++) // put it i = 1 i < 7
+        for (int i = 1; i < 7; i++) // put it i = 1 i < 7
             if (lobby.factionIsPicked[i] == false)
                 everyone = false;
         gameIsRunning = everyone;
@@ -453,7 +645,7 @@ public class GameClient
         int index = 0;
         var spices = playerDataDictionary[username].json["Map"]["Spice_Dict"];
         // Console.WriteLine($"Spices: {spices}");
-        playerDataDictionary[username].spice = new spiceGUI[20];
+        playerDataDictionary[username].spice = new spiceGUI[25];
 
         foreach (var card in spices)
         {
@@ -464,19 +656,22 @@ public class GameClient
         }
         // Forces
         index = 0;
-        var sections = playerDataDictionary[username].json["Map"]["Territories"];
+        var territories = playerDataDictionary[username].json["Map"]["Territories"];
         playerDataDictionary[username].forces = new forceGUI[85];
         int howMany = 0;
-        foreach (var section in sections)
+        foreach (var territory in territories)
         {
-            // Console.WriteLine($"Card: {section.Sections[0].Id}");
-            foreach (var forces in section.Sections[0].Forces)
+            // Console.WriteLine($"Card: {territory.Sections[0].Id}");
+            foreach (var section in territory.Sections)
             {
-                if (forces != null) {
-                    // Console.WriteLine($"Force: {forces}, {forces.Name}, {forces.Value}");
-                    playerDataDictionary[username].forces[index++] = new forceGUI { GoofySectionId = section.Sections[0].Id, Faction = forces.Name, Forces = forces.Value};
-                    howMany++;
+                foreach (var forces in section.Forces){
+                    if (forces.Value != 0) {
+                        // Console.WriteLine($"Force: {section.Id}, {forces.Name}, {forces.Value}");
+                        playerDataDictionary[username].forces[index++] = new forceGUI { GoofySectionId = section.Id, Faction = forces.Name, Forces = forces.Value};
+                        howMany++;
+                    }
                 }
+
             }
             // var boo = section.Value.Forces;
             // Console.WriteLine($"Card: {card.Name}, Quantity: {boo}");
@@ -497,13 +692,12 @@ public class GameClient
     {
         // Spice
         int index = 0;
-        var spices = playerDataDictionary[username].json["Map"]["Spice_Dict"];
         // Console.WriteLine($"Spices: {spices}");
         playerDataDictionary[username].otherPlayers = new otherPlayerGUI[7];
 
         foreach (var player in playerDataDictionary.Values)
         {
-            playerDataDictionary[username].otherPlayers[index++] = new otherPlayerGUI { turnId = player.playerID, Username = player.username, Faction = player.faction, Bot = player.isBot, Spice = player.json.Faction_Knowledge[0].Spice, NrTreatcheryCards = player.nrOfTreacheryCards};
+            playerDataDictionary[username].otherPlayers[index++] = new otherPlayerGUI { Username = player.username, Faction = player.faction, Bot = player.isBot, Spice = player.json.Faction_Knowledge[0].Spice, NrTreatcheryCards = player.nrOfTreacheryCards};
         }
 
         var otherPlayersInfo = new {
@@ -515,26 +709,34 @@ public class GameClient
     }
     public string GetPlayerData(string username)
     {
+        // spice
         int reserves = -1;
+        int deadForces = 0;
         switch (playerDataDictionary[username].faction)
         {
             case 1:
                 reserves = playerDataDictionary[username].json.Reserves[0].Atreides;
+                deadForces = playerDataDictionary[username].json.Tleilaxu_Tanks[0].Forces.Atreides;
                 break;
             case 2:
                 reserves = playerDataDictionary[username].json.Reserves[0].Bene_Gesserit;
+                deadForces = playerDataDictionary[username].json.Tleilaxu_Tanks[0].Forces.Bene_Gesserit;
                 break;
             case 3:
                 reserves = playerDataDictionary[username].json.Reserves[0].Emperor;
+                deadForces = playerDataDictionary[username].json.Tleilaxu_Tanks[0].Forces.Emperor;
                 break;
             case 4:
                 reserves = playerDataDictionary[username].json.Reserves[0].Fremen;
+                deadForces = playerDataDictionary[username].json.Tleilaxu_Tanks[0].Forces.Fremen;
                 break;
             case 5:
                 reserves = playerDataDictionary[username].json.Reserves[0].Spacing_Guild;
+                deadForces = playerDataDictionary[username].json.Tleilaxu_Tanks[0].Forces.Spacing_Guild;
                 break;
             case 6:
                 reserves = playerDataDictionary[username].json.Reserves[0].Harkonnen;
+                deadForces = playerDataDictionary[username].json.Tleilaxu_Tanks[0].Forces.Harkonnen;
                 break;
             default:
                 Console.WriteLine("Spice error.");
@@ -542,6 +744,7 @@ public class GameClient
         }
         int index = 0;
         var properties = playerDataDictionary[username].json["Faction_Knowledge"][0]["Treachery_Cards"].Properties();
+
         playerDataDictionary[username].treacheryCards = new string[4];
         foreach (var property in properties)
         {
@@ -573,14 +776,14 @@ public class GameClient
                 // Console.WriteLine($"Spices: {card.Id}");
             }
         }
-        Console.WriteLine($"{playerDataDictionary[username].json.Factions_To_Move[playerDataDictionary[username].faction-1]}");
+        //Console.WriteLine($"{playerDataDictionary[username].json.Factions_To_Move[playerDataDictionary[username].faction-1]}");
         var playerDat = new
         {
             faction = playerDataDictionary[username].faction,
             spice = playerDataDictionary[username].json.Faction_Knowledge[0].Spice,
             forcesReserve = reserves,
             forcesDeployed = 0,
-            forcesDead = 0,
+            forcesDead = deadForces,
             territories = new object[0],
             traitors = playerDataDictionary[username].traitorCards,
             treacheryCards = playerDataDictionary[username].treacheryCards,
@@ -589,9 +792,9 @@ public class GameClient
         // Serialize playerData object to JSON
         return Newtonsoft.Json.JsonConvert.SerializeObject(playerDat);
     }
-    public string GetBenePredict(string username, string faction)
+    public string GetBenePredict(string username, string faction, string round)
     {
-        SendBenePredict(faction);
+        SendBenePredict(faction, round);
         //SendPlayerAction("player2/setup/4", "2");
         var message = new {
             message = "ok"
@@ -625,6 +828,269 @@ public class GameClient
     public string GetPhase1Input(string username, string stormValue)
     {
         SendStormValue(playerDataDictionary[username].faction.ToString(), stormValue);
+
+        var message = new {
+            message = "ok"
+        };
+
+        // Serialize playerData object to JSON
+        return Newtonsoft.Json.JsonConvert.SerializeObject(message);
+    }
+    public string GetPhase2Info(string username)
+    {
+        var phase2Info = new {
+            lastSpiceCard = playerDataDictionary[username].json["Last_Spice_Card"]
+        };
+
+        // Serialize playerData object to JSON
+        return Newtonsoft.Json.JsonConvert.SerializeObject(phase2Info);
+    }
+    public string GetPhase4Info(string username)
+    {
+        var phase4Info = new {
+            lastBid = playerDataDictionary[username].json["Highest_Bid"]
+        };
+
+        // Serialize playerData object to JSON
+        return Newtonsoft.Json.JsonConvert.SerializeObject(phase4Info);
+    }
+     public string GetPhase4Input(string username, string bidValue)
+    {
+        SendPhase4(playerDataDictionary[username].faction.ToString(), bidValue);
+
+        var message = new {
+            message = "ok"
+        };
+
+        // Serialize playerData object to JSON
+        return Newtonsoft.Json.JsonConvert.SerializeObject(message);
+    }
+    public string GetPhase5Info(string username)
+    {
+        string[] revivableGeneralss = new string[4];
+        // Forces
+        var forces = playerDataDictionary[username].json.Tleilaxu_Tanks[0].Forces;
+        int forcess = 0;
+        int index = 0;
+        switch (playerDataDictionary[username].faction)
+        {
+            case 1:
+                index = 0;
+                foreach (var leader in playerDataDictionary[username].json.Tleilaxu_Tanks[0].Revivable_Generals.Atreides)
+                {
+                    revivableGeneralss[index++] = leader;
+                }
+                foreach (var force in forces)
+                {
+                    // Console.WriteLine($"Card: {section.Sections[0].Id}");
+                    if (force != null && force.Name == "Atreides") {
+                        // Console.WriteLine($"Force: {forces}, {forces.Name}, {forces.Value}");
+                        forcess = force.Value;
+                    }
+                    // var boo = section.Value.Forces;
+                    // Console.WriteLine($"Card: {card.Name}, Quantity: {boo}");
+                    // playerDataDictionary[username].spice[index++] = new spiceGUI { GoofySectionId = card.Name, Spice = boo };
+                }
+                break;
+            case 2:
+                index = 0;
+                foreach (var leader in playerDataDictionary[username].json.Tleilaxu_Tanks[0].Revivable_Generals.Bene_Gesserit)
+                {
+                    revivableGeneralss[index++] = leader;
+                }
+                foreach (var force in forces)
+                {
+                    // Console.WriteLine($"Card: {section.Sections[0].Id}");
+                    if (force != null && force.Name == "Bene_Gesserit") {
+                        // Console.WriteLine($"Force: {forces}, {forces.Name}, {forces.Value}");
+                        forcess = force.Value;
+                    }
+                    // var boo = section.Value.Forces;
+                    // Console.WriteLine($"Card: {card.Name}, Quantity: {boo}");
+                    // playerDataDictionary[username].spice[index++] = new spiceGUI { GoofySectionId = card.Name, Spice = boo };
+                }
+                break;
+            case 3:
+                index = 0;
+                foreach (var leader in playerDataDictionary[username].json.Tleilaxu_Tanks[0].Revivable_Generals.Emperor)
+                {
+                    revivableGeneralss[index++] = leader;
+                }
+                foreach (var force in forces)
+                {
+                    // Console.WriteLine($"Card: {section.Sections[0].Id}");
+                    if (force != null && force.Name == "Emperor") {
+                        // Console.WriteLine($"Force: {forces}, {forces.Name}, {forces.Value}");
+                        forcess = force.Value;
+                    }
+                    // var boo = section.Value.Forces;
+                    // Console.WriteLine($"Card: {card.Name}, Quantity: {boo}");
+                    // playerDataDictionary[username].spice[index++] = new spiceGUI { GoofySectionId = card.Name, Spice = boo };
+                }
+                break;
+            case 4:
+                index = 0;
+                foreach (var leader in playerDataDictionary[username].json.Tleilaxu_Tanks[0].Revivable_Generals.Fremen)
+                {
+                    revivableGeneralss[index++] = leader;
+                }
+                foreach (var force in forces)
+                {
+                    // Console.WriteLine($"Card: {section.Sections[0].Id}");
+                    if (force != null && force.Name == "Fremen") {
+                        // Console.WriteLine($"Force: {forces}, {forces.Name}, {forces.Value}");
+                        forcess = force.Value;
+                    }
+                    // var boo = section.Value.Forces;
+                    // Console.WriteLine($"Card: {card.Name}, Quantity: {boo}");
+                    // playerDataDictionary[username].spice[index++] = new spiceGUI { GoofySectionId = card.Name, Spice = boo };
+                }
+                break;
+            case 5:
+                index = 0;
+                foreach (var leader in playerDataDictionary[username].json.Tleilaxu_Tanks[0].Revivable_Generals.Spacing_Guild)
+                {
+                    revivableGeneralss[index++] = leader;
+                }
+                foreach (var force in forces)
+                {
+                    // Console.WriteLine($"Card: {section.Sections[0].Id}");
+                    if (force != null && force.Name == "Spacing_Guild") {
+                        // Console.WriteLine($"Force: {forces}, {forces.Name}, {forces.Value}");
+                        forcess = force.Value;
+                    }
+                    // var boo = section.Value.Forces;
+                    // Console.WriteLine($"Card: {card.Name}, Quantity: {boo}");
+                    // playerDataDictionary[username].spice[index++] = new spiceGUI { GoofySectionId = card.Name, Spice = boo };
+                }
+                break;
+            case 6:
+                index = 0;
+                foreach (var leader in playerDataDictionary[username].json.Tleilaxu_Tanks[0].Revivable_Generals.Harkonnen)
+                {
+                    revivableGeneralss[index++] = leader;
+                }
+                foreach (var force in forces)
+                {
+                    // Console.WriteLine($"Card: {section.Sections[0].Id}");
+                    if (force != null && force.Name == "Harkonnen") {
+                        // Console.WriteLine($"Force: {forces}, {forces.Name}, {forces.Value}");
+                        forcess = force.Value;
+                    }
+                    // var boo = section.Value.Forces;
+                    // Console.WriteLine($"Card: {card.Name}, Quantity: {boo}");
+                    // playerDataDictionary[username].spice[index++] = new spiceGUI { GoofySectionId = card.Name, Spice = boo };
+                }
+                break;
+            default:
+                Console.WriteLine("Spice error.");
+                break;
+        }
+        if (index == 0)
+            revivableGeneralss = null;
+
+        var phase5Info = new {
+            revivableGenerals = revivableGeneralss,
+            forces = forcess
+        };
+
+        // Serialize playerData object to JSON
+        return Newtonsoft.Json.JsonConvert.SerializeObject(phase5Info);
+    }
+    public string GetPhase61Input(string username, string sectionId, string forces)
+    {
+        SendPhase61(playerDataDictionary[username].faction.ToString(), sectionId, forces);
+
+        var message = new {
+            message = "ok"
+        };
+
+        // Serialize playerData object to JSON
+        return Newtonsoft.Json.JsonConvert.SerializeObject(message);
+    }
+    public string GetPhase62Input(string username, string sectionId, string sectionIdDest, string forces)
+    {
+        SendPhase62(playerDataDictionary[username].faction.ToString(), sectionId, sectionIdDest, forces);
+
+        var message = new {
+            message = "ok"
+        };
+
+        // Serialize playerData object to JSON
+        return Newtonsoft.Json.JsonConvert.SerializeObject(message);
+    }
+    public string GetPhase6BeneInput(string username, string answer)
+    {
+        SendPhase6Bene(playerDataDictionary[username].faction.ToString(), answer);
+
+        var message = new {
+            message = "ok"
+        };
+
+        // Serialize playerData object to JSON
+        return Newtonsoft.Json.JsonConvert.SerializeObject(message);
+    }
+    public string GetPhase5Input(string username, string forcesOrLeder)
+    {
+        SendPhase5(playerDataDictionary[username].faction.ToString(), forcesOrLeder);
+
+        var message = new {
+            message = "ok"
+        };
+
+        // Serialize playerData object to JSON
+        return Newtonsoft.Json.JsonConvert.SerializeObject(message);
+    }
+    public string GetPhase7Info(string username)
+    {
+
+
+        var phase7Info = new {
+            whereAreBattles = playerDataDictionary[username].json.Faction_Battles.Battle_Sections,
+            currentBattleSection = playerDataDictionary[username].json.Faction_Battles.Chosen_Battle_Section,
+            enemy = playerDataDictionary[username].json.Faction_Battles.enemy,
+            agressor = playerDataDictionary[username].json.Faction_Battles.faction,
+        };
+
+        // Serialize playerData object to JSON
+        return Newtonsoft.Json.JsonConvert.SerializeObject(phase7Info);
+    }
+    public string GetPickEnemyInput(string username, string sectionId, string playerId)
+    {
+        SendPickEnemy(playerDataDictionary[username].faction.ToString(), sectionId, playerId);
+
+        var message = new {
+            message = "ok"
+        };
+
+        // Serialize playerData object to JSON
+        return Newtonsoft.Json.JsonConvert.SerializeObject(message);
+    }
+    public string GetPhase71Input(string username, string forces, string leader)
+    {
+        SendPhase71(playerDataDictionary[username].faction.ToString(), forces, leader);
+
+        var message = new {
+            message = "ok"
+        };
+
+        // Serialize playerData object to JSON
+        return Newtonsoft.Json.JsonConvert.SerializeObject(message);
+    }
+    public string GetPhase72Input(string username, string forces, string leader, string card1)
+    {
+        SendPhase72(playerDataDictionary[username].faction.ToString(), forces, leader, card1);
+
+        var message = new {
+            message = "ok"
+        };
+
+        // Serialize playerData object to JSON
+        return Newtonsoft.Json.JsonConvert.SerializeObject(message);
+    }
+    public string GetPhase73Input(string username, string forces, string leader, string card1, string card2)
+    {
+        SendPhase73(playerDataDictionary[username].faction.ToString(), forces, leader, card1, card2);
 
         var message = new {
             message = "ok"
@@ -750,6 +1216,7 @@ public class GameClient
             Console.WriteLine($"WSMANAGER: Client disconnected: {username}");
             int nr = GetNumberOfClients();
                 Console.WriteLine($"WSMANAGER: Nr of clients: {nr}");
+            outerInstance.gameIsRunning = false;
         }
         catch (Exception ex)
         {

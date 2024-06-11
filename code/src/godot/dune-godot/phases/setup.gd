@@ -4,6 +4,8 @@ var traitorInputRequest
 var fremenInputRequest
 var traitorSelected : bool = false
 var benePickedUser
+var buttonsCreated = false
+var myTraitor = -1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,6 +30,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if (GameData.phaseMoment== "traitor selection" && buttonsCreated == false && PlayerData.myTurn):
+		get_node("InputBox/Traitor1").text = PlayerData.leaders_dict[int(PlayerData.traitors[0])]
+		get_node("InputBox/Traitor2").text = PlayerData.leaders_dict[int(PlayerData.traitors[1])]
+		get_node("InputBox/Traitor3").text = PlayerData.leaders_dict[int(PlayerData.traitors[2])]
+		get_node("InputBox/Traitor4").text = PlayerData.leaders_dict[int(PlayerData.traitors[3])]
+		buttonsCreated = true
 	var message = get_node("MessageBox/Description")
 	message.text = GameData.phaseMoment
 	if (GameData.phaseMoment == "Bene Gesserit prediction" && PlayerData.faction == 2):
@@ -63,7 +71,7 @@ func _process(delta):
 func _on_submit_pressed():
 	var playerInput = get_node("InputBox/Input")
 	if (GameData.phaseMoment == "traitor selection" && PlayerData.faction != 6):
-		var error = traitorInputRequest.request(PlayerData.api_url + "traitor_select_input/" + PlayerData.username + "/" + PlayerData.leaders_dict[int(playerInput.text)])
+		var error = traitorInputRequest.request(PlayerData.api_url + "traitor_select_input/" + PlayerData.username + "/" + PlayerData.leaders_dict[int(PlayerData.traitors[myTraitor])])
 		traitorSelected = true
 		if error != OK:
 			push_error("ERROR: HTTP: GET_TRAITOR_SELECT")
@@ -109,6 +117,8 @@ func _on_bene_input_request_completed(_result, _response_code, _headers, body):
 func _on_submit_bene_pressed():
 	var playerInput = get_node("InputBoxBene/VBoxContainer/HBoxContainer/InputBene")
 	if (GameData.phaseMoment == "Bene Gesserit prediction" && PlayerData.faction == 2):
+		var str = PlayerData.api_url + "bene_predict_input/" + PlayerData.username + "/" + str(benePickedUser) + '/' + playerInput.text
+		print(str)
 		var error = beneInputRequest.request(PlayerData.api_url + "bene_predict_input/" + PlayerData.username + "/" + str(benePickedUser) + '/' + playerInput.text)
 		if error != OK:
 			push_error("ERROR: HTTP: GET_BENE_PREDICT")
@@ -136,3 +146,18 @@ func _on_user_5_pressed():
 
 func _on_user_6_pressed():
 	benePickedUser = 6;
+
+
+func _on_traitor_1_pressed():
+	myTraitor = 0
+
+
+func _on_traitor_2_pressed():
+	myTraitor = 1
+
+func _on_traitor_3_pressed():
+	myTraitor = 2
+
+
+func _on_traitor_4_pressed():
+	myTraitor = 3

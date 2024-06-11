@@ -1,6 +1,7 @@
-[gd_scene load_steps=53 format=3 uid="uid://qb45g731sgmk"]
+[gd_scene load_steps=41 format=3 uid="uid://m4xphyu8ospk"]
 
 [ext_resource type="Script" path="res://baseGame/base_game_hud.gd" id="1_1jdqd"]
+[ext_resource type="Script" path="res://baseGame/popup.gd" id="1_xtbao"]
 [ext_resource type="Texture2D" uid="uid://b8tlsx6jx1s2m" path="res://assets/Asset 3.png" id="2_1wd2q"]
 [ext_resource type="Texture2D" uid="uid://wijyoxvk6w87" path="res://assets/Asset 19.png" id="3_gw5dj"]
 [ext_resource type="Texture2D" uid="uid://c17lfmus5m7xk" path="res://assets/Asset 16.png" id="4_132t1"]
@@ -10,16 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://cjbt75i11tf68" path="res://assets/Asset 14.png" id="8_lk417"]
 [ext_resource type="Texture2D" uid="uid://df662v78ds3im" path="res://assets/Asset 17.png" id="9_bvu6k"]
 [ext_resource type="Texture2D" uid="uid://dihi5tbv5a7pi" path="res://assets/Asset 13.png" id="10_epgx7"]
-[ext_resource type="Texture2D" uid="uid://dcatonsvgqmn3" path="res://assets/forces/atreides.png" id="10_rquc5"]
 [ext_resource type="Texture2D" uid="uid://deqid7wq0qaji" path="res://assets/Asset 11.png" id="11_f7s6u"]
-[ext_resource type="Texture2D" uid="uid://dgfrcg5kg1ne0" path="res://assets/forces/bene.png" id="11_n87gg"]
-[ext_resource type="Texture2D" uid="uid://civysvkqq0ajn" path="res://assets/forces/emperor.png" id="12_1np8h"]
 [ext_resource type="Texture2D" uid="uid://b4dkpahto565h" path="res://assets/Asset 12.png" id="12_jasq0"]
-[ext_resource type="Texture2D" uid="uid://b0gtxfy1w4eg8" path="res://assets/forces/fremen.png" id="13_3mjcr"]
 [ext_resource type="Texture2D" uid="uid://cvwwas6geu8l5" path="res://assets/Asset 10.png" id="13_ej40d"]
 [ext_resource type="Texture2D" uid="uid://ude4hoikhhin" path="res://assets/Asset 9.png" id="14_6q7bw"]
-[ext_resource type="Texture2D" uid="uid://nx8784a1bfec" path="res://assets/forces/guild.png" id="14_bn6s1"]
-[ext_resource type="Texture2D" uid="uid://eyv4q2q87b24" path="res://assets/forces/harkonnen.png" id="15_c5n8k"]
 [ext_resource type="Texture2D" uid="uid://20spkeq5ksmq" path="res://assets/Asset 8.png" id="15_xkqle"]
 [ext_resource type="Texture2D" uid="uid://ppan4qh17r08" path="res://assets/Asset 7.png" id="16_ltqj5"]
 [ext_resource type="Texture2D" uid="uid://0di871f8j1wy" path="res://assets/Asset 6.png" id="17_a0wlr"]
@@ -36,15 +31,6 @@
 [ext_resource type="Texture2D" uid="uid://bt3b2xwmxe8xc" path="res://assets/Asset 25.png" id="28_jbaol"]
 [ext_resource type="Texture2D" uid="uid://ddftscc3g2sgp" path="res://assets/Asset 52.png" id="29_jitfh"]
 [ext_resource type="Texture2D" uid="uid://blabedll75bav" path="res://assets/Asset 33.png" id="30_m248h"]
-[ext_resource type="Texture2D" uid="uid://cbl8k676p8n21" path="res://FactionInformationDetailed/AtreidesFactionInformation.png" id="32_3ions"]
-[ext_resource type="Texture2D" uid="uid://bwwav2afkppo" path="res://Winning Conditions/WinningCondition.png" id="32_nm7cp"]
-[ext_resource type="Texture2D" uid="uid://pbefwq3fbtlb" path="res://Winning Conditions/WinningConditionFremen.png" id="33_j8hnb"]
-[ext_resource type="Texture2D" uid="uid://dkm40ovv52su0" path="res://FactionInformationDetailed/BeneGesseritFactionInformation.png" id="33_wbslf"]
-[ext_resource type="Texture2D" uid="uid://cx4tal7dhv1qo" path="res://Winning Conditions/WinningConditionSpacingGuild.png" id="34_d0i01"]
-[ext_resource type="Texture2D" uid="uid://c8yxf23otyn66" path="res://FactionInformationDetailed/EmperorInformation.png" id="34_s6e3j"]
-[ext_resource type="Texture2D" uid="uid://1f85dbnjt8n5" path="res://FactionInformationDetailed/FremenInformation.png" id="35_846gt"]
-[ext_resource type="Texture2D" uid="uid://ruhhf0foh1bn" path="res://FactionInformationDetailed/SpacingGuildInformation.png" id="36_ht66n"]
-[ext_resource type="Texture2D" uid="uid://bfgly8yms13yx" path="res://FactionInformationDetailed/Harkonnen.png" id="37_pepyd"]
 
 [sub_resource type="Gradient" id="Gradient_s6gki"]
 colors = PackedColorArray(0.27, 0.196875, 0.0945, 1, 0.23, 0.132825, 0.0805, 1)
@@ -71,104 +57,34 @@ font = ExtResource("5_3gmgh")
 font_size = 12
 font_color = Color(0.858824, 0.8, 0.65098, 1)
 
+[sub_resource type="GDScript" id="GDScript_kk0r1"]
+script/source = "extends TextureButton
+
+
+
+"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_y20p6"]
+
 [node name="HUD" type="CanvasLayer"]
 scale = Vector2(0.84, 0.84)
 transform = Transform2D(0.84, 0, 0, 0.84, 0, 0)
 script = ExtResource("1_1jdqd")
 
-[node name="popupTraitors" type="TextureRect" parent="."]
-visible = false
-offset_left = 1065.0
-offset_top = 131.19
-offset_right = 1372.0
-offset_bottom = 371.19
+[node name="popup" type="TextureRect" parent="."]
+offset_top = 610.0
+offset_right = 307.0
+offset_bottom = 915.0
 texture = SubResource("GradientTexture1D_wmlrw")
+script = ExtResource("1_xtbao")
+metadata/_edit_group_ = true
 
-[node name="Title" type="Label" parent="popupTraitors"]
+[node name="Leaders" type="Label" parent="popup"]
 layout_mode = 0
 offset_left = 53.5714
 offset_top = 47.6191
-offset_right = 202.571
+offset_right = 93.5714
 offset_bottom = 70.6191
-text = "Traitors:"
-
-[node name="Traitors" type="Label" parent="popupTraitors"]
-layout_mode = 0
-offset_left = 55.2381
-offset_top = 89.0476
-offset_right = 204.238
-offset_bottom = 112.048
-text = "TRAITORS GO HERE"
-
-[node name="popupForces" type="TextureRect" parent="."]
-visible = false
-offset_top = 130.952
-offset_right = 307.0
-offset_bottom = 370.952
-texture = SubResource("GradientTexture1D_wmlrw")
-
-[node name="Title" type="Label" parent="popupForces"]
-layout_mode = 0
-offset_left = 53.5714
-offset_top = 47.6191
-offset_right = 202.571
-offset_bottom = 70.6191
-text = "Forces:"
-
-[node name="Traitors" type="Label" parent="popupForces"]
-layout_mode = 0
-offset_left = 55.2381
-offset_top = 89.0476
-offset_right = 204.238
-offset_bottom = 112.048
-text = "FORCES GO HERE"
-
-[node name="popupTreachery" type="TextureRect" parent="."]
-visible = false
-offset_left = 1064.29
-offset_top = 371.429
-offset_right = 1371.29
-offset_bottom = 676.429
-texture = SubResource("GradientTexture1D_wmlrw")
-
-[node name="Title" type="Label" parent="popupTreachery"]
-layout_mode = 0
-offset_left = 52.3808
-offset_top = 29.7619
-offset_right = 201.381
-offset_bottom = 52.7619
-text = "Treachery Cards:"
-
-[node name="Treachery" type="Label" parent="popupTreachery"]
-layout_mode = 0
-offset_left = 53.5714
-offset_top = 71.4286
-offset_right = 216.571
-offset_bottom = 94.4286
-text = "TREACHERY GO HERE"
-
-[node name="popupLeaders" type="TextureRect" parent="."]
-visible = false
-offset_left = 7.9751e-05
-offset_top = 371.429
-offset_right = 307.0
-offset_bottom = 676.429
-texture = SubResource("GradientTexture1D_wmlrw")
-
-[node name="Title" type="Label" parent="popupLeaders"]
-layout_mode = 0
-offset_left = 52.3808
-offset_top = 29.7619
-offset_right = 201.381
-offset_bottom = 52.7619
-text = "Leaders:"
-
-[node name="Leaders" type="Label" parent="popupLeaders"]
-layout_mode = 0
-offset_left = 53.5714
-offset_top = 71.4286
-offset_right = 216.571
-offset_bottom = 94.4286
 text = "LEADERS GO HERE"
 
 [node name="playerHUD" type="Panel" parent="."]
@@ -178,7 +94,7 @@ offset_right = 1374.86
 offset_bottom = 777.143
 theme_override_styles/panel = SubResource("StyleBoxTexture_xepbg")
 
-[node name="buttonExit3" type="TextureButton" parent="playerHUD"]
+[node name="buttonHelp" type="TextureButton" parent="playerHUD"]
 layout_mode = 0
 offset_left = 15.0
 offset_top = 12.0
@@ -228,7 +144,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 162
 
-[node name="buttonTutorial" type="TextureButton" parent="playerHUD"]
+[node name="buttonExit3" type="TextureButton" parent="playerHUD"]
 layout_mode = 0
 offset_left = 15.0
 offset_top = 111.0
@@ -277,42 +193,6 @@ offset_bottom = 99.8094
 text = "faction
 "
 
-[node name="1" type="Sprite2D" parent="playerHUD/buttonExit15"]
-visible = false
-position = Vector2(87.0476, 87.5234)
-scale = Vector2(0.057, 0.057)
-texture = ExtResource("10_rquc5")
-
-[node name="2" type="Sprite2D" parent="playerHUD/buttonExit15"]
-visible = false
-position = Vector2(87.0476, 87.5234)
-scale = Vector2(0.057, 0.057)
-texture = ExtResource("11_n87gg")
-
-[node name="3" type="Sprite2D" parent="playerHUD/buttonExit15"]
-visible = false
-position = Vector2(87.0476, 87.5234)
-scale = Vector2(0.057, 0.057)
-texture = ExtResource("12_1np8h")
-
-[node name="4" type="Sprite2D" parent="playerHUD/buttonExit15"]
-visible = false
-position = Vector2(87.0476, 87.5234)
-scale = Vector2(0.057, 0.057)
-texture = ExtResource("13_3mjcr")
-
-[node name="5" type="Sprite2D" parent="playerHUD/buttonExit15"]
-visible = false
-position = Vector2(87.0476, 87.5234)
-scale = Vector2(0.057, 0.057)
-texture = ExtResource("14_bn6s1")
-
-[node name="6" type="Sprite2D" parent="playerHUD/buttonExit15"]
-visible = false
-position = Vector2(87.0476, 87.5234)
-scale = Vector2(0.057, 0.057)
-texture = ExtResource("15_c5n8k")
-
 [node name="buttonExit5" type="TextureButton" parent="playerHUD"]
 layout_mode = 0
 offset_left = 374.0
@@ -331,6 +211,7 @@ offset_right = 521.0
 offset_bottom = 138.0
 theme = SubResource("Theme_lopji")
 texture_normal = ExtResource("11_f7s6u")
+script = SubResource("GDScript_kk0r1")
 
 [node name="forces" type="Label" parent="playerHUD/buttonForces"]
 layout_mode = 0
@@ -342,7 +223,7 @@ theme = SubResource("Theme_skht1")
 text = "5R  10M  5D"
 label_settings = SubResource("LabelSettings_goyfp")
 
-[node name="buttonLeaders" type="TextureButton" parent="playerHUD"]
+[node name="buttonExit7" type="TextureButton" parent="playerHUD"]
 layout_mode = 0
 offset_left = 333.0
 offset_top = 140.0
@@ -351,7 +232,7 @@ offset_bottom = 182.0
 theme = SubResource("Theme_lopji")
 texture_normal = ExtResource("12_jasq0")
 
-[node name="leaders" type="Label" parent="playerHUD/buttonLeaders"]
+[node name="leaders" type="Label" parent="playerHUD/buttonExit7"]
 layout_mode = 0
 offset_left = 42.0
 offset_top = 11.1905
@@ -388,9 +269,8 @@ offset_right = 845.0
 offset_bottom = 194.0
 theme = SubResource("Theme_lopji")
 texture_normal = ExtResource("14_6q7bw")
-metadata/_edit_group_ = true
 
-[node name="buttonWinningConditions" type="TextureButton" parent="playerHUD"]
+[node name="buttonExit9" type="TextureButton" parent="playerHUD"]
 layout_mode = 0
 offset_left = 476.0
 offset_top = 182.0
@@ -399,7 +279,7 @@ offset_bottom = 224.0
 theme = SubResource("Theme_lopji")
 texture_normal = ExtResource("15_xkqle")
 
-[node name="Label3" type="Label" parent="playerHUD/buttonWinningConditions"]
+[node name="Label3" type="Label" parent="playerHUD/buttonExit9"]
 layout_mode = 0
 offset_left = 128.762
 offset_top = 9.66671
@@ -409,7 +289,7 @@ theme = SubResource("Theme_skht1")
 text = "WINNING CONDITIONS"
 label_settings = SubResource("LabelSettings_goyfp")
 
-[node name="buttonFaction" type="TextureButton" parent="playerHUD"]
+[node name="buttonExit10" type="TextureButton" parent="playerHUD"]
 layout_mode = 0
 offset_left = 477.0
 offset_top = 56.0
@@ -418,7 +298,7 @@ offset_bottom = 98.0
 theme = SubResource("Theme_lopji")
 texture_normal = ExtResource("16_ltqj5")
 
-[node name="Label3" type="Label" parent="playerHUD/buttonFaction"]
+[node name="Label3" type="Label" parent="playerHUD/buttonExit10"]
 layout_mode = 0
 offset_left = 123.0
 offset_top = 7.09526
@@ -436,9 +316,8 @@ offset_right = 1269.0
 offset_bottom = 179.0
 theme = SubResource("Theme_lopji")
 texture_normal = ExtResource("17_a0wlr")
-metadata/_edit_group_ = true
 
-[node name="buttonTreachery" type="TextureButton" parent="playerHUD"]
+[node name="buttonExit13" type="TextureButton" parent="playerHUD"]
 layout_mode = 0
 offset_left = 1089.0
 offset_top = 119.0
@@ -447,7 +326,7 @@ offset_bottom = 204.0
 theme = SubResource("Theme_lopji")
 texture_normal = ExtResource("18_uebe1")
 
-[node name="TreacheryCards" type="Label" parent="playerHUD/buttonTreachery"]
+[node name="TreacheryCards" type="Label" parent="playerHUD/buttonExit13"]
 layout_mode = 0
 offset_left = 61.0
 offset_top = 22.6667
@@ -457,7 +336,7 @@ theme = SubResource("Theme_skht1")
 text = "TREACHERY CARDS"
 label_settings = SubResource("LabelSettings_goyfp")
 
-[node name="buttonTraitors" type="TextureButton" parent="playerHUD"]
+[node name="buttonExit14" type="TextureButton" parent="playerHUD"]
 layout_mode = 0
 offset_left = 1087.0
 offset_top = 61.0
@@ -466,7 +345,7 @@ offset_bottom = 118.0
 theme = SubResource("Theme_lopji")
 texture_normal = ExtResource("19_djhge")
 
-[node name="TraitorCards" type="Label" parent="playerHUD/buttonTraitors"]
+[node name="TraitorCards" type="Label" parent="playerHUD/buttonExit14"]
 layout_mode = 0
 offset_left = 80.8572
 offset_top = 18.7619
@@ -557,42 +436,6 @@ offset_bottom = 77.0
 texture_normal = ExtResource("22_jplrn")
 flip_h = true
 
-[node name="1" type="Sprite2D" parent="otherPlayersHUD/Player1/Player1Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("10_rquc5")
-
-[node name="2" type="Sprite2D" parent="otherPlayersHUD/Player1/Player1Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("11_n87gg")
-
-[node name="3" type="Sprite2D" parent="otherPlayersHUD/Player1/Player1Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("12_1np8h")
-
-[node name="4" type="Sprite2D" parent="otherPlayersHUD/Player1/Player1Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("13_3mjcr")
-
-[node name="5" type="Sprite2D" parent="otherPlayersHUD/Player1/Player1Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("14_bn6s1")
-
-[node name="6" type="Sprite2D" parent="otherPlayersHUD/Player1/Player1Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("15_c5n8k")
-
 [node name="Player2" type="TextureButton" parent="otherPlayersHUD"]
 layout_mode = 0
 offset_left = 301.0
@@ -609,42 +452,6 @@ offset_right = 152.333
 offset_bottom = 76.7143
 texture_normal = ExtResource("22_jplrn")
 flip_h = true
-
-[node name="1" type="Sprite2D" parent="otherPlayersHUD/Player2/Player2Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("10_rquc5")
-
-[node name="2" type="Sprite2D" parent="otherPlayersHUD/Player2/Player2Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("11_n87gg")
-
-[node name="3" type="Sprite2D" parent="otherPlayersHUD/Player2/Player2Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("12_1np8h")
-
-[node name="4" type="Sprite2D" parent="otherPlayersHUD/Player2/Player2Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("13_3mjcr")
-
-[node name="5" type="Sprite2D" parent="otherPlayersHUD/Player2/Player2Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("14_bn6s1")
-
-[node name="6" type="Sprite2D" parent="otherPlayersHUD/Player2/Player2Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("15_c5n8k")
 
 [node name="Player2NameBox" type="TextureButton" parent="otherPlayersHUD/Player2"]
 layout_mode = 0
@@ -720,42 +527,6 @@ offset_right = 162.619
 offset_bottom = 77.1905
 texture_normal = ExtResource("22_jplrn")
 
-[node name="1" type="Sprite2D" parent="otherPlayersHUD/Player3/Player3Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("10_rquc5")
-
-[node name="2" type="Sprite2D" parent="otherPlayersHUD/Player3/Player3Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("11_n87gg")
-
-[node name="3" type="Sprite2D" parent="otherPlayersHUD/Player3/Player3Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("12_1np8h")
-
-[node name="4" type="Sprite2D" parent="otherPlayersHUD/Player3/Player3Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("13_3mjcr")
-
-[node name="5" type="Sprite2D" parent="otherPlayersHUD/Player3/Player3Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("14_bn6s1")
-
-[node name="6" type="Sprite2D" parent="otherPlayersHUD/Player3/Player3Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("15_c5n8k")
-
 [node name="Player3CardsBox" type="TextureButton" parent="otherPlayersHUD/Player3"]
 layout_mode = 0
 offset_left = 150.952
@@ -828,42 +599,6 @@ offset_right = 158.095
 offset_bottom = 78.3333
 texture_normal = ExtResource("22_jplrn")
 
-[node name="1" type="Sprite2D" parent="otherPlayersHUD/Player4/Player4Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("10_rquc5")
-
-[node name="2" type="Sprite2D" parent="otherPlayersHUD/Player4/Player4Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("11_n87gg")
-
-[node name="3" type="Sprite2D" parent="otherPlayersHUD/Player4/Player4Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("12_1np8h")
-
-[node name="4" type="Sprite2D" parent="otherPlayersHUD/Player4/Player4Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("13_3mjcr")
-
-[node name="5" type="Sprite2D" parent="otherPlayersHUD/Player4/Player4Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("14_bn6s1")
-
-[node name="6" type="Sprite2D" parent="otherPlayersHUD/Player4/Player4Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("15_c5n8k")
-
 [node name="Player4CardsBox" type="TextureButton" parent="otherPlayersHUD/Player4"]
 layout_mode = 0
 offset_left = 146.714
@@ -934,42 +669,6 @@ offset_top = 32.0953
 offset_right = 158.48
 offset_bottom = 77.0953
 texture_normal = ExtResource("22_jplrn")
-
-[node name="1" type="Sprite2D" parent="otherPlayersHUD/Player5/Player5Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("10_rquc5")
-
-[node name="2" type="Sprite2D" parent="otherPlayersHUD/Player5/Player5Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("11_n87gg")
-
-[node name="3" type="Sprite2D" parent="otherPlayersHUD/Player5/Player5Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("12_1np8h")
-
-[node name="4" type="Sprite2D" parent="otherPlayersHUD/Player5/Player5Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("13_3mjcr")
-
-[node name="5" type="Sprite2D" parent="otherPlayersHUD/Player5/Player5Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("14_bn6s1")
-
-[node name="6" type="Sprite2D" parent="otherPlayersHUD/Player5/Player5Faction"]
-visible = false
-position = Vector2(22.3428, 22.4922)
-scale = Vector2(0.013, 0.013)
-texture = ExtResource("15_c5n8k")
 
 [node name="Player5NameBox" type="TextureButton" parent="otherPlayersHUD/Player5"]
 layout_mode = 0
@@ -1149,10 +848,8 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="AtreidesInformation/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("32_3ions")
 
 [node name="BeneGesseritInformation" type="TextureRect" parent="."]
-visible = false
 custom_minimum_size = Vector2(600, 500)
 anchors_preset = 8
 anchor_left = 0.5
@@ -1228,7 +925,7 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="BeneGesseritInformation/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("33_wbslf")
+texture = SubResource("CompressedTexture2D_y20p6")
 
 [node name="EmperorInformation" type="TextureRect" parent="."]
 visible = false
@@ -1307,7 +1004,6 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="EmperorInformation/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("34_s6e3j")
 
 [node name="FremenInformation" type="TextureRect" parent="."]
 visible = false
@@ -1386,7 +1082,6 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="FremenInformation/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("35_846gt")
 
 [node name="SpacingGuildInformation" type="TextureRect" parent="."]
 visible = false
@@ -1465,7 +1160,6 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="SpacingGuildInformation/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("36_ht66n")
 
 [node name="HarkonnenInformation" type="TextureRect" parent="."]
 visible = false
@@ -1544,7 +1238,6 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="HarkonnenInformation/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("37_pepyd")
 
 [node name="WinningConditions" type="TextureRect" parent="."]
 visible = false
@@ -1623,7 +1316,6 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="WinningConditions/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("32_nm7cp")
 
 [node name="WinningConditionsFremen" type="TextureRect" parent="."]
 visible = false
@@ -1702,7 +1394,6 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="WinningConditionsFremen/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("33_j8hnb")
 
 [node name="WinningConditionsSpacingGuild" type="TextureRect" parent="."]
 visible = false
@@ -1781,19 +1472,18 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="WinningConditionsSpacingGuild/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("34_d0i01")
 
-[connection signal="pressed" from="playerHUD/buttonForces" to="." method="_on_button_forces_pressed"]
-[connection signal="pressed" from="playerHUD/buttonLeaders" to="." method="_on_button_leaders_pressed"]
-[connection signal="pressed" from="playerHUD/buttonWinningConditions" to="." method="_on_button_winning_conditions_pressed"]
-[connection signal="pressed" from="playerHUD/buttonFaction" to="." method="_on_button_faction_pressed"]
-[connection signal="pressed" from="playerHUD/buttonTreachery" to="." method="_on_button_treachery_pressed"]
-[connection signal="pressed" from="playerHUD/buttonTraitors" to="." method="_on_button_traitors_pressed"]
+[connection signal="pressed" from="playerHUD/buttonForces" to="popup" method="_on_button_forces_pressed"]
+[connection signal="pressed" from="playerHUD/buttonExit9" to="." method="_on_button_exit_9_pressed"]
+[connection signal="pressed" from="playerHUD/buttonExit10" to="." method="_on_button_exit_10_pressed"]
 [connection signal="pressed" from="AtreidesInformation/VBoxContainer/ColorRect/ExitAtreidesInfo" to="." method="_on_exit_atreides_info_pressed"]
 [connection signal="pressed" from="BeneGesseritInformation/VBoxContainer/ColorRect/ExitBeneGesseritInfo" to="." method="_on_exit_bene_gesserit_info_pressed"]
 [connection signal="pressed" from="EmperorInformation/VBoxContainer/ColorRect/ExitEmperorInfo" to="." method="_on_exit_emperor_info_pressed"]
 [connection signal="pressed" from="FremenInformation/VBoxContainer/ColorRect/ExitFremenInfo" to="." method="_on_exit_fremen_info_pressed"]
 [connection signal="pressed" from="SpacingGuildInformation/VBoxContainer/ColorRect/ExitSpacingGuildInfo" to="." method="_on_exit_spacing_guild_info_pressed"]
+[connection signal="pressed" from="SpacingGuildInformation/VBoxContainer/ColorRect/ExitSpacingGuildInfo" to="." method="_on_exit_atreides_info_pressed"]
+[connection signal="pressed" from="SpacingGuildInformation/VBoxContainer/ColorRect/ExitSpacingGuildInfo" to="." method="_on_exit_bene_gesserit_info_pressed"]
+[connection signal="pressed" from="SpacingGuildInformation/VBoxContainer/ColorRect/ExitSpacingGuildInfo" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="HarkonnenInformation/VBoxContainer/ColorRect/ExitHarkonnenInfo" to="." method="_on_exit_harkonnen_info_pressed"]
 [connection signal="pressed" from="WinningConditions/VBoxContainer/ColorRect/ExitWinningConditions" to="." method="_on_exit_winning_conditions_pressed"]
 [connection signal="pressed" from="WinningConditionsFremen/VBoxContainer/ColorRect/ExitWinningConditionsFremen" to="." method="_on_exit_winning_conditions_fremen_pressed"]

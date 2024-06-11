@@ -9,6 +9,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if (PlayerData.lastSpice == PlayerData.spice):
+	if (PlayerData.lastSpice != PlayerData.spice):
 		get_node("MessageBox/Description").text = 'You received ' + str(PlayerData.spice-PlayerData.lastSpice) + ' spice!'
+	else:
+		get_node("MessageBox/Description").text = 'You received no spice...'
 

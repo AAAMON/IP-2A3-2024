@@ -75,7 +75,7 @@ offset_top = 56.0
 offset_right = 291.0
 offset_bottom = 79.0
 theme_override_font_sizes/font_size = 13
-text = "Players x and y are choosing storm..."
+text = "Storm is being moved..."
 horizontal_alignment = 1
 
 [node name="Timer" type="Timer" parent="."]

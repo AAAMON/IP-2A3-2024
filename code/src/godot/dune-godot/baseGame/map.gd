@@ -92,7 +92,7 @@ func _on_map_info_request_completed(_result, _response_code, _headers, body):
 # Function to hide all children and sub-children of type Label
 func hide_labels_recursively(node: Node):
 	for child in node.get_children():
-		if child.is_class("Label"):
+		if child.is_class("Label") || child.is_class("Sprite2D"):
 			child.visible = false
 		hide_labels_recursively(child) 
 
@@ -105,17 +105,29 @@ func map_update_labels():
 	# first hide all of them...
 	for territory in get_node("Nice/MapLabels").get_children():
 		hide_labels_recursively(territory)
+	var mySum = 0
 	for force in MapData.forces:
 		if (force != null):
 			var forcesLabelNode = "Nice/MapLabels/" + MapData.territory_dict[MapData.sections_goofy_dict[int(force["GoofySectionId"])]]["origin_sector"] + '/' + MapData.sections_goofy_dict[int(force["GoofySectionId"])] + '/' + str(PlayerData.goofy_faction_dict[force["Faction"]])
 			#print(forcesLabelNode)
-			get_node(forcesLabelNode).text = str(force["Forces"]) + 'f' + str(PlayerData.goofy_faction_dict[force["Faction"]])
+			get_node(forcesLabelNode).text = str(force["Forces"])# + 'f' + str(PlayerData.goofy_faction_dict[force["Faction"]])
 			get_node(forcesLabelNode).show()
+			var spriteNode = "Nice/MapLabels/" + MapData.territory_dict[MapData.sections_goofy_dict[int(force["GoofySectionId"])]]["origin_sector"] + '/' + MapData.sections_goofy_dict[int(force["GoofySectionId"])] + '/s' + str(PlayerData.goofy_faction_dict[force["Faction"]])
+			if (get_node(spriteNode) != null):
+				get_node(spriteNode).show()
+			# count my forces
+			print(force["Faction"])
+			if (force["Faction"] == PlayerData.faction_to_goofy_dict[PlayerData.faction_dict[PlayerData.faction]]):
+				mySum = mySum + 1
+			PlayerData.forcesDeployed = mySum
 	for spice in MapData.spice:
 		if (spice != null && spice["Spice"] != 0):
 			var spiceLabelNode = "Nice/MapLabels/" + MapData.territory_dict[MapData.sections_goofy_dict[int(spice["GoofySectionId"])]]["origin_sector"] + '/' + MapData.territory_dict[MapData.sections_goofy_dict[int(spice["GoofySectionId"])]]["origin_sector"] + "-spice"
-			get_node(spiceLabelNode).text = str(spice["Spice"]) + 's'
+			get_node(spiceLabelNode).text = str(spice["Spice"])
 			get_node(spiceLabelNode).show()
+			var spriteNode = "Nice/MapLabels/" + MapData.territory_dict[MapData.sections_goofy_dict[int(spice["GoofySectionId"])]]["origin_sector"] + '/s'
+			if (get_node(spriteNode) != null):
+				get_node(spriteNode).show()
 #var traitorsLabel = get_node("playerHUD/buttonExit14/TraitorCards")
 	#traitorsLabel.text = ' '
 	#for traitor in PlayerData.traitors:

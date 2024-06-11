@@ -10,7 +10,7 @@ func _ready():
 	# On first round, the number chosen is from 1 to 20
 	if (PlayerData.myTurn == true):
 		get_node("InputBox").show()
-		if (GameData.roundd == 0):
+		if (GameData.roundd == 1):
 			get_node("InputBox").hide()
 			get_node("MessageBox/Description").text = "First storm is calculated randomly..."
 		else:

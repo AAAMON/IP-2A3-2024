@@ -2,26 +2,42 @@ extends CanvasLayer
 var playerInfoRequest = HTTPRequest.new()
 var otherPlayersInfoRequest 
 var requestCompleted : bool = true
+var popupTraitorVisible = false
+var popupTreacheryVisible = false
+var popupLeadersVisible = false
+var popupForcesVisible = false
 @onready var timer: Timer = $Timer
-
+@onready var popupFaction1: TextureRect = $AtreidesInformation
+@onready var popupFaction2: TextureRect = $BeneGesseritInformation
+@onready var popupFaction3: TextureRect = $EmperorInformation
+@onready var popupFaction4: TextureRect = $FremenInformation
+@onready var popupFaction5: TextureRect = $SpacingGuildInformation
+@onready var popupFaction6: TextureRect = $HarkonnenInformation
+@onready var winningconditions: TextureRect = $WinningConditions
+@onready var winningconditionsfremen: TextureRect = $WinningConditionsFremen
+@onready var winningconditionsspacingguild: TextureRect = $WinningConditionsSpacingGuild
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var playerLeaders = get_node("popup/Leaders")
-	playerLeaders.text = ' '
+
 	if (PlayerData.faction == 1):
 		PlayerData.myLeaders = PlayerData.leadersAtreides.duplicate()
+		get_node("playerHUD/buttonExit15/1").show()
 	elif (PlayerData.faction == 2):
 		PlayerData.myLeaders = PlayerData.leadersBene.duplicate()
+		get_node("playerHUD/buttonExit15/2").show()
 	elif (PlayerData.faction == 3):
 		PlayerData.myLeaders = PlayerData.leadersEmperor.duplicate()
+		get_node("playerHUD/buttonExit15/3").show()
 	elif (PlayerData.faction == 4):
 		PlayerData.myLeaders = PlayerData.leadersFremen.duplicate()
+		get_node("playerHUD/buttonExit15/4").show()
 	elif (PlayerData.faction == 5):
 		PlayerData.myLeaders = PlayerData.leadersGuild.duplicate()
+		get_node("playerHUD/buttonExit15/5").show()
 	elif (PlayerData.faction == 6):
 		PlayerData.myLeaders = PlayerData.leadersHarkonnen.duplicate()
-	for leader in PlayerData.myLeaders:
-		playerLeaders.text = playerLeaders.text + leader.name + ' Strength: ' + str(leader.strength) + '\n'
+		get_node("playerHUD/buttonExit15/6").show()
+	
 	otherPlayersInfoRequest = HTTPRequest.new()
 	otherPlayersInfoRequest.connect("request_completed", _on_other_players_info_request_completed)
 	add_child(otherPlayersInfoRequest)
@@ -61,6 +77,7 @@ func _on_player_info_request_completed(_result, _response_code, _headers, body):
 		PlayerData.spice = json["spice"]
 		PlayerData.forcesReserve = json["forcesReserve"]
 		PlayerData.forcesDead = json["forcesDead"]
+		#PlayerData.forcesDeployed = json["forcesDeployed"]
 		PlayerData.treatcheryCards = json["treacheryCards"]
 		PlayerData.traitors = json["traitors"]
 		PlayerData.myTurn = json["yourTurn"]
@@ -79,7 +96,11 @@ func update_hud_other_players():
 			get_node(labelNodeName).text = str(otherPlayer["Username"])
 			labelNodeName = "otherPlayersHUD/Player" + str(index) + "/Player" + str(index) + "CardsBox/Player" + str(index) + "Cards" 
 			get_node(labelNodeName).text = str(otherPlayer["NrTreatcheryCards"])
+			labelNodeName = "otherPlayersHUD/Player" + str(index) + "/Player" + str(index) + "Faction/" + str(otherPlayer["Faction"])
+			print(labelNodeName)
+			get_node(labelNodeName).show()
 			index = index + 1
+			
 	
 
 func _on_other_players_info_request_completed(_result, _response_code, _headers, body):
@@ -106,6 +127,12 @@ func update_hud_player():
 	get_node("playerHUD/buttonForces/forces").text = str(PlayerData.forcesReserve) + "R " + str(PlayerData.forcesDeployed) + "M " + str(PlayerData.forcesDead) + "D "
 	get_node("playerHUD/buttonExit15/faction").text = str(PlayerData.faction)
 	
+	get_node("popupForces/Traitors").text = 'Forces in reserve: ' + str(PlayerData.forcesReserve) + '\nForces on map: ' + str(PlayerData.forcesDeployed) + '\nForces dead: ' + str(PlayerData.forcesDead)
+	
+	var playerLeaders = get_node("popupLeaders/Leaders")
+	playerLeaders.text = ' '
+	for leader in PlayerData.myLeaders:
+		playerLeaders.text = playerLeaders.text + leader.name + ' Strength: ' + str(leader.strength) + '\n'
 	# cards
 	# TODO THE GAME LOGIC SHOULD GIVE THIS, BUT FOR NOW, THEY'RE LETTING US EAT CAKE...
 	#var playerLeaders = get_node("popup/Leaders")
@@ -114,7 +141,7 @@ func update_hud_player():
 		#for leader in PlayerData.leadersAtreides:
 			#playerLeaders.text = playerLeaders.text + leader.name + ' Strength: ' + str(leader.strength) + '\n'
 	
-	var treacheryLabel = get_node("playerHUD/buttonExit13/TreacheryCards")
+	var treacheryLabel = get_node("popupTreachery/Treachery")
 	treacheryLabel.text = ' '
 	for card in PlayerData.treatcheryCards:
 		if (card != null):
@@ -122,13 +149,111 @@ func update_hud_player():
 	if (treacheryLabel.text == ' '):
 		treacheryLabel.text = "None"
 		
-	var traitorsLabel = get_node("playerHUD/buttonExit14/TraitorCards")
+	var traitorsLabel = get_node("popupTraitors/Traitors")
 	traitorsLabel.text = ' '
 	for traitor in PlayerData.traitors:
 		if (traitor != null):
-			traitorsLabel.text = traitorsLabel.text + str(traitor) + ' '  #'\n'
+			traitorsLabel.text = traitorsLabel.text + PlayerData.leaders_dict[int(traitor)] + str(traitor) + '\n'  #'\n'
 	if (traitorsLabel.text == ' '):
 		traitorsLabel.text = "None"
 	# TODO THESE NEED TO BE SEPARATED
 	get_node("otherPlayersHUD/Status/phase").text = "Phase " + str(GameData.phase)
 	get_node("otherPlayersHUD/Status/turn").text = "Phase Moment " + str(GameData.phaseMoment)
+
+
+
+
+
+
+func _on_exit_atreides_info_pressed():
+	popupFaction1.hide()
+
+
+func _on_exit_bene_gesserit_info_pressed():
+	popupFaction2.hide()
+
+
+func _on_exit_emperor_info_pressed():
+	popupFaction3.hide()
+
+
+func _on_exit_fremen_info_pressed():
+	popupFaction4.hide()
+
+
+
+func _on_exit_spacing_guild_info_pressed():
+	popupFaction5.hide()
+	
+
+func _on_exit_harkonnen_info_pressed():
+	popupFaction6.hide()
+
+
+func _on_exit_winning_conditions_pressed():
+	winningconditions.hide()
+	
+func _on_exit_winning_conditions_fremen_pressed():
+	winningconditionsfremen.hide()
+
+func _on_exit_winning_conditions_space_guild_pressed():
+	winningconditionsspacingguild.hide()
+
+func _on_button_faction_pressed():
+	if(PlayerData.faction == 1):
+		popupFaction1.show()
+	if (PlayerData.faction == 2):
+		popupFaction2.show()
+	if (PlayerData.faction == 3):
+		popupFaction3.show()
+	if (PlayerData.faction == 4):
+		popupFaction4.show()
+	if (PlayerData.faction == 5):
+		popupFaction5.show()
+	if (PlayerData.faction == 6):
+		popupFaction6.show()
+
+
+func _on_button_winning_conditions_pressed():
+	if (PlayerData.faction == 4):
+		winningconditions.show()
+	elif (PlayerData.faction == 5):
+		winningconditionsfremen.show()
+	else:
+		winningconditionsspacingguild.show()
+
+
+func _on_button_traitors_pressed():
+	if (popupTraitorVisible == false):
+		get_node("popupTraitors").show()
+		popupTraitorVisible = true
+	else:
+		get_node("popupTraitors").hide()
+		popupTraitorVisible = false
+
+
+func _on_button_treachery_pressed():
+	if (popupTreacheryVisible == false):
+		get_node("popupTreachery").show()
+		popupTreacheryVisible = true
+	else:
+		get_node("popupTreachery").hide()
+		popupTreacheryVisible = false
+
+
+func _on_button_leaders_pressed():
+	if (popupLeadersVisible == false):
+		get_node("popupLeaders").show()
+		popupLeadersVisible = true
+	else:
+		get_node("popupLeaders").hide()
+		popupLeadersVisible = false
+
+
+func _on_button_forces_pressed():
+	if (popupForcesVisible == false):
+		get_node("popupForces").show()
+		popupForcesVisible = true
+	else:
+		get_node("popupForces").hide()
+		popupForcesVisible = false

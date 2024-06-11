@@ -13,7 +13,7 @@ var faction : int = -1
 var spice : int = -1
 var lastSpice : int = -1
 var forcesReserve : int = -1
-var forcesDeployed : int = -1
+var forcesDeployed : int = 0
 var forcesDead : int = -1
 var leaders = []
 var territories = []
@@ -29,49 +29,49 @@ var oldSpice : int = -1
 var myLeaders = []
 
 var leadersAtreides = [
-	{"idForApi": -1, "name": "Thufir Hawat", "strength": 5},
-	{"idForApi": -1, "name": "Lady Jessica", "strength": 5},
-	{"idForApi": -1, "name": "Gurney Halleck", "strength": 4},
-	{"idForApi": -1, "name": "Duncan Idaho", "strength": 2},
-	{"idForApi": -1, "name": "Dr. Wellington Yueh", "strength": 1}
+	{"idForApi": 4, "name": "Thufir Hawat", "strength": 5},
+	{"idForApi": 3, "name": "Lady Jessica", "strength": 5},
+	{"idForApi": 2, "name": "Gurney Halleck", "strength": 4},
+	{"idForApi": 1, "name": "Duncan Idaho", "strength": 2},
+	{"idForApi": 0, "name": "Dr. Wellington Yueh", "strength": 1}
 ]
 var leadersBene = [
-	{"idForApi": -1, "name": "Alia", "strength": 5},
-	{"idForApi": -1, "name": "Margot Lady Fenring", "strength": 5},
-	{"idForApi": -1, "name": "Mother Ramallo", "strength": 5},
-	{"idForApi": -1, "name": "Princess Irulan", "strength": 5},
-	{"idForApi": -1, "name": "Wanna Yueh", "strength": 5}
+	{"idForApi": 9, "name": "Alia", "strength": 5},
+	{"idForApi": 8, "name": "Margot Lady Fenring", "strength": 5},
+	{"idForApi": 7, "name": "Mother Ramallo", "strength": 5},
+	{"idForApi": 6, "name": "Princess Irulan", "strength": 5},
+	{"idForApi": 5, "name": "Wanna Yueh", "strength": 5}
 ]
 var leadersEmperor = [
-	{"idForApi": -1, "name": "Hasimir Fenring", "strength": 6},
-	{"idForApi": -1, "name": "Capitan Aramsham", "strength": 5},
-	{"idForApi": -1, "name": "Caid", "strength": 3},
-	{"idForApi": -1, "name": "Burseg", "strength": 3},
-	{"idForApi": -1, "name": "Bashar", "strength": 2}
+	{"idForApi": 14, "name": "Hasimir Fenring", "strength": 6},
+	{"idForApi": 13, "name": "Capitan Aramsham", "strength": 5},
+	{"idForApi": 12, "name": "Caid", "strength": 3},
+	{"idForApi": 11, "name": "Burseg", "strength": 3},
+	{"idForApi": 10, "name": "Bashar", "strength": 2}
 ]
 
 var leadersFremen = [
-	{"idForApi": -1, "name": "Stilgar", "strength": 7},
-	{"idForApi": -1, "name": "Chani", "strength": 6},
-	{"idForApi": -1, "name": "Otheym", "strength": 5},
-	{"idForApi": -1, "name": "Shadout Mapes", "strength": 3},
-	{"idForApi": -1, "name": "Jamis", "strength": 2}
+	{"idForApi": 19, "name": "Stilgar", "strength": 7},
+	{"idForApi": 18, "name": "Chani", "strength": 6},
+	{"idForApi": 17, "name": "Otheym", "strength": 5},
+	{"idForApi": 16, "name": "Shadout Mapes", "strength": 3},
+	{"idForApi": 15, "name": "Jamis", "strength": 2}
 ]
 
 var leadersGuild = [
-	{"idForApi": -1, "name": "Staban Tuek", "strength": 5},
-	{"idForApi": -1, "name": "Master Bewt", "strength": 3},
-	{"idForApi": -1, "name": "Esmar Tuek", "strength": 3},
-	{"idForApi": -1, "name": "Soo-Soo Sook", "strength": 2},
-	{"idForApi": -1, "name": "Guild Rep", "strength": 1}
+	{"idForApi": 24, "name": "Staban Tuek", "strength": 5},
+	{"idForApi": 23, "name": "Master Bewt", "strength": 3},
+	{"idForApi": 22, "name": "Esmar Tuek", "strength": 3},
+	{"idForApi": 21, "name": "Soo-Soo Sook", "strength": 2},
+	{"idForApi": 20, "name": "Guild Rep", "strength": 1}
 ]
 
 var leadersHarkonnen = [
-	{"idForApi": -1, "name": "Feyd-Rautha", "strength": 6},
-	{"idForApi": -1, "name": "Beast Rabban", "strength": 4},
-	{"idForApi": -1, "name": "Pitter De Vries", "strength": 3},
-	{"idForApi": -1, "name": "Capitan Iakin Nefud", "strength": 2},
-	{"idForApi": -1, "name": "Umman Kudu", "strength": 1}
+	{"idForApi": 29, "name": "Feyd-Rautha", "strength": 6},
+	{"idForApi": 28, "name": "Beast Rabban", "strength": 4},
+	{"idForApi": 27, "name": "Pitter De Vries", "strength": 3},
+	{"idForApi": 26, "name": "Capitan Iakin Nefud", "strength": 2},
+	{"idForApi": 25, "name": "Umman Kudu", "strength": 1}
 ]
 
 var faction_dict = {
@@ -82,6 +82,15 @@ var faction_dict = {
 		4: "Fremen",
 		5: "SpaceGuild",
 		6: "Harkonnen"
+}
+
+var faction_to_goofy_dict = {
+	"Atreides" : "Atreides",
+	"BeneGesserit" : "Bene_Gesserit",
+	"Emperor" : "Emperor",
+	"Fremen" : "Fremen",
+	"SpaceGuild" : "Spacing_Guild",
+	"Harkonnen" : "Harkonnen"
 }
 
 var goofy_faction_dict = {
@@ -116,7 +125,7 @@ var leaders_dict = {
 	18: "Chani",
 	19: "Stilgar",
 	20: "Guild_Rep",
-	21: "Soo_Soo_Sook",
+	21: "Soo-Soo_Sook",
 	22: "Esmar_Tuek",
 	23: "Master_Bewt",
 	24: "Staban_Tuek",
@@ -127,6 +136,31 @@ var leaders_dict = {
 	29: "Feyd_Rautha"
 }
 
+var treachery = {
+	"Crysknife": {"type": "projectile", "mainType": "weapon"},
+	"Maula_Pistol": {"type": "projectile", "mainType": "weapon"},
+	"Slip_Tip": {"type": "projectile", "mainType": "weapon"},
+	"Stunner": {"type": "projectile", "mainType": "weapon"},
+	"Chaumas": {"type": "poison", "mainType": "weapon"},
+	"Chaumurky": {"type": "poison", "mainType": "weapon"},
+	"Ellaca_Drug": {"type": "poison", "mainType": "weapon"},
+	"Gom_Jabbar": {"type": "poison", "mainType": "weapon"},
+	"Lasgum": {"type": "poison", "mainType": "weapon"},
+	"Shield": {"type": "shield", "mainType": "defense"},
+	"Snooper": {"type": "shield", "mainType": "defense"},
+	"Cheap_Hero": {"type": "leader", "mainType": "special"},
+	"Family_Atomics": {"type": "storm", "mainType": "special"},
+	"Weather_Control": {"type": "storm", "mainType": "special"},
+	"Hajr": {"type": "movement", "mainType": "special"},
+	"Karama": {"type": "special", "mainType": "special"},
+	"Tleilaxu_Ghola": {"type": "special", "mainType": "special"},
+	"Truthtrance": {"type": "special", "mainType": "special"},
+	"Baliset": {"type": "worthless", "mainType": "worthless"},
+	"Jubba_Cloak": {"type": "worthless", "mainType": "worthless"},
+	"Kulon": {"type": "worthless", "mainType": "worthless"},
+	"La_La_La": {"type": "worthless", "mainType": "worthless"},
+	"Trip_To_Gamont": {"type": "worthless", "mainType": "worthless"}
+}
 
 func logout():
 	username = "Not Logged In..."
