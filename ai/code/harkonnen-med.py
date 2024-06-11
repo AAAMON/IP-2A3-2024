@@ -177,13 +177,52 @@ def bidding(game_state):
 
 
 def revival(game_state):
+    #faction dependent-done
+    min_spice_for_leaders = 3
+    max_forces_per_turn = 3
     my_spice = game_state['Faction_Knowledge'][0]['Spice']
     nr_dead = game_state['Tleilaxu_Tanks'][0]['Forces'][faction_name]
-    nr_revive = 0
-    if nr_dead >0:
-        nr_revive = 1
-    return {"action": "revive",
-            "value": nr_revive}
+    possible_revival_generals = game_state['Tleilaxu_Tanks'][0]['Revivable_Generals'][faction_name]
+
+    free_revives = min(nr_free_revive, nr_dead)
+    remaining_revives = nr_dead - free_revives
+
+    cost_per_force = 2  
+    additional_revives = 0
+    available_spice_for_forces = my_spice
+
+    if my_spice > min_spice_for_leaders and len(possible_revival_generals)>0:
+        available_spice_for_forces = my_spice - min_spice_for_leaders
+    additional_revives = min(remaining_revives, available_spice_for_forces // cost_per_force,max_forces_per_turn - free_revives)
+    total_revives = free_revives + additional_revives
+
+    total_cost = additional_revives * cost_per_force
+    my_spice -= total_cost
+
+    all_my_generals = {faction: generals_power[faction] for faction in generals_power if faction == faction_name}
+    sorted_generals = sorted(
+    [(name, strength) for faction in all_my_generals for name, strength in all_my_generals[faction].items()],
+    key=lambda x: x[1],
+    reverse=True)
+
+    generals_to_revive = []
+    for general in sorted_generals:
+        general_name = general[0]
+        general_strength = general[1]
+        if general_name in possible_revival_generals:
+            if my_spice >= general_strength:
+                generals_to_revive.append(general_name)
+                my_spice -= general_strength  
+
+    if len(generals_to_revive)==0:
+        generals_to_revive.append(None)  
+
+
+    return {
+        "action": "revive",
+        "value": total_revives,
+        "general_name": generals_to_revive[0]
+    }
 
 
 def storm_move(game_state, territory, nr):
